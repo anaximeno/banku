@@ -5,6 +5,3 @@ um software de gestão de contas bancárias.
 
 ## Elementos do grupo
 * Anaxímeno Brito
-* Carlos Monteiro
-* Marco Costa
-* Tamiris Nascimento
