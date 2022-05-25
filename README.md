@@ -7,3 +7,4 @@ um software de gestão de contas bancárias.
 * Anaxímeno Brito
 * Carlos Monteiro
 * Tamiris Évora
+* Marco Costa
