@@ -22,5 +22,6 @@ um software de gestão de contas bancárias.
 ### Licença
  O software, bem como todos os outros elementos relacionados ao mesmo, que foram diretamente criados pela equipa, encontram-se sobre a [licença MIT](LICENSE).
 
+-------
 
 ***Junho de 2022 - EIC - FCT - UniCV***
