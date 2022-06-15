@@ -14,7 +14,7 @@ um software de gestão de contas bancárias.
 ### Feramentas e bibliotecas utilizadas
 * Java
 * Git
-* Netbeans
+* IntelliJ
 * Scene Builder
 * Drawio
 * JavaFX
