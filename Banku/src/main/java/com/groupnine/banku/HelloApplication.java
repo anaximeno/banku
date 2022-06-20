@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
                 HelloApplication.class.getResource("hello-view.fxml")
         );
         Scene scene = new Scene(fxmlLoader.load(), 720, 480);
-        stage.setTitle("Banku - Banking Application");
+        stage.setTitle("Banku - test - Banking Application");
         stage.setScene(scene);
         stage.show();
     }
