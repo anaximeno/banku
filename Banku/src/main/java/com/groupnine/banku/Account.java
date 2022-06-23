@@ -5,7 +5,6 @@ public abstract class Account {
     private String accountNumber;
     private String accountName;
     private Double availableBalance;
-
     private Double interestRate;
 
     public Account(String accountNumber, String accountName, Double availableBalance, Double interestRate) {
