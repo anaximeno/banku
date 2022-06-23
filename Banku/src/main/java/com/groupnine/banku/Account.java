@@ -5,12 +5,14 @@ public abstract class Account {
     private String accountNumber;
     private String accountName;
     private Double availableBalance;
+
     private Double interestRate;
 
-    public Account(String accountNumber, String accountName, Double availableBalance) {
+    public Account(String accountNumber, String accountName, Double availableBalance, Double interestRate) {
         this.accountNumber = accountNumber;
         this.accountName = accountName;
         this.availableBalance = availableBalance;
+        this.interestRate = interestRate;
     }
 
     public String getAccountNumber() {
@@ -29,19 +31,18 @@ public abstract class Account {
         this.accountName = accountName;
     }
 
-    public String getAccountBalance() {
+    public Double getAccountBalance() {
         return availableBalance;
     }
 
     public void setAccountBalance(Double balance) {
-        this.availableBalance = availableBalance;
+        this.availableBalance = balance;
     }
 
     public void updateInterestRateTo(Double interestRate){
-
+        this.interestRate = interestRate;
     }
     public Double getInterestRate(){
-
+        return interestRate;
     }
-
 }
