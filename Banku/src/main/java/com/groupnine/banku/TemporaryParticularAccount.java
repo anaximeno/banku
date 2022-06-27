@@ -34,15 +34,18 @@ public class TemporaryParticularAccount extends ParticularAccount {
         this.boost = false;
     }
 
-    public LocalDate getCreationDate() {
+    public LocalDateTime getCreationDate() {
+
         return creationDate;
     }
 
-    public LocalDate getExpirationDate() {
+    public LocalDateTime getExpirationDate() {
+
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(LocalDateTime expirationDate) {
+
         this.expirationDate = expirationDate;
     }
 
