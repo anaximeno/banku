@@ -6,10 +6,11 @@ public abstract class Account {
     private Double availableBalance;
     private Double interestRate;
 
-    public Account(String accountNumber, String accountName, Double availableBalance) {
+    public Account(String accountNumber, String accountName, Double availableBalance, Double interestRate) {
         this.accountNumber = accountNumber;
         this.accountName = accountName;
         this.availableBalance = availableBalance;
+        this.interestRate = interestRate;
     }
 
     public String getAccountNumber() {
