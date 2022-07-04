@@ -1,10 +1,10 @@
 package com.groupnine.banku;
 
-public abstract class ParticularAccount extends Account{
+public abstract class ParticularAccount extends Account {
     private ParticularAccountOwner owner;
 
-    public ParticularAccount(ParticularAccountOwner owner) {
-
+    public ParticularAccount(String accountNumber, String accountName, Double availableBalance, ParticularAccountOwner owner) {
+        super(accountNumber, accountName, availableBalance);
         this.owner = owner;
     }
 
