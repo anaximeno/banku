@@ -3,8 +3,8 @@ package com.groupnine.banku;
 public abstract class ParticularAccount extends Account {
     private ParticularAccountOwner owner;
 
-    public ParticularAccount(String accountNumber, String accountName, Double availableBalance, ParticularAccountOwner owner) {
-        super(accountNumber, accountName, availableBalance);
+    public ParticularAccount(String accountNumber, String accountName, Double availableBalance, Double interestRate, ParticularAccountOwner owner) {
+        super(accountNumber, accountName, availableBalance, interestRate);
         this.owner = owner;
     }
 
