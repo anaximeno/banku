@@ -10,10 +10,12 @@ public class TemporaryParticularAccount extends ParticularAccount {
     private boolean boost;
 
     public TemporaryParticularAccount(String accountNumber, String accountName, Double balance,
-        Double interestRate, ParticularAccountOwner owner, LocalDate creationDate, LocalDate expirationDate) {
-        super(accountName, accountNumber, balance, owner, interestRate);
+        Double interestRate, ParticularAccountOwner owner, LocalDate creationDate, LocalDate expirationDate
+    ) {
+        super(accountNumber, accountName, balance, interestRate, owner);
         this.creationDate = creationDate;
         this.expirationDate = expirationDate;
+        this.boost = false;
     }
 
     public TemporaryParticularAccount(String accountNumber, String accountName, Double balance,
@@ -34,15 +36,15 @@ public class TemporaryParticularAccount extends ParticularAccount {
         this.boost = false;
     }
 
-    public LocalDateTime getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public LocalDateTime getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDateTime expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
 
         this.expirationDate = expirationDate;
     }
