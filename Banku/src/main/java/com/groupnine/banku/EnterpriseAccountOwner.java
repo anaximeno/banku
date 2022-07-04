@@ -18,11 +18,11 @@ public class EnterpriseAccountOwner extends AccountOwner{
     }
 
     //remove an account from the Enterprise list accounts
-    public boolean removeAccount (EnterpriseAccount account){
+    public boolean removeAccount (String accountNumber){
         boolean result = false;
         for (int i = 0; i < accounts.size(); i++){
-            if (accounts.get(i).equals(account) ){
-                accounts.remove(account);
+            if (accounts.get(i).getAccountNumber().equals(accountNumber)){
+                accounts.remove(i);
                 return result;
             }
         }
@@ -32,7 +32,7 @@ public class EnterpriseAccountOwner extends AccountOwner{
 
     //add a partner to the list of the Enterprise' partners
     public void addPartner (EnterprisePartners partner){
-        if (partner != NULL){
+        if (partner != null){
             partners.add(partner);
         }else{
             System.out.println("Partner object does not exist");
