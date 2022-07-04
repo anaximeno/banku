@@ -2,7 +2,7 @@ package com.groupnine.banku;
 
 import java.util.ArrayList;
 
-public class EnterpriseAccount extends Account{
+public class EnterpriseAccount extends Account {
     private ArrayList<Card> cards;
     private ParticularAccountOwner admin;
     private ArrayList<ParticularAccountOwner> authorizedUsers;
@@ -11,7 +11,7 @@ public class EnterpriseAccount extends Account{
 
     public EnterpriseAccount(String accountNumber, String accountName, Double availableBalance, Double interestRate,
                              ArrayList<Card> cards, ParticularAccountOwner admin, ArrayList<ParticularAccountOwner> authorizedUsers) {
-        super(accountNumber, accountName, availableBalance, interestRate);
+        super(accountNumber, accountName, availableBalance);
         this.cards = cards;
         this.admin = admin;
         this.authorizedUsers = authorizedUsers;
