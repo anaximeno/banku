@@ -2,20 +2,18 @@ package com.groupnine.banku;
 
 public class Card {
     private String numberID;
-    private String owner;
+    private ParticularAccountOwner owner;
     private Account account;
 
-    public Card(String numberID, String owner, Account account) {
+    public Card(String numberID, ParticularAccountOwner owner, Account account) {
         this.numberID = numberID;
         this.owner = owner;
         this.account = account;
     }
-    public String getOwner(){
-
+    public ParticularAccountOwner getOwner(){
         return owner;
     }
-    public void setOwner(ParticularAccountOwner owner){
-
+    public void setOwner(ParticularAccountOwner owner) {
         this.owner = owner;
     }
     public String getID(){
