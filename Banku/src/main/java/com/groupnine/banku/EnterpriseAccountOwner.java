@@ -5,21 +5,28 @@ import java.util.ArrayList;
 public class EnterpriseAccountOwner extends AccountOwner{
     private String enterpriseName;
     private ArrayList<EnterprisePartners> partners;
-    private ArrayList<EnterpriseAccounts> accounts;
+    private ArrayList<EnterpriseAccount> accounts;
 
     //get a list of accounts that the Enterprise own
     public ArrayList<EnterpriseAccount> getAccounts(){
-
+        return this.accounts;
     }
 
     //add an account to the Enterprise list accounts
     public void addAccount (EnterpriseAccount account){
-
+        this.accounts.add(account);
     }
 
     //remove an account from the Enterprise list accounts
-    public void removeAccount (EnterpriseAccount){
-
+    public boolean removeAccount (EnterpriseAccount account){
+        boolean result = false;
+        for (int i = 0; i < accounts.size(); i++){
+            if (accounts.get(i).equals(account) ){
+                accounts.remove(account);
+                return result;
+            }
+        }
+        return result;
     }
 
 
@@ -33,20 +40,21 @@ public class EnterpriseAccountOwner extends AccountOwner{
 
     }
     //remove a partner from the Enterprise list partners
-    public void removePartner (EnterprisePartners){
-
-    }
-    //get a clone list of the Enterprise's partners
-    /*public ArrayList<EnterprisePartners> getPartners(){
-        ArrayList<EnterprisePartners> partnersList = new ArrayList<>();
-        EnterprisePartners partner;
-        for(int i = 0; i < partners.size(); i++){ //for(EnterprisePartner partnerList : partners)
-            partner = (EnterprisePartners) partnersList.get(i).clone(partners);
-            partnersList.add(partner);
+    public boolean removePartner (String partnerCNI){
+        boolean result = false;
+        for (int i = 0; i < partners.size(); i++){
+            if (partners.get(i).getCNI().equals(partnerCNI)){
+                partners.remove(partners.get(i));
+                return result;
+            }
         }
-        return partnersList;
+        return result;
     }
-    */
+    //get a list of the Enterprise's partners
+    public ArrayList<EnterprisePartners> getPartners(){
+        return this.partners;
+    }
+
 
     public EnterpriseAccountOwner(String name, String NIF, String address, String enterpriseName) {
         super(name, NIF, address);
