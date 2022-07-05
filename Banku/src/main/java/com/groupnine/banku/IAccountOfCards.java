@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IAccountOfCards {
     public void addCard(Card card);
-    public void getCard(String cardID);
-    public void getAllCards();
+    public Card getCard(String cardID);
+    public List<Card> getAllCards();
 }
