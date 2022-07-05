@@ -6,27 +6,29 @@ public class EnterpriseAccount extends Account {
     private ArrayList<Card> cards;
     private ParticularAccountOwner admin;
     private ArrayList<ParticularAccountOwner> authorizedUsers;
-    private ArrayList<Double> dailyBalanceRecordOfTheMonth;
+    private ArrayList<Double> dailyBalanceRecord;
     private boolean todayBalanceWasSaved;
 
-    public EnterpriseAccount(String accountNumber, String accountName, Double availableBalance, Double interestRate,
-                             ArrayList<Card> cards, ParticularAccountOwner admin, ArrayList<ParticularAccountOwner> authorizedUsers) {
-        super(accountNumber, accountName, availableBalance);
+    public EnterpriseAccount(String accountNumber, String accountName, double availableBalance, double interestRate,
+                 ArrayList<Card> cards, ParticularAccountOwner admin, ArrayList<ParticularAccountOwner> authorizedUsers) {
+        super(accountNumber, accountName, availableBalance, interestRate);
         this.cards = cards;
         this.admin = admin;
         this.authorizedUsers = authorizedUsers;
-        this.dailyBalanceRecordOfTheMonth = new ArrayList<>();
         this.todayBalanceWasSaved = false;
+        this.dailyBalanceRecord = new ArrayList<>();
     }
 
-    public Double getAverageMonthlyBalance(){
+    public Double getTheAverageOfStoredBalances(){
         double average = 0d;
-        if (dailyBalanceRecordOfTheMonth.size() != 0) {
-            for (int i = 0; i < dailyBalanceRecordOfTheMonth.size(); i++) {
-                average += dailyBalanceRecordOfTheMonth.get(i).doubleValue();
-            }
-            average /= dailyBalanceRecordOfTheMonth.size();
+        final int days = dailyBalanceRecord.size();
+
+        for (int i = 0 ; i < days ; i++) {
+            // caso days == 0 este loop não será executado,
+            // então não precisa ser verificado.
+            average += dailyBalanceRecord.get(i) / (double) days;
         }
+
         return  average;
     }
 
@@ -54,12 +56,12 @@ public class EnterpriseAccount extends Account {
         this.authorizedUsers = authorizedUsers;
     }
 
-    public ArrayList<Double> getDailyBalanceRecordOfTheMonth() {
-        return dailyBalanceRecordOfTheMonth;
+    public ArrayList<Double> getDailyBalanceRecord() {
+        return dailyBalanceRecord;
     }
 
-    public void setDailyBalanceRecordOfTheMonth(ArrayList<Double> dailyBalanceRecordOfTheMonth) {
-        this.dailyBalanceRecordOfTheMonth = dailyBalanceRecordOfTheMonth;
+    public void emptyDailyBalanceRecord() {
+        this.dailyBalanceRecord = new ArrayList<>();
     }
 
     public boolean isTodayBalanceWasSaved() {
