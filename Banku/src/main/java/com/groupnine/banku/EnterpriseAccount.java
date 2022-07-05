@@ -10,14 +10,23 @@ public class EnterpriseAccount extends Account implements IAccountOfCards {
     private ArrayList<Double> dailyBalanceRecord;
     private boolean todayBalanceWasSaved;
 
-    public EnterpriseAccount(String accountNumber, String accountName, double availableBalance, double interestRate,
-                 ArrayList<Card> cards, ParticularAccountOwner admin, ArrayList<ParticularAccountOwner> authorizedUsers) {
-        super(accountNumber, accountName, availableBalance, interestRate);
+    public EnterpriseAccount(String accountNumber, String accountName, EnterpriseAccountOwner owner, ParticularAccountOwner admin,
+                     double availableBalance, double interestRate, ArrayList<ParticularAccountOwner> authorizedUsers, ArrayList<Card> cards) {
+        super(accountNumber, accountName, owner, availableBalance, interestRate);
         this.cards = cards;
         this.admin = admin;
         this.authorizedUsers = authorizedUsers;
         this.todayBalanceWasSaved = false;
         this.dailyBalanceRecord = new ArrayList<>();
+    }
+
+    public EnterpriseAccount(String accountNumber, String accountName, EnterpriseAccountOwner owner, ParticularAccountOwner admin,
+                             double balance, double interestRate) {
+        this(accountNumber, accountName, owner, admin, balance, interestRate, new ArrayList<>(), new ArrayList<>());
+    }
+
+    public EnterpriseAccount(String accountNumber, String accountName, EnterpriseAccountOwner owner, double balance, double interestRate) {
+        this(accountNumber, accountName, owner, null, balance, interestRate, new ArrayList<>(), new ArrayList<>());
     }
 
     public Double getTheAverageOfStoredBalances(){
