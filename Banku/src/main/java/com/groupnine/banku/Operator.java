@@ -1,5 +1,7 @@
 package com.groupnine.banku;
 
+import java.time.LocalDateTime;
+
 public class Operator {
     public Employee employeeResponsible;
 
@@ -31,7 +33,12 @@ public class Operator {
         from.setAccountBalance(accountFromNewBalance);
         to.setAccountBalance(accountToNewBalance);
 
-        // TODO: Log transaction
+        // Log transaction
+        Transaction transaction = new Transaction(
+                this, LocalDateTime.now(), from, to, value, accountFromBalance, accountToBalance
+        );
+
+        agency.addOperationLog(transaction);
 
         return true;
     }
@@ -41,7 +48,9 @@ public class Operator {
         double fromAccountBalanceAfter = fromAccountBalance - value;
         if (fromAccountBalanceAfter > 0) {
             from.setAccountBalance(fromAccountBalanceAfter);
-            // TODO: Log Withdraw
+            // Log Withdraw
+            MoneyWithDraw moneyWithDraw = new MoneyWithDraw(this, LocalDateTime.now(), from, value, fromAccountBalance);
+            BankAgency.getInstance().addOperationLog(moneyWithDraw);
             return true;
         } else {
             return false;
