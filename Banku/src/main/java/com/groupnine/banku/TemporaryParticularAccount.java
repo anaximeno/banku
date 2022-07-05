@@ -2,7 +2,6 @@ package com.groupnine.banku;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.lang.Math;
 
 public class TemporaryParticularAccount extends ParticularAccount {
     private LocalDate creationDate;
