@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Group layoutX="69.0" layoutY="71.0">
+         <children>
+            <Group>
+               <children>
+                  <Group layoutX="443.0" layoutY="377.0" />
+                  <Group layoutX="2.0">
+                     <children>
+                        <TextField layoutX="1.0" layoutY="37.0" prefHeight="40.0" prefWidth="320.0" />
+                        <Label prefHeight="41.0" prefWidth="184.0" text="Nome da Empresa">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <Group layoutX="2.0" layoutY="83.0">
+                     <children>
+                        <TextField layoutX="1.0" layoutY="37.0" prefHeight="40.0" prefWidth="700.0" />
+                        <Label prefHeight="41.0" prefWidth="107.0" text="Endereco">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <Group layoutX="380.0">
+                     <children>
+                        <TextField layoutX="1.0" layoutY="37.0" prefHeight="40.0" prefWidth="320.0" />
+                        <Label prefHeight="41.0" prefWidth="107.0" text="NIF">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+               </children>
+            </Group>
+            <Group layoutX="4.0" layoutY="173.0">
+               <children>
+                  <ListView layoutY="33.0" prefHeight="134.0" prefWidth="697.0" />
+                  <Button layoutX="580.0" layoutY="130.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="111.0" text="Adicionar" />
+                  <Label prefHeight="30.0" prefWidth="125.0" text="Clientes Parceiros">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <ButtonBar layoutX="508.0" layoutY="462.0" prefHeight="40.0" prefWidth="261.0">
+         <buttons>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Criar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Limpar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </buttons>
+      </ButtonBar>
+      <ButtonBar layoutX="62.0" layoutY="464.0" prefHeight="40.0" prefWidth="130.0">
+         <buttons>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="&lt; Voltar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </buttons>
+      </ButtonBar>
+      <Label layoutX="71.0" layoutY="21.0" prefHeight="50.0" prefWidth="575.0" text="Criar Cliente Corporativo">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

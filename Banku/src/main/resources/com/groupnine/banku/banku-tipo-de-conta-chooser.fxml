@@ -29,7 +29,7 @@
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                  </rowConstraints>
                   <children>
-                     <Label alignment="CENTER" prefHeight="76.0" prefWidth="843.0" text="Escolha o tipo de conta a ser criada">
+                     <Label alignment="CENTER" prefHeight="76.0" prefWidth="843.0" text="Selecione o tipo de conta a ser criada">
                         <font>
                            <Font name="System Bold" size="24.0" />
                         </font>
@@ -48,7 +48,7 @@
                         <children>
                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                               <children>
-                                 <Button alignment="CENTER" layoutX="201.0" layoutY="8.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="194.0" text="&lt; Retornar" textAlignment="CENTER">
+                                 <Button alignment="CENTER" layoutX="201.0" layoutY="8.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="194.0" text="&lt; Voltar" textAlignment="CENTER">
                                     <font>
                                        <Font size="16.0" />
                                     </font>
