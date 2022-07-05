@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 
-public class TemporaryParticularAccount extends ParticularAccount {
+public class TemporaryParticularAccount extends Account {
     private LocalDate creationDate;
     private LocalDate expirationDate;
     private boolean boost;
@@ -14,7 +14,7 @@ public class TemporaryParticularAccount extends ParticularAccount {
     public TemporaryParticularAccount(String accountNumber, String accountName, Double balance,
         Double interestRate, ParticularAccountOwner owner, LocalDate creationDate, LocalDate expirationDate
     ) {
-        super(accountNumber, accountName, balance, interestRate, owner);
+        super(accountNumber, accountName, owner, balance, interestRate);
         this.creationDate = creationDate;
         this.expirationDate = expirationDate;
         this.boost = false;

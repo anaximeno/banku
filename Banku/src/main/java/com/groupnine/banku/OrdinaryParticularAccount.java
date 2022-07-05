@@ -2,7 +2,7 @@ package com.groupnine.banku;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrdinaryParticularAccount extends ParticularAccount implements IAccountOfCards{
+public class OrdinaryParticularAccount extends Account implements IAccountOfCards{
     private List<Card> cards;
     // minorAccountAssociate é o beneficiário da conta.
     private ParticularAccountOwner minorAccountAssociate;
@@ -10,7 +10,7 @@ public class OrdinaryParticularAccount extends ParticularAccount implements IAcc
 
     public OrdinaryParticularAccount(String number, String name, ParticularAccountOwner owner,
             double balance, double interestRate, List<Card> cards, ParticularAccountOwner associate) {
-        super(number, name, balance, interestRate, owner);
+        super(number, name, owner, balance, interestRate);
         this.minorAccountAssociate = associate;
         this.cards = cards;
     }
