@@ -3,19 +3,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrdinaryParticularAccount extends ParticularAccount implements IAccountOfCards{
-    private ArrayList<Card> cards;
+    private List<Card> cards;
+    // minorAccountAssociate é o beneficiário da conta.
     private ParticularAccountOwner minorAccountAssociate;
 
 
-    public OrdinaryParticularAccount(ParticularAccountOwner owner, ParticularAccountOwner minorAccountAssociate) {
-        super(owner);
+    public OrdinaryParticularAccount(String number, String name, ParticularAccountOwner owner,
+            double balance, double interestRate, List<Card> cards, ParticularAccountOwner associate) {
+        super(number, name, balance, interestRate, owner);
+        this.minorAccountAssociate = associate;
         this.cards = cards;
-        this.minorAccountAssociate = minorAccountAssociate;
-        this.ArrayList<Card> cards = new ArrayList<>();
+    }
+
+    public OrdinaryParticularAccount(String number, String name, ParticularAccountOwner owner,
+        double balance, double interestRate, List<Card> card) {
+        this(number, name, owner, balance, interestRate, card, null);
+    }
+
+    public OrdinaryParticularAccount(String number, String name, ParticularAccountOwner owner,
+         double balance, double interestRate) {
+        this(number, name, owner, balance, interestRate, new ArrayList<>(), null);
     }
 
     public ParticularAccountOwner getMinorAccountAssociate() {
-
         return minorAccountAssociate;
     }
 
@@ -23,23 +33,28 @@ public class OrdinaryParticularAccount extends ParticularAccount implements IAcc
         this.minorAccountAssociate = minorAccountAssociate;
     }
 
-    public OrdinaryParticularAccount(String number, String name, Double balance, Double interestRate, List<Card> cards, ParticularAccountOwner associate){
-        super(owner);
-
-    }
-
     @Override
     public void addCard(Card card) {
-
+        for (Card c : cards) {
+            if (c.getID().equals(card.getID())) {
+                return;
+            }
+        }
+        this.cards.add(card);
     }
 
     @Override
-    public void getCard(String cardID) {
-
+    public Card getCard(String cardID) {
+        for (Card c : cards) {
+            if (c.getID().equals(cardID)) {
+                return c;
+            }
+        }
+        return null;
     }
 
     @Override
-    public void getAllCards() {
-
+    public List<Card> getAllCards() {
+        return this.cards;
     }
 }
