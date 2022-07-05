@@ -16,14 +16,17 @@ public class Card {
     public void setOwner(ParticularAccountOwner owner) {
         this.owner = owner;
     }
+
     public String getID(){
 
         return numberID;
     }
+
     public void setID(String id){
 
         this.numberID = id;
     }
+
     public Account getLinkedAccount(){
 
         return account;
