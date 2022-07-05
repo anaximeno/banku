@@ -31,6 +31,50 @@ public class Operator {
         from.setAccountBalance(accountFromNewBalance);
         to.setAccountBalance(accountToNewBalance);
 
+        // TODO: Log transaction
+
         return true;
+    }
+
+    public boolean makeMoneyWithdraw(Account from, double value) {
+        double fromAccountBalance = from.getAccountBalance();
+        double fromAccountBalanceAfter = fromAccountBalance - value;
+        if (fromAccountBalanceAfter > 0) {
+            from.setAccountBalance(fromAccountBalanceAfter);
+            // TODO: Log Withdraw
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean addClientAccountToTheBank(EnterpriseAccount account) {
+        final BankAgency agency = BankAgency.getInstance();
+
+        for (Account a : agency.getClientAccounts()) {
+            if (a.getAccountNumber().equals(account.getAccountNumber()) || a.getAccountName().equals(account.getAccountName())) {
+                return false;
+            }
+        }
+        agency.addEnterpriseAccount(account);
+        return true;
+    }
+
+    // TODO: Set account number to int
+    public boolean deleteAccount(String accountNumber) {
+        final BankAgency agency = BankAgency.getInstance();
+        Account accountToBeRemoved = null;
+        for (Account eac : agency.getClientAccounts()) {
+            if (eac.getAccountNumber().equals(accountNumber)) {
+                accountToBeRemoved = eac;
+                break;
+            }
+        }
+        if (accountToBeRemoved != null) {
+            agency.getClientAccounts().remove(accountToBeRemoved);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
