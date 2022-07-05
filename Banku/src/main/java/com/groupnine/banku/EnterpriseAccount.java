@@ -1,8 +1,9 @@
 package com.groupnine.banku;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class EnterpriseAccount extends Account {
+public class EnterpriseAccount extends Account implements IAccountOfCards {
     private ArrayList<Card> cards;
     private ParticularAccountOwner admin;
     private ArrayList<ParticularAccountOwner> authorizedUsers;
@@ -70,5 +71,30 @@ public class EnterpriseAccount extends Account {
 
     public void setTodayBalanceWasSaved(boolean todayBalanceWasSaved) {
         this.todayBalanceWasSaved = todayBalanceWasSaved;
+    }
+
+    @Override
+    public Card getCard(String cardID) {
+        for (Card c : cards) {
+            if (c.getID().equals(cardID)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void addCard(Card card) {
+        for (Card c : cards) {
+            if (c.getID().equals(card.getID())) {
+                return;
+            }
+        }
+        cards.add(card);
+    }
+
+    @Override
+    public List<Card> getAllCards() {
+        return this.cards;
     }
 }
