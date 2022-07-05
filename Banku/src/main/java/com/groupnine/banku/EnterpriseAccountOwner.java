@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class EnterpriseAccountOwner extends AccountOwner{
     private String enterpriseName;
+
     private ArrayList<EnterprisePartners> partners;
     private ArrayList<EnterpriseAccount> accounts;
 
