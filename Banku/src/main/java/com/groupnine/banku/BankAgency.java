@@ -8,8 +8,7 @@ public class BankAgency {
     private String name;
     private String address;
     private List<Employee> employees;
-    private List<EnterpriseAccount> enterpriseAccountList;
-    private List<ParticularAccount> particularAccounts;
+    private List<Account> clientAccounts;
     private List<AccountOwner> clients;
     private BankAgencyAccount bankAccount;
     private List<BankingOperation> operationsLog;
@@ -19,8 +18,7 @@ public class BankAgency {
         this.name = name;
         this.address = address;
         this.employees = new ArrayList<>();
-        this.enterpriseAccountList = new ArrayList<>();
-        this.particularAccounts = new ArrayList<>();
+        this.clientAccounts = new ArrayList<>();
         this.clients = new ArrayList<>();
         this.bankAccount = new BankAgencyAccount(null, initialBalance);
         this.operationsLog = new ArrayList<>();
@@ -49,20 +47,12 @@ public class BankAgency {
         this.address = address;
     }
 
-    public List<EnterpriseAccount> getEnterpriseAccountList() {
-        return enterpriseAccountList;
+    public List<Account> getClientAccounts() {
+        return clientAccounts;
     }
 
-    public void addEnterpriseAccount(EnterpriseAccount eac) {
-        this.enterpriseAccountList.add(eac);
-    }
-
-    public List<ParticularAccount> getParticularAccounts() {
-        return particularAccounts;
-    }
-
-    public void addParticularAccount(ParticularAccount pac) {
-        this.particularAccounts.add(pac);
+    public void addEnterpriseAccount(Account eac) {
+        this.clientAccounts.add(eac);
     }
 
     public List<AccountOwner> getClients() {
