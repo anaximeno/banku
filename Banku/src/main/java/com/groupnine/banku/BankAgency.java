@@ -84,4 +84,12 @@ public class BankAgency {
         }
         return null;
     }
+
+    public void addOperationLog(BankingOperation operation) {
+        this.operationsLog.add(operation);
+    }
+
+    public List<BankingOperation> getOperationsLog() {
+        return operationsLog;
+    }
 }
