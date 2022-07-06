@@ -10,48 +10,36 @@ public class Operator {
     }
 
     public boolean makeTransaction(Account from, Account to, double value) {
-        final double enterpriseAccountTransactionIterestRate = 0.2;
-        final BankAgency agency = BankAgency.getInstance();
-
         if (from == null || to == null || value < 0) {
             return false;
         }
 
-        double accountFromBalance = from.getAccountBalance();
-        double accountToBalance = to.getAccountBalance();
+        Transaction transaction = new Transaction(this, LocalDateTime.now(), from, to, value);
 
-        double accountFromNewBalance = accountFromBalance - value;
-        double accountToNewBalance = accountToBalance + value;
+        boolean result = transaction.executeOperation();
 
-        // Se a conta da qual se transfere for uma empresa, aplica-se um juro especial
-        if (from instanceof EnterpriseAccount eac) {
-            double transactionInterest = enterpriseAccountTransactionIterestRate * value;
-            accountFromNewBalance -= transactionInterest;
-            agency.addIncomeToBankAccount(transactionInterest);
-        }
-
-        from.setAccountBalance(accountFromNewBalance);
-        to.setAccountBalance(accountToNewBalance);
-
-        // Log transaction
-        Transaction transaction = new Transaction(
-                this, LocalDateTime.now(), from, to, value, accountFromBalance, accountToBalance
-        );
-
-        agency.addOperationLog(transaction);
-
-        return true;
+        // Log the transaction
+        BankAgency.getInstance().addOperationLog(transaction);
+        return result;
     }
 
     public boolean makeMoneyWithdraw(Account from, double value) {
-        double fromAccountBalance = from.getAccountBalance();
-        double fromAccountBalanceAfter = fromAccountBalance - value;
-        if (fromAccountBalanceAfter > 0) {
-            from.setAccountBalance(fromAccountBalanceAfter);
-            // Log Withdraw
-            MoneyWithDraw moneyWithDraw = new MoneyWithDraw(this, LocalDateTime.now(), from, value, fromAccountBalance);
+        if (from != null) {
+            MoneyWithDraw moneyWithDraw = new MoneyWithDraw(this, LocalDateTime.now(), from, value);
+            boolean result = moneyWithDraw.executeOperation();
             BankAgency.getInstance().addOperationLog(moneyWithDraw);
-            return true;
+            return result;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean makeMoneyDeposit(Account account, double value) {
+        if (account != null) {
+            MoneyDeposit moneyDeposit = new MoneyDeposit(this, LocalDateTime.now(), account, value);
+            boolean result = moneyDeposit.executeOperation();
+            BankAgency.getInstance().addOperationLog(moneyDeposit);
+            return result;
         } else {
             return false;
         }

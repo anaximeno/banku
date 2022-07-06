@@ -16,18 +16,28 @@ public class InterestApplication extends BankingOperation{
     }
 
     public String getFullDescription (){
-        String fullDescription = "Interest money to account with number" +this.account.getAccountNumber()
-                + " in the amount of " + this.value + "\n Balance before = " +this.balanceBefore + "\n Balance after = "
+        String fullDescription = getDescription() + this.value +
+                "\n Balance before = " +this.balanceBefore + "\n Balance after = "
                 + this.balanceAfter;
         return fullDescription;
-
     }
 
-    public InterestApplication(Operator operator, LocalDateTime dateTime, Account account, double balanceBefore, double value) {
+    public InterestApplication(Operator operator, LocalDateTime dateTime, Account account) {
         super(operator, dateTime);
         this.account = account;
-        this.balanceBefore = balanceBefore;
-        this.value = value;
-        this.balanceAfter = this.balanceBefore + this.value;
+    }
+
+    @Override
+    public boolean executeOperation() {
+        if (!wasExecuted) {
+            this.value = account.getAccountBalance() * account.getInterestRate();
+            this.balanceBefore = account.getAccountBalance();
+            account.setAccountBalance(account.getAccountBalance() - value);
+            this.balanceAfter = account.getAccountBalance();
+            wasExecuted = true;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
