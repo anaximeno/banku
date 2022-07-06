@@ -28,21 +28,39 @@ public class Transaction extends BankingOperation{
 
     }
 
-    public Transaction(Operator operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value,
-                       double balanceOfFromAccountBeforeTransaction, double balanceOfToAccountBeforeTransaction
-    ) {
+    public Transaction(Operator operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value) {
         super(operator, dateTime);
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;
         this.value = value;
-        this.balanceOfFromAccountBeforeTransaction = balanceOfFromAccountBeforeTransaction;
-        double valueWithInterests = value;
-        if (accountFrom instanceof EnterpriseAccount) {
-            valueWithInterests *= (1 + EnterpriseAccount.TRANSACTION_INTEREST);
+    }
+
+    @Override
+    public boolean executeOperation() {
+        BankAgency agency = BankAgency.getInstance();
+        if (accountFrom == null || accountTo == null || accountFrom.getAccountBalance() - value > 0 || !wasExecuted) {
+            double valueWithInterests = value;
+            if (accountFrom instanceof EnterpriseAccount) {
+                double transactionInterest = value * EnterpriseAccount.TRANSACTION_INTEREST;
+                valueWithInterests = valueWithInterests + transactionInterest;
+                agency.addIncomeToBankAccount(transactionInterest);
+            }
+
+            // Store the balance before the transaction
+            this.balanceOfFromAccountBeforeTransaction = accountFrom.getAccountBalance();
+            this.balanceOfToAccountBeforeTransaction = accountTo.getAccountBalance();
+
+            accountFrom.setAccountBalance(accountFrom.getAccountBalance() - valueWithInterests);
+            accountTo.setAccountBalance(accountTo.getAccountBalance() + value);
+
+            // Store the balance after the transaction
+            this.balanceOfFromAccountAfterTransaction = accountFrom.getAccountBalance();
+            this.balanceOfToAfterTransaction = accountTo.getAccountBalance();
+
+            wasExecuted = true;
+            return true;
+        } else {
+            return false;
         }
-        // Interest is only applied to account from which are EnterpriseAccounts
-        this.balanceOfFromAccountAfterTransaction = balanceOfFromAccountBeforeTransaction - valueWithInterests;
-        this.balanceOfToAccountBeforeTransaction = balanceOfToAccountBeforeTransaction;
-        this.balanceOfToAfterTransaction = balanceOfToAccountBeforeTransaction + value;
     }
 }
