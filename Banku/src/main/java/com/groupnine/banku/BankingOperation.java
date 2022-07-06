@@ -20,4 +20,5 @@ public abstract class BankingOperation {
     }
 
     public abstract String getDescription();
+    public abstract String getFullDescription();
 }
