@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="71.0" layoutY="21.0" prefHeight="50.0" prefWidth="575.0" text="Levantamento">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Group layoutX="69.0" layoutY="95.0" />
+      <ButtonBar layoutX="508.0" layoutY="462.0" prefHeight="40.0" prefWidth="261.0">
+         <buttons>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Confirmar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Limpar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </buttons>
+      </ButtonBar>
+      <ButtonBar layoutX="62.0" layoutY="464.0" prefHeight="40.0" prefWidth="130.0">
+         <buttons>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="&lt; Voltar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </buttons>
+      </ButtonBar>
+      <Group layoutX="72.0" layoutY="233.0" />
+      <Group layoutX="62.0" layoutY="-63.0">
+         <children>
+            <Label prefHeight="41.0" prefWidth="184.0" text="Nome da Conta">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Group layoutX="449.0" layoutY="60.0" />
+      <Group layoutX="68.0" layoutY="160.0">
+         <children>
+            <TextField layoutX="1.0" layoutY="37.0" prefHeight="40.0" prefWidth="320.0" />
+            <Label prefHeight="41.0" prefWidth="184.0" text="Conta a Debitar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="245.0" layoutY="42.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="72.0" text="Selecionar" />
+         </children>
+      </Group>
+      <Group layoutX="68.0" layoutY="253.0">
+         <children>
+            <TextField layoutX="1.0" layoutY="37.0" prefHeight="40.0" prefWidth="320.0" />
+            <Label prefHeight="41.0" prefWidth="184.0" text="Montante">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Group layoutX="449.0" layoutY="199.0" />
+      <Group layoutX="72.0" layoutY="199.0" />
+      <Group layoutX="448.0" layoutY="159.0">
+         <children>
+            <Label prefHeight="41.0" prefWidth="184.0" text="Data do Movimento">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutY="37.0" prefHeight="40.0" prefWidth="320.0" />
+         </children>
+      </Group>
+   </children>
+</AnchorPane>
