@@ -28,6 +28,6 @@ public class MoneyWithDraw extends BankingOperation{
         this.account = account;
         this.valueMoved = valueMoved;
         this.balanceBeforeWithDraw = balanceBeforeWithDraw;
-        this.balanceAfterWithDraw = this.balanceBeforeWithDraw + this.valueMoved;
+        this.balanceAfterWithDraw = balanceBeforeWithDraw - valueMoved;
     }
 }
