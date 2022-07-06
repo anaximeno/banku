@@ -3,12 +3,14 @@ package com.groupnine.banku;
 import java.time.LocalDateTime;
 
 public abstract class BankingOperation {
-    final Operator operator;
-    final LocalDateTime dateTime;
+    private final Operator operator;
+    private final LocalDateTime dateTime;
+    protected boolean wasExecuted;
 
     public BankingOperation(Operator operator, LocalDateTime dateTime) {
         this.operator = operator;
         this.dateTime = dateTime;
+        wasExecuted = false;
     }
 
     public Operator getOperator() {
@@ -19,6 +21,12 @@ public abstract class BankingOperation {
         return dateTime;
     }
 
+    public boolean operationWasExecuted() {
+        return wasExecuted;
+    }
+
     public abstract String getDescription();
     public abstract String getFullDescription();
+
+    public abstract boolean executeOperation();
 }
