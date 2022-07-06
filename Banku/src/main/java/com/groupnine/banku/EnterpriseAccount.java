@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnterpriseAccount extends Account implements IAccountOfCards {
+    final static double TRANSACTION_INTEREST = 0.02;
     private ArrayList<Card> cards;
     private ParticularAccountOwner admin;
     private ArrayList<ParticularAccountOwner> authorizedUsers;
