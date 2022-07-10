@@ -12,12 +12,21 @@ public class Transaction extends BankingOperation{
     private double balanceOfToAccountBeforeTransaction;
     private double balanceOfToAfterTransaction;
 
+    public Transaction(Employee operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value) {
+        super(operator, dateTime);
+        this.accountFrom = accountFrom;
+        this.accountTo = accountTo;
+        this.value = value;
+    }
+
+    @Override
     public String getDescription (){
         String description = "Money transaction from account with number" + accountFrom.getAccountNumber()
                 + " to account with number " + accountTo.getAccountNumber() + " in the amount of " + value;
          return description;
     }
 
+    @Override
     public String getFullDescription (){
         String fullDescription = getDescription()
                 + "\n Account balance debited before the transaction = " + balanceOfFromAccountBeforeTransaction
@@ -26,13 +35,6 @@ public class Transaction extends BankingOperation{
                 + "\n Account balance credited after the transaction = " + balanceOfToAfterTransaction;
         return fullDescription;
 
-    }
-
-    public Transaction(Operator operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value) {
-        super(operator, dateTime);
-        this.accountFrom = accountFrom;
-        this.accountTo = accountTo;
-        this.value = value;
     }
 
     @Override

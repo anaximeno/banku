@@ -8,18 +8,20 @@ public class MoneyDeposit extends BankingOperation {
     private double balanceBefore;
     private double balanceAfter;
 
-    public MoneyDeposit(Operator operator, LocalDateTime dateTime, Account account, double value) {
+    public MoneyDeposit(Employee operator, LocalDateTime dateTime, Account account, double value) {
         super(operator, dateTime);
         this.account = account;
         this.value = value;
     }
 
+    @Override
     public String getDescription() {
         String description = "Money deposit from account with number " + account.getAccountNumber()
                 + " in the amount of " + value;
         return description;
     }
 
+    @Override
     public String getFullDescription() {
         String fullDescription = getDescription() + "\n Balance before = " +
                         balanceBefore + "\n Balance after = " + balanceAfter;

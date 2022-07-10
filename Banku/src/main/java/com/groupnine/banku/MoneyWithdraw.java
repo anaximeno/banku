@@ -8,23 +8,25 @@ public class MoneyWithdraw extends BankingOperation {
     private double balanceBeforeWithDraw;
     private double balanceAfterWithDraw;
 
+    public MoneyWithdraw(Employee operator, LocalDateTime dateTime, Account account, double valueMoved) {
+        super(operator, dateTime);
+        this.account = account;
+        this.valueMoved = valueMoved;
+    }
+
+    @Override
     public String getDescription (){
         String description = "Money draw from account with number " + this.account.getAccountNumber()
                 + " in the amount of " + this.valueMoved;
         return description;
     }
 
+    @Override
     public String getFullDescription (){
         String fullDescription = "Money draw from account with number " + this.account.getAccountNumber()
                 + " in the amount of " + this.valueMoved + "\n Balance before = " + this.balanceBeforeWithDraw
                 + "\n Balance after = " + this.balanceAfterWithDraw;
         return fullDescription;
-    }
-
-    public MoneyWithdraw(Operator operator, LocalDateTime dateTime, Account account, double valueMoved) {
-        super(operator, dateTime);
-        this.account = account;
-        this.valueMoved = valueMoved;
     }
 
     @Override

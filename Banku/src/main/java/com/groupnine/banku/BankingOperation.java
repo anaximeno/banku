@@ -3,17 +3,17 @@ package com.groupnine.banku;
 import java.time.LocalDateTime;
 
 public abstract class BankingOperation {
-    private final Operator operator;
+    private final Employee operator;
     private final LocalDateTime dateTime;
     protected boolean wasExecuted;
 
-    public BankingOperation(Operator operator, LocalDateTime dateTime) {
+    public BankingOperation(Employee operator, LocalDateTime dateTime) {
         this.operator = operator;
         this.dateTime = dateTime;
         wasExecuted = false;
     }
 
-    public Operator getOperator() {
+    public Employee getOperator() {
         return operator;
     }
 
