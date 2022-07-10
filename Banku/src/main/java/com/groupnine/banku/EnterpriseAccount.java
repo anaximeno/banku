@@ -3,7 +3,7 @@ package com.groupnine.banku;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnterpriseAccount extends Account implements IAccountOfCards {
+public class EnterpriseAccount extends AccountOfCards {
     final static double TRANSACTION_INTEREST = 0.02;
     private ArrayList<Card> cards;
     private ParticularAccountOwner admin;
@@ -13,8 +13,7 @@ public class EnterpriseAccount extends Account implements IAccountOfCards {
 
     public EnterpriseAccount(String accountNumber, String accountName, EnterpriseAccountOwner owner, ParticularAccountOwner admin,
                      double availableBalance, double interestRate, ArrayList<ParticularAccountOwner> authorizedUsers, ArrayList<Card> cards) {
-        super(accountNumber, accountName, owner, availableBalance, interestRate);
-        this.cards = cards;
+        super(accountNumber, accountName, owner, availableBalance, interestRate, cards);
         this.admin = admin;
         this.authorizedUsers = authorizedUsers;
         this.todayBalanceWasSaved = false;
@@ -41,14 +40,6 @@ public class EnterpriseAccount extends Account implements IAccountOfCards {
         }
 
         return  average;
-    }
-
-    public ArrayList<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
     }
 
     public ParticularAccountOwner getAdmin() {
@@ -81,30 +72,5 @@ public class EnterpriseAccount extends Account implements IAccountOfCards {
 
     public void setTodayBalanceWasSaved(boolean todayBalanceWasSaved) {
         this.todayBalanceWasSaved = todayBalanceWasSaved;
-    }
-
-    @Override
-    public Card getCard(String cardID) {
-        for (Card c : cards) {
-            if (c.getID().equals(cardID)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void addCard(Card card) {
-        for (Card c : cards) {
-            if (c.getID().equals(card.getID())) {
-                return;
-            }
-        }
-        cards.add(card);
-    }
-
-    @Override
-    public List<Card> getAllCards() {
-        return this.cards;
     }
 }
