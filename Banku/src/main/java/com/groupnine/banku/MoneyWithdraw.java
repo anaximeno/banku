@@ -2,7 +2,7 @@ package com.groupnine.banku;
 
 import java.time.LocalDateTime;
 
-public class MoneyWithDraw extends BankingOperation {
+public class MoneyWithdraw extends BankingOperation {
     private Account account;
     private double valueMoved;
     private double balanceBeforeWithDraw;
@@ -21,7 +21,7 @@ public class MoneyWithDraw extends BankingOperation {
         return fullDescription;
     }
 
-    public MoneyWithDraw(Operator operator, LocalDateTime dateTime, Account account, double valueMoved) {
+    public MoneyWithdraw(Operator operator, LocalDateTime dateTime, Account account, double valueMoved) {
         super(operator, dateTime);
         this.account = account;
         this.valueMoved = valueMoved;
