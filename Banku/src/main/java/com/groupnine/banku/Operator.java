@@ -3,10 +3,26 @@ package com.groupnine.banku;
 import java.time.LocalDateTime;
 
 public class Operator {
-    public Employee employeeResponsible;
+    private static int operatorIdCounter = 0;
+    private final int id;
+    private final Employee employee;
+    
+    private static void increaseIdCounter() {
+        operatorIdCounter += 1;
+    }
 
     public Operator(Employee employee) {
-        employeeResponsible = employee;
+        increaseIdCounter();
+        id = operatorIdCounter;
+        this.employee = employee;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public boolean makeTransaction(Account from, Account to, double value) {
@@ -25,7 +41,7 @@ public class Operator {
 
     public boolean makeMoneyWithdraw(Account from, double value) {
         if (from != null) {
-            MoneyWithDraw moneyWithDraw = new MoneyWithDraw(this, LocalDateTime.now(), from, value);
+            MoneyWithdraw moneyWithDraw = new MoneyWithdraw(this, LocalDateTime.now(), from, value);
             boolean result = moneyWithDraw.executeOperation();
             BankAgency.getInstance().addOperationLog(moneyWithDraw);
             return result;
@@ -57,7 +73,6 @@ public class Operator {
         return true;
     }
 
-    // TODO: Set account number to int
     public boolean deleteAccount(String accountNumber) {
         final BankAgency agency = BankAgency.getInstance();
         Account accountToBeRemoved = null;
