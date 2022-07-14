@@ -16,10 +16,13 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
+                        <TableView fx:id="particularAccountsTable" layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn prefWidth="75.0" text="Numero" />
+                              <TableColumn prefWidth="193.0" text="Nome" />
+                              <TableColumn prefWidth="303.0" text="Dono" />
+                              <TableColumn minWidth="0.0" prefWidth="156.0" text="Balanco Atual" />
+                              <TableColumn prefWidth="89.0" text="#Cartoes" />
                            </columns>
                         </TableView>
                      </children>
@@ -32,8 +35,11 @@
                      <children>
                         <TableView layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn prefWidth="75.0" text="Numero" />
+                            <TableColumn prefWidth="228.0" text="Dono" />
+                              <TableColumn minWidth="0.0" prefWidth="188.0" text="Admin" />
+                              <TableColumn prefWidth="143.0" text="Balanco Atual" />
+                              <TableColumn prefWidth="184.0" text="#Usuarios Autorizados" />
                           </columns>
                         </TableView>
                      </children>
@@ -46,8 +52,12 @@
                      <children>
                         <TableView layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn prefWidth="75.0" text="Numero" />
+                              <TableColumn prefWidth="152.0" text="Nome" />
+                              <TableColumn prefWidth="208.0" text="Dono" />
+                              <TableColumn minWidth="0.0" prefWidth="132.0" text="Balanco Atual" />
+                              <TableColumn prefWidth="116.0" text="Criado em" />
+                              <TableColumn prefWidth="134.0" text="Expira em" />
                            </columns>
                         </TableView>
                      </children>
