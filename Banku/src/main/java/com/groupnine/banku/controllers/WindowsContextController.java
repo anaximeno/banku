@@ -12,7 +12,14 @@ public class WindowsContextController {
     private static Stage principalStage;
     private static double defaultHeight = 560;
     private static double defaultWidth = 860;
-    private static String defaultTitle = "Banku - A Banking Application";
+    private static String defaultTitle = "banku generic window context";
+
+    public static void setTitle(String title) {
+        defaultTitle = title;
+        if (principalStage != null) {
+            principalStage.setTitle(title);
+        }
+    }
 
     public static void setPrincipalScene(Scene scene) {
         getPrincipalStage().setScene(scene);
