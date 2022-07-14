@@ -27,13 +27,18 @@ public class DashboardController {
         vBox.setBackground(new Background(backgroundFill));
     }
 
-    private void openViewAsStage(String path) throws IOException {
-        Stage stage = new Stage();
+    private void openView(String path) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BankuApp.class.getResource(path));
-        Scene scene = new Scene(fxmlLoader.load(), 840, 560);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+        Scene scene = WindowsContextController.getInstance().getMainScene();
+        if (scene == null) {
+            scene = new Scene(fxmlLoader.load(), 840, 560);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } else {
+            scene.setRoot(fxmlLoader.load());
+        }
     }
 
     @FXML
@@ -48,7 +53,7 @@ public class DashboardController {
 
     @FXML
     protected void onVBox1MouseClick() throws IOException {
-        openViewAsStage("views/accounts-view.fxml");
+        openView("views/accounts-view.fxml");
     }
 
     @FXML
@@ -63,7 +68,7 @@ public class DashboardController {
 
     @FXML
     protected void onVBox2MouseClick() throws IOException {
-        openViewAsStage("views/clients-view.fxml");
+        openView("views/clients-view.fxml");
     }
 
     @FXML
@@ -78,6 +83,6 @@ public class DashboardController {
 
     @FXML
     protected void onVBox3MouseClick() throws IOException {
-        openViewAsStage("views/agency-view.fxml");
+        openView("views/agency-view.fxml");
     }
 }

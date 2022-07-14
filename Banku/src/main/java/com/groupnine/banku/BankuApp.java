@@ -1,5 +1,6 @@
 package com.groupnine.banku;
 
+import com.groupnine.banku.controllers.WindowsContextController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ public class BankuApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BankuApp.class.getResource("views/dashboard-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 840, 560);
+        WindowsContextController.getInstance().setMainScene(scene);
         stage.setTitle("Banku - A Banking Application");
         stage.setResizable(false);
         stage.setScene(scene);
