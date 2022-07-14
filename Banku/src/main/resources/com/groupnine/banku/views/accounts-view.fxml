@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
 <AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.AccountsController">
    <children>
@@ -55,6 +56,17 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="dashboardBtn" layoutX="14.0" layoutY="521.0" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" text="Voltar ao Dashboard" />
+      <HBox alignment="BOTTOM_LEFT" layoutX="8.0" layoutY="523.0" prefHeight="33.0" prefWidth="826.0" spacing="270.0">
+         <children>
+            <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" text="Voltar ao Dashboard" />
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="6.0" prefWidth="403.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Criar Novo" />
+                  <Button mnemonicParsing="false" text="Expandir" />
+                  <Button mnemonicParsing="false" text="Remover" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
