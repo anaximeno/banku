@@ -20,9 +20,13 @@ public class Transaction extends BankingOperation{
     }
 
     @Override
-    public String getDescription (){
-        String description = "Money transaction from account with number" + accountFrom.getAccountNumber()
-                + " to account with number " + accountTo.getAccountNumber() + " in the amount of " + value;
+    public String getDescription () {
+        // If transaction interest was applied, show the information
+        String interestInfo = accountFrom instanceof EnterpriseAccount ?
+                "With transaction interest of " + value * EnterpriseAccount.TRANSACTION_INTEREST + "." :  "";
+        String description = "Money transaction from account with number " + accountFrom.getAccountNumber()
+                + " to account with number " + accountTo.getAccountNumber() + " in the amount of " + value + "."
+                + interestInfo;
          return description;
     }
 
@@ -41,18 +45,20 @@ public class Transaction extends BankingOperation{
     public boolean executeOperation() {
         BankAgency agency = BankAgency.getInstance();
         if (accountFrom == null || accountTo == null || accountFrom.getAccountBalance() - value > 0 || !wasExecuted) {
-            double valueWithInterests = value;
-            if (accountFrom instanceof EnterpriseAccount) {
-                double transactionInterest = value * EnterpriseAccount.TRANSACTION_INTEREST;
-                valueWithInterests = valueWithInterests + transactionInterest;
-                agency.addIncomeToBankAccount(transactionInterest);
-            }
-
             // Store the balance before the transaction
             this.balanceOfFromAccountBeforeTransaction = accountFrom.getAccountBalance();
             this.balanceOfToAccountBeforeTransaction = accountTo.getAccountBalance();
 
-            accountFrom.setAccountBalance(accountFrom.getAccountBalance() - valueWithInterests);
+            if (accountFrom instanceof EnterpriseAccount) {
+                // If the type of the account is Enterprise, a transaction interest is applied.
+                InterestApplication interestApplication = new InterestApplication(
+                        getOperator(), LocalDateTime.now(), accountFrom, EnterpriseAccount.TRANSACTION_INTEREST
+                );
+                interestApplication.executeOperation();
+                BankAgency.getInstance().addOperationLog(interestApplication);
+            }
+
+            accountFrom.setAccountBalance(accountFrom.getAccountBalance() - value);
             accountTo.setAccountBalance(accountTo.getAccountBalance() + value);
 
             // Store the balance after the transaction

@@ -7,10 +7,16 @@ public class InterestApplication extends BankingOperation {
     private double balanceBefore;
     private double value;
     private double balanceAfter;
+    private double interest;
 
     public InterestApplication(Employee operator, LocalDateTime dateTime, Account account) {
+        this(operator, dateTime, account, account.getInterestRate());
+    }
+
+    public InterestApplication(Employee operator, LocalDateTime dateTime, Account account, double interest) {
         super(operator, dateTime);
         this.account = account;
+        this.interest = interest;
     }
 
     @Override
@@ -31,11 +37,12 @@ public class InterestApplication extends BankingOperation {
     @Override
     public boolean executeOperation() {
         if (!wasExecuted) {
-            this.value = account.getAccountBalance() * account.getInterestRate();
+            this.value = account.getAccountBalance() * interest;
             this.balanceBefore = account.getAccountBalance();
-            account.setAccountBalance(account.getAccountBalance() - value);
+            this.account.setAccountBalance(account.getAccountBalance() - value);
+            BankAgency.getInstance().addIncomeToBankAccount(value);
             this.balanceAfter = account.getAccountBalance();
-            wasExecuted = true;
+            this.wasExecuted = true;
             return true;
         } else {
             return false;
