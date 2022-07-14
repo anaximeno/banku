@@ -1,4 +1,4 @@
-package com.groupnine.banku;
+package com.groupnine.banku.businesslogic;
 
 import java.util.List;
 

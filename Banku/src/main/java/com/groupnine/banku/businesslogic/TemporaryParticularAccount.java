@@ -1,4 +1,4 @@
-package com.groupnine.banku;
+package com.groupnine.banku.businesslogic;
 
 import java.time.LocalDate;
 import java.time.Period;

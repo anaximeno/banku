@@ -5,4 +5,5 @@ module com.groupnine.banku {
                             
     opens com.groupnine.banku.controllers to javafx.fxml;
     exports com.groupnine.banku;
+    exports com.groupnine.banku.businesslogic;
 }

@@ -1,4 +1,4 @@
-package com.groupnine.banku;
+package com.groupnine.banku.businesslogic;
 
 public interface IOperator {
     public boolean makeTransaction(Account from, Account to, double value);

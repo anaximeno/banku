@@ -1,7 +1,6 @@
-package com.groupnine.banku;
+package com.groupnine.banku.businesslogic;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ParticularAccountOwner  extends AccountOwner{
      private String lastName;

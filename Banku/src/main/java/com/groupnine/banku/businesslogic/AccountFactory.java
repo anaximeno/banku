@@ -1,10 +1,7 @@
-package com.groupnine.banku;
+package com.groupnine.banku.businesslogic;
 
 import java.lang.Math;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 // This class is abstract because only one AccountFactory will be used for all accounts
 // so there's no need for instantiation on this class

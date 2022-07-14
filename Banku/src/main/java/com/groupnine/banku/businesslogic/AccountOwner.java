@@ -1,4 +1,4 @@
-package com.groupnine.banku;
+package com.groupnine.banku.businesslogic;
 
 public class AccountOwner {
     private String name;
