@@ -74,7 +74,7 @@
                </cursor>
             </VBox>
          </children></HBox>
-      <Label layoutX="170.0" layoutY="51.0" prefHeight="55.0" prefWidth="489.0" text="Escolha Uma Opcao Abaixo">
+      <Label layoutX="170.0" layoutY="51.0" prefHeight="55.0" prefWidth="489.0" text="Escolha Uma Opção Abaixo">
          <font>
             <Font size="35.0" />
          </font>
