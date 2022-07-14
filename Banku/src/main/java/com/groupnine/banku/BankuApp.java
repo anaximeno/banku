@@ -12,7 +12,6 @@ public class BankuApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         WindowsContextController.setPrincipalStage(stage);
-        WindowsContextController.setTitle("Banku - A Banking Application");
         WindowsContextController.showDashboardOnPrincipalStage();
     }
 

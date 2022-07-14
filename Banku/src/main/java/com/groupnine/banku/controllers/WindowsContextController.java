@@ -12,7 +12,7 @@ public class WindowsContextController {
     private static Stage principalStage;
     private static double defaultHeight = 560;
     private static double defaultWidth = 860;
-    private static String defaultTitle = "banku generic window context";
+    private static String defaultTitle = "Banku - A Banking Application";
 
     public static void setTitle(String title) {
         defaultTitle = title;
@@ -54,5 +54,6 @@ public class WindowsContextController {
 
     public static void showDashboardOnPrincipalStage() throws IOException {
         openSceneGraphViewOnPrincipalStage("views/dashboard-view.fxml");
+        setTitle("Banku - Dashboard");
     }
 }
