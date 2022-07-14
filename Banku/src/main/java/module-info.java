@@ -3,6 +3,6 @@ module com.groupnine.banku {
     requires javafx.fxml;
             
                             
-    opens com.groupnine.banku to javafx.fxml;
+    opens com.groupnine.banku.controllers to javafx.fxml;
     exports com.groupnine.banku;
 }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="560.0" prefWidth="840.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.DashboardController">
+   <children>
+      <HBox layoutX="114.0" layoutY="177.0" prefHeight="266.0" prefWidth="532.0" spacing="50.0">
+         <children>
+            <VBox fx:id="vBox1" onMouseClicked="#onVBox1MouseClick" onMouseEntered="#onVBox1MouseIn" onMouseExited="#onVBox1MouseOut" prefHeight="266.0" prefWidth="170.0" style="-fx-border-color: red; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: white;">
+               <children>
+                  <ImageView fitHeight="192.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/login.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin></ImageView>
+                  <Label alignment="CENTER" prefHeight="96.0" prefWidth="168.0" style="-fx-background-color: red;" text="Contas" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </VBox>
+            <VBox fx:id="vBox2" layoutX="10.0" layoutY="10.0" onMouseClicked="#onVBox2MouseClick" onMouseEntered="#onVBox2MouseIn" onMouseExited="#onVBox2MouseOut" prefHeight="266.0" prefWidth="170.0" style="-fx-border-radius: 5; -fx-border-color: orange; -fx-background-radius: 5; -fx-background-color: white;">
+               <children>
+                  <ImageView fitHeight="192.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                     <image>
+                        <Image url="@../images/kyc.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="100.0" prefWidth="168.0" style="-fx-background-color: orange;" text="Clientes" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </VBox>
+            <VBox fx:id="vBox3" layoutX="180.0" layoutY="10.0" onMouseClicked="#onVBox3MouseClick" onMouseEntered="#onVBox3MouseIn" onMouseExited="#onVBox3MouseOut" prefHeight="266.0" prefWidth="170.0" style="-fx-border-radius: 5; -fx-border-color: blue; -fx-background-radius: 5; -fx-background-color: white;">
+               <children>
+                  <ImageView fitHeight="192.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/bank.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="98.0" prefWidth="168.0" style="-fx-background-color: blue;" text="Agência" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </VBox>
+         </children></HBox>
+      <Label layoutX="170.0" layoutY="51.0" prefHeight="55.0" prefWidth="489.0" text="Escolha Uma Opcao Abaixo">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

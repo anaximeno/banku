@@ -7,14 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class BankuApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(
-                HelloApplication.class.getResource("hello-view.fxml")
-        );
-        Scene scene = new Scene(fxmlLoader.load(), 720, 480);
-        stage.setTitle("Banku - test - Banking Application");
+        FXMLLoader fxmlLoader = new FXMLLoader(BankuApp.class.getResource("views/dashboard-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 840, 560);
+        stage.setTitle("Banku - A Banking Application");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
