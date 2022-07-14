@@ -40,6 +40,7 @@ public class DashboardController {
     @FXML
     protected void onVBox1MouseClick() throws IOException {
         WindowsContextController.openSceneGraphViewOnPrincipalStage("views/accounts-view.fxml");
+        WindowsContextController.setTitle("Banku - Contas");
     }
 
     @FXML
@@ -55,6 +56,7 @@ public class DashboardController {
     @FXML
     protected void onVBox2MouseClick() throws IOException {
         WindowsContextController.openSceneGraphViewOnPrincipalStage("views/clients-view.fxml");
+        WindowsContextController.setTitle("Banku - Clientes");
     }
 
     @FXML
@@ -70,5 +72,6 @@ public class DashboardController {
     @FXML
     protected void onVBox3MouseClick() throws IOException {
         WindowsContextController.openSceneGraphViewOnPrincipalStage("views/agency-view.fxml");
+        WindowsContextController.setTitle("Banku - Agência");
     }
 }

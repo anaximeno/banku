@@ -10,12 +10,11 @@ import java.io.IOException;
 
 public class WindowsContextController {
     private static Stage principalStage;
-    private static double defaultHeight = 560;
-    private static double defaultWidth = 860;
+    private static double defaultHeight = 600;
+    private static double defaultWidth = 840;
     private static String defaultTitle = "Banku - A Banking Application";
 
     public static void setTitle(String title) {
-        defaultTitle = title;
         if (principalStage != null) {
             principalStage.setTitle(title);
         }
@@ -33,6 +32,7 @@ public class WindowsContextController {
         principalStage.setWidth(defaultWidth);
         principalStage.setResizable(false);
         setPrincipalScene(mainScene);
+        setTitle(defaultTitle);
     }
 
     public static void setPrincipalStage(Stage stage) {
