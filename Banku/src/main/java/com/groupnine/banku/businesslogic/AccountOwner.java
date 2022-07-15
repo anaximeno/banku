@@ -1,17 +1,23 @@
 package com.groupnine.banku.businesslogic;
 
-public class AccountOwner {
+public class  AccountOwner {
+    private String ownerID;
     private String name;
     private String NIF;
     private String address;
 
 
-    public AccountOwner(String name, String NIF, String address) {
+    public AccountOwner(String ownerID, String name, String NIF, String address) {
         if (name.isEmpty() != true && NIF.isEmpty() != true && address.isEmpty() != true){
+            this.ownerID = ownerID;
             this.name = name;
             this.NIF = NIF;
             this.address = address;
         }
+    }
+
+    public String getOwnerID() {
+        return ownerID;
     }
 
     public String getName() {
