@@ -7,8 +7,10 @@ public class EnterprisePartners {
 
 
     public EnterprisePartners(String fullName, String CNI) {
-        this.fullName = fullName;
-        this.CNI = CNI;
+        if (fullName.isEmpty() != true && CNI.isEmpty() != true){
+            this.fullName = fullName;
+            this.CNI = CNI;
+        }
     }
 
     public String getFullName() {

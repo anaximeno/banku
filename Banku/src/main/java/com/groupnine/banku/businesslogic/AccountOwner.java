@@ -7,9 +7,11 @@ public class AccountOwner {
 
 
     public AccountOwner(String name, String NIF, String address) {
-        this.name = name;
-        this.NIF = NIF;
-        this.address = address;
+        if (name.isEmpty() != true && NIF.isEmpty() != true && address.isEmpty() != true){
+            this.name = name;
+            this.NIF = NIF;
+            this.address = address;
+        }
     }
 
     public String getName() {

@@ -11,6 +11,7 @@ public class ParticularAccountOwner  extends AccountOwner{
 
      public ParticularAccountOwner(String name, String NIF, String address, String lastname, String id, String nationality,
                                    ArrayList<? extends Account>accounts, ArrayList<? extends Account>associatedAccounts ){
+
           super(name, NIF, address);
           this.lastName = lastname;
           this.id = id;
@@ -27,6 +28,7 @@ public class ParticularAccountOwner  extends AccountOwner{
      public ParticularAccountOwner(String name, String NIF, String address, String lastName, String id, String nationality) {
           this(name, NIF, address, lastName, id, nationality, new ArrayList<>(), new ArrayList<>() );
      }
+
 
      public Double getTotalAvailableBalance(){
           Double balance = 0d;

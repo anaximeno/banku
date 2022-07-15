@@ -7,14 +7,15 @@ public abstract class Account {
     private Double interestRate;
     private AccountOwner owner;
 
-    public Account(
-            String accountNumber, String accountName, AccountOwner owner, Double availableBalance, Double interestRate
-    ) {
-        setAccountNumber(accountNumber);
-        setAccountName(accountName);
-        setAccountBalance(availableBalance);
-        updateInterestRateTo(interestRate);
-        setOwner(owner);
+    public Account(String accountNumber, String accountName, AccountOwner owner, Double availableBalance, Double interestRate) {
+        if (accountNumber.isEmpty() != true && accountName.isEmpty() != true && owner != null && availableBalance > 0d
+                && interestRate > 0d){
+            setAccountNumber(accountNumber);
+            setAccountName(accountName);
+            setAccountBalance(availableBalance);
+            updateInterestRateTo(interestRate);
+            setOwner(owner);
+        }
     }
 
     public AccountOwner getOwner() {

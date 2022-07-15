@@ -49,4 +49,16 @@ public abstract class AccountFactory {
         increaseCounter();
         return num;
     }
+
+    public static void updateCurrentEnterpriseInterestRate(double currentEnterpriseInterestRate) {
+        AccountFactory.currentEnterpriseInterestRate = currentEnterpriseInterestRate;
+    }
+
+    public static void updateCurrentOrdinaryAccountInterestRate(double currentOrdinaryAccountInterestRate) {
+        AccountFactory.currentOrdinaryAccountInterestRate = currentOrdinaryAccountInterestRate;
+    }
+
+    public static void updateCurrentTemporaryAccountInterestRate(double currentTemporaryAccountInterestRate) {
+        AccountFactory.currentTemporaryAccountInterestRate = currentTemporaryAccountInterestRate;
+    }
 }

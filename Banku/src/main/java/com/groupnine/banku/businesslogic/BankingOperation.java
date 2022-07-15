@@ -1,5 +1,6 @@
 package com.groupnine.banku.businesslogic;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public abstract class BankingOperation {
@@ -8,9 +9,11 @@ public abstract class BankingOperation {
     protected boolean wasExecuted;
 
     public BankingOperation(Employee operator, LocalDateTime dateTime) {
-        this.operator = operator;
-        this.dateTime = dateTime;
-        wasExecuted = false;
+        if (operator != null && dateTime.isBefore(LocalDateTime.now())){
+            this.operator = operator;
+            this.dateTime = dateTime;
+            wasExecuted = false;
+        }
     }
 
     public Employee getOperator() {

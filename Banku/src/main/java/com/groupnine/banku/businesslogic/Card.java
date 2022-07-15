@@ -6,9 +6,11 @@ public class Card {
     private Account account;
 
     public Card(String numberID, ParticularAccountOwner owner, Account account) {
-        this.numberID = numberID;
-        this.owner = owner;
-        this.account = account;
+        if (numberID.isEmpty() != true && owner != null && account != null){
+            this.numberID = numberID;
+            this.owner = owner;
+            this.account = account;
+        }
     }
     public ParticularAccountOwner getOwner(){
         return owner;

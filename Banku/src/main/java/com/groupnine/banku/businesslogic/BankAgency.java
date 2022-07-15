@@ -13,6 +13,23 @@ public class BankAgency {
     private BankAgencyAccount bankAccount;
     private List<BankingOperation> operationsLog;
 
+    public Account findAccount (String accountNumber){
+        for (Account account : clientAccounts) {
+            if (account.getAccountNumber().equals(accountNumber)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public AccountOwner findAccountOwner (String NIF){
+        for (AccountOwner client : clients) {
+            if (client.getNIF().equals(NIF)) {
+                return client;
+            }
+        }
+        return null;
+    }
     private BankAgency(String name, String address) {
         final double initialBalance = 100000000;
         this.name = name;

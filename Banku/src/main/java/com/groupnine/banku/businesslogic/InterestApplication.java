@@ -15,8 +15,10 @@ public class InterestApplication extends BankingOperation {
 
     public InterestApplication(Employee operator, LocalDateTime dateTime, Account account, double interest) {
         super(operator, dateTime);
-        this.account = account;
-        this.interest = interest;
+        if ( account != null && interest > 0d){
+            this.account = account;
+            this.interest = interest;
+        }
     }
 
     @Override
