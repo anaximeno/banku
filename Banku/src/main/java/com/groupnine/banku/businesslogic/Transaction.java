@@ -44,7 +44,7 @@ public class Transaction extends BankingOperation{
     @Override
     public boolean executeOperation() {
         BankAgency agency = BankAgency.getInstance();
-        if (accountFrom == null || accountTo == null || accountFrom.getAccountBalance() - value > 0 || !wasExecuted) {
+        if (accountFrom != null && accountTo != null && accountFrom.getAccountBalance() - value > 0 && !wasExecuted) {
             // Store the balance before the transaction
             this.balanceOfFromAccountBeforeTransaction = accountFrom.getAccountBalance();
             this.balanceOfToAccountBeforeTransaction = accountTo.getAccountBalance();
