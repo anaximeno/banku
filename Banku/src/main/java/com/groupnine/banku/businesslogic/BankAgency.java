@@ -143,6 +143,18 @@ public class BankAgency {
         return list;
     }
 
+    public List<EnterpriseAccount> getEnterpriseAccountList() {
+        List<EnterpriseAccount> list = new ArrayList<>();
+
+        for (Account acc : clientAccounts) {
+            if (acc instanceof EnterpriseAccount eacc) {
+                list.add(eacc);
+            }
+        }
+
+        return list;
+    }
+
     public void addOperationLog(BankingOperation operation) {
         this.operationsLog.add(operation);
     }
