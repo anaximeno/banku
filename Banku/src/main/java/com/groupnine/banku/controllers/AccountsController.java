@@ -17,23 +17,26 @@ import java.util.List;
 
 public class AccountsController {
     @FXML
-    private Button dashboardBtn;
-    @FXML
-    private Button carregarBtn;
-    @FXML
-    private Button removeBtn;
-    @FXML
-    private TableView particularAccountsTable;
-    @FXML
-    private TabPane tabPane;
-    @FXML
     private Tab tabParticulares;
     @FXML
     private Tab tabCorporativas;
     @FXML
     private Tab tabTemporarias;
+    @FXML
+    private TableView particularAccountsTable;
+    @FXML
+    private TableView corporativeAccountsTable;
+    @FXML
+    private TableView temporaryAccountsTable;
 
-    private boolean ordinaryAccountTableWasCreated;
+    private boolean ordinaryAccountTableWasCreated = false;
+    private boolean corporativeAccountTableWasCreated = false;
+    private boolean temporaryAccountsTableWasCreated = false;
+
+    @FXML
+    protected void dashboardBtnOnClick() throws IOException {
+        WindowsContextController.showDashboardOnPrincipalStage();
+    }
 
     @FXML
     protected void initialize() {
@@ -54,7 +57,7 @@ public class AccountsController {
         }
     }
 
-    protected void createParticularAccountTable() {
+    private void createParticularAccountTable() {
         particularAccountsTable.getColumns().clear();
         particularAccountsTable.setEditable(false);
 
@@ -78,7 +81,9 @@ public class AccountsController {
         ordinaryAccountTableWasCreated = true;
     }
 
-    protected void refreshParticularAccountTable() {
+
+
+    private void refreshParticularAccountTable() {
         if (ordinaryAccountTableWasCreated == false) {
             createParticularAccountTable();
         }
@@ -91,24 +96,6 @@ public class AccountsController {
         }
 
         particularAccountsTable.setItems(data);
-    }
-
-    @FXML
-    protected void dashboardBtnOnClick() throws IOException {
-        WindowsContextController.showDashboardOnPrincipalStage();
-    }
-
-    @FXML
-    protected void carregarBtnOnClick() {
-        if (tabParticulares.isSelected()) {
-            refreshParticularAccountTable();
-        } else if (tabCorporativas.isSelected()) {
-            // TODO
-        } else if (tabTemporarias.isSelected()) {
-            // TODO
-        } else {
-            System.out.println("WARN: At carregarBtnOnClick event, unknown tab state");
-        }
     }
 
     private void removeSelectedParticularAccount() {
@@ -146,13 +133,13 @@ public class AccountsController {
     }
 
     public static class ParticularAccountBean {
-        private SimpleStringProperty id;
-        private SimpleStringProperty nome;
-        private SimpleStringProperty dono;
-        private SimpleDoubleProperty balanco;
-        private SimpleIntegerProperty cartoes;
-        private SimpleStringProperty associado;
-        private SimpleDoubleProperty valorDoJuro;
+        final private SimpleStringProperty id;
+        final private SimpleStringProperty nome;
+        final private SimpleStringProperty dono;
+        final private SimpleDoubleProperty balanco;
+        final private SimpleIntegerProperty cartoes;
+        final private SimpleStringProperty associado;
+        final private SimpleDoubleProperty valorDoJuro;
 
         public ParticularAccountBean(final OrdinaryParticularAccount account) {
             this.id = new SimpleStringProperty(account.getAccountNumber());
