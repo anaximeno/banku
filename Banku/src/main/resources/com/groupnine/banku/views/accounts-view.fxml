@@ -5,9 +5,9 @@
 
 <AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.AccountsController">
    <children>
-      <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="560.0" prefWidth="840.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#tabPaneOnClick" prefHeight="560.0" prefWidth="840.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Particulares">
+          <Tab fx:id="tabParticulares" text="Particulares">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -24,7 +24,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Corporativas">
+          <Tab fx:id="tabCorporativas" text="Corporativas">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="832.0">
                      <children>
@@ -41,7 +41,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Temporarias">
+            <Tab fx:id="tabTemporarias" text="Temporarias">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

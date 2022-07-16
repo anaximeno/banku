@@ -8,13 +8,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AccountsController {
     @FXML
@@ -25,16 +24,37 @@ public class AccountsController {
     private Button removeBtn;
     @FXML
     private TableView particularAccountsTable;
+    @FXML
+    private TabPane tabPane;
+    @FXML
+    private Tab tabParticulares;
+    @FXML
+    private Tab tabCorporativas;
+    @FXML
+    private Tab tabTemporarias;
 
     private boolean ordinaryAccountTableWasCreated;
 
     @FXML
     protected void initialize() {
-        createOrdinaryAccountTable();
-        refreshOrdinaryParticularAccountTable();
+        createParticularAccountTable();
+        refreshParticularAccountTable();
     }
 
-    protected void createOrdinaryAccountTable() {
+    @FXML
+    protected void tabPaneOnClick() {
+        if (tabParticulares.isSelected()) {
+            refreshParticularAccountTable();
+        } else if (tabCorporativas.isSelected()) {
+                // TODO
+        } else if (tabTemporarias.isSelected()) {
+                // TODO
+        } else {
+            System.out.println("WARN: At tabPaneOnClick event, unknown tab state");
+        }
+    }
+
+    protected void createParticularAccountTable() {
         particularAccountsTable.getColumns().clear();
         particularAccountsTable.setEditable(false);
 
@@ -58,14 +78,15 @@ public class AccountsController {
         ordinaryAccountTableWasCreated = true;
     }
 
-    protected void refreshOrdinaryParticularAccountTable() {
+    protected void refreshParticularAccountTable() {
         if (ordinaryAccountTableWasCreated == false) {
-            createOrdinaryAccountTable();
+            createParticularAccountTable();
         }
 
+        List<OrdinaryParticularAccount> accountList = BankAgency.getInstance().getOrdinaryAccountList();
         ObservableList<ParticularAccountBean> data = FXCollections.observableArrayList();
 
-        for (OrdinaryParticularAccount acc : BankAgency.getInstance().getOrdinaryAccountList()) {
+        for (OrdinaryParticularAccount acc : accountList) {
             data.add(new ParticularAccountBean(acc));
         }
 
@@ -79,23 +100,48 @@ public class AccountsController {
 
     @FXML
     protected void carregarBtnOnClick() {
-        refreshOrdinaryParticularAccountTable();
+        if (tabParticulares.isSelected()) {
+            refreshParticularAccountTable();
+        } else if (tabCorporativas.isSelected()) {
+            // TODO
+        } else if (tabTemporarias.isSelected()) {
+            // TODO
+        } else {
+            System.out.println("WARN: At carregarBtnOnClick event, unknown tab state");
+        }
+    }
+
+    private void removeSelectedParticularAccount() {
+        BankAgency agency = BankAgency.getInstance();
+
+        ParticularAccountBean acc = (ParticularAccountBean) particularAccountsTable.getSelectionModel().getSelectedItem();
+        if (acc != null) {
+            OrdinaryParticularAccount account = (OrdinaryParticularAccount) agency.findAccountByNumber(acc.getId());
+
+            if (account != null) {
+                String id = account.getAccountNumber();
+
+                agency.getClientAccounts().remove(account);
+                
+                System.out.println("Account '" + id + "' was removed!");
+                // TODO: Notify user that account was removed?
+            }
+        } else {
+            // TODO: Alert user that a line must be selected
+        }
     }
 
     @FXML
     protected void removeBtnOnClick() {
-        ParticularAccountBean acc = (ParticularAccountBean) particularAccountsTable.getSelectionModel().getSelectedItem();
-        if (acc != null) {
-            // TODO: Improve this
-            for (OrdinaryParticularAccount account : BankAgency.getInstance().getOrdinaryAccountList()) {
-                if (account.getAccountNumber().equals(acc.getId())) {
-                    BankAgency.getInstance().getClientAccounts().remove(account);
-                    break;
-                }
-            }
-            refreshOrdinaryParticularAccountTable();
+        if (tabParticulares.isSelected()) {
+            removeSelectedParticularAccount();
+            refreshParticularAccountTable();
+        } else if (tabCorporativas.isSelected()) {
+            // TODO
+        } else if (tabTemporarias.isSelected()) {
+            // TODO
         } else {
-            // TODO: Alert user that a line must be selected
+            System.out.println("WARN: At removeBtnOnClick event, unknown tab state");
         }
     }
 
