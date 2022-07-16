@@ -7,9 +7,7 @@ public abstract class Account {
     private Double interestRate;
     private AccountOwner owner;
 
-    public Account(
-            String accountNumber, String accountName, AccountOwner owner, Double availableBalance, Double interestRate
-    ) {
+    public Account(String accountNumber, String accountName, AccountOwner owner, Double availableBalance, Double interestRate) {
         setAccountNumber(accountNumber);
         setAccountName(accountName);
         setAccountBalance(availableBalance);

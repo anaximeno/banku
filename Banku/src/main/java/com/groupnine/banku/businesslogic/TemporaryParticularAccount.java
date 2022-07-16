@@ -12,8 +12,7 @@ public class TemporaryParticularAccount extends Account {
     private boolean todayBalanceWasSaved;
 
     public TemporaryParticularAccount(String accountNumber, String accountName, Double balance,
-        Double interestRate, ParticularAccountOwner owner, LocalDate creationDate, LocalDate expirationDate
-    ) {
+        Double interestRate, ParticularAccountOwner owner, LocalDate creationDate, LocalDate expirationDate) {
         super(accountNumber, accountName, owner, balance, interestRate);
         this.creationDate = creationDate;
         this.expirationDate = expirationDate;

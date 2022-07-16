@@ -13,6 +13,7 @@ public class EnterpriseAccount extends AccountOfCards {
     public EnterpriseAccount(String accountNumber, String accountName, EnterpriseAccountOwner owner, ParticularAccountOwner admin,
                      double availableBalance, double interestRate, ArrayList<ParticularAccountOwner> authorizedUsers, ArrayList<Card> cards) {
         super(accountNumber, accountName, owner, availableBalance, interestRate, cards);
+        this.cards = cards;
         this.admin = admin;
         this.authorizedUsers = authorizedUsers;
         this.todayBalanceWasSaved = false;
@@ -27,6 +28,12 @@ public class EnterpriseAccount extends AccountOfCards {
     public EnterpriseAccount(String accountNumber, String accountName, EnterpriseAccountOwner owner, double balance, double interestRate) {
         this(accountNumber, accountName, owner, null, balance, interestRate, new ArrayList<>(), new ArrayList<>());
     }
+
+    public EnterpriseAccount(String accountNumber, String accountName, EnterpriseAccountOwner owner, ParticularAccountOwner admin,
+                             double balance, double interestRate, ArrayList<ParticularAccountOwner> authorizedUsers) {
+        this(accountNumber, accountName, owner, admin, balance, interestRate, authorizedUsers, new ArrayList<>());
+    }
+
 
     public Double getTheAverageOfStoredBalances(){
         double average = 0d;

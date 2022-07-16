@@ -11,12 +11,14 @@ public class Transaction extends BankingOperation{
     private double balanceOfFromAccountAfterTransaction;
     private double balanceOfToAccountBeforeTransaction;
     private double balanceOfToAfterTransaction;
+    private String details;
 
     public Transaction(Employee operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value) {
         super(operator, dateTime);
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;
         this.value = value;
+
     }
 
     @Override

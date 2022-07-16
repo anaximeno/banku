@@ -13,6 +13,51 @@ public class BankAgency {
     private BankAgencyAccount bankAccount;
     private List<BankingOperation> operationsLog;
 
+    public Account findAccountByNumber (String accountNumber){
+        for (Account account : clientAccounts) {
+            if (account.getAccountNumber().equals(accountNumber)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public Account findAccountByName (String accountName){
+        for (Account account : clientAccounts) {
+            if (account.getAccountName().equals(accountName)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public Account findAccountByOwnerID (String ownerID){
+        for (Account account : clientAccounts) {
+            if (account.getOwner() == findAccountOwnerByID(ownerID)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public AccountOwner findAccountOwnerByNIF (String NIF){
+        for (AccountOwner client : clients) {
+            if (client.getNIF().equals(NIF)) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+
+    public AccountOwner findAccountOwnerByID (String id){
+        for (AccountOwner client : clients) {
+            if (client.getOwnerID().equals(id)) {
+                return client;
+            }
+        }
+        return null;
+    }
     private BankAgency(String name, String address) {
         final double initialBalance = 100000000;
         this.name = name;

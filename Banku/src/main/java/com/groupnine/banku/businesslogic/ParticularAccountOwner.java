@@ -9,9 +9,10 @@ public class ParticularAccountOwner  extends AccountOwner{
      private ArrayList<Account> accounts;
      private ArrayList<Account> associatedAccounts;
 
-     public ParticularAccountOwner(String name, String NIF, String address, String lastname, String id, String nationality,
+     public ParticularAccountOwner(String ownerID, String name, String NIF, String address, String lastname, String id, String nationality,
                                    ArrayList<? extends Account>accounts, ArrayList<? extends Account>associatedAccounts ){
-          super(name, NIF, address);
+
+          super(ownerID, name, NIF, address);
           this.lastName = lastname;
           this.id = id;
           this.nationality = nationality;
@@ -19,14 +20,15 @@ public class ParticularAccountOwner  extends AccountOwner{
           this.associatedAccounts = (ArrayList<Account>) associatedAccounts;
      }
 
-     public ParticularAccountOwner(String name, String NIF, String address, String lastName, String id, String nationality,
+     public ParticularAccountOwner(String ownerID, String name, String NIF, String address, String lastName, String id, String nationality,
                                    ArrayList<? extends Account>accounts ) {
-          this(name, NIF, address, lastName, id, nationality, accounts, new ArrayList<>() );
+          this(ownerID, name, NIF, address, lastName, id, nationality, accounts, new ArrayList<>() );
      }
 
-     public ParticularAccountOwner(String name, String NIF, String address, String lastName, String id, String nationality) {
-          this(name, NIF, address, lastName, id, nationality, new ArrayList<>(), new ArrayList<>() );
+     public ParticularAccountOwner(String ownerID, String name, String NIF, String address, String lastName, String id, String nationality) {
+          this(ownerID, name, NIF, address, lastName, id, nationality, new ArrayList<>(), new ArrayList<>() );
      }
+
 
      public Double getTotalAvailableBalance(){
           Double balance = 0d;
