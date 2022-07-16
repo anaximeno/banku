@@ -65,4 +65,8 @@ public class ParticularAccountOwner  extends AccountOwner{
      public void setNationality(String nationality) {
           this.nationality = nationality;
      }
+
+     public String getFullName() {
+          return getName() + " " + getLastName();
+     }
 }

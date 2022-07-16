@@ -96,7 +96,8 @@ public class BankAgency {
         return clientAccounts;
     }
 
-    public void addEnterpriseAccount(Account eac) {
+    // TODO: throw error if account id already used!
+    public void addNewAccount(Account eac) {
         this.clientAccounts.add(eac);
     }
 
@@ -128,6 +129,18 @@ public class BankAgency {
             }
         }
         return null;
+    }
+
+    public List<OrdinaryParticularAccount> getOrdinaryAccountList() {
+        List<OrdinaryParticularAccount> list = new ArrayList<>();
+
+        for (Account acc : clientAccounts) {
+            if (acc instanceof OrdinaryParticularAccount opacc) {
+                list.add(opacc);
+            }
+        }
+
+        return list;
     }
 
     public void addOperationLog(BankingOperation operation) {

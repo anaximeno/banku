@@ -89,7 +89,7 @@ public class Employee implements IOperator {
         }
     }
 
-    public boolean addClientAccountToTheBank(EnterpriseAccount account) {
+    public boolean addNewAccountToTheBank(Account account) {
         final BankAgency agency = BankAgency.getInstance();
 
         for (Account a : agency.getClientAccounts()) {
@@ -97,7 +97,7 @@ public class Employee implements IOperator {
                 return false;
             }
         }
-        agency.addEnterpriseAccount(account);
+        agency.addNewAccount(account);
         return true;
     }
 

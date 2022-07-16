@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.AccountsController">
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.AccountsController">
    <children>
       <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="560.0" prefWidth="840.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -71,6 +66,7 @@
             <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" text="Voltar ao Dashboard" />
             <HBox alignment="BOTTOM_RIGHT" prefHeight="6.0" prefWidth="403.0">
                <children>
+                  <Button fx:id="carregarBtn" layoutX="336.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#carregarBtnOnClick" text="Carregar" />
                   <Button mnemonicParsing="false" text="Criar Novo" />
                   <Button mnemonicParsing="false" text="Expandir" />
                   <Button mnemonicParsing="false" text="Remover" />

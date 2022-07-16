@@ -57,4 +57,10 @@ public class WindowsContextController {
         openSceneGraphViewOnPrincipalStage("views/dashboard-view.fxml");
         setTitle("Banku - Dashboard");
     }
+
+    public static void notifyUser(String message) {
+        /// TODO: Implement this method
+        /// SPEC: This should show a notification, using a dialogbox or
+        /// Something related.
+    }
 }

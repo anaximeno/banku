@@ -22,7 +22,9 @@ public abstract class AccountFactory {
             String name, ParticularAccountOwner owner, double balance, ParticularAccountOwner associate) {
         String accountNumber = getNewAccountNumberEncoded();
         double interest = currentOrdinaryAccountInterestRate;
-        return new OrdinaryParticularAccount(accountNumber, name, owner, balance, interest);
+        OrdinaryParticularAccount acc = new OrdinaryParticularAccount(accountNumber, name, owner, balance, interest);
+        acc.setMinorAccountAssociate(associate);
+        return acc;
     }
     
     public static TemporaryParticularAccount createTemporaryParticularAccount(
@@ -36,6 +38,9 @@ public abstract class AccountFactory {
     }
 
     private static String getNewAccountNumberEncoded() {
+        // Increase the counter
+        increaseCounter();
+
         String num = String.valueOf(accountNumberCounter);
 
         // accu - is the accumulator, it accumulates the number of decimal places
@@ -45,8 +50,6 @@ public abstract class AccountFactory {
             num = "0" + num;
         }
 
-        // Increase the counter
-        increaseCounter();
         return num;
     }
 
