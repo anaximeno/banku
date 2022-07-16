@@ -11,9 +11,9 @@ public abstract class AccountOfCards extends Account {
     }
 
     /// Used to add a new card to the card list
-    public void addCard(Card card) {
+    public void addCard(ParticularAccountOwner owner, String Id) {
         for (Card c : cards) {
-            if (c.getID().equals(card.getID())) {
+            if (c.getID().equals(Id)) {
                 // If card already inserted
                 // return
                 return;
@@ -21,7 +21,7 @@ public abstract class AccountOfCards extends Account {
         }
         // If card was not inserted before
         // add it to the list
-        this.cards.add(card);
+        this.cards.add(new Card(Id, owner, this));
     }
 
     /// Used to get a card from the list given its ID
