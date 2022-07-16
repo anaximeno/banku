@@ -7,9 +7,9 @@ import java.time.LocalDate;
 // so there's no need for instantiation on this class
 public abstract class AccountFactory {
     private static int accountNumberCounter = 0;
-    private static double currentEnterpriseInterestRate;
-    private static double currentOrdinaryAccountInterestRate;
-    private static double currentTemporaryAccountInterestRate;
+    private static double currentEnterpriseInterestRate = 0.01;
+    private static double currentOrdinaryAccountInterestRate = 0.01;
+    private static double currentTemporaryAccountInterestRate = 0.01;
 
     public static EnterpriseAccount createEnterpriseAccount(
             String name, EnterpriseAccountOwner owner, ParticularAccountOwner admin, double initialBalance) {
