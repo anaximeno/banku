@@ -13,7 +13,7 @@ public class BankAgency {
     private BankAgencyAccount bankAccount;
     private List<BankingOperation> operationsLog;
 
-    public Account findAccount (String accountNumber){
+    public Account findAccountByNumber (String accountNumber){
         for (Account account : clientAccounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
                 return account;
@@ -22,9 +22,27 @@ public class BankAgency {
         return null;
     }
 
-    public AccountOwner findAccountOwner (String NIF){
+    public Account findAccountByName (String accountName){
+        for (Account account : clientAccounts) {
+            if (account.getAccountName().equals(accountName)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public AccountOwner findAccountOwnerByNIF (String NIF){
         for (AccountOwner client : clients) {
             if (client.getNIF().equals(NIF)) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+    public AccountOwner findAccountOwnerByID (String id){
+        for (AccountOwner client : clients) {
+            if (client.getOwnerID().equals(id)) {
                 return client;
             }
         }
