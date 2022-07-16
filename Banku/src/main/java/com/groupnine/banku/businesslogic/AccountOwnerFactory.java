@@ -45,6 +45,9 @@ public class AccountOwnerFactory {
         ownerIDCounter += 1;
     }
     private static String getNewOwnerIDEncoded() {
+        // Increase the counter
+        increaseCounter();
+        
         String num = String.valueOf(ownerIDCounter);
 
         // accu - is the accumulator, it accumulates the number of decimal places
@@ -54,8 +57,6 @@ public class AccountOwnerFactory {
             num = "0" + num;
         }
 
-        // Increase the counter
-        increaseCounter();
         return num;
     }
 
