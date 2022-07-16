@@ -1,6 +1,7 @@
 package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.businesslogic.BankAgency;
+import com.groupnine.banku.businesslogic.EnterpriseAccount;
 import com.groupnine.banku.businesslogic.OrdinaryParticularAccount;
 import com.groupnine.banku.businesslogic.ParticularAccountOwner;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -207,6 +208,84 @@ public class AccountsController {
 
         public void setValorDoJuro(double valor) {
             valorDoJuro.set(valor);
+        }
+    }
+
+    public static class EnterpriseAccountBean {
+        final private SimpleStringProperty id;
+        final private SimpleStringProperty nome;
+        final private SimpleStringProperty dono;
+        final private SimpleStringProperty admin;
+        final private SimpleDoubleProperty balanco;
+        final private SimpleIntegerProperty nAutorizados;
+        final private SimpleDoubleProperty juro;
+
+        EnterpriseAccountBean(EnterpriseAccount account) {
+            this.id = new SimpleStringProperty(account.getAccountNumber());
+            this.nome = new SimpleStringProperty(account.getAccountName());
+            this.dono = new SimpleStringProperty(account.getOwner().getName());
+            ParticularAccountOwner admin = account.getAdmin();
+            this.admin = new SimpleStringProperty(admin != null ? admin.getFullName() : "-");
+            this.balanco = new SimpleDoubleProperty(account.getAccountBalance());
+            List<ParticularAccountOwner> autorizados = account.getAuthorizedUsers();
+            this.nAutorizados = new SimpleIntegerProperty(autorizados != null ? autorizados.size() : 0);
+            this.juro = new SimpleDoubleProperty(account.getInterestRate());
+        }
+
+        public String getId() {
+            return id.get();
+        }
+
+        public void setId(String id) {
+            this.id.set(id);
+        }
+
+        public String getNome() {
+            return nome.get();
+        }
+
+        public void setNome(String nome) {
+            this.nome.set(nome);
+        }
+
+        public String getDono() {
+            return dono.get();
+        }
+
+        public void setDono(String dono) {
+            this.dono.set(dono);
+        }
+
+        public String getAdmin() {
+            return admin.get();
+        }
+
+        public void setAdmin(String admin) {
+            this.admin.set(admin);
+        }
+
+        public String getBalanco() {
+            return balanco.get();
+        }
+
+        public void setBalanco(String balanco) {
+            this.balanco.set(balanco);
+        }
+
+        public int getnAutorizados() {
+            return nAutorizados.get();
+        }
+
+        public void setNAutorizados(int n) {
+            this.nAutorizados.set(n);
+        }
+
+        public double getJuro() {
+            return juro.get();
+        }
+
+        public void setJuro(double juro) {
+            this.juro.set(juro);
         }
     }
 }
