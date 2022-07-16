@@ -1,9 +1,6 @@
 package com.groupnine.banku.controllers;
 
-import com.groupnine.banku.businesslogic.BankAgency;
-import com.groupnine.banku.businesslogic.EnterpriseAccount;
-import com.groupnine.banku.businesslogic.OrdinaryParticularAccount;
-import com.groupnine.banku.businesslogic.ParticularAccountOwner;
+import com.groupnine.banku.businesslogic.*;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -101,7 +98,7 @@ public class AccountsController {
         accAdmin.setCellValueFactory(new PropertyValueFactory<>("admin"));
         accBal.setCellValueFactory(new PropertyValueFactory<>("balanco"));
         accNAutori.setCellValueFactory(new PropertyValueFactory<>("nAutorizados"));
-        accInterest.setCellValueFactory(new PropertyValueFactory<>("juro"));
+        accInterest.setCellValueFactory(new PropertyValueFactory<>("valorDoJuro"));
 
         corporativeAccountsTable.getColumns().addAll(accId, accName, accOwner, accAdmin, accBal, accNAutori, accInterest);
 
@@ -138,18 +135,18 @@ public class AccountsController {
         corporativeAccountsTable.setItems(data);
     }
 
-    private void removeSelectedParticularAccount() {
+    static private<B extends AccountBean, A extends Account> void removeSelectedAccountFromTable(TableView<B> table) {
         BankAgency agency = BankAgency.getInstance();
 
-        ParticularAccountBean acc = (ParticularAccountBean) particularAccountsTable.getSelectionModel().getSelectedItem();
+        B acc = (B) table.getSelectionModel().getSelectedItem();
         if (acc != null) {
-            OrdinaryParticularAccount account = (OrdinaryParticularAccount) agency.findAccountByNumber(acc.getId());
+            A account = (A) agency.findAccountByNumber(acc.getId());
 
             if (account != null) {
                 String id = account.getAccountNumber();
 
                 agency.getClientAccounts().remove(account);
-                
+
                 System.out.println("Account '" + id + "' was removed!");
                 // TODO: Notify user that account was removed?
             }
@@ -161,35 +158,30 @@ public class AccountsController {
     @FXML
     protected void removeBtnOnClick() {
         if (tabParticulares.isSelected()) {
-            removeSelectedParticularAccount();
+            removeSelectedAccountFromTable(particularAccountsTable);
             refreshParticularAccountTable();
         } else if (tabCorporativas.isSelected()) {
-            // TODO
+            removeSelectedAccountFromTable(corporativeAccountsTable);
         } else if (tabTemporarias.isSelected()) {
-            // TODO
+            removeSelectedAccountFromTable(temporaryAccountsTable);
         } else {
             System.out.println("WARN: At removeBtnOnClick event, unknown tab state");
         }
     }
 
-    public static class ParticularAccountBean {
+    public static abstract class AccountBean {
         final private SimpleStringProperty id;
         final private SimpleStringProperty nome;
         final private SimpleStringProperty dono;
         final private SimpleDoubleProperty balanco;
-        final private SimpleIntegerProperty cartoes;
-        final private SimpleStringProperty associado;
         final private SimpleDoubleProperty valorDoJuro;
 
-        public ParticularAccountBean(final OrdinaryParticularAccount account) {
+        public AccountBean(final Account account) {
             this.id = new SimpleStringProperty(account.getAccountNumber());
             this.nome = new SimpleStringProperty(account.getAccountName());
             ParticularAccountOwner owner = (ParticularAccountOwner) account.getOwner();
             this.dono = new SimpleStringProperty(owner.getFullName());
             this.balanco = new SimpleDoubleProperty(account.getAccountBalance());
-            this.cartoes = new SimpleIntegerProperty(account.getAllCards().size());
-            ParticularAccountOwner associate = account.getMinorAccountAssociate();
-            this.associado = new SimpleStringProperty(associate != null ? associate.getFullName() : "-");
             this.valorDoJuro = new SimpleDoubleProperty(account.getInterestRate());
         }
 
@@ -225,6 +217,28 @@ public class AccountsController {
             this.balanco.set(balanco);
         }
 
+        public double getValorDoJuro() {
+            return valorDoJuro.get();
+        }
+
+        public void setValorDoJuro(double valor) {
+            valorDoJuro.set(valor);
+        }
+    }
+
+    public static class ParticularAccountBean extends AccountBean {
+        final private SimpleIntegerProperty cartoes;
+        final private SimpleStringProperty associado;
+
+        public ParticularAccountBean(final OrdinaryParticularAccount account) {
+            super((Account) account);
+            this.cartoes = new SimpleIntegerProperty(account.getAllCards().size());
+            ParticularAccountOwner associate = account.getMinorAccountAssociate();
+            this.associado = new SimpleStringProperty(associate != null ? associate.getFullName() : "-");
+        }
+
+
+
         public int getCartoes() {
             return cartoes.get();
         }
@@ -240,59 +254,18 @@ public class AccountsController {
         public void setAssociado(String associado) {
             this.associado.set(associado);
         }
-
-        public double getValorDoJuro() {
-            return valorDoJuro.get();
-        }
-
-        public void setValorDoJuro(double valor) {
-            valorDoJuro.set(valor);
-        }
     }
 
-    public static class EnterpriseAccountBean {
-        final private SimpleStringProperty id;
-        final private SimpleStringProperty nome;
-        final private SimpleStringProperty dono;
+    public static class EnterpriseAccountBean extends AccountBean {
         final private SimpleStringProperty admin;
-        final private SimpleDoubleProperty balanco;
         final private SimpleIntegerProperty nAutorizados;
-        final private SimpleDoubleProperty juro;
 
-        EnterpriseAccountBean(EnterpriseAccount account) {
-            this.id = new SimpleStringProperty(account.getAccountNumber());
-            this.nome = new SimpleStringProperty(account.getAccountName());
-            this.dono = new SimpleStringProperty(account.getOwner().getName());
+        EnterpriseAccountBean(final EnterpriseAccount account) {
+            super((Account) account);
             ParticularAccountOwner admin = account.getAdmin();
             this.admin = new SimpleStringProperty(admin != null ? admin.getFullName() : "-");
-            this.balanco = new SimpleDoubleProperty(account.getAccountBalance());
             List<ParticularAccountOwner> autorizados = account.getAuthorizedUsers();
             this.nAutorizados = new SimpleIntegerProperty(autorizados != null ? autorizados.size() : 0);
-            this.juro = new SimpleDoubleProperty(account.getInterestRate());
-        }
-
-        public String getId() {
-            return id.get();
-        }
-
-        public void setId(String id) {
-            this.id.set(id);
-        }
-
-        public String getNome() {
-            return nome.get();
-        }
-
-        public void setNome(String nome) {
-            this.nome.set(nome);
-        }
-
-        public String getDono() {
-            return dono.get();
-        }
-
-        public void setDono(String dono) {
-            this.dono.set(dono);
         }
 
         public String getAdmin() {
@@ -303,28 +276,12 @@ public class AccountsController {
             this.admin.set(admin);
         }
 
-        public double getBalanco() {
-            return balanco.get();
-        }
-
-        public void setBalanco(double balanco) {
-            this.balanco.set(balanco);
-        }
-
         public int getnAutorizados() {
             return nAutorizados.get();
         }
 
         public void setNAutorizados(int n) {
             this.nAutorizados.set(n);
-        }
-
-        public double getJuro() {
-            return juro.get();
-        }
-
-        public void setJuro(double juro) {
-            this.juro.set(juro);
         }
     }
 }
