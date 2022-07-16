@@ -24,9 +24,9 @@ public class AccountsController {
     @FXML
     private Tab tabTemporarias;
     @FXML
-    private TableView particularAccountsTable;
+    private TableView<ParticularAccountBean> particularAccountsTable;
     @FXML
-    private TableView corporativeAccountsTable;
+    private TableView<EnterpriseAccountBean> corporativeAccountsTable;
     @FXML
     private TableView temporaryAccountsTable;
 
@@ -62,30 +62,54 @@ public class AccountsController {
         particularAccountsTable.getColumns().clear();
         particularAccountsTable.setEditable(false);
 
-        TableColumn accId = new TableColumn("Id");
-        TableColumn accName = new TableColumn("Nome");
-        TableColumn accOwner = new TableColumn("Dono");
-        TableColumn accBalance = new TableColumn("Balanço");
-        TableColumn accNCards = new TableColumn("#Cartões");
-        TableColumn accAssociate = new TableColumn("Associado");
-        TableColumn accInterest = new TableColumn("Valor do Juro");
+        TableColumn<ParticularAccountBean, String> accId = new TableColumn("Id");
+        TableColumn<ParticularAccountBean, String>  accName = new TableColumn("Nome");
+        TableColumn<ParticularAccountBean, String>  accOwner = new TableColumn("Dono");
+        TableColumn<ParticularAccountBean, Double>  accBalance = new TableColumn("Balanço");
+        TableColumn<ParticularAccountBean, Integer>  accNCards = new TableColumn("#Cartões");
+        TableColumn<ParticularAccountBean, String>  accAssociate = new TableColumn("Associado");
+        TableColumn<ParticularAccountBean, String>  accInterest = new TableColumn("Valor do Juro");
 
-        accId.setCellValueFactory(new PropertyValueFactory<ParticularAccountBean, String>("id"));
-        accName.setCellValueFactory(new PropertyValueFactory<ParticularAccountBean, String>("nome"));
-        accOwner.setCellValueFactory(new PropertyValueFactory<ParticularAccountBean, String>("dono"));
-        accBalance.setCellValueFactory(new PropertyValueFactory<ParticularAccountBean, Double>("balanco"));
-        accNCards.setCellValueFactory(new PropertyValueFactory<ParticularAccountBean, Integer>("cartoes"));
-        accAssociate.setCellValueFactory(new PropertyValueFactory<ParticularAccountBean, String>("associado"));
-        accInterest.setCellValueFactory(new PropertyValueFactory<ParticularAccountBean, String>("valorDoJuro"));
+        accId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        accName.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        accOwner.setCellValueFactory(new PropertyValueFactory<>("dono"));
+        accBalance.setCellValueFactory(new PropertyValueFactory<>("balanco"));
+        accNCards.setCellValueFactory(new PropertyValueFactory<>("cartoes"));
+        accAssociate.setCellValueFactory(new PropertyValueFactory<>("associado"));
+        accInterest.setCellValueFactory(new PropertyValueFactory<>("valorDoJuro"));
 
         particularAccountsTable.getColumns().addAll(accId, accName, accOwner, accBalance, accNCards, accAssociate, accInterest);
+
         ordinaryAccountTableWasCreated = true;
     }
 
+    private void createCorporativeAccountTable() {
+        corporativeAccountsTable.getColumns().clear();
+        corporativeAccountsTable.setEditable(false);
 
+        TableColumn<EnterpriseAccountBean, String> accId  = new TableColumn("Id");
+        TableColumn<EnterpriseAccountBean, String> accName = new TableColumn("Nome");
+        TableColumn<EnterpriseAccountBean, String> accOwner = new TableColumn("Dono");
+        TableColumn<EnterpriseAccountBean, String> accAdmin = new TableColumn("Admin");
+        TableColumn<EnterpriseAccountBean, Double> accBal = new TableColumn("Balanço");
+        TableColumn<EnterpriseAccountBean, Integer> accNAutori = new TableColumn("#Autorizados");
+        TableColumn<EnterpriseAccountBean, Double> accInterest = new TableColumn("Valor do Juro");
+
+        accId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        accName.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        accOwner.setCellValueFactory(new PropertyValueFactory<>("dono"));
+        accAdmin.setCellValueFactory(new PropertyValueFactory<>("admin"));
+        accBal.setCellValueFactory(new PropertyValueFactory<>("balanco"));
+        accNAutori.setCellValueFactory(new PropertyValueFactory<>("nAutorizados"));
+        accInterest.setCellValueFactory(new PropertyValueFactory<>("juro"));
+
+        corporativeAccountsTable.getColumns().addAll(accId, accName, accOwner, accAdmin, accBal, accNAutori, accInterest);
+
+        corporativeAccountTableWasCreated = true;
+    }
 
     private void refreshParticularAccountTable() {
-        if (ordinaryAccountTableWasCreated == false) {
+        if (!ordinaryAccountTableWasCreated) {
             createParticularAccountTable();
         }
 
@@ -97,6 +121,21 @@ public class AccountsController {
         }
 
         particularAccountsTable.setItems(data);
+    }
+
+    private void refreshCorporativeAccount() {
+        if (!corporativeAccountTableWasCreated) {
+            createCorporativeAccountTable();
+        }
+
+        List<EnterpriseAccount> accountList = BankAgency.getInstance().getEnterpriseAccountList();
+        ObservableList<EnterpriseAccountBean> data = FXCollections.observableArrayList();
+
+        for (EnterpriseAccount acc : accountList) {
+            data.add(new EnterpriseAccountBean(acc));
+        }
+
+        corporativeAccountsTable.setItems(data);
     }
 
     private void removeSelectedParticularAccount() {
@@ -264,11 +303,11 @@ public class AccountsController {
             this.admin.set(admin);
         }
 
-        public String getBalanco() {
+        public double getBalanco() {
             return balanco.get();
         }
 
-        public void setBalanco(String balanco) {
+        public void setBalanco(double balanco) {
             this.balanco.set(balanco);
         }
 
