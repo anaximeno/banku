@@ -22,6 +22,8 @@ public class AccountsController {
     @FXML
     private Button carregarBtn;
     @FXML
+    private Button removeBtn;
+    @FXML
     private TableView particularAccountsTable;
 
     private boolean ordinaryAccountTableWasCreated;
@@ -78,6 +80,23 @@ public class AccountsController {
     @FXML
     protected void carregarBtnOnClick() {
         refreshOrdinaryParticularAccountTable();
+    }
+
+    @FXML
+    protected void removeBtnOnClick() {
+        ParticularAccountBean acc = (ParticularAccountBean) particularAccountsTable.getSelectionModel().getSelectedItem();
+        if (acc != null) {
+            // TODO: Improve this
+            for (OrdinaryParticularAccount account : BankAgency.getInstance().getOrdinaryAccountList()) {
+                if (account.getAccountNumber().equals(acc.getId())) {
+                    BankAgency.getInstance().getClientAccounts().remove(account);
+                    break;
+                }
+            }
+            refreshOrdinaryParticularAccountTable();
+        } else {
+            // TODO: Alert user that a line must be selected
+        }
     }
 
     public static class ParticularAccountBean {

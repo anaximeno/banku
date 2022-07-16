@@ -69,7 +69,7 @@
                   <Button fx:id="carregarBtn" layoutX="336.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#carregarBtnOnClick" text="Carregar" />
                   <Button mnemonicParsing="false" text="Criar Novo" />
                   <Button mnemonicParsing="false" text="Expandir" />
-                  <Button mnemonicParsing="false" text="Remover" />
+                  <Button fx:id="removeBtn" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" text="Remover" />
                </children>
             </HBox>
          </children>
