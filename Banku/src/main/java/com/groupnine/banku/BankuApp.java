@@ -29,7 +29,8 @@ public class BankuApp extends Application {
 
             OrdinaryParticularAccount acc1 = AccountFactory.createOrdinaryParticularAccount("Ordiacc", owner1, 100000, owner2);
 
-            acc1.addCard(new Card("0003", owner1, acc1));
+            acc1.addCard(owner1, "001");
+            acc1.addCard(owner2, "002");
 
             operator.addNewAccountToTheBank(acc1);
             operator.addNewAccountToTheBank(AccountFactory.createOrdinaryParticularAccount("myOrdAcc", owner1, 230004, null));
