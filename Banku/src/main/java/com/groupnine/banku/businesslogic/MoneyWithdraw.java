@@ -2,13 +2,13 @@ package com.groupnine.banku.businesslogic;
 
 import java.time.LocalDateTime;
 
-public class MoneyWithDraw extends BankingOperation {
+public class MoneyWithdraw extends BankingOperation {
     private Account account;
     private double valueMoved;
     private double balanceBeforeWithDraw;
     private double balanceAfterWithDraw;
 
-    public MoneyWithDraw(Employee operator, LocalDateTime dateTime, Account account, double valueMoved) {
+    public MoneyWithdraw(Employee operator, LocalDateTime dateTime, Account account, double valueMoved) {
         super(operator, dateTime);
         if(account != null && valueMoved > 0d){
             this.account = account;
