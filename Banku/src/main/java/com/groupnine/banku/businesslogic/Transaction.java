@@ -15,11 +15,9 @@ public class Transaction extends BankingOperation{
 
     public Transaction(Employee operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value) {
         super(operator, dateTime);
-        if (accountFrom != null && accountTo != null && value > 0d){
-            this.accountFrom = accountFrom;
-            this.accountTo = accountTo;
-            this.value = value;
-        }
+        this.accountFrom = accountFrom;
+        this.accountTo = accountTo;
+        this.value = value;
 
     }
 

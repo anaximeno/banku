@@ -13,13 +13,11 @@ public class EnterpriseAccount extends AccountOfCards {
     public EnterpriseAccount(String accountNumber, String accountName, EnterpriseAccountOwner owner, ParticularAccountOwner admin,
                      double availableBalance, double interestRate, ArrayList<ParticularAccountOwner> authorizedUsers, ArrayList<Card> cards) {
         super(accountNumber, accountName, owner, availableBalance, interestRate, cards);
-        if (admin != null && authorizedUsers.isEmpty() != true && cards.isEmpty() != true) {
-            this.cards = cards;
-            this.admin = admin;
-            this.authorizedUsers = authorizedUsers;
-            this.todayBalanceWasSaved = false;
-            this.dailyBalanceRecord = new ArrayList<>();
-        }
+        this.cards = cards;
+        this.admin = admin;
+        this.authorizedUsers = authorizedUsers;
+        this.todayBalanceWasSaved = false;
+        this.dailyBalanceRecord = new ArrayList<>();
     }
 
     public EnterpriseAccount(String accountNumber, String accountName, EnterpriseAccountOwner owner, ParticularAccountOwner admin,

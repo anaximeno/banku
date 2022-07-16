@@ -58,10 +58,8 @@ public class EnterpriseAccountOwner extends AccountOwner{
 
     public EnterpriseAccountOwner(String ownerID,String name, String NIF, String address, ArrayList<EnterprisePartners> partners, ArrayList<EnterpriseAccount> accounts) {
         super(ownerID, name, NIF, address);
-        if (partners.isEmpty() != true && accounts.isEmpty() != true){
-            this.partners = partners;
-            this.accounts = accounts;
-        }
+        this.partners = partners;
+        this.accounts = accounts;
     }
 
     public EnterpriseAccountOwner(String  ownerID, String name, String NIF, String address, ArrayList<EnterprisePartners> partners) {

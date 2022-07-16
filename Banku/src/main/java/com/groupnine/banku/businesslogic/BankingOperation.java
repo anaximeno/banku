@@ -9,11 +9,9 @@ public abstract class BankingOperation {
     protected boolean wasExecuted;
 
     public BankingOperation(Employee operator, LocalDateTime dateTime) {
-        if (operator != null && dateTime.isBefore(LocalDateTime.now())){
-            this.operator = operator;
-            this.dateTime = dateTime;
-            wasExecuted = false;
-        }
+        this.operator = operator;
+        this.dateTime = dateTime;
+        wasExecuted = false;
     }
 
     public Employee getOperator() {

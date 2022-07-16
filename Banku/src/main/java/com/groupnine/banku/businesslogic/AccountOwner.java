@@ -8,12 +8,10 @@ public class  AccountOwner {
 
 
     public AccountOwner(String ownerID, String name, String NIF, String address) {
-        if (name.isEmpty() != true && NIF.isEmpty() != true && address.isEmpty() != true){
-            this.ownerID = ownerID;
-            this.name = name;
-            this.NIF = NIF;
-            this.address = address;
-        }
+        this.ownerID = ownerID;
+        this.name = name;
+        this.NIF = NIF;
+        this.address = address;
     }
 
     public String getOwnerID() {

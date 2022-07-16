@@ -31,6 +31,15 @@ public class BankAgency {
         return null;
     }
 
+    public Account findAccountByOwnerID (String ownerID){
+        for (Account account : clientAccounts) {
+            if (account.getOwner() == findAccountOwnerByID(ownerID)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
     public AccountOwner findAccountOwnerByNIF (String NIF){
         for (AccountOwner client : clients) {
             if (client.getNIF().equals(NIF)) {
@@ -39,6 +48,7 @@ public class BankAgency {
         }
         return null;
     }
+
 
     public AccountOwner findAccountOwnerByID (String id){
         for (AccountOwner client : clients) {

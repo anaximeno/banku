@@ -69,7 +69,7 @@ public class Employee implements IOperator {
 
     public boolean makeMoneyWithdraw(Account from, double value) {
         if (from != null) {
-            MoneyWithDraw moneyWithDraw = new MoneyWithDraw(this, LocalDateTime.now(), from, value);
+            MoneyWithdraw moneyWithDraw = new MoneyWithdraw(this, LocalDateTime.now(), from, value);
             boolean result = moneyWithDraw.executeOperation();
             BankAgency.getInstance().addOperationLog(moneyWithDraw);
             return result;
