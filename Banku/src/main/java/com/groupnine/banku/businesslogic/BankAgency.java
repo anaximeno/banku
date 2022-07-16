@@ -155,6 +155,18 @@ public class BankAgency {
         return list;
     }
 
+    public List<TemporaryParticularAccount> getTemporaryAccountList() {
+        List<TemporaryParticularAccount> list = new ArrayList<>();
+
+        for (Account acc : clientAccounts) {
+            if (acc instanceof TemporaryParticularAccount eacc) {
+                list.add(eacc);
+            }
+        }
+
+        return list;
+    }
+
     public void addOperationLog(BankingOperation operation) {
         this.operationsLog.add(operation);
     }
