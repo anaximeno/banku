@@ -38,10 +38,12 @@ public class AccountsController {
 
     @FXML
     protected void initialize() {
+        // note: Only Particular Accounts will be loaded initially
+        // because they'll be the first to be seen. Also the others
+        // will be loaded when their tab is clicked. This was made this
+        // way for performance reasons.
         createParticularAccountTable();
         refreshParticularAccountTable();
-        createParticularAccountTable();
-        refreshCorporativeAccount();
     }
 
     @FXML
@@ -49,7 +51,7 @@ public class AccountsController {
         if (tabParticulares.isSelected()) {
             refreshParticularAccountTable();
         } else if (tabCorporativas.isSelected()) {
-                refreshCorporativeAccount();
+            refreshCorporativeAccount();
         } else if (tabTemporarias.isSelected()) {
                 // TODO
         } else {
@@ -167,6 +169,7 @@ public class AccountsController {
             refreshCorporativeAccount();
         } else if (tabTemporarias.isSelected()) {
             removeSelectedAccountFromTable(temporaryAccountsTable);
+            // TODO: put refresh here!
         } else {
             System.out.println("WARN: At removeBtnOnClick event, unknown tab state");
         }
@@ -248,8 +251,6 @@ public class AccountsController {
             this.associado = new SimpleStringProperty(associate != null ? associate.getFullName() : "-");
         }
 
-
-
         public int getCartoes() {
             return cartoes.get();
         }
@@ -274,8 +275,8 @@ public class AccountsController {
         EnterpriseAccountBean(final EnterpriseAccount account) {
             super((Account) account);
             ParticularAccountOwner admin = account.getAdmin();
-            this.admin = new SimpleStringProperty(admin != null ? admin.getFullName() : "-");
             List<ParticularAccountOwner> autorizados = account.getAuthorizedUsers();
+            this.admin = new SimpleStringProperty(admin != null ? admin.getFullName() : "-");
             this.nAutorizados = new SimpleIntegerProperty(autorizados != null ? autorizados.size() : 0);
         }
 

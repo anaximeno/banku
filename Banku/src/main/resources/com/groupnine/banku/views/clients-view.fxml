@@ -39,8 +39,8 @@
       </TabPane>
       <HBox alignment="BOTTOM_LEFT" layoutX="8.0" layoutY="523.0" prefHeight="33.0" prefWidth="826.0" spacing="270.0">
          <children>
-            <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" text="Voltar ao Dashboard" />
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="6.0" prefWidth="403.0">
+            <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="180.0" text="Voltar ao Dashboard" />
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="6.0" prefWidth="403.0" spacing="5.0">
                <children>
                   <Button mnemonicParsing="false" text="Criar Novo" />
                   <Button mnemonicParsing="false" text="Expandir" />
