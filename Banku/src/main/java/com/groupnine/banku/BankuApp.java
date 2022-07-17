@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BankuApp extends Application {
@@ -37,6 +38,12 @@ public class BankuApp extends Application {
             EnterpriseAccountOwner eOwner = AccountOwnerFactory.createEnterpriseAccountOwner("LuckeLuke CO", "234124124", "The Place", new ArrayList<>());
 
             operator.addNewAccountToTheBank(AccountFactory.createEnterpriseAccount("LuckeLukeAcc01", eOwner, owner2, 10000000));
+
+            ParticularAccountOwner owner3 = AccountOwnerFactory.createParticularAccountOwner(
+                            "Francisco", "3311213131", "Santa Catarina, Cabo Verde", "Rodrigues", "0012e", "Cabo Verdiana");
+            TemporaryParticularAccount account3 = AccountFactory.createTemporaryParticularAccount(
+                    "MyTempAcc", 65000d, owner3, LocalDate.of(2023, 5, 23));
+            BankAgency.getInstance().addNewAccount(account3);
         }
     }
 
