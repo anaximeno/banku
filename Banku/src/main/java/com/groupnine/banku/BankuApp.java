@@ -4,7 +4,9 @@ import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.controllers.WindowsContextController;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -23,6 +25,13 @@ public class BankuApp extends Application {
 
         AutomaticInterestHandler interestHandler = new AutomaticInterestHandler();
         interestHandler.start();
+
+        WindowsContextController.getPrincipalStage().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                interestHandler.interrupt();
+            }
+        });
     }
 
     public static void initData() {
