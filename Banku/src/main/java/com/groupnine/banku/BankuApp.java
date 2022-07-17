@@ -15,7 +15,11 @@ import java.util.ArrayList;
 public class BankuApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Employee interestHandlerEmp = new Employee("Automatic", "Thread", "multi-threading", "Automatic Interest Applicator");
+        Employee interestHandlerEmp = new Employee(
+                "Background", "Thread",
+                "multi-threading",
+                "Automatic Interest Applicator");
+
         BankAgency.getInstance().addEmployee(interestHandlerEmp);
         
         initData();
@@ -26,12 +30,14 @@ public class BankuApp extends Application {
         AutomaticInterestHandler interestHandler = new AutomaticInterestHandler();
         interestHandler.start();
 
-        WindowsContextController.getPrincipalStage().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, new EventHandler<WindowEvent>() {
+        EventHandler<WindowEvent> event = new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent windowEvent) {
                 interestHandler.interrupt();
             }
-        });
+        };
+
+        WindowsContextController.getPrincipalStage().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event);
     }
 
     public static void initData() {
