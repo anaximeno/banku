@@ -28,7 +28,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="832.0">
                      <children>
-                        <TableView layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
+                        <TableView fx:id="corporativeAccountsTable" layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Numero" />
                             <TableColumn prefWidth="228.0" text="Dono" />
@@ -45,7 +45,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
+                        <TableView fx:id="temporaryAccountsTable" layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="Numero" />
                               <TableColumn prefWidth="152.0" text="Nome" />
