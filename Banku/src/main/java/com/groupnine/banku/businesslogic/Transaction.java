@@ -53,8 +53,9 @@ public class Transaction extends BankingOperation{
 
             if (accountFrom instanceof EnterpriseAccount) {
                 // If the type of the account is Enterprise, a transaction interest is applied.
+                double interestValue = EnterpriseAccount.TRANSACTION_INTEREST * accountFrom.getAccountBalance();
                 InterestApplication interestApplication = new InterestApplication(
-                        getOperator(), LocalDateTime.now(), accountFrom, EnterpriseAccount.TRANSACTION_INTEREST
+                        getOperator(), LocalDateTime.now(), accountFrom, interestValue
                 );
                 interestApplication.executeOperation();
                 BankAgency.getInstance().addOperationLog(interestApplication);

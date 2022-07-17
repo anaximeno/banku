@@ -3,20 +3,19 @@ package com.groupnine.banku.businesslogic;
 import java.time.LocalDateTime;
 
 public class InterestApplication extends BankingOperation {
-    private Account account;
+    private final Account account;
     private double balanceBefore;
-    private double value;
+    private final double value;
     private double balanceAfter;
-    private double interest;
 
     public InterestApplication(Employee operator, LocalDateTime dateTime, Account account) {
-        this(operator, dateTime, account, account.getInterestRate());
+        this(operator, dateTime, account, account.getInterestRate() * account.getAccountBalance());
     }
 
-    public InterestApplication(Employee operator, LocalDateTime dateTime, Account account, double interest) {
+    public InterestApplication(Employee operator, LocalDateTime dateTime, Account account, double value) {
         super(operator, dateTime);
         this.account = account;
-        this.interest = interest;
+        this.value = value;
     }
 
     @Override
@@ -37,10 +36,9 @@ public class InterestApplication extends BankingOperation {
     @Override
     public boolean executeOperation() {
         if (!wasExecuted) {
-            this.value = account.getAccountBalance() * interest;
             this.balanceBefore = account.getAccountBalance();
-            this.account.setAccountBalance(account.getAccountBalance() - value);
-            BankAgency.getInstance().addIncomeToBankAccount(value);
+            this.account.setAccountBalance(account.getAccountBalance() - this.value);
+            BankAgency.getInstance().addIncomeToBankAccount(this.value);
             this.balanceAfter = account.getAccountBalance();
             this.wasExecuted = true;
             return true;
