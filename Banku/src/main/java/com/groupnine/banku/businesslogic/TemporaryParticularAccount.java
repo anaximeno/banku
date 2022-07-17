@@ -44,7 +44,6 @@ public class TemporaryParticularAccount extends Account {
     }
 
     public void setExpirationDate(LocalDate expirationDate) {
-
         this.expirationDate = expirationDate;
     }
 

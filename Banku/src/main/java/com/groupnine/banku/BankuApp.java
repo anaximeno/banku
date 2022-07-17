@@ -13,13 +13,16 @@ import java.util.ArrayList;
 public class BankuApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        BankAgency.getInstance().addEmployee(
-            new Employee("Automatic", "Thread", "multi-threading", "Automatic Interest Applicator"));
-        AutomaticInterestHandler interestHandler = new AutomaticInterestHandler();
-        interestHandler.start();
+        Employee interestHandlerEmp = new Employee("Automatic", "Thread", "multi-threading", "Automatic Interest Applicator");
+        BankAgency.getInstance().addEmployee(interestHandlerEmp);
+        
         initData();
+
         WindowsContextController.setPrincipalStage(stage);
         WindowsContextController.showDashboardOnPrincipalStage();
+
+        AutomaticInterestHandler interestHandler = new AutomaticInterestHandler();
+        interestHandler.start();
     }
 
     public static void initData() {
