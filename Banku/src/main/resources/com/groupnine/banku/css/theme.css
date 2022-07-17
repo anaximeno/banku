@@ -1,3 +1,7 @@
+/* This theme is from this thread at stackoverflow:
+ *      - https://stackoverflow.com/questions/21268062/bootstrap-with-javafx
+ */
+
 .root {
     -fx-body-color: #F5F5F5;
     -fx-outer-border: #cecece;
