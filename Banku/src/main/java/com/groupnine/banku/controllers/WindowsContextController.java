@@ -33,7 +33,13 @@ public class WindowsContextController {
         principalStage.setWidth(defaultWidth);
         principalStage.setResizable(false);
         setPrincipalScene(mainScene);
+        activateTheme("css/theme.css");
         setTitle(defaultTitle);
+    }
+
+    public static void activateTheme(String pathToTheme) {
+        String themePath = BankuApp.class.getResource(pathToTheme).toExternalForm();
+        getPrincipalStage().getScene().getStylesheets().add(themePath);
     }
 
     public static void setPrincipalStage(Stage stage) {
