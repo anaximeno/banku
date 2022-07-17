@@ -1,6 +1,7 @@
 package com.groupnine.banku.businesslogic;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Account {
@@ -18,6 +19,7 @@ public abstract class Account {
         setAccountBalance(availableBalance);
         updateInterestRateTo(interestRate);
         setOwner(owner);
+        this.balanceRecord = new ArrayList<>();
     }
 
     public AccountOwner getOwner() {
@@ -64,8 +66,9 @@ public abstract class Account {
     }
 
     public void recordCurrentBalance() {
-        if (lastTimeRecordWasSave.isBefore(LocalDate.now())) {
+        if (lastTimeRecordWasSave == null || lastTimeRecordWasSave.isBefore(LocalDate.now())) {
             balanceRecord.add(availableBalance);
+            lastTimeRecordWasSave = LocalDate.now();
         }
     }
 

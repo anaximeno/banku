@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class AutomaticInterestHandler extends Thread {
-    public static int minutesSinceTheLastCheck = 30;
+    public static int minutesSinceTheLastCheck = 1;
 
     public void recordBalanceForAccount(Account account) {
         account.recordCurrentBalance();
@@ -22,7 +22,8 @@ public class AutomaticInterestHandler extends Thread {
 
     public void applyInterestsIntoAccount(Account account, int minimunRecordDays) {
         // Thirty days of record, then apply interests
-        if (account.getBalanceRecord().size() >= minimunRecordDays) {
+        int numberOfDailyRecords = account.getBalanceRecord() != null ? account.getBalanceRecord().size() : 0;
+        if (numberOfDailyRecords >= minimunRecordDays) {
             IOperator operator = BankAgency.getInstance().getBankOperator("Automatic", "Thread", "multi-threading");
             // TODO: Update the interest applycation algorithm
             double value = account.getInterestRate() * getMean(account.getBalanceRecord());
@@ -50,14 +51,14 @@ public class AutomaticInterestHandler extends Thread {
         while (true) {
             for (Account acc : accounts) {
                 if (acc instanceof OrdinaryParticularAccount) {
-                    applyInterestsIntoAccount(acc, 30);
+                    applyInterestsIntoAccount(acc, 1);
                     recordBalanceForAccount(acc);
                 } else if (acc instanceof TemporaryParticularAccount) {
                     // TODO: Update record days according the specs
-                    applyInterestsIntoAccount(acc, 12);
+                    applyInterestsIntoAccount(acc, 1);
                     recordBalanceForAccount(acc);
                 } else if (acc instanceof EnterpriseAccount) {
-                    applyInterestsIntoAccount(acc, 30);
+                    applyInterestsIntoAccount(acc, 1);
                     recordBalanceForAccount(acc);
                 } else {
                     System.out.println("WARN: Unknown account type at AutomaticInterestHandler.");
