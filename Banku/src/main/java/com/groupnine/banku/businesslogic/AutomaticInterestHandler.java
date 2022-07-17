@@ -1,5 +1,8 @@
 package com.groupnine.banku.businesslogic;
 
+import com.groupnine.banku.Misc;
+import com.groupnine.banku.controllers.WindowsContextController;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,13 +34,13 @@ public class AutomaticInterestHandler extends Thread {
             InterestApplication interestApplication = new InterestApplication((Employee) operator, LocalDateTime.now(), account, value);
             if (interestApplication.executeOperation()) {
                 BankAgency.getInstance().addOperationLog(interestApplication);
-                System.out.println("Interest Applied to account '" + account.getAccountNumber() + "'");
+                Misc.log("Interest Applied to account '" + account.getAccountNumber() + "'", Misc.LogType.INFO);
                 // clear the list for new records
                 account.getBalanceRecord().clear();
-                // TODO: Alert user
+                // TODO: notify user
             } else {
-                // TODO: Error, Alert user
-                System.out.println("Interest Could not be applied to account '" + account.getAccountNumber() + "'");
+                Misc.log("Interest Could not be applied to account '" + account.getAccountNumber() + "'", Misc.LogType.ERROR);
+                // TODO: Error, notify user
             }
         }
     }
@@ -46,9 +49,9 @@ public class AutomaticInterestHandler extends Thread {
     public void run() {
         List<Account> accounts = BankAgency.getInstance().getClientAccounts();
 
-        System.out.println("INFO: Interest handler started!");
+        Misc.log("Interest handler started in background", Misc.LogType.INFO);
 
-        while (true) {
+        while (WindowsContextController.getPrincipalStage().isShowing()) {
             for (Account acc : accounts) {
                 if (acc instanceof OrdinaryParticularAccount) {
                     applyInterestsIntoAccount(acc, 1);
@@ -61,7 +64,7 @@ public class AutomaticInterestHandler extends Thread {
                     applyInterestsIntoAccount(acc, 1);
                     recordBalanceForAccount(acc);
                 } else {
-                    System.out.println("WARN: Unknown account type at AutomaticInterestHandler.");
+                    Misc.log("Unknown account type at AutomaticInterestHandler", Misc.LogType.WARNING);
                 }
             }
 
@@ -69,7 +72,7 @@ public class AutomaticInterestHandler extends Thread {
                 // Compute interest each half hour
                 sleep(minutesSinceTheLastCheck * 60 * 1000);
             } catch (InterruptedException exception) {
-                exception.printStackTrace();
+                Misc.log(exception.getMessage(), Misc.LogType.WARNING);
             }
         }
     }

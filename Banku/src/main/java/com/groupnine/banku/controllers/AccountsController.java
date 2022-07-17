@@ -1,5 +1,6 @@
 package com.groupnine.banku.controllers;
 
+import com.groupnine.banku.Misc;
 import com.groupnine.banku.businesslogic.*;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -55,7 +56,7 @@ public class AccountsController {
         } else if (tabTemporarias.isSelected()) {
                 // TODO
         } else {
-            System.out.println("WARN: At tabPaneOnClick event, unknown tab state");
+            Misc.log("At tabPaneOnClick event, unknown tab state", Misc.LogType.WARNING);
         }
     }
 
@@ -63,13 +64,13 @@ public class AccountsController {
         particularAccountsTable.getColumns().clear();
         particularAccountsTable.setEditable(false);
 
-        TableColumn<ParticularAccountBean, String> accId = new TableColumn("Id");
-        TableColumn<ParticularAccountBean, String>  accName = new TableColumn("Nome");
-        TableColumn<ParticularAccountBean, String>  accOwner = new TableColumn("Dono");
-        TableColumn<ParticularAccountBean, Double>  accBalance = new TableColumn("Balanço");
-        TableColumn<ParticularAccountBean, Integer>  accNCards = new TableColumn("#Cartões");
-        TableColumn<ParticularAccountBean, String>  accAssociate = new TableColumn("Associado");
-        TableColumn<ParticularAccountBean, String>  accInterest = new TableColumn("Valor do Juro");
+        TableColumn<ParticularAccountBean, String> accId = new TableColumn<>("Id");
+        TableColumn<ParticularAccountBean, String>  accName = new TableColumn<>("Nome");
+        TableColumn<ParticularAccountBean, String>  accOwner = new TableColumn<>("Dono");
+        TableColumn<ParticularAccountBean, Double>  accBalance = new TableColumn<>("Balanço");
+        TableColumn<ParticularAccountBean, Integer>  accNCards = new TableColumn<>("#Cartões");
+        TableColumn<ParticularAccountBean, String>  accAssociate = new TableColumn<>("Associado");
+        TableColumn<ParticularAccountBean, String>  accInterest = new TableColumn<>("Valor do Juro");
 
         accId.setCellValueFactory(new PropertyValueFactory<>("id"));
         accName.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -87,13 +88,13 @@ public class AccountsController {
         corporativeAccountsTable.getColumns().clear();
         corporativeAccountsTable.setEditable(false);
 
-        TableColumn<EnterpriseAccountBean, String> accId  = new TableColumn("Id");
-        TableColumn<EnterpriseAccountBean, String> accName = new TableColumn("Nome");
-        TableColumn<EnterpriseAccountBean, String> accOwner = new TableColumn("Dono");
-        TableColumn<EnterpriseAccountBean, String> accAdmin = new TableColumn("Admin");
-        TableColumn<EnterpriseAccountBean, Double> accBal = new TableColumn("Balanço");
-        TableColumn<EnterpriseAccountBean, Integer> accNAutori = new TableColumn("#Autorizados");
-        TableColumn<EnterpriseAccountBean, Double> accInterest = new TableColumn("Valor do Juro");
+        TableColumn<EnterpriseAccountBean, String> accId  = new TableColumn<>("Id");
+        TableColumn<EnterpriseAccountBean, String> accName = new TableColumn<>("Nome");
+        TableColumn<EnterpriseAccountBean, String> accOwner = new TableColumn<>("Dono");
+        TableColumn<EnterpriseAccountBean, String> accAdmin = new TableColumn<>("Admin");
+        TableColumn<EnterpriseAccountBean, Double> accBal = new TableColumn<>("Balanço");
+        TableColumn<EnterpriseAccountBean, Integer> accNAutori = new TableColumn<>("#Autorizados");
+        TableColumn<EnterpriseAccountBean, Double> accInterest = new TableColumn<>("Valor do Juro");
 
         accId.setCellValueFactory(new PropertyValueFactory<>("id"));
         accName.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -190,11 +191,12 @@ public class AccountsController {
 
                 agency.getClientAccounts().remove(account);
 
-                System.out.println("Account '" + id + "' was removed!");
+                Misc.log("Account '" + id + "' was removed", Misc.LogType.INFO);
                 // TODO: Notify user that account was removed?
             }
         } else {
             // TODO: Alert user that a line must be selected
+            Misc.log("Remove button clicker with no line selected, nothing done");
         }
     }
 
@@ -210,7 +212,7 @@ public class AccountsController {
             removeSelectedAccountFromTable(temporaryAccountsTable);
             refreshTemporaryAccountTable();
         } else {
-            System.out.println("WARN: At removeBtnOnClick event, unknown tab state");
+            Misc.log("At removeBtnOnClick event, unknown tab state");
         }
     }
 
