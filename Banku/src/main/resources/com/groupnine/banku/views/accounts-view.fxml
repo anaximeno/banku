@@ -11,7 +11,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="particularAccountsTable" layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
+                        <TableView fx:id="particularAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="Numero" />
                               <TableColumn prefWidth="193.0" text="Nome" />
@@ -28,7 +28,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="832.0">
                      <children>
-                        <TableView fx:id="corporativeAccountsTable" layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
+                        <TableView fx:id="corporativeAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Numero" />
                             <TableColumn prefWidth="228.0" text="Dono" />
@@ -45,7 +45,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="temporaryAccountsTable" layoutX="5.0" prefHeight="537.0" prefWidth="840.0">
+                        <TableView fx:id="temporaryAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="Numero" />
                               <TableColumn prefWidth="152.0" text="Nome" />
@@ -63,7 +63,7 @@
       </TabPane>
       <HBox alignment="BOTTOM_LEFT" layoutX="8.0" layoutY="523.0" prefHeight="33.0" prefWidth="826.0" spacing="270.0">
          <children>
-            <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" text="Voltar ao Dashboard" />
+            <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="205.0" text="Voltar ao Dashboard" />
             <HBox alignment="BOTTOM_RIGHT" prefHeight="6.0" prefWidth="403.0">
                <children>
                   <Button mnemonicParsing="false" text="Criar Novo" />
