@@ -25,7 +25,7 @@ public class AccountsController {
     @FXML
     private TableView<EnterpriseAccountBean> corporativeAccountsTable;
     @FXML
-    private TableView temporaryAccountsTable;
+    private TableView<TemporaryAccountBean> temporaryAccountsTable;
 
     private boolean ordinaryAccountTableWasCreated = false;
     private boolean corporativeAccountTableWasCreated = false;
@@ -38,12 +38,12 @@ public class AccountsController {
 
     @FXML
     protected void initialize() {
-        // note: Only Particular Accounts will be loaded initially
-        // because they'll be the first to be seen. Also the others
-        // will be loaded when their tab is clicked. This was made this
-        // way for performance reasons.
         createParticularAccountTable();
         refreshParticularAccountTable();
+        createCorporativeAccountTable();
+        refreshCorporativeAccountTable();
+        createTemporaryAccountTable();
+        refreshTemporaryAccountTable();
     }
 
     @FXML
@@ -51,7 +51,7 @@ public class AccountsController {
         if (tabParticulares.isSelected()) {
             refreshParticularAccountTable();
         } else if (tabCorporativas.isSelected()) {
-            refreshCorporativeAccount();
+            refreshCorporativeAccountTable();
         } else if (tabTemporarias.isSelected()) {
                 // TODO
         } else {
@@ -80,7 +80,6 @@ public class AccountsController {
         accInterest.setCellValueFactory(new PropertyValueFactory<>("valorDoJuro"));
 
         particularAccountsTable.getColumns().addAll(accId, accName, accOwner, accBalance, accNCards, accAssociate, accInterest);
-
         ordinaryAccountTableWasCreated = true;
     }
 
@@ -105,8 +104,33 @@ public class AccountsController {
         accInterest.setCellValueFactory(new PropertyValueFactory<>("valorDoJuro"));
 
         corporativeAccountsTable.getColumns().addAll(accId, accName, accOwner, accAdmin, accBal, accNAutori, accInterest);
-
         corporativeAccountTableWasCreated = true;
+    }
+
+    private void createTemporaryAccountTable() {
+        temporaryAccountsTable.getColumns().clear();
+        temporaryAccountsTable.setEditable(false);
+
+        TableColumn<TemporaryAccountBean, String> accId  = new TableColumn<>("Id");
+        TableColumn<TemporaryAccountBean, String> accName = new TableColumn<>("Nome");
+        TableColumn<TemporaryAccountBean, String> accOwner = new TableColumn<>("Dono");
+        TableColumn<TemporaryAccountBean, Double> accBal = new TableColumn<>("Balanço");
+        TableColumn<TemporaryAccountBean, String> accCreat = new TableColumn<>("Data de criação");
+        TableColumn<TemporaryAccountBean, String> accExpir = new TableColumn<>("Data de expiração");
+        TableColumn<TemporaryAccountBean, String> accBoost = new TableColumn<>("Reforço");
+        //TableColumn<TemporaryAccountBean, Double> accInterest = new TableColumn<>("Valor do Juro");
+
+        accId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        accName.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        accOwner.setCellValueFactory(new PropertyValueFactory<>("dono"));
+        accBal.setCellValueFactory(new PropertyValueFactory<>("balanco"));
+        accCreat.setCellValueFactory(new PropertyValueFactory<>("dataDeCriacao"));
+        accExpir.setCellValueFactory(new PropertyValueFactory<>("dataDeExpiracao"));
+        accBoost.setCellValueFactory(new PropertyValueFactory<>("reforco"));
+        //accInterest.setCellValueFactory(new PropertyValueFactory<>("valorDoJuro"));
+
+        temporaryAccountsTable.getColumns().addAll(accId, accName, accOwner, accBal, accCreat, accExpir, accBoost /*, accInterest */);
+        temporaryAccountsTableWasCreated = false;
     }
 
     private void refreshParticularAccountTable() {
@@ -124,7 +148,7 @@ public class AccountsController {
         particularAccountsTable.setItems(data);
     }
 
-    private void refreshCorporativeAccount() {
+    private void refreshCorporativeAccountTable() {
         if (!corporativeAccountTableWasCreated) {
             createCorporativeAccountTable();
         }
@@ -137,6 +161,21 @@ public class AccountsController {
         }
 
         corporativeAccountsTable.setItems(data);
+    }
+
+    private void refreshTemporaryAccountTable() {
+        if (!temporaryAccountsTableWasCreated) {
+            createTemporaryAccountTable();
+        }
+
+        List<TemporaryParticularAccount> accountList = BankAgency.getInstance().getTemporaryAccountList();
+        ObservableList<TemporaryAccountBean> data = FXCollections.observableArrayList();
+
+        for (TemporaryParticularAccount acc : accountList) {
+            data.add(new TemporaryAccountBean(acc));
+        }
+
+        temporaryAccountsTable.setItems(data);
     }
 
     static private<B extends AccountBean, A extends Account> void removeSelectedAccountFromTable(TableView<B> table) {
@@ -166,10 +205,10 @@ public class AccountsController {
             refreshParticularAccountTable();
         } else if (tabCorporativas.isSelected()) {
             removeSelectedAccountFromTable(corporativeAccountsTable);
-            refreshCorporativeAccount();
+            refreshCorporativeAccountTable();
         } else if (tabTemporarias.isSelected()) {
             removeSelectedAccountFromTable(temporaryAccountsTable);
-            // TODO: put refresh here!
+            refreshTemporaryAccountTable();
         } else {
             System.out.println("WARN: At removeBtnOnClick event, unknown tab state");
         }
@@ -294,6 +333,43 @@ public class AccountsController {
 
         public void setNAutorizados(int n) {
             this.nAutorizados.set(n);
+        }
+    }
+
+    public static class TemporaryAccountBean extends AccountBean {
+        final private SimpleStringProperty dataDeCriacao;
+        final private SimpleStringProperty dataDeExpiracao;
+        final private SimpleStringProperty reforco;
+
+        public TemporaryAccountBean(TemporaryParticularAccount account) {
+            super((Account) account);
+            this.dataDeCriacao = new SimpleStringProperty(account.getCreationDate().toString());
+            this.dataDeExpiracao = new SimpleStringProperty(account.getExpirationDate().toString());
+            this.reforco = new SimpleStringProperty(account.hasBoost() ? "Sim" : "Não");
+        }
+
+        public String getDataDeCriacao() {
+            return dataDeCriacao.get();
+        }
+
+        public void setDataDeCriacao(String data) {
+            dataDeCriacao.set(data);
+        }
+
+        public String getDataDeExpiracao() {
+            return dataDeExpiracao.get();
+        }
+
+        public void setDataDeExpiracao(String data) {
+            dataDeExpiracao.set(data);
+        }
+
+        public String getReforco() {
+            return reforco.get();
+        }
+
+        public void setReforco(String valor) {
+            reforco.set(valor);
         }
     }
 }
