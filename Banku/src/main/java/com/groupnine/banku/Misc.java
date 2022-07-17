@@ -17,7 +17,6 @@ public class Misc {
 
     public static void log(String message, LogType type) {
         String time = "[" + LocalTime.now() + "] ";
-        String prefix;
 
         switch (type) {
             case EXIT_ERROR, ERROR:
