@@ -40,6 +40,8 @@ public class AccountsController {
     protected void initialize() {
         createParticularAccountTable();
         refreshParticularAccountTable();
+        createParticularAccountTable();
+        refreshCorporativeAccount();
     }
 
     @FXML
@@ -47,7 +49,7 @@ public class AccountsController {
         if (tabParticulares.isSelected()) {
             refreshParticularAccountTable();
         } else if (tabCorporativas.isSelected()) {
-                // TODO
+                refreshCorporativeAccount();
         } else if (tabTemporarias.isSelected()) {
                 // TODO
         } else {
@@ -162,6 +164,7 @@ public class AccountsController {
             refreshParticularAccountTable();
         } else if (tabCorporativas.isSelected()) {
             removeSelectedAccountFromTable(corporativeAccountsTable);
+            refreshCorporativeAccount();
         } else if (tabTemporarias.isSelected()) {
             removeSelectedAccountFromTable(temporaryAccountsTable);
         } else {
@@ -179,8 +182,16 @@ public class AccountsController {
         public AccountBean(final Account account) {
             this.id = new SimpleStringProperty(account.getAccountNumber());
             this.nome = new SimpleStringProperty(account.getAccountName());
-            ParticularAccountOwner owner = (ParticularAccountOwner) account.getOwner();
-            this.dono = new SimpleStringProperty(owner.getFullName());
+
+            if (account.getOwner() instanceof ParticularAccountOwner owner) {
+                this.dono = new SimpleStringProperty(owner.getFullName());
+            } else if (account.getOwner() instanceof EnterpriseAccountOwner owner) {
+                this.dono = new SimpleStringProperty(owner.getName());
+            } else {
+                this.dono = new SimpleStringProperty("Undefined!");
+                System.out.println("WARN: Undefined AccountOwner type at Account Bean instantiation!");
+            }
+
             this.balanco = new SimpleDoubleProperty(account.getAccountBalance());
             this.valorDoJuro = new SimpleDoubleProperty(account.getInterestRate());
         }
@@ -276,7 +287,7 @@ public class AccountsController {
             this.admin.set(admin);
         }
 
-        public int getnAutorizados() {
+        public int getNAutorizados() {
             return nAutorizados.get();
         }
 
