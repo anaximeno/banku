@@ -5,11 +5,9 @@ import java.time.Period;
 import java.util.ArrayList;
 
 public class TemporaryParticularAccount extends Account {
-    private LocalDate creationDate;
+    private final LocalDate creationDate;
     private LocalDate expirationDate;
     private boolean boost;
-    private ArrayList<Double> dailyBalanceRecord;
-    private boolean todayBalanceWasSaved;
 
     public TemporaryParticularAccount(String accountNumber, String accountName, Double balance,
         Double interestRate, ParticularAccountOwner owner, LocalDate creationDate, LocalDate expirationDate) {
@@ -52,13 +50,5 @@ public class TemporaryParticularAccount extends Account {
 
     public Period getNumberOfDaysToExpiration() {
         return Period.between(creationDate, expirationDate);
-    }
-
-    public ArrayList<Double> getDailyBalanceRecord() {
-        return dailyBalanceRecord;
-    }
-
-    public void emptyDailyBalanceRecord() {
-        this.dailyBalanceRecord = new ArrayList<>();
     }
 }
