@@ -10,10 +10,8 @@ public class MoneyWithdraw extends BankingOperation {
 
     public MoneyWithdraw(Employee operator, LocalDateTime dateTime, Account account, double valueMoved) {
         super(operator, dateTime);
-        if(account != null && valueMoved > 0d){
             this.account = account;
             this.valueMoved = valueMoved;
-        }
     }
 
     @Override
