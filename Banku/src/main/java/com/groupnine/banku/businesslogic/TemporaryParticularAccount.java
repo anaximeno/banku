@@ -2,11 +2,11 @@ package com.groupnine.banku.businesslogic;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 
 public class TemporaryParticularAccount extends Account {
     private final LocalDate creationDate;
     private LocalDate expirationDate;
+    private int numberOfDaysBetweenCreationAndExpiration;
     private boolean boost;
 
     public TemporaryParticularAccount(String accountNumber, String accountName, Double balance,
@@ -15,6 +15,7 @@ public class TemporaryParticularAccount extends Account {
         this.creationDate = creationDate;
         this.expirationDate = expirationDate;
         this.boost = false;
+        numberOfDaysBetweenCreationAndExpiration = Period.between(creationDate, expirationDate).getDays();
     }
 
     public TemporaryParticularAccount(String accountNumber, String accountName, Double balance,
@@ -45,9 +46,14 @@ public class TemporaryParticularAccount extends Account {
 
     public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
+        numberOfDaysBetweenCreationAndExpiration = Period.between(creationDate, expirationDate).getDays();
     }
 
     public Period getNumberOfDaysToExpiration() {
         return Period.between(creationDate, expirationDate);
+    }
+
+    public int getNumberOfDaysBetweenCreationAndExpiration() {
+        return numberOfDaysBetweenCreationAndExpiration;
     }
 }
