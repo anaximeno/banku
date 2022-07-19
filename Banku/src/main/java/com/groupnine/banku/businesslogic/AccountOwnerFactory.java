@@ -2,62 +2,39 @@ package com.groupnine.banku.businesslogic;
 
 import java.util.ArrayList;
 
-public class AccountOwnerFactory {
-
-    private static int ownerIDCounter = 0;
-
+public class AccountOwnerFactory extends SequentiableFactory {
     //public AccountOwner createAccount ()
     public static EnterpriseAccountOwner createEnterpriseAccountOwner (String name, String NIF, String address,
                                                            ArrayList<EnterprisePartner> partners,
                                                            ArrayList<EnterpriseAccount> accounts){
-        EnterpriseAccountOwner eAOwner = new EnterpriseAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, partners, accounts);
+        EnterpriseAccountOwner eAOwner = new EnterpriseAccountOwner(getEncodedSequentialId(), name, NIF, address, partners, accounts);
         return eAOwner;
     }
 
     public static EnterpriseAccountOwner createEnterpriseAccountOwner (String name, String NIF, String address,
                                                            ArrayList<EnterprisePartner> partners){
-        EnterpriseAccountOwner eAOwner =  new EnterpriseAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, partners);
+        EnterpriseAccountOwner eAOwner =  new EnterpriseAccountOwner(getEncodedSequentialId(), name, NIF, address, partners);
         return eAOwner;
     }
 
     public static ParticularAccountOwner createParticularAccountOwner (String name, String NIF, String address, String lastname,
                                                                 String id, String nationality, ArrayList<Account> accounts,
                                                                 ArrayList<Account> associatedAccounts){
-        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, lastname, id, nationality,
+        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getEncodedSequentialId(), name, NIF, address, lastname, id, nationality,
                 accounts, associatedAccounts);
         return  pAOwner;
     }
 
     public static ParticularAccountOwner createParticularAccountOwner (String name, String NIF, String address, String lastname,
                                                                 String id, String nationality, ArrayList<Account> accounts){
-        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, lastname, id, nationality, accounts);
+        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getEncodedSequentialId(), name, NIF, address, lastname, id, nationality, accounts);
         return pAOwner;
 
     }
 
     public static ParticularAccountOwner createParticularAccountOwner (String name, String NIF, String address, String lastName,
                                                                 String id, String nationality){
-        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, lastName, id, nationality);
+        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getEncodedSequentialId(), name, NIF, address, lastName, id, nationality);
         return pAOwner;
     }
-
-    private static void increaseCounter() {
-        ownerIDCounter += 1;
-    }
-    private static String getNewOwnerIDEncoded() {
-        // Increase the counter
-        increaseCounter();
-        
-        String num = String.valueOf(ownerIDCounter);
-
-        // accu - is the accumulator, it accumulates the number of decimal places
-        // which is then reduced until the value from accu is less than the accountNumberCounter
-        double accu = Math.pow(10d, 12d);
-        for (int x = ownerIDCounter ; x < accu ; accu = accu / 10) {
-            num = "0" + num;
-        }
-
-        return num;
-    }
-
 }
