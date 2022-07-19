@@ -40,8 +40,8 @@ public class BankuApp extends Application {
         IOperator operator = agency.getBankOperator("John", "Doe", "isDoe");
 
         if (operator != null) {
-            ParticularAccountOwner owner1 = AccountOwnerFactory.createParticularAccountOwner("Jane", "324413131", "Praia, Cabo Verde", "Adina Freire", "0012e", "Cape Berdianu");
-            ParticularAccountOwner owner2 = AccountOwnerFactory.createParticularAccountOwner("Francis", "320013131", "Tarrafal, Santiago, Cabo Verde", "Sanchu Neto", "0034e", "South African");
+            ParticularAccountOwner owner1 = AccountOwnerFactory.createParticularAccountOwner("Jane", "Adina Freire", "Praia, Cabo Verde", "324413131", "Cape Berdianu");
+            ParticularAccountOwner owner2 = AccountOwnerFactory.createParticularAccountOwner("Francis", "Sanchu Neto", "Tarrafal, Santiago, Cabo Verde", "320013131", "South African");
             OrdinaryParticularAccount acc1 = AccountFactory.createOrdinaryParticularAccount("Ordiacc", owner1, 100000, owner2);
 
             acc1.addCard(owner1, "001");
@@ -56,7 +56,7 @@ public class BankuApp extends Application {
             operator.addNewAccountToTheBank(AccountFactory.createEnterpriseAccount("LuckeLukeAcc01", eOwner, owner2, 10000000));
 
             ParticularAccountOwner owner3 = AccountOwnerFactory.createParticularAccountOwner(
-                            "Francisco", "3311213131", "Santa Catarina, Cabo Verde", "Rodrigues", "0012e", "Cabo Verdiana");
+                            "Francisco", "3311213131", "Santa Catarina, Cabo Verde", "Rodrigues", "Cabo Verdiana");
             TemporaryParticularAccount account3 = AccountFactory.createTemporaryParticularAccount(
                     "MyTempAcc", 65000d, owner3, LocalDate.of(2023, 5, 23));
             BankAgency.getInstance().addNewAccount(account3);
