@@ -66,7 +66,7 @@ public class AddNewParticularAccountController {
                     AccountsController.getActiveInstance().refreshTables();
                 }
             } else {
-                result = new InputValidationResult(false, "O tipo de utilizador fornecido não é particular!");
+                result = new InputValidationResult(false, "O tipo de utilizador fornecido não é particular!\n");
             }
         }
 
@@ -104,7 +104,7 @@ public class AddNewParticularAccountController {
             if (!res.isValid) {
                 finalResult.isValid = false;
 
-                finalResult.explainStatus = finalResult.explainStatus.concat("\n" + res.explainStatus);
+                finalResult.explainStatus = finalResult.explainStatus.concat(res.explainStatus + "\n");
             }
         }
 
