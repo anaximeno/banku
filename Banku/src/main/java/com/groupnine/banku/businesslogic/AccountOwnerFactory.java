@@ -20,24 +20,24 @@ public class AccountOwnerFactory {
         return eAOwner;
     }
 
-    public static ParticularAccountOwner createParticularAccountOwner (String name, String NIF, String address, String lastname,
-                                                                String id, String nationality, ArrayList<Account> accounts,
+    public static ParticularAccountOwner createParticularAccountOwner (String name, String lastName, String address, String NIF,
+                                                                       String nationality, ArrayList<Account> accounts,
                                                                 ArrayList<Account> associatedAccounts){
-        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, lastname, id, nationality,
+        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getNewOwnerIDEncoded(), name, lastName, address, NIF, nationality,
                 accounts, associatedAccounts);
         return  pAOwner;
     }
 
-    public static ParticularAccountOwner createParticularAccountOwner (String name, String NIF, String address, String lastname,
-                                                                String id, String nationality, ArrayList<Account> accounts){
-        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, lastname, id, nationality, accounts);
+    public static ParticularAccountOwner createParticularAccountOwner (String name, String lastName, String address, String NIF,
+                                                                       String nationality, ArrayList<Account> accounts){
+        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getNewOwnerIDEncoded(), name, lastName, address, NIF, nationality, accounts);
         return pAOwner;
 
     }
 
-    public static ParticularAccountOwner createParticularAccountOwner (String name, String NIF, String address, String lastName,
-                                                                String id, String nationality){
-        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, lastName, id, nationality);
+    public static ParticularAccountOwner createParticularAccountOwner (String name, String lastName, String address, String NIF,
+                                                                       String nationality){
+        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getNewOwnerIDEncoded(), name, lastName, address, NIF, nationality);
         return pAOwner;
     }
 
