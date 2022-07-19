@@ -19,31 +19,17 @@ public class Logger {
     public static void log(String message, LogType type)
     /* Mostra e registra um log do sistema. */
     {
-        String fullLogMessage;
-        String time = "[" + LocalTime.now() + "] ";
+        String infix, fullLogMessage;
 
+        infix = switch (type) {
+            case EXIT_ERROR, ERROR -> "ERROR: ";
+            case WARNING -> "WARNING: ";
+            case INFO -> "INFO: ";
+            case DEBUG -> "DEBUG MESSAGE: ";
+            default -> "LOG MESSAGE: ";
+        };
 
-        switch (type) {
-            case EXIT_ERROR, ERROR:
-                fullLogMessage = time + "ERROR: " + message;
-                break;
-
-            case WARNING:
-                fullLogMessage = time + "WARNING: " + message;
-                break;
-
-            case INFO:
-                fullLogMessage = time + "INFO: " + message;
-                break;
-
-            case DEBUG:
-                fullLogMessage = time + "DEBUG MESSAGE: " + message;
-                break;
-
-            default:
-                fullLogMessage = time + "LOG MESSAGE: " + message;
-                break;
-        }
+        fullLogMessage = getFormattedTime() + infix + message;
 
         saveLog(fullLogMessage);
         printLog(fullLogMessage, type);
@@ -53,13 +39,16 @@ public class Logger {
         }
     }
 
-    public static void saveLog(String message)
+    private static String getFormattedTime()
+    /* Retorna a hora atual formatada para uso no log. */
+
+    private static void saveLog(String message)
     /* Guarda a mensagem de log no arquivo de log da aplicação*/
     {
         // todo: save log at `defaultLogFilePath`
     }
 
-    public static void printLog(String message, LogType type)
+    private static void printLog(String message, LogType type)
     /* Mostra a mensagem de log para saidas diferentes dependedo do
      * grau de gravidade.
      * */
