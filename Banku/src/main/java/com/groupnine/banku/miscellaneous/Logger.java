@@ -41,6 +41,9 @@ public class Logger {
 
     private static String getFormattedTime()
     /* Retorna a hora atual formatada para uso no log. */
+    {
+        return "[" + LocalTime.now() + "] ";
+    }
 
     private static void saveLog(String message)
     /* Guarda a mensagem de log no arquivo de log da aplicação*/
