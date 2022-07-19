@@ -12,12 +12,12 @@
                <children>
                   <HBox prefHeight="0.0" prefWidth="573.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="213.0" text="Nome:">
+                        <Label prefHeight="38.0" prefWidth="213.0" text="Nome da conta:">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="ownerNameInput" prefHeight="38.0" prefWidth="425.0" />
+                        <TextArea fx:id="accountNameInput" prefHeight="38.0" prefWidth="425.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="0.0" prefWidth="573.0">
