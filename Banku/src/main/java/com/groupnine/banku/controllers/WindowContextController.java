@@ -5,6 +5,7 @@ import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.miscellaneous.LogType;
 import com.groupnine.banku.miscellaneous.Logger;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -25,17 +26,21 @@ public class WindowContextController {
 
     public WindowContextController(Stage stage, double height, double width, String defaultViewPath, String title, String themePath)
     {
-        this.stage = stage;
         this.height = height;
         this.width = width;
         this.defaultViewPath = defaultViewPath;
         this.themePath = themePath;
         this.title = title;
+        setStage(stage);
     }
 
     public WindowContextController(double height, double width, String defaultViewPath, String title, String themePath)
     {
         this(new Stage(), height, width, defaultViewPath, title, themePath);
+    }
+    public WindowContextController(double height, double width, String defaultViewPath, String title)
+    {
+        this(new Stage(), height, width, defaultViewPath, title, DEFAULT_THEME_PATH);
     }
 
     public WindowContextController(String defaultViewPath, String title, String themePath)
@@ -53,7 +58,7 @@ public class WindowContextController {
         this(defaultViewPath, DEFAULT_TITLE);
     }
 
-    public void setDefaultThemeAtPath(String path)
+    public void setThemeAtPath(String path)
     {
         themePath = path;
     }
@@ -69,10 +74,15 @@ public class WindowContextController {
         getStage().setTitle(title);
     }
 
-    private Scene loadViewFromPath(String path) throws IOException
+    private void setRootViewOnMainScene(String path)
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(BankuApp.class.getResource(path));
-        return new Scene(fxmlLoader.load());
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(BankuApp.class.getResource(path));
+            getStage().getScene().setRoot(fxmlLoader.load());
+        } catch (IOException exception) {
+            Logger.log("Could not load view at '" + path + "'", LogType.ERROR);
+            Logger.log(exception.getMessage(), LogType.EXIT_ERROR);
+        }
     }
 
     public void setStage(Stage stage)
@@ -82,7 +92,7 @@ public class WindowContextController {
         this.stage.setHeight(height);
         this.stage.setWidth(width);
         this.stage.setResizable(false);
-        openDefaultView();
+        this.stage.setScene(new Scene(new Group()));
         activateTheme();
         updateTitle();
     }
@@ -90,9 +100,14 @@ public class WindowContextController {
     public void activateTheme()
     {
         //"css/theme.css"
-        if (!themePath.isEmpty()) {
-            String themePath = BankuApp.class.getResource(this.themePath).toExternalForm();
-            getStage().getScene().getStylesheets().add(themePath);
+        if (themePath != null && !themePath.isEmpty()) {
+            try {
+                String themePath = BankuApp.class.getResource(this.themePath).toExternalForm();
+                getStage().getScene().getStylesheets().add(themePath);
+            } catch (NullPointerException exception) {
+                Logger.log("Could not load the theme '" + themePath + "'", LogType.ERROR);
+                Logger.log(exception.getMessage(), LogType.EXIT_ERROR);
+            }
         }
     }
 
@@ -104,23 +119,21 @@ public class WindowContextController {
         return stage;
     }
 
-    public void show()
+    private void show()
     {
+        activateTheme();
         getStage().show();
     }
 
-    public void openView(String path)
+    public void showView(String path, String windowTitle)
     {
-        try {
-            this.stage.setScene(loadViewFromPath(path));
-        } catch (IOException exception) {
-            Logger.log("Could not load view at '" + path + "'", LogType.ERROR);
-            Logger.log(exception.getMessage(), LogType.EXIT_ERROR);
-        }
+        getStage().setTitle(windowTitle);
+        setRootViewOnMainScene(path);
+        show();
     }
 
-    public void openDefaultView()
+    public void showDefaultView()
     {
-        openView(defaultViewPath);
+        showView(defaultViewPath, title);
     }
 }

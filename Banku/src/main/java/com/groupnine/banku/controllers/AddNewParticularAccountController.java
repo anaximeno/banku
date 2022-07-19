@@ -1,15 +1,15 @@
 package com.groupnine.banku.controllers;
 
-import com.groupnine.banku.businesslogic.AccountFactory;
-import com.groupnine.banku.businesslogic.BankAgency;
-import com.groupnine.banku.businesslogic.OrdinaryParticularAccount;
-import com.groupnine.banku.businesslogic.ParticularAccountOwner;
+import com.groupnine.banku.BankuApp;
+import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.miscellaneous.InputValidationResult;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
@@ -24,14 +24,20 @@ public class AddNewParticularAccountController {
     private TextArea initialBalanceInput;
 
     @FXML
-    private Label resultLabel;
+    private Text resultText;
     @FXML
-    private TextFlow explainResultTextFlow;
+    private Text explainText;
+
+    @FXML
+    private Button searchOwnerButton;
 
     @FXML
     protected void initialize()
     {
-        resultLabel.setText("");
+        resultText.setText("");
+        explainText.setText("");
+        // não foi implementado ainda, então, desativa-se.
+        searchOwnerButton.setDisable(true);
     }
 
     @FXML
@@ -43,22 +49,45 @@ public class AddNewParticularAccountController {
         final String ownerNum = ownerNumberInput.getText();
         final String balance = initialBalanceInput.getText();
 
-        final InputValidationResult result = validateInputs(name, ownerNum, balance);
+        InputValidationResult result = validateInputs(name, ownerNum, balance);
 
         if (result.isValid) {
-            ParticularAccountOwner owner = (ParticularAccountOwner) agency.findAccountOwnerByID(ownerNum);
-            OrdinaryParticularAccount acc = AccountFactory.createOrdinaryParticularAccount(name, owner, Double.parseDouble(balance), null);
-            agency.addNewAccount(acc);
+            AccountOwner owner = agency.findAccountOwnerByID(ownerNum);
+
+            if (owner instanceof ParticularAccountOwner pOwner) {
+                // for parAcc
+                OrdinaryParticularAccount account = BankuApp.globalAccFactory.createOrdinaryParticularAccount(
+                        name, (ParticularAccountOwner) owner, Double.parseDouble(balance), null
+                );
+
+                BankuApp.currentOperator.addNewAccountToTheBank(account);
+
+                if (AccountsController.getActiveInstance() != null) {
+                    AccountsController.getActiveInstance().refreshTables();
+                }
+            } else {
+                result = new InputValidationResult(false, "O tipo de utilizador fornecido não é particular!");
+            }
         }
 
         displayResults(result);
     }
 
+    @FXML
+    protected void searchOwnerButtonOnClick() {
+        // todo: implement
+    }
+
+    @FXML
+    protected void cancelButtonOnClick() {
+        // todo: implement
+    }
+
     private void displayResults(final InputValidationResult result)
     {
-        resultLabel.setText(result.isValid ? "Sucesso!" : "Erro!");
-        resultLabel.setTextFill(Paint.valueOf( result.isValid ? "red" : "green"));
-        explainResultTextFlow.getChildren().add(new Text(result.explainStatus));
+        resultText.setText(result.isValid ? "Sucesso!" : "Erro!");
+        resultText.setFill(Paint.valueOf(result.isValid ? "green" : "red"));
+        explainText.setText(result.explainStatus);
     }
 
     private InputValidationResult validateInputs(String accountName, String accountOwnerNumber, String initialBalance)
@@ -74,7 +103,8 @@ public class AddNewParticularAccountController {
         for (InputValidationResult res : list) {
             if (!res.isValid) {
                 finalResult.isValid = false;
-                finalResult.explainStatus = finalResult.explainStatus.concat(res.explainStatus);
+
+                finalResult.explainStatus = finalResult.explainStatus.concat("\n" + res.explainStatus);
             }
         }
 
@@ -128,11 +158,13 @@ public class AddNewParticularAccountController {
         } catch (NullPointerException exception) {
             return new InputValidationResult(false, "Balanço inicial não foi inserido.");
         } catch (NumberFormatException exception) {
+            if (value.isEmpty())
+                return new InputValidationResult(false, "Balanço inicial não foi inserido.");
             return new InputValidationResult(false, "Valor inválido para balanço inicial. Deve ser um número.");
         }
 
         if (initialBalance < minimumInitialBalance) {
-            return new InputValidationResult(false, "Balanço deve menor ou igual a " + minimumInitialBalance + " escudos.");
+            return new InputValidationResult(false, "Balanço deve maior ou igual a " + minimumInitialBalance + " escudos.");
         }
         else {
             return new InputValidationResult(true);

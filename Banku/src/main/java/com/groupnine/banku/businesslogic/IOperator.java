@@ -5,5 +5,6 @@ public interface IOperator {
     public boolean makeMoneyWithdraw(Account from, double value);
     public boolean makeMoneyDeposit(Account account, double value);
     public boolean addNewAccountToTheBank(Account account);
+    public boolean addNewClientToTheBank(AccountOwner client);
     public boolean deleteAccount(String accountNumber);
 }

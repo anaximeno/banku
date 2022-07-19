@@ -5,12 +5,18 @@ import java.time.LocalDate;
 
 // This class is abstract because only one AccountFactory will be used for all accounts
 // so there's no need for instantiation on this class
-public abstract class AccountFactory extends SequentiableFactory {
-    private static double currentEnterpriseInterestRate = 0.01;
-    private static double currentOrdinaryAccountInterestRate = 0.01;
-    private static double currentTemporaryAccountInterestRate = 0.01;
+public class AccountFactory extends SequentiableFactory {
+    private double currentEnterpriseInterestRate = 0.01;
+    private double currentOrdinaryAccountInterestRate = 0.01;
+    private double currentTemporaryAccountInterestRate = 0.01;
 
-    public static EnterpriseAccount createEnterpriseAccount(
+    public AccountFactory(double particularInterest, double enterpriseIntererst, double temporaryInterest) {
+        currentOrdinaryAccountInterestRate = particularInterest;
+        currentEnterpriseInterestRate = enterpriseIntererst;
+        currentTemporaryAccountInterestRate = temporaryInterest;
+    }
+
+    public EnterpriseAccount createEnterpriseAccount(
             String name, EnterpriseAccountOwner owner, ParticularAccountOwner admin, double initialBalance)
     {
         String accountNumber = getEncodedSequentialId();
@@ -18,7 +24,7 @@ public abstract class AccountFactory extends SequentiableFactory {
         return new EnterpriseAccount(accountNumber, name, owner, admin, initialBalance, interest);
     }
 
-    public static OrdinaryParticularAccount createOrdinaryParticularAccount(
+    public OrdinaryParticularAccount createOrdinaryParticularAccount(
             String name, ParticularAccountOwner owner, double balance, ParticularAccountOwner associate)
     {
         String accountNumber = getEncodedSequentialId();
@@ -28,7 +34,7 @@ public abstract class AccountFactory extends SequentiableFactory {
         return acc;
     }
     
-    public static TemporaryParticularAccount createTemporaryParticularAccount(
+    public TemporaryParticularAccount createTemporaryParticularAccount(
             String accountName, Double balance, ParticularAccountOwner owner, LocalDate expirationDate)
     {
         String accountNumber = getEncodedSequentialId();
@@ -36,15 +42,15 @@ public abstract class AccountFactory extends SequentiableFactory {
         return  new TemporaryParticularAccount(accountNumber, accountName, balance, interest, owner, LocalDate.now(), expirationDate);
     }
 
-    public static void updateCurrentEnterpriseInterestRate(double currentEnterpriseInterestRate) {
-        AccountFactory.currentEnterpriseInterestRate = currentEnterpriseInterestRate;
+    public void updateCurrentEnterpriseInterestRate(double currentEnterpriseInterestRate) {
+        this.currentEnterpriseInterestRate = currentEnterpriseInterestRate;
     }
 
-    public static void updateCurrentOrdinaryAccountInterestRate(double currentOrdinaryAccountInterestRate) {
-        AccountFactory.currentOrdinaryAccountInterestRate = currentOrdinaryAccountInterestRate;
+    public void updateCurrentOrdinaryAccountInterestRate(double currentOrdinaryAccountInterestRate) {
+        this.currentOrdinaryAccountInterestRate = currentOrdinaryAccountInterestRate;
     }
 
-    public static void updateCurrentTemporaryAccountInterestRate(double currentTemporaryAccountInterestRate) {
-        AccountFactory.currentTemporaryAccountInterestRate = currentTemporaryAccountInterestRate;
+    public void updateCurrentTemporaryAccountInterestRate(double currentTemporaryAccountInterestRate) {
+        this.currentTemporaryAccountInterestRate = currentTemporaryAccountInterestRate;
     }
 }

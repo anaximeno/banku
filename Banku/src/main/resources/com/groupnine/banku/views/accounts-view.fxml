@@ -11,7 +11,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="particularAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
+                        <TableView fx:id="particularAccountsTable" layoutX="1.0" prefHeight="482.0" prefWidth="840.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="Numero" />
                               <TableColumn prefWidth="193.0" text="Nome" />
@@ -79,7 +79,7 @@
                   </HBox>
                   <HBox alignment="BOTTOM_RIGHT" layoutX="460.0" layoutY="10.0" prefHeight="24.0" prefWidth="320.0" spacing="5.0">
                      <children>
-                        <Button fx:id="reloadBtn" mnemonicParsing="false" onMouseClicked="#reloadBtnOnClick" prefHeight="24.0" prefWidth="113.0" text="Recarregar" />
+                        <Button fx:id="reloadBtn" mnemonicParsing="false" onMouseClicked="#reloadBtnOnClick" prefHeight="24.0" prefWidth="113.0" text="Carregar" />
                         <Button fx:id="removeBtn1" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" prefHeight="24.0" prefWidth="102.0" text="Remover" />
                         <Button fx:id="createButton" layoutX="228.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#createButtonOnClick" prefHeight="24.0" prefWidth="102.0" text="Criar Novo" />
                      </children>

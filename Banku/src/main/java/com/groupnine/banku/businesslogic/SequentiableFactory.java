@@ -1,15 +1,15 @@
 package com.groupnine.banku.businesslogic;
 
 public abstract class SequentiableFactory {
-    static int counter = 0;
+    private int counter = 0;
 
-    private static void increaseCounter()
+    private void increaseCounter()
     /* Aumenta o valor do counter. */
     {
         counter += 1;
     }
 
-    protected static String getEncodedSequentialId()
+    protected String getEncodedSequentialId()
     /* Retorna um valor normalizado para ser usado como um
      * id sequencial.
      * */

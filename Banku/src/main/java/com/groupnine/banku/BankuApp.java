@@ -14,6 +14,11 @@ public class BankuApp extends Application {
     private static WindowContextController mainWindow;
     private AutomaticInterestHandler interestHandler;
 
+    // todo: update fact usage
+    public static AccountFactory globalAccFactory;
+    public static AccountOwnerFactory globalAccOwnFactory;
+    public static IOperator currentOperator;
+
     private static void setMainWindow(WindowContextController window)
     {
         mainWindow = window;
@@ -38,42 +43,50 @@ public class BankuApp extends Application {
     public void start(Stage stage)
     {
         initData();
-
-        setMainWindow(new WindowContextController("views/dashboard-view.fxml", "Banku - Dashboard", "css/theme"));
-
+        setMainWindow(new WindowContextController("views/dashboard-view.fxml", "Banku - Dashboard"));
         initInterestHandler();
-        getMainWindow().show();
+        getMainWindow().showDefaultView();
     }
 
     public static void initData() {
-        Employee interestHandlerEmp = new Employee("Background", "Thread",  "multi-threading", "Automatic Interest Applicator");
-        BankAgency.getInstance().addEmployee(interestHandlerEmp);
+        final AccountFactory accFact = new AccountFactory(0.01, 0.05, 0.08);
+        final AccountOwnerFactory accOwnFact = new AccountOwnerFactory();
+        globalAccFactory = accFact;
+        globalAccOwnFactory = accOwnFact;
+        final BankAgency agency = BankAgency.getInstance();
 
-        BankAgency agency = BankAgency.getInstance();
         agency.addEmployee(new Employee("John", "Doe", "isDoe", "Manager"));
-        IOperator operator = agency.getBankOperator("John", "Doe", "isDoe");
+        agency.addEmployee(new Employee("Background", "Thread",  "multi-threading", "Automatic Interest Applicator"));
+
+        final IOperator operator = agency.getBankOperator("John", "Doe", "isDoe");
+        currentOperator = operator;
 
         if (operator != null) {
-            ParticularAccountOwner owner1 = AccountOwnerFactory.createParticularAccountOwner("Jane", "324413131", "Praia, Cabo Verde", "Adina Freire", "0012e", "Cape Berdianu");
-            ParticularAccountOwner owner2 = AccountOwnerFactory.createParticularAccountOwner("Francis", "320013131", "Tarrafal, Santiago, Cabo Verde", "Sanchu Neto", "0034e", "South African");
-            OrdinaryParticularAccount acc1 = AccountFactory.createOrdinaryParticularAccount("Ordiacc", owner1, 100000, owner2);
+            ParticularAccountOwner owner1 = accOwnFact.createParticularAccountOwner("Jane", "324413131", "Praia, Cabo Verde", "Adina Freire", "0012e", "Cape Berdianu");
+            ParticularAccountOwner owner2 = accOwnFact.createParticularAccountOwner("Francis", "320013131", "Tarrafal, Santiago, Cabo Verde", "Sanchu Neto", "0034e", "South African");
+            EnterpriseAccountOwner owner3 = accOwnFact.createEnterpriseAccountOwner("LuckeLuke CO", "234124124", "The Place", new ArrayList<>());
+            ParticularAccountOwner owner4 = accOwnFact.createParticularAccountOwner("Francisco", "3311213131", "Santa Catarina, Cabo Verde", "Rodrigues", "0012e", "Cabo Verdiana");
+
+            operator.addNewClientToTheBank(owner1);
+            operator.addNewClientToTheBank(owner2);
+            operator.addNewClientToTheBank(owner3);
+            operator.addNewClientToTheBank(owner4);
+
+            OrdinaryParticularAccount acc1 = accFact.createOrdinaryParticularAccount("Ordiacc", owner1, 100000, owner2);
+            OrdinaryParticularAccount acc2 = accFact.createOrdinaryParticularAccount("myOrdAcc", owner1, 230004, null);
+            OrdinaryParticularAccount acc3 = accFact.createOrdinaryParticularAccount("Foster", owner2, 12000, null);
+            EnterpriseAccount acc4 = accFact.createEnterpriseAccount("LuckeLukeAcc01", owner3, owner2, 10000000);
+            final LocalDate expDate = LocalDate.of(2023, 5, 23);
+            TemporaryParticularAccount acc5 = accFact.createTemporaryParticularAccount("MyTempAcc", 65000d, owner4, expDate);
 
             acc1.addCard(owner1, "001");
             acc1.addCard(owner2, "002");
 
             operator.addNewAccountToTheBank(acc1);
-            operator.addNewAccountToTheBank(AccountFactory.createOrdinaryParticularAccount("myOrdAcc", owner1, 230004, null));
-            operator.addNewAccountToTheBank(AccountFactory.createOrdinaryParticularAccount("Foster", owner2, 12000, null));
-
-            EnterpriseAccountOwner eOwner = AccountOwnerFactory.createEnterpriseAccountOwner("LuckeLuke CO", "234124124", "The Place", new ArrayList<>());
-
-            operator.addNewAccountToTheBank(AccountFactory.createEnterpriseAccount("LuckeLukeAcc01", eOwner, owner2, 10000000));
-
-            ParticularAccountOwner owner3 = AccountOwnerFactory.createParticularAccountOwner(
-                            "Francisco", "3311213131", "Santa Catarina, Cabo Verde", "Rodrigues", "0012e", "Cabo Verdiana");
-            TemporaryParticularAccount account3 = AccountFactory.createTemporaryParticularAccount(
-                    "MyTempAcc", 65000d, owner3, LocalDate.of(2023, 5, 23));
-            BankAgency.getInstance().addNewAccount(account3);
+            operator.addNewAccountToTheBank(acc2);
+            operator.addNewAccountToTheBank(acc3);
+            operator.addNewAccountToTheBank(acc4);
+            operator.addNewAccountToTheBank(acc5);
         }
     }
 

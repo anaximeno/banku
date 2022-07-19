@@ -36,8 +36,7 @@ public class DashboardController {
 
     @FXML
     protected void onVBox1MouseClick() throws IOException {
-        BankuApp.getMainWindow().openView("views/accounts-view.fxml");
-        BankuApp.getMainWindow().setTitle("Banku - Contas");
+        BankuApp.getMainWindow().showView("views/accounts-view.fxml", "Banku - Contas");
     }
 
     @FXML
@@ -52,8 +51,7 @@ public class DashboardController {
 
     @FXML
     protected void onVBox2MouseClick() throws IOException {
-        BankuApp.getMainWindow().openView("views/clients-view.fxml");
-        BankuApp.getMainWindow().setTitle("Banku - Clientes");
+        BankuApp.getMainWindow().showView("views/clients-view.fxml", "Banku - Clientes");
     }
 
     @FXML
@@ -68,7 +66,6 @@ public class DashboardController {
 
     @FXML
     protected void onVBox3MouseClick() throws IOException {
-        BankuApp.getMainWindow().openView("views/agency-view.fxml");
-        BankuApp.getMainWindow().setTitle("Banku - Agência");
+        BankuApp.getMainWindow().showView("views/agency-view.fxml", "Banku - Agência");
     }
 }

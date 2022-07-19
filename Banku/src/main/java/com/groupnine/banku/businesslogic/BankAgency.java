@@ -1,5 +1,7 @@
 package com.groupnine.banku.businesslogic;
 
+import com.groupnine.banku.miscellaneous.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +55,7 @@ public class BankAgency {
 
     public AccountOwner findAccountOwnerByID (String id){
         for (AccountOwner client : clients) {
+            Logger.log("Serching for " + client.getOwnerID() + " is eq to " + id);
             if (client.getOwnerID().equals(id)) {
                 return client;
             }

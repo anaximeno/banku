@@ -3,14 +3,10 @@ package com.groupnine.banku.controllers;
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.miscellaneous.ListUtils;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
-import java.io.IOException;
-import java.util.List;
 
 public class ClientsController {
     @FXML
@@ -19,7 +15,7 @@ public class ClientsController {
     @FXML
     protected void dashboardBtnOnClick()
     {
-        BankuApp.getMainWindow().openDefaultView();
+        BankuApp.getMainWindow().showDefaultView();
     }
 
     public static abstract class AccountOwnerBean {

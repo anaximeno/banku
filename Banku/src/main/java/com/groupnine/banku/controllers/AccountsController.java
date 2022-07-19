@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
 import java.util.List;
 
 public class AccountsController {
@@ -45,14 +44,36 @@ public class AccountsController {
     }
 
     @FXML
-    protected void dashboardBtnOnClick() throws IOException {
-        BankuApp.getMainWindow().openDefaultView();
+    protected void dashboardBtnOnClick()
+    {
+        BankuApp.getMainWindow().showDefaultView();
     }
 
     @FXML
     protected void reloadBtnOnClick()
     {
         refreshTables();
+    }
+
+    @FXML
+    protected void createButtonOnClick()
+    {
+        String viewPath = "", title = "Banku - ";
+
+        if (tabParticulares.isSelected()) {
+            viewPath = "views/add-new-particular-account-view.fxml";
+            title += " Adicionar Nova Conta Particular";
+        } else if (tabCorporativas.isSelected()) {
+            // todo
+        } else if (tabTemporarias.isSelected()) {
+            // todo
+        } else {
+            Logger.log("Unknown tab state at createButtonOnClick in AccountsController", LogType.WARNING);
+            return;
+        }
+
+        WindowContextController newWindow = new WindowContextController(450, 600, viewPath, title);
+        newWindow.showDefaultView();
     }
 
     @FXML

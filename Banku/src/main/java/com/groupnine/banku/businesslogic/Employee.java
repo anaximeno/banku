@@ -8,6 +8,14 @@ public class Employee implements IOperator {
     private String password;
     private String role;
 
+    public Employee(String name, String lastName, String password, String role) {
+        this.name = name;
+        this.lastName = lastName;
+        this.password = password;
+        this.role = role;
+    }
+
+
     public boolean CheckPassword(String passwordTry) {
         boolean result = false;
         if (passwordTry.equals(this.password)) {
@@ -17,16 +25,23 @@ public class Employee implements IOperator {
     }
 
     public void ChangePassword(String newPassword) {
-        if (this.password.equals(newPassword) != true){
+        if (!this.password.equals(newPassword)){
             this.password = newPassword;
         }
     }
 
-    public Employee(String name, String lastName, String password, String role) {
-        this.name = name;
-        this.lastName = lastName;
-        this.password = password;
-        this.role = role;
+
+    public boolean addNewClientToTheBank(AccountOwner client) {
+        final BankAgency agency = BankAgency.getInstance();
+
+        for (AccountOwner c : agency.getClients()) {
+            if (c.getOwnerID().equals(client.getOwnerID()) || c.getNIF().equals(client.getNIF())) {
+                return false;
+            }
+        }
+
+        agency.addClient(client);
+        return true;
     }
 
     public String getName() {
