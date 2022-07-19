@@ -1,5 +1,6 @@
 package com.groupnine.banku.controllers;
 
+import com.groupnine.banku.miscellaneous.ListUtils;
 import com.groupnine.banku.miscellaneous.Misc;
 import com.groupnine.banku.businesslogic.*;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -76,7 +77,7 @@ public class AccountsController {
         accName.setCellValueFactory(new PropertyValueFactory<>("nome"));
         accOwner.setCellValueFactory(new PropertyValueFactory<>("dono"));
         accBalance.setCellValueFactory(new PropertyValueFactory<>("balanco"));
-        accNCards.setCellValueFactory(new PropertyValueFactory<>("cartoes"));
+        accNCards.setCellValueFactory(new PropertyValueFactory<>("numCards"));
         accAssociate.setCellValueFactory(new PropertyValueFactory<>("associado"));
         accInterest.setCellValueFactory(new PropertyValueFactory<>("valorDoJuro"));
 
@@ -233,7 +234,7 @@ public class AccountsController {
                 this.dono = new SimpleStringProperty(owner.getName());
             } else {
                 this.dono = new SimpleStringProperty("Undefined!");
-                System.out.println("WARN: Undefined AccountOwner type at Account Bean instantiation!");
+                Misc.log("Undefined AccountOwner type at Account Bean instantiation!", Misc.LogType.WARNING);
             }
 
             this.balanco = new SimpleDoubleProperty(account.getAccountBalance());
@@ -282,22 +283,22 @@ public class AccountsController {
     }
 
     public static class ParticularAccountBean extends AccountBean {
-        final private SimpleIntegerProperty cartoes;
+        final private SimpleIntegerProperty numCards;
         final private SimpleStringProperty associado;
 
         public ParticularAccountBean(final OrdinaryParticularAccount account) {
-            super((Account) account);
-            this.cartoes = new SimpleIntegerProperty(account.getAllCards().size());
+            super(account);
+            this.numCards = new SimpleIntegerProperty(ListUtils.lengthOf(account.getAllCards()));
             ParticularAccountOwner associate = account.getMinorAccountAssociate();
             this.associado = new SimpleStringProperty(associate != null ? associate.getFullName() : "-");
         }
 
-        public int getCartoes() {
-            return cartoes.get();
+        public int getNumCards() {
+            return numCards.get();
         }
 
-        public void setCartoes(int value) {
-            this.cartoes.set(value);
+        public void setNumCards(int value) {
+            this.numCards.set(value);
         }
 
         public String getAssociado() {
@@ -314,11 +315,10 @@ public class AccountsController {
         final private SimpleIntegerProperty nAutorizados;
 
         EnterpriseAccountBean(final EnterpriseAccount account) {
-            super((Account) account);
+            super(account);
             ParticularAccountOwner admin = account.getAdmin();
-            List<ParticularAccountOwner> autorizados = account.getAuthorizedUsers();
             this.admin = new SimpleStringProperty(admin != null ? admin.getFullName() : "-");
-            this.nAutorizados = new SimpleIntegerProperty(autorizados != null ? autorizados.size() : 0);
+            this.nAutorizados = new SimpleIntegerProperty(ListUtils.lengthOf(account.getAuthorizedUsers()));
         }
 
         public String getAdmin() {

@@ -1,6 +1,7 @@
 package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.businesslogic.*;
+import com.groupnine.banku.miscellaneous.ListUtils;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -73,7 +74,7 @@ public class ClientsController {
         public ParticularAccountOwnerBean(final ParticularAccountOwner particularAccountOwner) {
             super((AccountOwner) particularAccountOwner);
             this.nationality = new SimpleStringProperty(particularAccountOwner.getNationality());
-            this.accountNum = new SimpleIntegerProperty(particularAccountOwner.getAccounts() != null ? particularAccountOwner.getAccounts().size() : 0);
+            this.accountNum = new SimpleIntegerProperty(ListUtils.lengthOf(particularAccountOwner.getAccounts()));
         }
     }
 
@@ -83,8 +84,8 @@ public class ClientsController {
 
         EnterpriseAccountOwnerBean(final EnterpriseAccountOwner enterpriseAccountOwner) {
             super((AccountOwner) enterpriseAccountOwner);
-            this.partnersNum = new SimpleIntegerProperty(enterpriseAccountOwner.getPartners() != null ? enterpriseAccountOwner.getPartners().size() : 0);
-            this.accountsNum = new SimpleIntegerProperty(enterpriseAccountOwner.getAccounts() != null ? enterpriseAccountOwner.getAccounts().size() : 0);
+            this.partnersNum = new SimpleIntegerProperty(ListUtils.lengthOf(enterpriseAccountOwner.getPartners()));
+            this.accountsNum = new SimpleIntegerProperty(ListUtils.lengthOf(enterpriseAccountOwner.getAccounts()));
         }
 
         public int getPartnersNum() {
