@@ -31,13 +31,14 @@ public class BankAgency {
         return null;
     }
 
-    public Account findAccountByOwnerID (String ownerID){
+    public List<Account> findAccountsByOwnerID (String ownerID){
+        List<Account> list = new ArrayList<>();
         for (Account account : clientAccounts) {
             if (account.getOwner() == findAccountOwnerByID(ownerID)) {
-                return account;
+                list.add(account);
             }
         }
-        return null;
+        return list;
     }
 
     public AccountOwner findAccountOwnerByNIF (String NIF){
