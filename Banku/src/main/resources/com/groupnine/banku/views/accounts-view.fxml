@@ -61,16 +61,31 @@
             </Tab>
         </tabs>
       </TabPane>
-      <HBox alignment="BOTTOM_LEFT" layoutX="8.0" layoutY="523.0" prefHeight="33.0" prefWidth="826.0" spacing="270.0">
+      <Pane layoutX="1.0" layoutY="520.0" prefHeight="40.0" prefWidth="840.0" style="-fx-background-color: #efefef;">
          <children>
-            <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="180.0" text="Voltar ao Dashboard" />
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="6.0" prefWidth="403.0" spacing="5.0">
+            <HBox alignment="BOTTOM_LEFT" layoutX="9.0" layoutY="11.0" prefHeight="10.0" prefWidth="820.0">
                <children>
-                  <Button mnemonicParsing="false" text="Criar Novo" />
-                  <Button fx:id="removeBtn" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" text="Remover" />
+                  <HBox>
+                     <children>
+                        <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="180.0" text="Voltar ao Dashboard" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="373.0" spacing="1.0">
+                     <children>
+                        <ComboBox prefHeight="24.0" prefWidth="91.0" />
+                        <TextField />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_RIGHT" layoutX="460.0" layoutY="10.0" prefHeight="24.0" prefWidth="267.0" spacing="5.0">
+                     <children>
+                        <Button fx:id="reloadBtn" mnemonicParsing="false" onMouseClicked="#reloadBtnOnClick" text="Recarregar" />
+                        <Button fx:id="removeBtn1" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" text="Remover" />
+                        <Button layoutX="228.0" layoutY="10.0" mnemonicParsing="false" text="Criar Novo" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>
-      </HBox>
+      </Pane>
    </children>
 </AnchorPane>
