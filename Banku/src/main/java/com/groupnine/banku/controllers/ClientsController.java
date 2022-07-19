@@ -1,5 +1,6 @@
 package com.groupnine.banku.controllers;
 
+import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.miscellaneous.ListUtils;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -16,8 +17,9 @@ public class ClientsController {
     private Button dashboardBtn;
 
     @FXML
-    protected void dashboardBtnOnClick() throws IOException {
-        WindowsContextController.showDashboardOnPrincipalStage();
+    protected void dashboardBtnOnClick()
+    {
+        BankuApp.getMainWindow().openDefaultView();
     }
 
     public static abstract class AccountOwnerBean {

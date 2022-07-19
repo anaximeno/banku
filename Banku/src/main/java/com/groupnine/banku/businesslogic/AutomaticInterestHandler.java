@@ -1,5 +1,6 @@
 package com.groupnine.banku.businesslogic;
 
+import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.controllers.AccountsController;
 import com.groupnine.banku.miscellaneous.LogType;
 import com.groupnine.banku.miscellaneous.Logger;
@@ -79,7 +80,7 @@ public class AutomaticInterestHandler extends Thread {
 
         Logger.log("Interest handler started in background", LogType.INFO);
 
-        while (WindowsContextController.getPrincipalStage().isShowing()) {
+        while (BankuApp.getMainWindow().getStage().isShowing()) {
             for (Account acc : accounts) {
                 recordBalanceForAccount(acc);
 

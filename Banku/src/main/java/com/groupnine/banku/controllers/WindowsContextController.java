@@ -2,71 +2,125 @@ package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.BankuApp;
 
+import com.groupnine.banku.miscellaneous.LogType;
+import com.groupnine.banku.miscellaneous.Logger;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
+// Abstract this class for general use
 public class WindowsContextController {
-    private static Stage principalStage;
-    private static double defaultHeight = 600;
-    private static double defaultWidth = 840;
-    private static String defaultTitle = "Banku - A Banking Application";
+    public final static double DEFAULT_HEIGHT = 600;
+    public final static double DEFAULT_WIDTH = 840;
+    public final static String DEFAULT_TITLE = "Banku - A Banking Application";
+    private final static String DEFAULT_THEME_PATH = "css/theme.css";
+    private Stage stage;
+    private final double height;
+    private final double width;
+    private final String defaultViewPath;
+    private String themePath;
+    private String title;
 
-    public static void setTitle(String title) {
-        if (principalStage != null) {
-            principalStage.setTitle(title);
-        }
+    public WindowsContextController(Stage stage, double height, double width, String defaultViewPath, String title, String themePath)
+    {
+        this.stage = stage;
+        this.height = height;
+        this.width = width;
+        this.defaultViewPath = defaultViewPath;
+        this.themePath = themePath;
+        this.title = title;
     }
 
-    public static void setPrincipalScene(Scene scene) {
-        getPrincipalStage().setScene(scene);
+    public WindowsContextController(double height, double width, String defaultViewPath, String title, String themePath)
+    {
+        this(new Stage(), height, width, defaultViewPath, title, themePath);
     }
 
-    public static void setPrincipalStage(Stage stage, Scene mainScene) {
-        assert stage != null; // stage should not be null
-        principalStage = stage;
-        principalStage.setTitle(defaultTitle);
-        principalStage.setHeight(defaultHeight);
-        principalStage.setWidth(defaultWidth);
-        principalStage.setResizable(false);
-        setPrincipalScene(mainScene);
-        activateTheme("css/theme.css");
-        setTitle(defaultTitle);
+    public WindowsContextController(String defaultViewPath, String title, String themePath)
+    {
+        this(DEFAULT_HEIGHT, DEFAULT_WIDTH, defaultViewPath, title, themePath);
     }
 
-    public static void activateTheme(String pathToTheme) {
-        String themePath = BankuApp.class.getResource(pathToTheme).toExternalForm();
-        getPrincipalStage().getScene().getStylesheets().add(themePath);
+    public WindowsContextController(String defaultViewPath, String title)
+    {
+        this(defaultViewPath, title, DEFAULT_THEME_PATH);
     }
 
-    public static void setPrincipalStage(Stage stage) {
-        setPrincipalStage(stage, new Scene(new Group(), defaultHeight, defaultWidth));
+    public WindowsContextController(String defaultViewPath)
+    {
+        this(defaultViewPath, DEFAULT_TITLE);
     }
 
-    public static Stage getPrincipalStage() {
-        if (principalStage == null) {
-            setPrincipalStage(new Stage());
-        }
-        return principalStage;
+    public void setDefaultThemeAtPath(String path)
+    {
+        themePath = path;
     }
 
-    public static void openSceneGraphViewOnPrincipalStage(String path) throws IOException {
+    public void setTitle(String title)
+    {
+        this.title = title;
+        updateTitle();
+    }
+
+    public void updateTitle()
+    {
+        getStage().setTitle(title);
+    }
+
+    private Scene loadViewFromPath(String path) throws IOException
+    {
         FXMLLoader fxmlLoader = new FXMLLoader(BankuApp.class.getResource(path));
-        getPrincipalStage().getScene().setRoot(fxmlLoader.load());
-        getPrincipalStage().show();
+        return new Scene(fxmlLoader.load());
     }
 
-    public static void showDashboardOnPrincipalStage() throws IOException {
-        openSceneGraphViewOnPrincipalStage("views/dashboard-view.fxml");
-        setTitle("Banku - Dashboard");
+    public void setStage(Stage stage)
+    {
+        assert stage != null; // stage should not be null
+        this.stage = stage;
+        this.stage.setHeight(height);
+        this.stage.setWidth(width);
+        this.stage.setResizable(false);
+        openDefaultView();
+        activateTheme();
+        updateTitle();
     }
 
-    public static void notifyUser(String message) {
-        /// TODO: Implement this method
-        /// SPEC: This should show a notification, using a dialogbox or
-        /// Something related.
+    public void activateTheme()
+    {
+        //"css/theme.css"
+        if (!themePath.isEmpty()) {
+            String themePath = BankuApp.class.getResource(this.themePath).toExternalForm();
+            getStage().getScene().getStylesheets().add(themePath);
+        }
+    }
+
+    public Stage getStage()
+    {
+        if (stage == null) {
+            setStage(new Stage());
+        }
+        return stage;
+    }
+
+    public void show()
+    {
+        getStage().show();
+    }
+
+    public void openView(String path)
+    {
+        try {
+            this.stage.setScene(loadViewFromPath(path));
+        } catch (IOException exception) {
+            Logger.log("Could not load view at '" + path + "'", LogType.ERROR);
+            Logger.log(exception.getMessage(), LogType.EXIT_ERROR);
+        }
+    }
+
+    public void openDefaultView()
+    {
+        openView(defaultViewPath);
     }
 }

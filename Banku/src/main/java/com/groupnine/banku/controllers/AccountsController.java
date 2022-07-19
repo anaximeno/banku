@@ -1,5 +1,6 @@
 package com.groupnine.banku.controllers;
 
+import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.miscellaneous.ListUtils;
 import com.groupnine.banku.miscellaneous.LogType;
 import com.groupnine.banku.miscellaneous.Logger;
@@ -45,7 +46,7 @@ public class AccountsController {
 
     @FXML
     protected void dashboardBtnOnClick() throws IOException {
-        WindowsContextController.showDashboardOnPrincipalStage();
+        BankuApp.getMainWindow().openDefaultView();
     }
 
     @FXML
@@ -55,7 +56,8 @@ public class AccountsController {
     }
 
     @FXML
-    protected void initialize() {
+    protected void initialize()
+    {
         createTables();
         refreshTables();
 
@@ -83,7 +85,8 @@ public class AccountsController {
     }
 
     @FXML
-    protected void tabPaneOnClick() {
+    protected void tabPaneOnClick()
+    {
         if (tabParticulares.isSelected()) {
             refreshParticularAccountTable();
         } else if (tabCorporativas.isSelected()) {
@@ -95,7 +98,8 @@ public class AccountsController {
         }
     }
 
-    private void createParticularAccountTable() {
+    private void createParticularAccountTable()
+    {
         particularAccountsTable.getColumns().clear();
         particularAccountsTable.setEditable(false);
 
@@ -119,7 +123,8 @@ public class AccountsController {
         ordinaryAccountTableWasCreated = true;
     }
 
-    private void createCorporativeAccountTable() {
+    private void createCorporativeAccountTable()
+    {
         corporativeAccountsTable.getColumns().clear();
         corporativeAccountsTable.setEditable(false);
 
@@ -143,7 +148,8 @@ public class AccountsController {
         corporativeAccountTableWasCreated = true;
     }
 
-    private void createTemporaryAccountTable() {
+    private void createTemporaryAccountTable()
+    {
         temporaryAccountsTable.getColumns().clear();
         temporaryAccountsTable.setEditable(false);
 
@@ -169,7 +175,8 @@ public class AccountsController {
         temporaryAccountsTableWasCreated = false;
     }
 
-    private void refreshParticularAccountTable() {
+    private void refreshParticularAccountTable()
+    {
         if (!ordinaryAccountTableWasCreated) {
             createParticularAccountTable();
         }
@@ -184,7 +191,8 @@ public class AccountsController {
         particularAccountsTable.setItems(data);
     }
 
-    private void refreshCorporativeAccountTable() {
+    private void refreshCorporativeAccountTable()
+    {
         if (!corporativeAccountTableWasCreated) {
             createCorporativeAccountTable();
         }
@@ -199,7 +207,8 @@ public class AccountsController {
         corporativeAccountsTable.setItems(data);
     }
 
-    private void refreshTemporaryAccountTable() {
+    private void refreshTemporaryAccountTable()
+    {
         if (!temporaryAccountsTableWasCreated) {
             createTemporaryAccountTable();
         }
@@ -214,7 +223,8 @@ public class AccountsController {
         temporaryAccountsTable.setItems(data);
     }
 
-    static private<B extends AccountBean, A extends Account> void removeSelectedAccountFromTable(TableView<B> table) {
+    static private<B extends AccountBean, A extends Account> void removeSelectedAccountFromTable(TableView<B> table)
+    {
         BankAgency agency = BankAgency.getInstance();
 
         B acc = (B) table.getSelectionModel().getSelectedItem();
@@ -236,7 +246,8 @@ public class AccountsController {
     }
 
     @FXML
-    protected void removeBtnOnClick() {
+    protected void removeBtnOnClick()
+    {
         if (tabParticulares.isSelected()) {
             removeSelectedAccountFromTable(particularAccountsTable);
             refreshParticularAccountTable();
@@ -258,7 +269,8 @@ public class AccountsController {
         final private SimpleDoubleProperty balanco;
         final private SimpleDoubleProperty valorDoJuro;
 
-        public AccountBean(final Account account) {
+        public AccountBean(final Account account)
+        {
             this.id = new SimpleStringProperty(account.getAccountNumber());
             this.nome = new SimpleStringProperty(account.getAccountName());
 

@@ -121,7 +121,6 @@ public class AddNewParticularAccountController {
     private InputValidationResult validateInitialBalance(String value)
     {
         final double minimumInitialBalance = 5000;
-        final BankAgency agency = BankAgency.getInstance();
         double initialBalance;
 
         try {

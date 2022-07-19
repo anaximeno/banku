@@ -7,4 +7,5 @@ module com.groupnine.banku {
     exports com.groupnine.banku;
     exports com.groupnine.banku.businesslogic;
     exports com.groupnine.banku.miscellaneous;
+    exports com.groupnine.banku.controllers;
 }

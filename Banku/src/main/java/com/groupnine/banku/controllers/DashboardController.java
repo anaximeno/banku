@@ -1,5 +1,6 @@
 package com.groupnine.banku.controllers;
 
+import com.groupnine.banku.BankuApp;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
@@ -35,8 +36,8 @@ public class DashboardController {
 
     @FXML
     protected void onVBox1MouseClick() throws IOException {
-        WindowsContextController.openSceneGraphViewOnPrincipalStage("views/accounts-view.fxml");
-        WindowsContextController.setTitle("Banku - Contas");
+        BankuApp.getMainWindow().openView("views/accounts-view.fxml");
+        BankuApp.getMainWindow().setTitle("Banku - Contas");
     }
 
     @FXML
@@ -51,8 +52,8 @@ public class DashboardController {
 
     @FXML
     protected void onVBox2MouseClick() throws IOException {
-        WindowsContextController.openSceneGraphViewOnPrincipalStage("views/clients-view.fxml");
-        WindowsContextController.setTitle("Banku - Clientes");
+        BankuApp.getMainWindow().openView("views/clients-view.fxml");
+        BankuApp.getMainWindow().setTitle("Banku - Clientes");
     }
 
     @FXML
@@ -67,7 +68,7 @@ public class DashboardController {
 
     @FXML
     protected void onVBox3MouseClick() throws IOException {
-        WindowsContextController.openSceneGraphViewOnPrincipalStage("views/agency-view.fxml");
-        WindowsContextController.setTitle("Banku - Agência");
+        BankuApp.getMainWindow().openView("views/agency-view.fxml");
+        BankuApp.getMainWindow().setTitle("Banku - Agência");
     }
 }

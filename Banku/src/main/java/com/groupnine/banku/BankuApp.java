@@ -13,34 +13,44 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BankuApp extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        Employee interestHandlerEmp = new Employee(
-                "Background", "Thread",
-                "multi-threading",
-                "Automatic Interest Applicator");
+    private static WindowsContextController mainWindow;
+    private AutomaticInterestHandler interestHandler;
 
-        BankAgency.getInstance().addEmployee(interestHandlerEmp);
-        
-        initData();
+    private static void setMainWindow(WindowsContextController window)
+    {
+        mainWindow = window;
+    }
 
-        WindowsContextController.setPrincipalStage(stage);
-        WindowsContextController.showDashboardOnPrincipalStage();
+    public static WindowsContextController getMainWindow()
+    {
+        return mainWindow;
+    }
 
-        AutomaticInterestHandler interestHandler = new AutomaticInterestHandler();
+    public void initInterestHandler() {
+        WindowsContextController window = getMainWindow();
+        interestHandler = new AutomaticInterestHandler();
         interestHandler.start();
 
-        EventHandler<WindowEvent> event = new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent windowEvent) {
-                interestHandler.interrupt();
-            }
-        };
+        if (window != null) {
+            window.getStage().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, windowEvent -> interestHandler.interrupt());
+        }
+    }
 
-        WindowsContextController.getPrincipalStage().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event);
+    @Override
+    public void start(Stage stage)
+    {
+        initData();
+
+        setMainWindow(new WindowsContextController("views/dashboard-view.fxml", "Banku - Dashboard", "css/theme"));
+
+        initInterestHandler();
+        getMainWindow().show();
     }
 
     public static void initData() {
+        Employee interestHandlerEmp = new Employee("Background", "Thread",  "multi-threading", "Automatic Interest Applicator");
+        BankAgency.getInstance().addEmployee(interestHandlerEmp);
+
         BankAgency agency = BankAgency.getInstance();
         agency.addEmployee(new Employee("John", "Doe", "isDoe", "Manager"));
         IOperator operator = agency.getBankOperator("John", "Doe", "isDoe");
