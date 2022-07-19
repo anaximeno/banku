@@ -28,9 +28,9 @@ public class AutomaticInterestHandler extends Thread {
         int numberOfDailyRecords = account.getBalanceRecord() != null ? account.getBalanceRecord().size() : 0;
         if (numberOfDailyRecords >= minimunRecordDays) {
             IOperator operator = BankAgency.getInstance().getBankOperator("Background", "Thread", "multi-threading");
-            // TODO: Update the interest applycation algorithm
+            // TODO: Update the interest application algorithm
             double value = account.getInterestRate() * getMean(account.getBalanceRecord());
-            // TODO: Fic the problem with the usage of operator in this app!
+            // TODO: Fix the problem with the usage of operator in this app!
             InterestApplication interestApplication = new InterestApplication((Employee) operator, LocalDateTime.now(), account, value);
             if (interestApplication.executeOperation()) {
                 BankAgency.getInstance().addOperationLog(interestApplication);

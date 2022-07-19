@@ -3,8 +3,6 @@ package com.groupnine.banku.businesslogic;
 import java.util.ArrayList;
 
 public class EnterpriseAccountOwner extends AccountOwner{
-
-
     private ArrayList<EnterprisePartners> partners;
     private ArrayList<EnterpriseAccount> accounts;
 
