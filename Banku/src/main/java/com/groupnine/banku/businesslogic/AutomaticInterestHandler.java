@@ -1,6 +1,7 @@
 package com.groupnine.banku.businesslogic;
 
 import com.groupnine.banku.miscellaneous.Misc;
+import com.groupnine.banku.miscellaneous.ListUtils;
 import com.groupnine.banku.controllers.WindowsContextController;
 
 import java.time.LocalDateTime;
@@ -9,38 +10,57 @@ import java.util.List;
 public class AutomaticInterestHandler extends Thread {
     public static int minutesSinceTheLastCheck = 1;
 
-    public void recordBalanceForAccount(Account account) {
+    /* Um ano de balanços salvos necessário para aplicar juros em contas
+     * Particulares e de Empresas.
+     * */
+    public static final int yearlyInterstApplicationRecordDays = 12 * 30;
+
+    public void recordBalanceForAccount(Account account)
+    /* Guarda o balanço de uma conta, chamando o método
+     * responsável por isso dentro da classe.
+     * */
+    {
         account.recordCurrentBalance();
     }
 
-    public double getMean(List<Double> list) {
-        double mean = 0;
-
-        for (Double value : list) {
-            mean += value / list.size();
-        }
-
-        return mean;
+    public double calculateInterests(Account account)
+    /* Retorna o valor do juro da conta.
+     * */
+    {
+        final double meanRecordedBalances = ListUtils.meanOf(account.getBalanceRecord());
+        return account.getInterestRate() * meanRecordedBalances;
     }
 
-    public void applyInterestsIntoAccount(Account account, int minimunRecordDays) {
-        // Thirty days of record, then apply interests
-        int numberOfDailyRecords = account.getBalanceRecord() != null ? account.getBalanceRecord().size() : 0;
+    public void applyInterestsIntoAccount(Account account, int minimunRecordDays)
+    /* Aplica o juro numa conta, se essa tiver ao menos `minimumRecordDays` dias de saldo
+     * guardado ao longo do tempo.
+     * */
+    {
+        assert minimunRecordDays > 0; // At least 1 day of record is requested
+        assert account != null; // Account should not be null
+
+        BankAgency agency = BankAgency.getInstance();
+
+        int numberOfDailyRecords = ListUtils.lengthOf(account.getBalanceRecord());
+
         if (numberOfDailyRecords >= minimunRecordDays) {
-            IOperator operator = BankAgency.getInstance().getBankOperator("Background", "Thread", "multi-threading");
-            // TODO: Update the interest application algorithm
-            double value = account.getInterestRate() * getMean(account.getBalanceRecord());
-            // TODO: Fix the problem with the usage of operator in this app!
-            InterestApplication interestApplication = new InterestApplication((Employee) operator, LocalDateTime.now(), account, value);
+            IOperator operator = agency.getBankOperator("Background", "Thread", "multi-threading");
+
+            final double interestValue = calculateInterests(account);
+
+            InterestApplication interestApplication = new InterestApplication(
+                    (Employee) operator, LocalDateTime.now(), account, interestValue);
+
             if (interestApplication.executeOperation()) {
-                BankAgency.getInstance().addOperationLog(interestApplication);
+                agency.addOperationLog(interestApplication);
+
                 Misc.log("Interest Applied to account '" + account.getAccountNumber() + "'", Misc.LogType.INFO);
+
                 // clear the list for new records
                 account.getBalanceRecord().clear();
-                // TODO: notify user
-            } else {
+            }
+            else {
                 Misc.log("Interest Could not be applied to account '" + account.getAccountNumber() + "'", Misc.LogType.ERROR);
-                // TODO: Error, notify user
             }
         }
     }
@@ -53,17 +73,15 @@ public class AutomaticInterestHandler extends Thread {
 
         while (WindowsContextController.getPrincipalStage().isShowing()) {
             for (Account acc : accounts) {
-                if (acc instanceof OrdinaryParticularAccount) {
-                    applyInterestsIntoAccount(acc, 1);
-                    recordBalanceForAccount(acc);
-                } else if (acc instanceof TemporaryParticularAccount) {
-                    // TODO: Update record days according the specs
-                    applyInterestsIntoAccount(acc, 1);
-                    recordBalanceForAccount(acc);
-                } else if (acc instanceof EnterpriseAccount) {
-                    applyInterestsIntoAccount(acc, 1);
-                    recordBalanceForAccount(acc);
-                } else {
+                recordBalanceForAccount(acc);
+
+                if (acc instanceof OrdinaryParticularAccount || acc instanceof EnterpriseAccount) {
+                    applyInterestsIntoAccount(acc, yearlyInterstApplicationRecordDays);
+                }
+                else if (acc instanceof TemporaryParticularAccount tAcc) {
+                    applyInterestsIntoAccount(tAcc, tAcc.getNumberOfDaysBetweenCreationAndExpiration());
+                }
+                else {
                     Misc.log("Unknown account type at AutomaticInterestHandler", Misc.LogType.WARNING);
                 }
             }
