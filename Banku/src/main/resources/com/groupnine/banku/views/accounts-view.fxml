@@ -61,26 +61,27 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Pane layoutX="1.0" layoutY="520.0" prefHeight="40.0" prefWidth="840.0" style="-fx-background-color: #efefef;">
+      <Pane layoutY="516.0" prefHeight="44.0" prefWidth="840.0" style="-fx-background-color: #eee;">
          <children>
-            <HBox alignment="BOTTOM_LEFT" layoutX="9.0" layoutY="11.0" prefHeight="10.0" prefWidth="820.0">
+            <HBox alignment="BOTTOM_LEFT" layoutX="9.0" layoutY="11.0" prefHeight="24.0" prefWidth="822.0">
                <children>
                   <HBox>
                      <children>
-                        <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="180.0" text="Voltar ao Dashboard" />
+                        <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="168.0" text="Voltar ao Dashboard" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="373.0" spacing="1.0">
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="321.0" spacing="4.0">
                      <children>
+                        <Label text="Procurar:" />
+                        <TextField prefHeight="24.0" prefWidth="147.0" />
                         <ComboBox prefHeight="24.0" prefWidth="91.0" />
-                        <TextField />
                      </children>
                   </HBox>
-                  <HBox alignment="BOTTOM_RIGHT" layoutX="460.0" layoutY="10.0" prefHeight="24.0" prefWidth="267.0" spacing="5.0">
+                  <HBox alignment="BOTTOM_RIGHT" layoutX="460.0" layoutY="10.0" prefHeight="24.0" prefWidth="320.0" spacing="5.0">
                      <children>
-                        <Button fx:id="reloadBtn" mnemonicParsing="false" onMouseClicked="#reloadBtnOnClick" text="Recarregar" />
-                        <Button fx:id="removeBtn1" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" text="Remover" />
-                        <Button layoutX="228.0" layoutY="10.0" mnemonicParsing="false" text="Criar Novo" />
+                        <Button fx:id="reloadBtn" mnemonicParsing="false" onMouseClicked="#reloadBtnOnClick" prefHeight="24.0" prefWidth="113.0" text="Recarregar" />
+                        <Button fx:id="removeBtn1" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" prefHeight="24.0" prefWidth="102.0" text="Remover" />
+                        <Button fx:id="createButton" layoutX="228.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#createButtonOnClick" prefHeight="24.0" prefWidth="102.0" text="Criar Novo" />
                      </children>
                   </HBox>
                </children>
