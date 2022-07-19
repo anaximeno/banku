@@ -1,5 +1,6 @@
 package com.groupnine.banku.businesslogic;
 
+import com.groupnine.banku.controllers.AccountsController;
 import com.groupnine.banku.miscellaneous.LogType;
 import com.groupnine.banku.miscellaneous.Logger;
 import com.groupnine.banku.miscellaneous.ListUtils;
@@ -59,6 +60,10 @@ public class AutomaticInterestHandler extends Thread {
 
                 // clear the list for new records
                 account.getBalanceRecord().clear();
+
+                /* Mostra a mudança na view de conta ativa, caso ela tenha sido criada. */
+                if (AccountsController.getActiveInstance() != null)
+                    AccountsController.getActiveInstance().refreshTables();
             }
             else {
                 Logger.log("Interest Could not be applied to account '" + account.getAccountNumber() + "'", LogType.ERROR);

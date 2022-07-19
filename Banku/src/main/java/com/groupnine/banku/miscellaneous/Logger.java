@@ -11,7 +11,7 @@ public class Logger {
     private static final String defaultLogFilePath = "resources/banku.log";
 
     public void setDefaultLogType(LogType type)
-    /* Usado para muda o tipo de log por default. */
+    /* Usado para mudar o tipo de log por default. */
     {
         defaultLogType = type;
     }

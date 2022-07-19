@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class AccountsController {
+    private static AccountsController activeInstance;
+
     @FXML
     private Tab tabParticulares;
     @FXML
@@ -34,6 +36,12 @@ public class AccountsController {
     private boolean corporativeAccountTableWasCreated = false;
     private boolean temporaryAccountsTableWasCreated = false;
 
+    public static AccountsController getActiveInstance()
+    /* Retorna a instancia ativa e inicialiada dessa view. */
+    {
+        return activeInstance;
+    }
+
     @FXML
     protected void dashboardBtnOnClick() throws IOException {
         WindowsContextController.showDashboardOnPrincipalStage();
@@ -41,11 +49,29 @@ public class AccountsController {
 
     @FXML
     protected void initialize() {
+        createTables();
+        refreshTables();
+
+        /* Isto vai ser utilizado externamente para
+         * atualizar o estado dessa view.
+         * */
+        activeInstance = this;
+    }
+
+    private void createTables()
+    /* Cria todas as tabelas dessa view. */
+    {
         createParticularAccountTable();
-        refreshParticularAccountTable();
         createCorporativeAccountTable();
-        refreshCorporativeAccountTable();
         createTemporaryAccountTable();
+    }
+
+    public void refreshTables()
+    /* Atualiza todas a tabelas. Este método é público pois
+     * pode ser utilizado externamente. */
+    {
+        refreshParticularAccountTable();
+        refreshCorporativeAccountTable();
         refreshTemporaryAccountTable();
     }
 
