@@ -1,33 +1,31 @@
 package com.groupnine.banku;
 
 import com.groupnine.banku.businesslogic.*;
-import com.groupnine.banku.controllers.WindowsContextController;
+import com.groupnine.banku.controllers.WindowContextController;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BankuApp extends Application {
-    private static WindowsContextController mainWindow;
+    private static WindowContextController mainWindow;
     private AutomaticInterestHandler interestHandler;
 
-    private static void setMainWindow(WindowsContextController window)
+    private static void setMainWindow(WindowContextController window)
     {
         mainWindow = window;
     }
 
-    public static WindowsContextController getMainWindow()
+    public static WindowContextController getMainWindow()
     {
         return mainWindow;
     }
 
     public void initInterestHandler() {
-        WindowsContextController window = getMainWindow();
+        WindowContextController window = getMainWindow();
         interestHandler = new AutomaticInterestHandler();
         interestHandler.start();
 
@@ -41,7 +39,7 @@ public class BankuApp extends Application {
     {
         initData();
 
-        setMainWindow(new WindowsContextController("views/dashboard-view.fxml", "Banku - Dashboard", "css/theme"));
+        setMainWindow(new WindowContextController("views/dashboard-view.fxml", "Banku - Dashboard", "css/theme"));
 
         initInterestHandler();
         getMainWindow().show();

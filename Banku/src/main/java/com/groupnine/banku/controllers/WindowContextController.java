@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 // Abstract this class for general use
-public class WindowsContextController {
+public class WindowContextController {
     public final static double DEFAULT_HEIGHT = 600;
     public final static double DEFAULT_WIDTH = 840;
     public final static String DEFAULT_TITLE = "Banku - A Banking Application";
@@ -23,7 +23,7 @@ public class WindowsContextController {
     private String themePath;
     private String title;
 
-    public WindowsContextController(Stage stage, double height, double width, String defaultViewPath, String title, String themePath)
+    public WindowContextController(Stage stage, double height, double width, String defaultViewPath, String title, String themePath)
     {
         this.stage = stage;
         this.height = height;
@@ -33,22 +33,22 @@ public class WindowsContextController {
         this.title = title;
     }
 
-    public WindowsContextController(double height, double width, String defaultViewPath, String title, String themePath)
+    public WindowContextController(double height, double width, String defaultViewPath, String title, String themePath)
     {
         this(new Stage(), height, width, defaultViewPath, title, themePath);
     }
 
-    public WindowsContextController(String defaultViewPath, String title, String themePath)
+    public WindowContextController(String defaultViewPath, String title, String themePath)
     {
         this(DEFAULT_HEIGHT, DEFAULT_WIDTH, defaultViewPath, title, themePath);
     }
 
-    public WindowsContextController(String defaultViewPath, String title)
+    public WindowContextController(String defaultViewPath, String title)
     {
         this(defaultViewPath, title, DEFAULT_THEME_PATH);
     }
 
-    public WindowsContextController(String defaultViewPath)
+    public WindowContextController(String defaultViewPath)
     {
         this(defaultViewPath, DEFAULT_TITLE);
     }

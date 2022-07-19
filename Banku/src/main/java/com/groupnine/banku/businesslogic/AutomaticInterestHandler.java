@@ -5,7 +5,6 @@ import com.groupnine.banku.controllers.AccountsController;
 import com.groupnine.banku.miscellaneous.LogType;
 import com.groupnine.banku.miscellaneous.Logger;
 import com.groupnine.banku.miscellaneous.ListUtils;
-import com.groupnine.banku.controllers.WindowsContextController;
 
 import java.time.LocalDateTime;
 import java.util.List;
