@@ -40,7 +40,6 @@ public class Transaction extends BankingOperation{
                 + "\n Account balance credited before the transaction = " + balanceOfToAccountBeforeTransaction
                 + "\n Account balance credited after the transaction = " + balanceOfToAfterTransaction;
         return fullDescription;
-
     }
 
     @Override
