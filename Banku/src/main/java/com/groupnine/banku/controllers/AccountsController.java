@@ -25,6 +25,7 @@ public class AccountsController {
     private Tab tabCorporativas;
     @FXML
     private Tab tabTemporarias;
+
     @FXML
     private TableView<ParticularAccountBean> particularAccountsTable;
     @FXML
@@ -45,6 +46,12 @@ public class AccountsController {
     @FXML
     protected void dashboardBtnOnClick() throws IOException {
         WindowsContextController.showDashboardOnPrincipalStage();
+    }
+
+    @FXML
+    protected void reloadBtnOnClick()
+    {
+        refreshTables();
     }
 
     @FXML
