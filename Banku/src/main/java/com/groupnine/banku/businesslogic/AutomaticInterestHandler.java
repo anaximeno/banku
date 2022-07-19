@@ -66,7 +66,9 @@ public class AutomaticInterestHandler extends Thread {
     }
 
     @Override
-    public void run() {
+    public void run()
+    /* Executa o InterestHandler. */
+    {
         List<Account> accounts = BankAgency.getInstance().getClientAccounts();
 
         Misc.log("Interest handler started in background", Misc.LogType.INFO);
