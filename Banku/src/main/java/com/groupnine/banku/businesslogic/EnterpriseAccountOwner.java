@@ -1,6 +1,7 @@
 package com.groupnine.banku.businesslogic;
 
-import com.groupnine.banku.miscellaneous.Misc;
+import com.groupnine.banku.miscellaneous.LogType;
+import com.groupnine.banku.miscellaneous.Logger;
 
 import java.util.ArrayList;
 
@@ -53,7 +54,7 @@ public class EnterpriseAccountOwner extends AccountOwner {
         if (partner != null) {
             for (EnterprisePartner p : partners) {
                 if (p.getCNI().equals(partner.getCNI())) {
-                    Misc.log("Trying to add partner with ID " + p.getCNI() + " more than once.", Misc.LogType.ERROR);
+                    Logger.log("Trying to add partner with ID " + p.getCNI() + " more than once.", LogType.ERROR);
                     return;
                 }
             }

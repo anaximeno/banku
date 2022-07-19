@@ -1,7 +1,8 @@
 package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.miscellaneous.ListUtils;
-import com.groupnine.banku.miscellaneous.Misc;
+import com.groupnine.banku.miscellaneous.LogType;
+import com.groupnine.banku.miscellaneous.Logger;
 import com.groupnine.banku.businesslogic.*;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -57,7 +58,7 @@ public class AccountsController {
         } else if (tabTemporarias.isSelected()) {
                 // TODO
         } else {
-            Misc.log("At tabPaneOnClick event, unknown tab state", Misc.LogType.WARNING);
+            Logger.log("At tabPaneOnClick event, unknown tab state", LogType.WARNING);
         }
     }
 
@@ -192,12 +193,12 @@ public class AccountsController {
 
                 agency.getClientAccounts().remove(account);
 
-                Misc.log("Account '" + id + "' was removed", Misc.LogType.INFO);
+                Logger.log("Account '" + id + "' was removed", LogType.INFO);
                 // TODO: Notify user that account was removed?
             }
         } else {
             // TODO: Alert user that a line must be selected
-            Misc.log("Remove button clicker with no line selected, nothing done");
+            Logger.log("Remove button clicker with no line selected, nothing done");
         }
     }
 
@@ -213,7 +214,7 @@ public class AccountsController {
             removeSelectedAccountFromTable(temporaryAccountsTable);
             refreshTemporaryAccountTable();
         } else {
-            Misc.log("At removeBtnOnClick event, unknown tab state");
+            Logger.log("At removeBtnOnClick event, unknown tab state");
         }
     }
 
@@ -234,7 +235,7 @@ public class AccountsController {
                 this.dono = new SimpleStringProperty(owner.getName());
             } else {
                 this.dono = new SimpleStringProperty("Undefined!");
-                Misc.log("Undefined AccountOwner type at Account Bean instantiation!", Misc.LogType.WARNING);
+                Logger.log("Undefined AccountOwner type at Account Bean instantiation!", LogType.WARNING);
             }
 
             this.balanco = new SimpleDoubleProperty(account.getAccountBalance());

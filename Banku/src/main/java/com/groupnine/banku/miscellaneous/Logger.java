@@ -1,14 +1,9 @@
 package com.groupnine.banku.miscellaneous;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 // Miscellaneous class
-public class Misc {
-    public enum LogType {
-        DEBUG, INFO, WARNING, ERROR, EXIT_ERROR
-    }
-
+public class Logger {
     private static LogType defaultLogType = LogType.INFO;
 
     public void setDefaultLogType(LogType type) {

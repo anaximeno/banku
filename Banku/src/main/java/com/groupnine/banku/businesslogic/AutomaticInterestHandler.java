@@ -1,6 +1,7 @@
 package com.groupnine.banku.businesslogic;
 
-import com.groupnine.banku.miscellaneous.Misc;
+import com.groupnine.banku.miscellaneous.LogType;
+import com.groupnine.banku.miscellaneous.Logger;
 import com.groupnine.banku.miscellaneous.ListUtils;
 import com.groupnine.banku.controllers.WindowsContextController;
 
@@ -54,13 +55,13 @@ public class AutomaticInterestHandler extends Thread {
             if (interestApplication.executeOperation()) {
                 agency.addOperationLog(interestApplication);
 
-                Misc.log("Interest Applied to account '" + account.getAccountNumber() + "'", Misc.LogType.INFO);
+                Logger.log("Interest Applied to account '" + account.getAccountNumber() + "'", LogType.INFO);
 
                 // clear the list for new records
                 account.getBalanceRecord().clear();
             }
             else {
-                Misc.log("Interest Could not be applied to account '" + account.getAccountNumber() + "'", Misc.LogType.ERROR);
+                Logger.log("Interest Could not be applied to account '" + account.getAccountNumber() + "'", LogType.ERROR);
             }
         }
     }
@@ -71,7 +72,7 @@ public class AutomaticInterestHandler extends Thread {
     {
         List<Account> accounts = BankAgency.getInstance().getClientAccounts();
 
-        Misc.log("Interest handler started in background", Misc.LogType.INFO);
+        Logger.log("Interest handler started in background", LogType.INFO);
 
         while (WindowsContextController.getPrincipalStage().isShowing()) {
             for (Account acc : accounts) {
@@ -84,7 +85,7 @@ public class AutomaticInterestHandler extends Thread {
                     applyInterestsIntoAccount(tAcc, tAcc.getNumberOfDaysBetweenCreationAndExpiration());
                 }
                 else {
-                    Misc.log("Unknown account type at AutomaticInterestHandler", Misc.LogType.WARNING);
+                    Logger.log("Unknown account type at AutomaticInterestHandler", LogType.WARNING);
                 }
             }
 
@@ -92,7 +93,7 @@ public class AutomaticInterestHandler extends Thread {
                 // Compute interest each half hour
                 sleep(minutesSinceTheLastCheck * 60 * 1000);
             } catch (InterruptedException exception) {
-                Misc.log(exception.getMessage(), Misc.LogType.WARNING);
+                Logger.log(exception.getMessage(), LogType.WARNING);
             }
         }
     }
