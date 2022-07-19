@@ -1,4 +1,4 @@
-package com.groupnine.banku;
+package com.groupnine.banku.miscellaneous;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;

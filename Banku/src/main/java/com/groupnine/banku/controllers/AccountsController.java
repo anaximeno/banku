@@ -1,6 +1,6 @@
 package com.groupnine.banku.controllers;
 
-import com.groupnine.banku.Misc;
+import com.groupnine.banku.miscellaneous.Misc;
 import com.groupnine.banku.businesslogic.*;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;

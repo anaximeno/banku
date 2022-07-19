@@ -8,14 +8,14 @@ public class AccountOwnerFactory {
 
     //public AccountOwner createAccount ()
     public static EnterpriseAccountOwner createEnterpriseAccountOwner (String name, String NIF, String address,
-                                                           ArrayList<EnterprisePartners> partners,
+                                                           ArrayList<EnterprisePartner> partners,
                                                            ArrayList<EnterpriseAccount> accounts){
         EnterpriseAccountOwner eAOwner = new EnterpriseAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, partners, accounts);
         return eAOwner;
     }
 
     public static EnterpriseAccountOwner createEnterpriseAccountOwner (String name, String NIF, String address,
-                                                           ArrayList<EnterprisePartners> partners){
+                                                           ArrayList<EnterprisePartner> partners){
         EnterpriseAccountOwner eAOwner =  new EnterpriseAccountOwner(getNewOwnerIDEncoded(), name, NIF, address, partners);
         return eAOwner;
     }

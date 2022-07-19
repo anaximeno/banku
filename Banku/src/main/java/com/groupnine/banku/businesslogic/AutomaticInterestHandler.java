@@ -1,6 +1,6 @@
 package com.groupnine.banku.businesslogic;
 
-import com.groupnine.banku.Misc;
+import com.groupnine.banku.miscellaneous.Misc;
 import com.groupnine.banku.controllers.WindowsContextController;
 
 import java.time.LocalDateTime;
