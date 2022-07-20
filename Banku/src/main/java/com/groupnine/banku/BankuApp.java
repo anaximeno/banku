@@ -28,7 +28,7 @@ public class BankuApp extends Application {
 
     public static IOperator currentOperator;
 
-    private final static int MAX_GEN_ITERATION = 20;
+    private final static int MAX_GEN_ITERATION = 100;
 
     private static void setMainWindow(WindowContextController window)
     {

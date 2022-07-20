@@ -3,11 +3,14 @@ package com.groupnine.banku.controllers;
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.miscellaneous.InputValidationResult;
+import com.groupnine.banku.miscellaneous.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,9 @@ public class AddNewParticularAccountController {
     @FXML
     private Button searchOwnerButton;
 
+    public static TextArea publicOwnerNumInput;
+    public static TextArea publicAssociatedNumInput;
+
     private void clearView() {
         // todo: extract EMPTY_STR to miscellaneous
         final String EMPTY_STR = "";
@@ -44,6 +50,8 @@ public class AddNewParticularAccountController {
     @FXML
     protected void initialize()
     {
+        publicOwnerNumInput = ownerNumberInput;
+        publicAssociatedNumInput = associateNumberInput;
         clearView();
     }
 
@@ -88,8 +96,12 @@ public class AddNewParticularAccountController {
 
     @FXML
     protected void searchOwnerButtonOnClick() {
-        WindowContextController window = new WindowContextController(390, 530, "views/select-owner-id-view.fxml", "Select Owner");
-        window.showDefaultView();
+        if (SelectOwnerIdController.activeIntance == null) {
+            SelectOwnerIdController.activeIntance = new WindowContextController(390, 535, "views/select-owner-id-view.fxml", "Select Owner");
+            SelectOwnerIdController.activeIntance.showDefaultView();
+        } else {
+            SelectOwnerIdController.activeIntance.getStage().show();
+        }
     }
 
     @FXML
