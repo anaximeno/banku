@@ -9,15 +9,21 @@ import javafx.stage.WindowEvent;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import com.github.javafaker.Faker;
+
 
 public class BankuApp extends Application {
     private static WindowContextController mainWindow;
     private AutomaticInterestHandler interestHandler;
 
     // todo: update fact usage
-    public static AccountFactory globalAccFactory;
-    public static AccountOwnerFactory globalAccOwnFactory;
+    final public static AccountFactory globalAccFactory =  new AccountFactory(0.01, 0.05, 0.08);
+    final public static AccountOwnerFactory globalAccOwnFactory = new AccountOwnerFactory();
+    final public static Faker globalFaker = new Faker();
+
     public static IOperator currentOperator;
+
+    private final static int MAX_GEN_ITERATION = 20;
 
     private static void setMainWindow(WindowContextController window)
     {
@@ -48,11 +54,38 @@ public class BankuApp extends Application {
         getMainWindow().showDefaultView();
     }
 
+    private static ParticularAccountOwner generateNewFakeAccountOwner()
+    /* Retorna uma classe ParticularAccountOwner generada com dados falsos. */
+    {
+        final String name = globalFaker.name().firstName();
+        final String lastName = globalFaker.name().lastName();
+        final String address = globalFaker.address().fullAddress();
+        final String id = globalFaker.regexify("[A-Z0-9]{12}");
+        final String NIF = globalFaker.regexify("[0-9]{13}");
+        final String nationality = globalFaker.address().country();
+        return globalAccOwnFactory.createParticularAccountOwner(name, NIF, address, lastName, id, nationality);
+    }
+
+    private static OrdinaryParticularAccount generateOrdinaryAccount(ParticularAccountOwner owner) {
+        final BankAgency agency = BankAgency.getInstance();
+        final IOperator operator = agency.getBankOperator("John", "Doe", "isDoe");
+
+        final String accountName = globalFaker.funnyName().name();
+        final int balance = globalFaker.number().numberBetween(5000, 800000);
+
+        ParticularAccountOwner associate = null;
+
+        if (globalFaker.random().nextBoolean()) {
+            associate = generateNewFakeAccountOwner();
+            operator.addNewClientToTheBank(associate);
+        }
+
+        return globalAccFactory.createOrdinaryParticularAccount(accountName, owner, balance, associate);
+    }
+
     public static void initData() {
-        final AccountFactory accFact = new AccountFactory(0.01, 0.05, 0.08);
-        final AccountOwnerFactory accOwnFact = new AccountOwnerFactory();
-        globalAccFactory = accFact;
-        globalAccOwnFactory = accOwnFact;
+        final AccountFactory accFact = globalAccFactory;
+        final AccountOwnerFactory accOwnFact = globalAccOwnFactory;
         final BankAgency agency = BankAgency.getInstance();
 
         agency.addEmployee(new Employee("John", "Doe", "isDoe", "Manager"));
@@ -87,6 +120,13 @@ public class BankuApp extends Application {
             operator.addNewAccountToTheBank(acc3);
             operator.addNewAccountToTheBank(acc4);
             operator.addNewAccountToTheBank(acc5);
+
+            for (int i = 0 ; i < MAX_GEN_ITERATION ; i += 1) {
+                ParticularAccountOwner owner = generateNewFakeAccountOwner();
+                OrdinaryParticularAccount account = generateOrdinaryAccount(owner);
+                operator.addNewClientToTheBank(owner);
+                operator.addNewAccountToTheBank(account);
+            }
         }
     }
 

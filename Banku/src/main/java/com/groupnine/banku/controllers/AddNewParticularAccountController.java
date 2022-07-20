@@ -5,12 +5,9 @@ import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.miscellaneous.InputValidationResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +45,6 @@ public class AddNewParticularAccountController {
     protected void initialize()
     {
         clearView();
-        // não foi implementado ainda, então, desativa-se.
-        searchOwnerButton.setDisable(true);
     }
 
     @FXML
@@ -93,7 +88,8 @@ public class AddNewParticularAccountController {
 
     @FXML
     protected void searchOwnerButtonOnClick() {
-        // todo: implement
+        WindowContextController window = new WindowContextController(390, 530, "views/select-owner-id-view.fxml", "Select Owner");
+        window.showDefaultView();
     }
 
     @FXML

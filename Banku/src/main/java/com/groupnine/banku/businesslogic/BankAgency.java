@@ -5,6 +5,7 @@ import com.groupnine.banku.miscellaneous.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class BankAgency {
     static private BankAgency instance;
     private String name;
