@@ -59,7 +59,6 @@ public class AddNewParticularAccountController {
             final ParticularAccountOwner associate = (ParticularAccountOwner) agency.findAccountOwnerByID(associateNumber);
 
             if (owner instanceof ParticularAccountOwner pOwner) {
-
                 // for parAcc
                 OrdinaryParticularAccount account = BankuApp.globalAccFactory.createOrdinaryParticularAccount(
                         name, pOwner, Double.parseDouble(balance), associate);
@@ -127,6 +126,7 @@ public class AddNewParticularAccountController {
         else {
             try {
                 int ret = Integer.parseInt(value);
+                return new InputValidationResult(true);
             } catch (NumberFormatException exception) { /* Quando fornecido deve poder ser convertido para int. */
                 return new InputValidationResult(false, "Número de associado inválido.");
             }
