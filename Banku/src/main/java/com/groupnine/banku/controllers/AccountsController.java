@@ -63,17 +63,15 @@ public class AccountsController {
         if (tabParticulares.isSelected()) {
             viewPath = "views/add-new-particular-account-view.fxml";
             title += " Adicionar Nova Conta Particular";
+            AddNewParticularAccountController.activeInstance = new WindowContextController(430, 600, viewPath, title);
+            AddNewParticularAccountController.activeInstance.showDefaultView();
         } else if (tabCorporativas.isSelected()) {
             // todo
         } else if (tabTemporarias.isSelected()) {
             // todo
         } else {
             Logger.log("Unknown tab state at createButtonOnClick in AccountsController", LogType.WARNING);
-            return;
         }
-
-        WindowContextController newWindow = new WindowContextController(430, 600, viewPath, title);
-        newWindow.showDefaultView();
     }
 
     @FXML

@@ -3,19 +3,17 @@ package com.groupnine.banku.controllers;
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.miscellaneous.InputValidationResult;
-import com.groupnine.banku.miscellaneous.Logger;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.stage.Window;
-import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddNewParticularAccountController {
+    public static WindowContextController activeInstance;
+
     @FXML
     private TextArea accountNameInput;
     @FXML
@@ -112,7 +110,8 @@ public class AddNewParticularAccountController {
 
     @FXML
     protected void cancelButtonOnClick() {
-        // todo: implement
+        if (activeInstance != null)
+            activeInstance.getStage().close();
     }
 
     private void displayResults(final InputValidationResult result)
