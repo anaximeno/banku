@@ -7,8 +7,12 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.util.Date;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 import com.github.javafaker.Faker;
 
 
@@ -70,7 +74,7 @@ public class BankuApp extends Application {
         final BankAgency agency = BankAgency.getInstance();
         final IOperator operator = agency.getBankOperator("John", "Doe", "isDoe");
 
-        final String accountName = globalFaker.funnyName().name();
+        final String accountName = globalFaker.dragonBall().character();
         final int balance = globalFaker.number().numberBetween(5000, 800000);
 
         ParticularAccountOwner associate = null;
@@ -81,6 +85,23 @@ public class BankuApp extends Application {
         }
 
         return globalAccFactory.createOrdinaryParticularAccount(accountName, owner, balance, associate);
+    }
+
+    private static TemporaryParticularAccount generateTemporaryAccount(ParticularAccountOwner owner) {
+        final String accountName = globalFaker.pokemon().name();
+        final double balance = globalFaker.number().numberBetween(50000, 300000);
+        final ZoneId zoneId = ZoneId.systemDefault();
+        final Date now = Date.from(LocalDate.now().atStartOfDay(zoneId).toInstant());
+        final Date expiration = globalFaker.date().future(30, TimeUnit.DAYS, now);
+        final LocalDate expirationDate = expiration.toInstant().atZone(zoneId).toLocalDate();
+        final boolean hasBoost = globalFaker.random().nextBoolean();
+
+        TemporaryParticularAccount acc = globalAccFactory.createTemporaryParticularAccount(accountName, balance, owner, expirationDate);
+
+        if (hasBoost)
+            acc.activateBoost();
+
+        return acc;
     }
 
     public static void initData() {
@@ -123,9 +144,15 @@ public class BankuApp extends Application {
 
             for (int i = 0 ; i < MAX_GEN_ITERATION ; i += 1) {
                 ParticularAccountOwner owner = generateNewFakeAccountOwner();
-                OrdinaryParticularAccount account = generateOrdinaryAccount(owner);
+                boolean isOrdinary = globalFaker.random().nextBoolean();
+
                 operator.addNewClientToTheBank(owner);
-                operator.addNewAccountToTheBank(account);
+
+                if (isOrdinary) {
+                    operator.addNewAccountToTheBank(generateOrdinaryAccount(owner));
+                } else {
+                    operator.addNewAccountToTheBank(generateTemporaryAccount(owner));
+                }
             }
         }
     }
