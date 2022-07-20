@@ -41,12 +41,11 @@ public class BankuApp extends Application {
     }
 
     public void initInterestHandler() {
-        WindowContextController window = getMainWindow();
         interestHandler = new AutomaticInterestHandler();
         interestHandler.start();
 
-        if (window != null) {
-            window.getStage().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, windowEvent -> interestHandler.interrupt());
+        if (mainWindow != null) {
+            mainWindow.getStage().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> interestHandler.interrupt());
         }
     }
 
@@ -55,8 +54,8 @@ public class BankuApp extends Application {
     {
         initData();
         setMainWindow(new WindowContextController("views/dashboard-view.fxml", "Banku - Dashboard"));
-        initInterestHandler();
         getMainWindow().showDefaultView();
+        initInterestHandler();
     }
 
     private static ParticularAccountOwner generateNewFakeAccountOwner()

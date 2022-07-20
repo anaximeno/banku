@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class AutomaticInterestHandler extends Thread {
-    public static int minutesSinceTheLastCheck = 1;
+    public static int minutesSinceTheLastCheck = 30;
 
     /* Um ano de balanços salvos necessário para aplicar juros em contas
      * Particulares e de Empresas.
@@ -96,10 +96,12 @@ public class AutomaticInterestHandler extends Thread {
 
             try {
                 // Compute interest each half hour
-                sleep(minutesSinceTheLastCheck * 60 * 1000);
+                sleep((long) minutesSinceTheLastCheck * 60 * 1000);
             } catch (InterruptedException exception) {
                 Logger.log(exception.getMessage(), LogType.WARNING);
             }
         }
+
+        Logger.log("Interest handler stopped.", LogType.INFO);
     }
 }
