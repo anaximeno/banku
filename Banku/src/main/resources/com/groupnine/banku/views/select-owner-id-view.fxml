@@ -10,10 +10,10 @@
    <children>
       <VBox layoutY="-1.0" prefHeight="360.0" prefWidth="531.0">
          <children>
-            <ListView fx:id="listView" prefHeight="280.0" prefWidth="531.0" />
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="71.0" prefWidth="531.0" spacing="10.0">
+            <ListView fx:id="listView" prefHeight="306.0" prefWidth="531.0" />
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="41.0" prefWidth="531.0" spacing="10.0">
                <children>
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="71.0" prefWidth="242.0" spacing="10.0">
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="41.0" prefWidth="221.0" spacing="10.0">
                      <children>
                         <Button mnemonicParsing="false" onMouseClicked="#cancelButtonOnClick" text="Cancelar" />
                         <Button fx:id="selectButton" mnemonicParsing="false" onMouseClicked="#selectButtonOnClick" text="Selecionar" />

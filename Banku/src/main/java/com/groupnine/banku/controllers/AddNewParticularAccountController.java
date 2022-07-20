@@ -30,17 +30,19 @@ public class AddNewParticularAccountController {
     @FXML
     private Text explainText;
 
-    @FXML
-    private Button searchOwnerButton;
-
     public static TextArea publicOwnerNumInput;
     public static TextArea publicAssociatedNumInput;
 
+    // todo: extract EMPTY_STR to miscellaneous
+    final String EMPTY_STR = "";
+
     private void clearView() {
-        // todo: extract EMPTY_STR to miscellaneous
-        final String EMPTY_STR = "";
         resultText.setText(EMPTY_STR);
         explainText.setText(EMPTY_STR);
+        clearInputForms();
+    }
+
+    private void clearInputForms() {
         accountNameInput.setText(EMPTY_STR);
         ownerNumberInput.setText(EMPTY_STR);
         initialBalanceInput.setText(EMPTY_STR);
@@ -83,9 +85,13 @@ public class AddNewParticularAccountController {
 
                 BankuApp.currentOperator.addNewAccountToTheBank(account);
 
+                clearInputForms();
+
                 if (AccountsController.getActiveInstance() != null) {
                     AccountsController.getActiveInstance().refreshTables();
                 }
+
+                result.explainStatus = "A conta '" + name + "' foi adicionada com sucesso.";
             } else {
                 result = new InputValidationResult(false, "O tipo de utilizador fornecido não é particular!\n");
             }
