@@ -27,7 +27,7 @@ public class ParticularAccountOwner  extends AccountOwner{
           this(ownerID, name, lastName, address, NIF, nationality, new ArrayList<>(), new ArrayList<>() );
      }
 
-
+     //function that return all the money available in all accounts to an owner
      public Double getTotalAvailableBalance(){
           Double balance = 0d;
           for (int i = 0; i < accounts.size(); i++){

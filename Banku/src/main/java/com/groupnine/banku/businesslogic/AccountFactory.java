@@ -2,7 +2,7 @@ package com.groupnine.banku.businesslogic;
 
 import java.lang.Math;
 import java.time.LocalDate;
-
+// A Factory Class that helps the organization of the accounts's construction
 // This class is abstract because only one AccountFactory will be used for all accounts
 // so there's no need for instantiation on this class
 public abstract class AccountFactory {
@@ -11,6 +11,7 @@ public abstract class AccountFactory {
     private static double currentOrdinaryAccountInterestRate = 0.01;
     private static double currentTemporaryAccountInterestRate = 0.01;
 
+    //function that create an EnterpriseAccount
     public static EnterpriseAccount createEnterpriseAccount(
             String name, EnterpriseAccountOwner owner, ParticularAccountOwner admin, double initialBalance) {
         String accountNumber = getNewAccountNumberEncoded();
@@ -18,6 +19,7 @@ public abstract class AccountFactory {
         return new EnterpriseAccount(accountNumber, name, owner, admin, initialBalance, interest);
     }
 
+    //functions that create an OrdinaryParticularAccount
     public static OrdinaryParticularAccount createOrdinaryParticularAccount(
             String name, ParticularAccountOwner owner, double balance, ParticularAccountOwner associate) {
         String accountNumber = getNewAccountNumberEncoded();
@@ -26,17 +28,20 @@ public abstract class AccountFactory {
         acc.setMinorAccountAssociate(associate);
         return acc;
     }
-    
+
+    //functions that create an TemporaryParticularAccount
     public static TemporaryParticularAccount createTemporaryParticularAccount(
             String accountName, Double balance, ParticularAccountOwner owner, LocalDate expirationDate) {
         String accountNumber = getNewAccountNumberEncoded();
         double interest = currentTemporaryAccountInterestRate;
         return  new TemporaryParticularAccount(accountNumber, accountName, balance, interest, owner, LocalDate.now(), expirationDate);
     }
+
     private static void increaseCounter() {
         accountNumberCounter += 1;
     }
 
+    //function that put a counter with 13 digits
     private static String getNewAccountNumberEncoded() {
         // Increase the counter
         increaseCounter();
@@ -53,6 +58,7 @@ public abstract class AccountFactory {
         return num;
     }
 
+    //functions that update/set the interest rates
     public static void updateCurrentEnterpriseInterestRate(double currentEnterpriseInterestRate) {
         AccountFactory.currentEnterpriseInterestRate = currentEnterpriseInterestRate;
     }

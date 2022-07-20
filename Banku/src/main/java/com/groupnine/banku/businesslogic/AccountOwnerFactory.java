@@ -1,12 +1,14 @@
 package com.groupnine.banku.businesslogic;
 
 import java.util.ArrayList;
-
+// A Factory Class that helps the organization of the accountsOwner's construction
+// This class is abstract because only one AccountFactory will be used for all accounts
+// so there's no need for instantiation on this class
 public class AccountOwnerFactory {
 
     private static int ownerIDCounter = 0;
 
-    //public AccountOwner createAccount ()
+    //functions that create an EnterpriseAccountOwner
     public static EnterpriseAccountOwner createEnterpriseAccountOwner (String name, String NIF, String address,
                                                            ArrayList<EnterprisePartners> partners,
                                                            ArrayList<EnterpriseAccount> accounts){
@@ -20,6 +22,7 @@ public class AccountOwnerFactory {
         return eAOwner;
     }
 
+    //function that create an ParticularAccountOwner
     public static ParticularAccountOwner createParticularAccountOwner (String name, String lastName, String address, String NIF,
                                                                        String nationality, ArrayList<Account> accounts,
                                                                 ArrayList<Account> associatedAccounts){
@@ -44,6 +47,8 @@ public class AccountOwnerFactory {
     private static void increaseCounter() {
         ownerIDCounter += 1;
     }
+
+    //function that put a counter with 13 digits
     private static String getNewOwnerIDEncoded() {
         // Increase the counter
         increaseCounter();
