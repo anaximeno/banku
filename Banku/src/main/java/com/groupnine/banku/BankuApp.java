@@ -11,6 +11,7 @@ import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.github.javafaker.Faker;
@@ -70,7 +71,8 @@ public class BankuApp extends Application {
         return globalAccOwnFactory.createParticularAccountOwner(name, NIF, address, lastName, id, nationality);
     }
 
-    private static OrdinaryParticularAccount generateOrdinaryAccount(ParticularAccountOwner owner) {
+    private static OrdinaryParticularAccount generateOrdinaryAccount(ParticularAccountOwner owner)
+    {
         final BankAgency agency = BankAgency.getInstance();
         final IOperator operator = agency.getBankOperator("John", "Doe", "isDoe");
 
@@ -87,12 +89,13 @@ public class BankuApp extends Application {
         return globalAccFactory.createOrdinaryParticularAccount(accountName, owner, balance, associate);
     }
 
-    private static TemporaryParticularAccount generateTemporaryAccount(ParticularAccountOwner owner) {
+    private static TemporaryParticularAccount generateTemporaryAccount(ParticularAccountOwner owner)
+    {
         final String accountName = globalFaker.pokemon().name();
         final double balance = globalFaker.number().numberBetween(50000, 300000);
         final ZoneId zoneId = ZoneId.systemDefault();
         final Date now = Date.from(LocalDate.now().atStartOfDay(zoneId).toInstant());
-        final Date expiration = globalFaker.date().future(30, TimeUnit.DAYS, now);
+        final Date expiration = globalFaker.date().future(366, TimeUnit.DAYS, now);
         final LocalDate expirationDate = expiration.toInstant().atZone(zoneId).toLocalDate();
         final boolean hasBoost = globalFaker.random().nextBoolean();
 
@@ -104,9 +107,33 @@ public class BankuApp extends Application {
         return acc;
     }
 
-    public static void initData() {
-        final AccountFactory accFact = globalAccFactory;
-        final AccountOwnerFactory accOwnFact = globalAccOwnFactory;
+    private static EnterpriseAccountOwner generateEnterpriseAccountOwner()
+    {
+        final String name = globalFaker.company().name();
+        final String NIF = globalFaker.regexify("[0-9]{13}");
+        final String address = globalFaker.address().fullAddress();
+
+        ArrayList<EnterprisePartner> partners = new ArrayList<>();
+
+        final int numberOfPartners = globalFaker.random().nextInt(1, 15);
+
+        for (int i = 0 ; i < numberOfPartners ; i += 1) {
+            final String partnerName = globalFaker.lordOfTheRings().character();
+            final String cni =  globalFaker.regexify("[A-Z0-9]{12}");
+            partners.add(new EnterprisePartner(partnerName, cni));
+        }
+
+        return globalAccOwnFactory.createEnterpriseAccountOwner(name, NIF, address, partners);
+    }
+
+    private static EnterpriseAccount generateEnterpriseAccount(EnterpriseAccountOwner owner) {
+        final String name = globalFaker.zelda().character();
+        final double balance = globalFaker.random().nextInt(30000, 1000000000);
+        return globalAccFactory.createEnterpriseAccount(name, owner, generateNewFakeAccountOwner(), balance);
+    }
+
+    public static void initData()
+    {
         final BankAgency agency = BankAgency.getInstance();
 
         agency.addEmployee(new Employee("John", "Doe", "isDoe", "Manager"));
@@ -116,42 +143,11 @@ public class BankuApp extends Application {
         currentOperator = operator;
 
         if (operator != null) {
-            ParticularAccountOwner owner1 = accOwnFact.createParticularAccountOwner("Jane", "324413131", "Praia, Cabo Verde", "Adina Freire", "0012e", "Cape Berdianu");
-            ParticularAccountOwner owner2 = accOwnFact.createParticularAccountOwner("Francis", "320013131", "Tarrafal, Santiago, Cabo Verde", "Sanchu Neto", "0034e", "South African");
-            EnterpriseAccountOwner owner3 = accOwnFact.createEnterpriseAccountOwner("LuckeLuke CO", "234124124", "The Place", new ArrayList<>());
-            ParticularAccountOwner owner4 = accOwnFact.createParticularAccountOwner("Francisco", "3311213131", "Santa Catarina, Cabo Verde", "Rodrigues", "0012e", "Cabo Verdiana");
-
-            operator.addNewClientToTheBank(owner1);
-            operator.addNewClientToTheBank(owner2);
-            operator.addNewClientToTheBank(owner3);
-            operator.addNewClientToTheBank(owner4);
-
-            OrdinaryParticularAccount acc1 = accFact.createOrdinaryParticularAccount("Ordiacc", owner1, 100000, owner2);
-            OrdinaryParticularAccount acc2 = accFact.createOrdinaryParticularAccount("myOrdAcc", owner1, 230004, null);
-            OrdinaryParticularAccount acc3 = accFact.createOrdinaryParticularAccount("Foster", owner2, 12000, null);
-            EnterpriseAccount acc4 = accFact.createEnterpriseAccount("LuckeLukeAcc01", owner3, owner2, 10000000);
-            final LocalDate expDate = LocalDate.of(2023, 5, 23);
-            TemporaryParticularAccount acc5 = accFact.createTemporaryParticularAccount("MyTempAcc", 65000d, owner4, expDate);
-
-            acc1.addCard(owner1, "001");
-            acc1.addCard(owner2, "002");
-
-            operator.addNewAccountToTheBank(acc1);
-            operator.addNewAccountToTheBank(acc2);
-            operator.addNewAccountToTheBank(acc3);
-            operator.addNewAccountToTheBank(acc4);
-            operator.addNewAccountToTheBank(acc5);
-
             for (int i = 0 ; i < MAX_GEN_ITERATION ; i += 1) {
-                ParticularAccountOwner owner = generateNewFakeAccountOwner();
-                boolean isOrdinary = globalFaker.random().nextBoolean();
-
-                operator.addNewClientToTheBank(owner);
-
-                if (isOrdinary) {
-                    operator.addNewAccountToTheBank(generateOrdinaryAccount(owner));
-                } else {
-                    operator.addNewAccountToTheBank(generateTemporaryAccount(owner));
+                switch (globalFaker.random().nextInt(1, 3)) {
+                    case 1 -> operator.addNewAccountToTheBank(generateOrdinaryAccount(generateNewFakeAccountOwner()));
+                    case 2 -> operator.addNewAccountToTheBank(generateTemporaryAccount(generateNewFakeAccountOwner()));
+                    case 3 -> operator.addNewAccountToTheBank(generateEnterpriseAccount(generateEnterpriseAccountOwner()));
                 }
             }
         }

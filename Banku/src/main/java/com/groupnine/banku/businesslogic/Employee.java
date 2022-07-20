@@ -112,6 +112,9 @@ public class Employee implements IOperator {
                 return false;
             }
         }
+
+        // adiciona o cliente caso não ter sido adicionado antes.
+        addNewClientToTheBank(account.getOwner());
         agency.addNewAccount(account);
         return true;
     }
