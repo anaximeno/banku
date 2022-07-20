@@ -22,6 +22,8 @@ public class AddNewParticularAccountController {
     private TextArea ownerNumberInput;
     @FXML
     private TextArea initialBalanceInput;
+    @FXML
+    private TextArea associateNumberInput;
 
     @FXML
     private Text resultText;
@@ -45,20 +47,22 @@ public class AddNewParticularAccountController {
     {
         final BankAgency agency = BankAgency.getInstance();
 
-        final String name = accountNameInput.getText();
-        final String ownerNum = ownerNumberInput.getText();
-        final String balance = initialBalanceInput.getText();
-
-        InputValidationResult result = validateInputs(name, ownerNum, balance);
+        InputValidationResult result = validateInputs();
 
         if (result.isValid) {
-            AccountOwner owner = agency.findAccountOwnerByID(ownerNum);
+            final String ownerNumber = ownerNumberInput.getText();
+            final String associateNumber = associateNumberInput.getText();
+            final String name = accountNameInput.getText();
+            final String balance = initialBalanceInput.getText();
+
+            final AccountOwner owner = agency.findAccountOwnerByID(ownerNumber);
+            final ParticularAccountOwner associate = (ParticularAccountOwner) agency.findAccountOwnerByID(associateNumber);
 
             if (owner instanceof ParticularAccountOwner pOwner) {
+
                 // for parAcc
                 OrdinaryParticularAccount account = BankuApp.globalAccFactory.createOrdinaryParticularAccount(
-                        name, (ParticularAccountOwner) owner, Double.parseDouble(balance), null
-                );
+                        name, pOwner, Double.parseDouble(balance), associate);
 
                 BankuApp.currentOperator.addNewAccountToTheBank(account);
 
@@ -90,13 +94,14 @@ public class AddNewParticularAccountController {
         explainText.setText(result.explainStatus);
     }
 
-    private InputValidationResult validateInputs(String accountName, String accountOwnerNumber, String initialBalance)
+    private InputValidationResult validateInputs()
     /* Valida os inputs e retorna o resultado da validação global. */
     {
         List<InputValidationResult> list = new ArrayList<>();
-        list.add(validateAccountName(accountName));
-        list.add(validateOwnerNumber(accountOwnerNumber));
-        list.add(validateInitialBalance(initialBalance));
+        list.add(validateAccountName(accountNameInput.getText()));
+        list.add(validateOwnerNumber(ownerNumberInput.getText()));
+        list.add(validateInitialBalance(initialBalanceInput.getText()));
+        list.add(validateAssociateNumber(associateNumberInput.getText()));
 
         InputValidationResult finalResult = new InputValidationResult(true, "");
 
@@ -113,6 +118,19 @@ public class AddNewParticularAccountController {
         }
 
         return finalResult;
+    }
+
+    private InputValidationResult validateAssociateNumber(String value)
+    {
+        if (value == null || value.isEmpty()) /* Associado é opcional. */
+            return new InputValidationResult(true);
+        else {
+            try {
+                int ret = Integer.parseInt(value);
+            } catch (NumberFormatException exception) { /* Quando fornecido deve poder ser convertido para int. */
+                return new InputValidationResult(false, "Número de associado inválido.");
+            }
+        }
     }
 
     private InputValidationResult validateAccountName(String value)
