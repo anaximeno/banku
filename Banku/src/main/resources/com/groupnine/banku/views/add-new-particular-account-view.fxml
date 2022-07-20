@@ -60,7 +60,7 @@
                         <HBox prefHeight="38.0" prefWidth="357.0" spacing="20.0">
                            <children>
                               <TextArea fx:id="associateNumberInput" prefHeight="38.0" prefWidth="262.0" />
-                              <Button fx:id="searchAssociateButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Procurar" />
+                              <Button fx:id="searchAssociateButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="151.0" text="Procurar" />
                            </children>
                         </HBox>
                      </children>
@@ -83,6 +83,11 @@
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="41.0" prefWidth="573.0" spacing="10.0">
                <children>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="41.0" prefWidth="309.0">
+                     <children>
+                        <Button fx:id="clearButton" mnemonicParsing="false" onMouseClicked="#clearButtonOnClick" prefHeight="35.0" prefWidth="84.0" text="Limpar" />
+                     </children>
+                  </HBox>
                   <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#cancelButtonOnClick" prefHeight="35.0" prefWidth="126.0" text="Cancelar" />
                   <Button fx:id="createButton" mnemonicParsing="false" onMouseClicked="#createButtonOnClick" prefHeight="35.0" prefWidth="122.0" text="Criar" />
                </children></HBox>

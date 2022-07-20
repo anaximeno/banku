@@ -33,13 +33,28 @@ public class AddNewParticularAccountController {
     @FXML
     private Button searchOwnerButton;
 
+    private void clearView() {
+        // todo: extract EMPTY_STR to miscellaneous
+        final String EMPTY_STR = "";
+        resultText.setText(EMPTY_STR);
+        explainText.setText(EMPTY_STR);
+        accountNameInput.setText(EMPTY_STR);
+        ownerNumberInput.setText(EMPTY_STR);
+        initialBalanceInput.setText(EMPTY_STR);
+        associateNumberInput.setText(EMPTY_STR);
+    }
+
     @FXML
     protected void initialize()
     {
-        resultText.setText("");
-        explainText.setText("");
+        clearView();
         // não foi implementado ainda, então, desativa-se.
         searchOwnerButton.setDisable(true);
+    }
+
+    @FXML
+    protected void clearButtonOnClick() {
+        clearView();
     }
 
     @FXML
@@ -88,7 +103,7 @@ public class AddNewParticularAccountController {
 
     private void displayResults(final InputValidationResult result)
     {
-        resultText.setText(result.isValid ? "Sucesso!" : "Erro!");
+        resultText.setText(result.isValid ? "Sucesso!" : "Insucesso!");
         resultText.setFill(Paint.valueOf(result.isValid ? "green" : "red"));
         explainText.setText(result.explainStatus);
     }
