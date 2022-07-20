@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 interface AccountFilter<T extends Account, U> {
     boolean passesFilter(T account, U entry);
@@ -93,18 +94,12 @@ public class AccountsController {
         /* default */
         comboBox.setValue("Nome");
 
+
         createTables();
         refreshTables();
 
-        searchInput.textProperty().addListener((obs, old, niu)->{
-            if (tabParticulares.isSelected()) {
-                refreshParticularAccountTable();
-            } else if (tabCorporativas.isSelected()) {
-                refreshCorporativeAccountTable();
-            } else {
-                refreshTemporaryAccountTable();
-            }
-        });
+        comboBox.setOnMouseClicked(e -> tabPaneOnClick());
+        searchInput.textProperty().addListener((obs, old, niu) -> tabPaneOnClick());
 
         /* Isto vai ser utilizado externamente para
          * atualizar o estado dessa view.
@@ -237,13 +232,21 @@ public class AccountsController {
     private<T extends Account>  List<T> applyFilter(List<T> accountList, String searchEntry)
     /* Retorna a lista filtrada. */
     {
-        return filterAccountList(accountList, searchEntry, (account, entry) -> {
+        List<T> result = filterAccountList(accountList, searchEntry, (account, entry) -> {
             if (comboBox.getValue().equals("Nome")) {
-                return account.getAccountName().contains(entry);
+                return account.getAccountName().toLowerCase().contains(entry.toLowerCase());
             } else {
                 return account.getAccountNumber().contains(entry);
             }
         });
+        result.sort((T a, T b) -> {
+            if (comboBox.getValue().equals("Nome")) {
+                return a.getAccountName().compareTo(b.getAccountName());
+            } else {
+                return a.getAccountNumber().compareTo(b.getAccountNumber());
+            }
+        });
+        return result;
     }
 
     private void refreshParticularAccountTable()
@@ -342,16 +345,14 @@ public class AccountsController {
     {
         if (tabParticulares.isSelected()) {
             removeSelectedAccountFromTable(particularAccountsTable);
-            refreshParticularAccountTable();
         } else if (tabCorporativas.isSelected()) {
             removeSelectedAccountFromTable(corporativeAccountsTable);
-            refreshCorporativeAccountTable();
         } else if (tabTemporarias.isSelected()) {
             removeSelectedAccountFromTable(temporaryAccountsTable);
-            refreshTemporaryAccountTable();
         } else {
             Logger.log("At removeBtnOnClick event, unknown tab state");
         }
+        tabPaneOnClick();
     }
 
     public static abstract class AccountBean {
