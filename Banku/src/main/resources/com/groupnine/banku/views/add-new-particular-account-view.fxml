@@ -13,7 +13,7 @@
    <children>
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="375.0" prefWidth="573.0">
          <children>
-            <VBox alignment="CENTER_RIGHT" prefHeight="180.0" prefWidth="573.0" spacing="12.0">
+            <VBox alignment="TOP_CENTER" prefHeight="177.0" prefWidth="573.0" spacing="12.0">
                <children>
                   <HBox prefHeight="0.0" prefWidth="573.0">
                      <children>
@@ -22,7 +22,7 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="accountNameInput" prefHeight="38.0" prefWidth="425.0" />
+                        <TextArea fx:id="accountNameInput" prefHeight="38.0" prefWidth="426.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="0.0" prefWidth="573.0">
@@ -34,8 +34,8 @@
                         </Label>
                         <HBox prefHeight="38.0" prefWidth="392.0" spacing="20.0">
                            <children>
-                              <TextArea fx:id="ownerNumberInput" prefHeight="38.0" prefWidth="262.0" />
-                              <Button fx:id="searchOwnerButton" mnemonicParsing="false" onMouseClicked="#searchOwnerButtonOnClick" prefHeight="38.0" prefWidth="109.0" text="Procurar" />
+                              <TextArea fx:id="ownerNumberInput" prefHeight="40.0" prefWidth="262.0" />
+                              <Button fx:id="searchOwnerButton" mnemonicParsing="false" onMouseClicked="#searchOwnerButtonOnClick" prefHeight="59.0" prefWidth="109.0" text="Procurar" />
                            </children>
                         </HBox>
                      </children>
@@ -50,23 +50,38 @@
                         <TextArea fx:id="initialBalanceInput" prefHeight="38.0" prefWidth="393.0" />
                      </children>
                   </HBox>
+                  <HBox layoutX="10.0" layoutY="110.0" prefHeight="0.0" prefWidth="573.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="227.0" text="Numero do Beneficiario:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="38.0" prefWidth="357.0" spacing="20.0">
+                           <children>
+                              <TextArea fx:id="associateNumberInput" prefHeight="38.0" prefWidth="262.0" />
+                              <Button fx:id="searchAssociateButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Procurar" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="127.0" prefWidth="573.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="146.0" prefWidth="573.0">
                <children>
-                  <Text fx:id="resultText" strokeType="OUTSIDE" strokeWidth="0.0" text="Resultado" textAlignment="CENTER" wrappingWidth="340.7294921875">
+                  <Text fx:id="resultText" lineSpacing="5.0" stroke="#faf4f2" strokeWidth="0.0" text="Resultado" textAlignment="CENTER" wrappingWidth="193.7294921875">
                      <font>
-                        <Font size="23.0" />
+                        <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="explainText" layoutX="266.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Explain" textAlignment="CENTER" wrappingWidth="547.7294921875">
+                  <Text fx:id="explainText" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Explain" textAlignment="CENTER" wrappingWidth="346.7294921875">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="16.0" />
                      </font>
                   </Text>
                </children>
-            </VBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="66.0" prefWidth="573.0" spacing="10.0">
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="41.0" prefWidth="573.0" spacing="10.0">
                <children>
                   <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#cancelButtonOnClick" prefHeight="35.0" prefWidth="126.0" text="Cancelar" />
                   <Button fx:id="createButton" mnemonicParsing="false" onMouseClicked="#createButtonOnClick" prefHeight="35.0" prefWidth="122.0" text="Criar" />

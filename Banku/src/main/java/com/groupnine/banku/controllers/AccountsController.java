@@ -72,7 +72,7 @@ public class AccountsController {
             return;
         }
 
-        WindowContextController newWindow = new WindowContextController(450, 600, viewPath, title);
+        WindowContextController newWindow = new WindowContextController(430, 600, viewPath, title);
         newWindow.showDefaultView();
     }
 
