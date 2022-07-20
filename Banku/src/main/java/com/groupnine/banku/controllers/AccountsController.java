@@ -14,10 +14,20 @@ import javafx.scene.control.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+
+interface AccountFilter<T extends Account, U> {
+    boolean passesFilter(T account, U entry);
+}
 
 public class AccountsController {
     private static AccountsController activeInstance;
+
+    @FXML
+    private ComboBox<String> comboBox;
+    @FXML
+    private TextField searchInput;
 
     @FXML
     private Tab tabParticulares;
@@ -77,8 +87,24 @@ public class AccountsController {
     @FXML
     protected void initialize()
     {
+        comboBox.getItems().add("Nome");
+        comboBox.getItems().add("Número");
+
+        /* default */
+        comboBox.setValue("Nome");
+
         createTables();
         refreshTables();
+
+        searchInput.textProperty().addListener((obs, old, niu)->{
+            if (tabParticulares.isSelected()) {
+                refreshParticularAccountTable();
+            } else if (tabCorporativas.isSelected()) {
+                refreshCorporativeAccountTable();
+            } else {
+                refreshTemporaryAccountTable();
+            }
+        });
 
         /* Isto vai ser utilizado externamente para
          * atualizar o estado dessa view.
@@ -111,7 +137,7 @@ public class AccountsController {
         } else if (tabCorporativas.isSelected()) {
             refreshCorporativeAccountTable();
         } else if (tabTemporarias.isSelected()) {
-                // TODO
+            refreshTemporaryAccountTable();
         } else {
             Logger.log("At tabPaneOnClick event, unknown tab state", LogType.WARNING);
         }
@@ -194,6 +220,32 @@ public class AccountsController {
         temporaryAccountsTableWasCreated = false;
     }
 
+    private<T extends Account> List<T> filterAccountList(List<T> accountList, String entry, AccountFilter<T, String> filter)
+    /* Filtra uma lista de contas, usando um método de filtragem fornecido pelo utilizador. */
+    {
+        List<T> list = new ArrayList<>();
+
+        for (T item : accountList) {
+            if (filter.passesFilter(item, entry)) {
+                list.add(item);
+            }
+        }
+
+        return list;
+    }
+
+    private<T extends Account>  List<T> applyFilter(List<T> accountList, String searchEntry)
+    /* Retorna a lista filtrada. */
+    {
+        return filterAccountList(accountList, searchEntry, (account, entry) -> {
+            if (comboBox.getValue().equals("Nome")) {
+                return account.getAccountName().contains(entry);
+            } else {
+                return account.getAccountNumber().contains(entry);
+            }
+        });
+    }
+
     private void refreshParticularAccountTable()
     {
         if (!ordinaryAccountTableWasCreated) {
@@ -201,6 +253,13 @@ public class AccountsController {
         }
 
         List<OrdinaryParticularAccount> accountList = BankAgency.getInstance().getOrdinaryAccountList();
+
+        String searchEntry = searchInput.getText();
+
+        if (searchEntry != null && !searchEntry.isEmpty()) {
+            accountList = applyFilter(accountList, searchEntry);
+        }
+
         ObservableList<ParticularAccountBean> data = FXCollections.observableArrayList();
 
         for (OrdinaryParticularAccount acc : accountList) {
@@ -217,6 +276,13 @@ public class AccountsController {
         }
 
         List<EnterpriseAccount> accountList = BankAgency.getInstance().getEnterpriseAccountList();
+
+        String searchEntry = searchInput.getText();
+
+        if (searchEntry != null && !searchEntry.isEmpty()) {
+            accountList = applyFilter(accountList, searchEntry);
+        }
+
         ObservableList<EnterpriseAccountBean> data = FXCollections.observableArrayList();
 
         for (EnterpriseAccount acc : accountList) {
@@ -233,6 +299,13 @@ public class AccountsController {
         }
 
         List<TemporaryParticularAccount> accountList = BankAgency.getInstance().getTemporaryAccountList();
+
+        String searchEntry = searchInput.getText();
+
+        if (searchEntry != null && !searchEntry.isEmpty()) {
+            accountList = applyFilter(accountList, searchEntry);
+        }
+
         ObservableList<TemporaryAccountBean> data = FXCollections.observableArrayList();
 
         for (TemporaryParticularAccount acc : accountList) {
