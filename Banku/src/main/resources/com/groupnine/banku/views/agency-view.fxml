@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="313.0" layoutY="45.0" prefHeight="71.0" prefWidth="213.0" text="Agencia">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
