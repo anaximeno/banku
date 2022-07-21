@@ -82,7 +82,10 @@ public class AccountsController {
             AddNewEnterpriseAccountController.activeInstance = new WindowContextController(430, 600, viewPath, title);
             AddNewEnterpriseAccountController.activeInstance.showDefaultView();
         } else if (tabTemporarias.isSelected()) {
-            // todo
+            viewPath = "views/add-new-temporary-account-view.fxml";
+            title += " Adicionar Nova Conta Temporária";
+            AddNewTemporaryAccountController.activeInstance = new WindowContextController(430, 600, viewPath, title);
+            AddNewTemporaryAccountController.activeInstance.showDefaultView();
         } else {
             Logger.log("Unknown tab state at createButtonOnClick in AccountsController", LogType.WARNING);
         }
