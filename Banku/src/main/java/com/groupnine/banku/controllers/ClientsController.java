@@ -3,14 +3,14 @@ package com.groupnine.banku.controllers;
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.miscellaneous.ListUtils;
+import com.groupnine.banku.miscellaneous.LogType;
+import com.groupnine.banku.miscellaneous.Logger;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.List;
@@ -18,11 +18,20 @@ import java.util.List;
 public class ClientsController {
     private static ClientsController activeInstance;
     @FXML
-    private Button dashboardBtn;
+    private Button reloadBtn;
+
+    @FXML
+    private TabPane tabPane;
+
     @FXML
     private TableView<ParticularAccountOwnerBean> particularAccountOwnerTable;
     @FXML
     private TableView<EnterpriseAccountOwnerBean> enterpriseAccountOwnerTable;
+
+    @FXML
+    private Tab tabParticulares;
+    @FXML
+    private Tab tabCorporativos;
 
     private boolean particularAccountOwnerTableWasCreated = false;
     private boolean enterpriseAccountOwnerTableWasCreated = false;
@@ -38,6 +47,9 @@ public class ClientsController {
     {
         createTables();
         refreshTables();
+
+        tabPane.setOnMouseClicked(e -> refreshTables());
+        reloadBtn.setOnMouseClicked(e -> refreshTables());
 
         /* Isto vai ser utilizado externamente para
          * atualizar o estado dessa view.
@@ -66,6 +78,47 @@ public class ClientsController {
         BankuApp.getMainWindow().showDefaultView();
     }
 
+    @FXML
+    protected void createButtonOnClick() {
+        // todo
+    }
+
+    @FXML
+    protected void removeBtnOnClick()
+    {
+        if (tabParticulares.isSelected()) {
+            removeSelectedClientFromTable(particularAccountOwnerTable);
+        } else if (tabCorporativos.isSelected()) {
+            removeSelectedClientFromTable(enterpriseAccountOwnerTable);
+        } else {
+            Logger.log("At removeBtnOnClick event, unknown tab state");
+        }
+        refreshTables();
+    }
+
+    static private
+    <B extends AccountOwnerBean, A extends AccountOwner>
+    void removeSelectedClientFromTable(TableView<B> table)
+    {
+        BankAgency agency = BankAgency.getInstance();
+
+        B acc = (B) table.getSelectionModel().getSelectedItem();
+        if (acc != null) {
+            A account = (A) agency.findAccountOwnerByID(acc.getId());
+
+            if (account != null) {
+                String id = account.getOwnerID();
+
+                agency.getClients().remove(account);
+
+                Logger.log("Account Owner '" + id + "' was removed", LogType.INFO);
+                // TODO: Notify user that account was removed?
+            }
+        } else {
+            // TODO: Alert user that a line must be selected
+            Logger.log("Remove button clicker with no line selected, nothing done");
+        }
+    }
 
     private void createParticularAccountOwnerTable()
     {
@@ -89,7 +142,6 @@ public class ClientsController {
         particularAccountOwnerTable.getColumns().addAll(accId, accName, accNIF, accAddress, accNationality, accNAccount);
         particularAccountOwnerTableWasCreated = true;
     }
-
 
     private void createEnterpriseAccountOwnerTable()
     {

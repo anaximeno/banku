@@ -10,52 +10,69 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.AddNewEnterpriseClientController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.AddNewParticularController">
    <children>
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="375.0" prefWidth="573.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="192.0" prefWidth="573.0" spacing="12.0">
+            <VBox alignment="TOP_CENTER" prefHeight="220.0" prefWidth="573.0" spacing="12.0">
                <children>
                   <HBox prefHeight="0.0" prefWidth="573.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="213.0" text="Nome:">
+                        <Label prefHeight="24.0" prefWidth="128.0" text="Nome:">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nameInput" prefHeight="24.0" prefWidth="424.0" />
+                        <TextField fx:id="nameInput" prefHeight="24.0" prefWidth="449.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="46.0" prefHeight="0.0" prefWidth="573.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="213.0" text="NIF:">
+                        <Label prefHeight="24.0" prefWidth="124.0" text="NIF:">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="NIFInput" prefHeight="24.0" prefWidth="424.0" />
+                        <TextField fx:id="NIFInput" prefHeight="24.0" prefWidth="446.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="82.0" prefHeight="0.0" prefWidth="573.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="213.0" text="Endereço:">
+                        <Label prefHeight="24.0" prefWidth="124.0" text="Endereço:">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="addressInput" prefHeight="24.0" prefWidth="424.0" />
+                        <TextField fx:id="addressInput" prefHeight="24.0" prefWidth="448.0" />
                      </children>
                   </HBox>
-                  <HBox layoutX="10.0" layoutY="118.0" prefHeight="85.0" prefWidth="573.0" spacing="5.0">
+                  <HBox layoutX="10.0" layoutY="118.0" prefHeight="115.0" prefWidth="573.0" spacing="5.0">
                      <children>
-                        <Label prefHeight="24.0" prefWidth="186.0" text="Parceiros:">
+                        <Label prefHeight="24.0" prefWidth="126.0" text="Parceiros:">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextFlow fx:id="partnersTextFlow" prefHeight="85.0" prefWidth="272.0" style="-fx-border-color: #111; -fx-border-radius: 3;" />
-                        <HBox prefHeight="85.0" prefWidth="136.0">
+                        <VBox prefHeight="112.0" prefWidth="360.0">
+                           <children>
+                              <HBox prefHeight="34.0" prefWidth="242.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField promptText="Nome" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField promptText="Cod. CNI" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <TextFlow fx:id="partnersTextFlow" prefHeight="83.0" prefWidth="242.0" style="-fx-border-radius: 3;" />
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="112.0" prefWidth="101.0">
                            <children>
                               <Button fx:id="addPartnerButton" mnemonicParsing="false" onMouseClicked="#addPartnerButtonOnClick" prefHeight="28.0" prefWidth="101.0" text="Adicionar" />
                            </children>
@@ -64,7 +81,7 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="135.0" prefWidth="573.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="115.0" prefWidth="573.0">
                <children>
                   <Text fx:id="resultText" lineSpacing="5.0" stroke="#faf4f2" strokeWidth="0.0" text="Resultado" textAlignment="CENTER" wrappingWidth="193.7294921875">
                      <font>
