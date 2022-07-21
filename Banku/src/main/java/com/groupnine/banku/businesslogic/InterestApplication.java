@@ -18,17 +18,19 @@ public class InterestApplication extends BankingOperation {
         this.value = value;
     }
 
+
     @Override
     public String getDescription() {
-        String description = "Interest money to account with number" + this.account.getAccountNumber()
-                + " in the amount of " + this.value;
+        String description = "Dinheiro resultante de juros para a conta numero" + this.account.getAccountNumber()
+                + " no valor de " + this.value;
         return description;
     }
+
 
     @Override
     public String getFullDescription() {
         String fullDescription = getDescription() + this.value +
-                "\n Balance before = " +this.balanceBefore + "\n Balance after = "
+                "\n Saldo anterior = " +this.balanceBefore + "\n Saldo atual = "
                 + this.balanceAfter;
         return fullDescription;
     }

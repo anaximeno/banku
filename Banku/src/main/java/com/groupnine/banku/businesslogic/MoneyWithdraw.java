@@ -16,16 +16,15 @@ public class MoneyWithdraw extends BankingOperation {
 
     @Override
     public String getDescription (){
-        String description = "Money draw from account with number " + this.account.getAccountNumber()
-                + " in the amount of " + this.valueMoved;
+        String description = "Dinheiro retirado da conta numero " + this.account.getAccountNumber()
+                + " no valor de " + this.valueMoved;
         return description;
     }
 
     @Override
     public String getFullDescription (){
-        String fullDescription = "Money draw from account with number " + this.account.getAccountNumber()
-                + " in the amount of " + this.valueMoved + "\n Balance before = " + this.balanceBeforeWithDraw
-                + "\n Balance after = " + this.balanceAfterWithDraw;
+        String fullDescription = getDescription() + "\n Saldo anterior = " + this.balanceBeforeWithDraw
+                + "\n Saldo atual = " + this.balanceAfterWithDraw;
         return fullDescription;
     }
 

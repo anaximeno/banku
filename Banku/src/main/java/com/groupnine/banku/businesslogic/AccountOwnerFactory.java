@@ -8,37 +8,35 @@ public class AccountOwnerFactory extends SequentiableFactory {
     }
 
     //public AccountOwner createAccount ()
-    public EnterpriseAccountOwner createEnterpriseAccountOwner (String name, String NIF, String address,
-                                                           ArrayList<EnterprisePartner> partners,
-                                                           ArrayList<EnterpriseAccount> accounts){
-        EnterpriseAccountOwner eAOwner = new EnterpriseAccountOwner(getEncodedSequentialId(), name, NIF, address, partners, accounts);
-        return eAOwner;
+    public EnterpriseAccountOwner createEnterpriseAccountOwner(String name, String NIF, String address,
+                                       ArrayList<EnterprisePartner> partners, ArrayList<EnterpriseAccount> accounts)
+    {
+        return new EnterpriseAccountOwner(getEncodedSequentialId(), name, NIF, address, partners, accounts);
     }
 
     public EnterpriseAccountOwner createEnterpriseAccountOwner (String name, String NIF, String address,
-                                                           ArrayList<EnterprisePartner> partners){
-        EnterpriseAccountOwner eAOwner =  new EnterpriseAccountOwner(getEncodedSequentialId(), name, NIF, address, partners);
-        return eAOwner;
+                                                           ArrayList<EnterprisePartner> partners)
+    {
+        return new EnterpriseAccountOwner(getEncodedSequentialId(), name, NIF, address, partners);
     }
 
-    public ParticularAccountOwner createParticularAccountOwner (String name, String NIF, String address, String lastname,
-                                                                String id, String nationality, ArrayList<Account> accounts,
-                                                                ArrayList<Account> associatedAccounts){
-        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getEncodedSequentialId(), name, NIF, address, lastname,nationality,
-                accounts, associatedAccounts);
-        return  pAOwner;
+    //function that create an ParticularAccountOwner
+    public ParticularAccountOwner createParticularAccountOwner(String name, String lastName, String address, String NIF,
+                                       String nationality, ArrayList<Account> accounts, ArrayList<Account> associatedAccounts)
+    {
+        return  new ParticularAccountOwner(getEncodedSequentialId(), name, lastName, address, NIF, nationality,
+                    accounts, associatedAccounts);
     }
 
-    public ParticularAccountOwner createParticularAccountOwner (String name, String NIF, String address, String lastname,
-                                                                String id, String nationality, ArrayList<Account> accounts){
-        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getEncodedSequentialId(), name, NIF, address, lastname, id, nationality, accounts);
-        return pAOwner;
-
+    public ParticularAccountOwner createParticularAccountOwner (String name, String lastName, String address, String NIF,
+                                                                       String nationality, ArrayList<Account> accounts)
+    {
+        return new ParticularAccountOwner(getEncodedSequentialId(), name, lastName, address, NIF, nationality, accounts);
     }
 
-    public ParticularAccountOwner createParticularAccountOwner (String name, String NIF, String address, String lastName,
-                                                                String id, String nationality){
-        ParticularAccountOwner pAOwner = new ParticularAccountOwner(getEncodedSequentialId(), name, NIF, address, lastName, id, nationality);
-        return pAOwner;
+    public ParticularAccountOwner createParticularAccountOwner (String name, String lastName, String address, String NIF,
+                                                                       String nationality)
+    {
+        return new ParticularAccountOwner(getEncodedSequentialId(), name, lastName, address, NIF, nationality);
     }
 }

@@ -16,15 +16,15 @@ public class MoneyDeposit extends BankingOperation {
 
     @Override
     public String getDescription() {
-        String description = "Money deposit from account with number " + account.getAccountNumber()
-                + " in the amount of " + value;
+        String description = "Dinheiro depositado na conta numero " + account.getAccountNumber()
+                + " no valor de " + value;
         return description;
     }
 
     @Override
     public String getFullDescription() {
-        String fullDescription = getDescription() + "\n Balance before = " +
-                        balanceBefore + "\n Balance after = " + balanceAfter;
+        String fullDescription = getDescription() + "\n Saldo anterior = " +
+                        balanceBefore + "\n Saldo atual = " + balanceAfter;
         return fullDescription;
     }
 

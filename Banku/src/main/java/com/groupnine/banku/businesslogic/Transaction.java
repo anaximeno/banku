@@ -25,9 +25,9 @@ public class Transaction extends BankingOperation{
     public String getDescription () {
         // If transaction interest was applied, show the information
         String interestInfo = accountFrom instanceof EnterpriseAccount ?
-                "With transaction interest of " + value * EnterpriseAccount.TRANSACTION_INTEREST + "." :  "";
-        String description = "Money transaction from account with number " + accountFrom.getAccountNumber()
-                + " to account with number " + accountTo.getAccountNumber() + " in the amount of " + value + "."
+                "Com os juros de trandferencia de " + value * EnterpriseAccount.TRANSACTION_INTEREST + "." :  "";
+        String description = "Dinheiro transferido da conta numero " + accountFrom.getAccountNumber()
+                + " para a conta numero " + accountTo.getAccountNumber() + " no valor de " + value + "."
                 + interestInfo;
          return description;
     }
@@ -35,10 +35,10 @@ public class Transaction extends BankingOperation{
     @Override
     public String getFullDescription (){
         String fullDescription = getDescription()
-                + "\n Account balance debited before the transaction = " + balanceOfFromAccountBeforeTransaction
-                + "\n Account balance debited after the transaction = " + balanceOfFromAccountAfterTransaction
-                + "\n Account balance credited before the transaction = " + balanceOfToAccountBeforeTransaction
-                + "\n Account balance credited after the transaction = " + balanceOfToAfterTransaction;
+                + "\n Saldo da conta debitada antes da transferencia = " + balanceOfFromAccountBeforeTransaction
+                + "\n Saldo da conta debitada depois da transferencia = " + balanceOfFromAccountAfterTransaction
+                + "\n Saldo da conta creditada antes da transferencia = " + balanceOfToAccountBeforeTransaction
+                + "\n Saldo da conta creditada depois da transferencia = " + balanceOfToAfterTransaction;
         return fullDescription;
     }
 

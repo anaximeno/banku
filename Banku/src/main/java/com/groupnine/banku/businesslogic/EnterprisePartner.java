@@ -4,8 +4,6 @@ public class EnterprisePartner {
     private String fullName;
     private String CNI;
 
-
-
     public EnterprisePartner(String fullName, String CNI) {
         this.fullName = fullName;
         this.CNI = CNI;

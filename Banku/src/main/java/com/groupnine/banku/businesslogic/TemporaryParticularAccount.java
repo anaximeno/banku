@@ -24,6 +24,7 @@ public class TemporaryParticularAccount extends Account {
         this.boost = boost;
     }
 
+    //function that confirms if an TemporaryParticularAccount has the possibility to do operations
     public boolean hasBoost() {
         return boost;
     }

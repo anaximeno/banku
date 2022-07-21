@@ -11,7 +11,6 @@ import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.github.javafaker.Faker;
@@ -64,10 +63,9 @@ public class BankuApp extends Application {
         final String name = globalFaker.name().firstName();
         final String lastName = globalFaker.name().lastName();
         final String address = globalFaker.address().fullAddress();
-        final String id = globalFaker.regexify("[A-Z0-9]{12}");
         final String NIF = globalFaker.regexify("[0-9]{13}");
         final String nationality = globalFaker.address().country();
-        return globalAccOwnFactory.createParticularAccountOwner(name, NIF, address, lastName, id, nationality);
+        return globalAccOwnFactory.createParticularAccountOwner(name, lastName, address, NIF, nationality);
     }
 
     private static OrdinaryParticularAccount generateOrdinaryAccount(ParticularAccountOwner owner)

@@ -16,6 +16,7 @@ public class BankAgency {
     private BankAgencyAccount bankAccount;
     private List<BankingOperation> operationsLog;
 
+
     public Account findAccountByNumber (String accountNumber){
         for (Account account : clientAccounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
@@ -73,6 +74,7 @@ public class BankAgency {
         this.operationsLog = new ArrayList<>();
     }
 
+    //function that helps the BankAgency respect the singleton pattern
     public static BankAgency getInstance() {
         if (instance == null) {
             instance = new BankAgency("Test Bank", "Somewhere");
@@ -171,10 +173,12 @@ public class BankAgency {
         return list;
     }
 
+    //Save an operation
     public void addOperationLog(BankingOperation operation) {
         this.operationsLog.add(operation);
     }
 
+    //get the list of operations already done
     public List<BankingOperation> getOperationsLog() {
         return operationsLog;
     }

@@ -74,6 +74,22 @@ public class ClientsController {
             this.nationality = new SimpleStringProperty(particularAccountOwner.getNationality());
             this.accountNum = new SimpleIntegerProperty(ListUtils.lengthOf(particularAccountOwner.getAccounts()));
         }
+
+        public String getNationality() {
+            return nationality.get();
+        }
+
+        public void setNationality(String nationality) {
+            this.nationality.set(nationality);
+        }
+
+        public int getAccountNum() {
+            return accountNum.get();
+        }
+
+        public void setAccountNum(int accountNum) {
+            this.accountNum.set(accountNum);
+        }
     }
 
     public static class EnterpriseAccountOwnerBean extends ClientsController.AccountOwnerBean {
@@ -90,7 +106,7 @@ public class ClientsController {
             return partnersNum.get();
         }
 
-        public void setAdmin(int partnersNum) {
+        public void setPartnersNum(int partnersNum) {
             this.partnersNum.set(partnersNum);
         }
 
