@@ -87,6 +87,7 @@ public class ClientsController {
         accNAccount.setCellValueFactory(new PropertyValueFactory<>("accountNum"));
 
         particularAccountOwnerTable.getColumns().addAll(accId, accName, accNIF, accAddress, accNationality, accNAccount);
+        particularAccountOwnerTableWasCreated = true;
     }
 
 
@@ -110,6 +111,7 @@ public class ClientsController {
         accNAccount.setCellValueFactory(new PropertyValueFactory<>("accountsNum"));
 
         enterpriseAccountOwnerTable.getColumns().addAll(accId, accName, accNIF, accAddress, accNPartners, accNAccount);
+        enterpriseAccountOwnerTableWasCreated = true;
     }
 
     private void refreshParticularAccountOwnerTable()
