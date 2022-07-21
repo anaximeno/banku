@@ -5,6 +5,7 @@ import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.miscellaneous.InputValidationResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
@@ -15,13 +16,13 @@ public class AddNewParticularAccountController {
     public static WindowContextController activeInstance;
 
     @FXML
-    private TextArea accountNameInput;
+    private TextField accountNameInput;
     @FXML
-    private TextArea ownerNumberInput;
+    private TextField ownerNumberInput;
     @FXML
-    private TextArea initialBalanceInput;
+    private TextField initialBalanceInput;
     @FXML
-    private TextArea associateNumberInput;
+    private TextField associateNumberInput;
 
     @FXML
     private Text resultText;
