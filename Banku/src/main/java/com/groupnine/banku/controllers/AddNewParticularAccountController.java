@@ -28,9 +28,6 @@ public class AddNewParticularAccountController {
     @FXML
     private Text explainText;
 
-    public static TextArea publicOwnerNumInput;
-    public static TextArea publicAssociatedNumInput;
-
     // todo: extract EMPTY_STR to miscellaneous
     final String EMPTY_STR = "";
 
@@ -50,8 +47,6 @@ public class AddNewParticularAccountController {
     @FXML
     protected void initialize()
     {
-        publicOwnerNumInput = ownerNumberInput;
-        publicAssociatedNumInput = associateNumberInput;
         clearView();
     }
 
@@ -100,7 +95,7 @@ public class AddNewParticularAccountController {
 
     @FXML
     protected void searchOwnerButtonOnClick() {
-        openAccountIdSelectionWindow(selectedId -> publicOwnerNumInput.setText(selectedId));
+        openAccountIdSelectionWindow(selectedId -> ownerNumberInput.setText(selectedId));
     }
 
     @FXML
