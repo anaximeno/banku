@@ -7,10 +7,15 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 
 public class ClientsController {
     @FXML
     private Button dashboardBtn;
+    @FXML
+    private TableView<ParticularAccountOwnerBean> particularAccountOwnerTable;
+    @FXML
+    private TableView<EnterpriseAccountOwnerBean> enterpriseAccountOwnerTable;
 
     @FXML
     protected void dashboardBtnOnClick()
