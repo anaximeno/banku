@@ -22,11 +22,11 @@
                      <children>
                         <TableView fx:id="particularAccountsTable" layoutX="1.0" prefHeight="482.0" prefWidth="840.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="Numero" />
+                              <TableColumn prefWidth="75.0" text="Número" />
                               <TableColumn prefWidth="193.0" text="Nome" />
                               <TableColumn prefWidth="303.0" text="Dono" />
-                              <TableColumn minWidth="0.0" prefWidth="156.0" text="Balanco Atual" />
-                              <TableColumn prefWidth="89.0" text="#Cartoes" />
+                              <TableColumn minWidth="0.0" prefWidth="156.0" text="Saldo Atual" />
+                              <TableColumn prefWidth="89.0" text="#Cartões" />
                            </columns>
                         </TableView>
                      </children>
@@ -39,11 +39,11 @@
                      <children>
                         <TableView fx:id="corporativeAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Numero" />
+                            <TableColumn prefWidth="75.0" text="Número" />
                             <TableColumn prefWidth="228.0" text="Dono" />
                               <TableColumn minWidth="0.0" prefWidth="188.0" text="Admin" />
-                              <TableColumn prefWidth="143.0" text="Balanco Atual" />
-                              <TableColumn prefWidth="184.0" text="#Usuarios Autorizados" />
+                              <TableColumn prefWidth="143.0" text="Saldo Atual" />
+                              <TableColumn prefWidth="184.0" text="#Usuários Autorizados" />
                           </columns>
                         </TableView>
                      </children>
@@ -56,12 +56,12 @@
                      <children>
                         <TableView fx:id="temporaryAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="Numero" />
+                              <TableColumn prefWidth="75.0" text="Número" />
                               <TableColumn prefWidth="152.0" text="Nome" />
                               <TableColumn prefWidth="208.0" text="Dono" />
-                              <TableColumn minWidth="0.0" prefWidth="132.0" text="Balanco Atual" />
-                              <TableColumn prefWidth="116.0" text="Criado em" />
-                              <TableColumn prefWidth="134.0" text="Expira em" />
+                              <TableColumn minWidth="0.0" prefWidth="132.0" text="Saldo Atual" />
+                              <TableColumn prefWidth="116.0" text="Criado" />
+                              <TableColumn prefWidth="134.0" text="Expira" />
                            </columns>
                         </TableView>
                      </children>
@@ -88,7 +88,7 @@
                   </HBox>
                   <HBox alignment="BOTTOM_RIGHT" layoutX="460.0" layoutY="10.0" prefHeight="24.0" prefWidth="311.0" spacing="5.0">
                      <children>
-                        <Button fx:id="reloadBtn" mnemonicParsing="false" onMouseClicked="#reloadBtnOnClick" prefHeight="24.0" prefWidth="94.0" text="Carregar" />
+                        <Button fx:id="reloadBtn" mnemonicParsing="false" onMouseClicked="#reloadBtnOnClick" prefHeight="24.0" prefWidth="94.0" text="Atualizar" />
                         <Button fx:id="removeBtn1" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" prefHeight="24.0" prefWidth="102.0" text="Remover" />
                         <Button fx:id="createButton" layoutX="228.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#createButtonOnClick" prefHeight="24.0" prefWidth="102.0" text="Criar Novo" />
                      </children>

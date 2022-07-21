@@ -27,7 +27,7 @@
                   </HBox>
                   <HBox prefHeight="0.0" prefWidth="573.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="181.0" text="Numero do Dono:">
+                        <Label prefHeight="38.0" prefWidth="181.0" text="Número do Dono:">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -42,7 +42,7 @@
                   </HBox>
                   <HBox prefHeight="0.0" prefWidth="573.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="181.0" text="Balanço Inicial:">
+                        <Label prefHeight="38.0" prefWidth="181.0" text="Saldo Inicial:">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -52,7 +52,7 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="110.0" prefHeight="0.0" prefWidth="573.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="227.0" text="Numero do Beneficiario:">
+                        <Label prefHeight="38.0" prefWidth="227.0" text="Número do Beneficiário:">
                            <font>
                               <Font size="17.0" />
                            </font>
