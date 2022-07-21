@@ -1,6 +1,7 @@
 package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.businesslogic.AccountOwner;
+import com.groupnine.banku.businesslogic.AccountType;
 import com.groupnine.banku.businesslogic.BankAgency;
 import com.groupnine.banku.businesslogic.ParticularAccountOwner;
 import com.groupnine.banku.miscellaneous.LogType;
@@ -9,10 +10,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
+import java.util.List;
+
 
 public class SelectOwnerIdController {
     public static WindowContextController activeWindowInstance;
     public static OnValidSelectedAction onValidSelectedAction;
+    public static AccountType accountTypeFilter;
 
     @FXML
     ListView<String> listView;
@@ -22,12 +26,25 @@ public class SelectOwnerIdController {
 
     @FXML
     void initialize() {
+        final BankAgency agency = BankAgency.getInstance();
+
         selectButton.setDisable(true);
         listView.setOnMouseClicked(windowEvent -> {if (getSelectedItem() != null) selectButton.setDisable(false);});
-        for (AccountOwner owner : BankAgency.getInstance().getClients()) {
-            if (owner instanceof ParticularAccountOwner) { // todo: make for enterprise also
-                listView.getItems().add(formatted(owner));
+
+        if (accountTypeFilter != null) {
+            switch (accountTypeFilter) {
+                case PARTICULAR, TEMPORARY -> addItemsToTheListView(agency.getParticularClientList());
+                case ENTERPRISE -> addItemsToTheListView(agency.getEnterpriseClientList());
             }
+        } else {
+            addItemsToTheListView(agency.getClients());
+        }
+    }
+
+    private<T extends AccountOwner> void addItemsToTheListView(final List<T> list)
+    {
+        for (T accOwn : list) {
+            listView.getItems().add(formatted(accOwn));
         }
     }
 
@@ -47,6 +64,11 @@ public class SelectOwnerIdController {
     public static void setOnValidSelectedAction(OnValidSelectedAction action)
     {
         onValidSelectedAction = action;
+    }
+
+    public static void setAccountTypeFilter(AccountType accountType)
+    {
+        accountTypeFilter = accountType;
     }
 
     String getSelectedItem() {

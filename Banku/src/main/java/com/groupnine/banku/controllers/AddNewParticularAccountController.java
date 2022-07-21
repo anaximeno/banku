@@ -100,9 +100,19 @@ public class AddNewParticularAccountController {
 
     @FXML
     protected void searchOwnerButtonOnClick() {
+        openAccountIdSelectionWindow(selectedId -> publicOwnerNumInput.setText(selectedId));
+    }
+
+    @FXML
+    protected void searchAssociateButtonOnClick() {
+        openAccountIdSelectionWindow(selectedId -> associateNumberInput.setText(selectedId));
+    }
+
+    protected void openAccountIdSelectionWindow(OnValidSelectedAction action) {
+        SelectOwnerIdController.setAccountTypeFilter(AccountType.PARTICULAR);
+        SelectOwnerIdController.setOnValidSelectedAction(action);
         if (SelectOwnerIdController.activeWindowInstance == null) {
             SelectOwnerIdController.activeWindowInstance = new WindowContextController(390, 535, "views/select-owner-id-view.fxml", "Select Owner");
-            SelectOwnerIdController.setOnValidSelectedAction(selectedId -> publicOwnerNumInput.setText(selectedId));
             SelectOwnerIdController.activeWindowInstance.showDefaultView();
         } else {
             SelectOwnerIdController.activeWindowInstance.getStage().show();

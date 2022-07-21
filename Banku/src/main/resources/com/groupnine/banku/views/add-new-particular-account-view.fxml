@@ -60,7 +60,7 @@
                         <HBox alignment="CENTER" prefHeight="38.0" prefWidth="357.0" spacing="20.0">
                            <children>
                               <TextArea fx:id="associateNumberInput" prefHeight="38.0" prefWidth="262.0" />
-                              <Button fx:id="searchAssociateButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="151.0" text="Procurar" />
+                              <Button fx:id="searchAssociateButton" mnemonicParsing="false" onMouseClicked="#searchAssociateButtonOnClick" prefHeight="38.0" prefWidth="151.0" text="Procurar" />
                            </children>
                         </HBox>
                      </children>

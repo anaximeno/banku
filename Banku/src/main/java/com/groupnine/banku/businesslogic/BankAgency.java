@@ -173,6 +173,32 @@ public class BankAgency {
         return list;
     }
 
+    public List<ParticularAccountOwner> getParticularClientList()
+    {
+        List<ParticularAccountOwner> list = new ArrayList<>();
+
+        for (AccountOwner accOwner : clients) {
+            if (accOwner instanceof ParticularAccountOwner pAccOwner) {
+                list.add(pAccOwner);
+            }
+        }
+
+        return list;
+    }
+
+    public List<EnterpriseAccountOwner> getEnterpriseClientList()
+    {
+        List<EnterpriseAccountOwner> list = new ArrayList<>();
+
+        for (AccountOwner accOwner : clients) {
+            if (accOwner instanceof EnterpriseAccountOwner eAccOwner) {
+                list.add(eAccOwner);
+            }
+        }
+
+        return list;
+    }
+
     //Save an operation
     public void addOperationLog(BankingOperation operation) {
         this.operationsLog.add(operation);
