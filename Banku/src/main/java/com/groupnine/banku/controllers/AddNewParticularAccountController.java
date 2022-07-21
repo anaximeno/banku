@@ -100,11 +100,12 @@ public class AddNewParticularAccountController {
 
     @FXML
     protected void searchOwnerButtonOnClick() {
-        if (SelectOwnerIdController.activeIntance == null) {
-            SelectOwnerIdController.activeIntance = new WindowContextController(390, 535, "views/select-owner-id-view.fxml", "Select Owner");
-            SelectOwnerIdController.activeIntance.showDefaultView();
+        if (SelectOwnerIdController.activeWindowInstance == null) {
+            SelectOwnerIdController.activeWindowInstance = new WindowContextController(390, 535, "views/select-owner-id-view.fxml", "Select Owner");
+            SelectOwnerIdController.setOnValidSelectedAction(selectedId -> publicOwnerNumInput.setText(selectedId));
+            SelectOwnerIdController.activeWindowInstance.showDefaultView();
         } else {
-            SelectOwnerIdController.activeIntance.getStage().show();
+            SelectOwnerIdController.activeWindowInstance.getStage().show();
         }
     }
 

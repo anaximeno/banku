@@ -2,7 +2,6 @@ package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.businesslogic.AccountOwner;
 import com.groupnine.banku.businesslogic.BankAgency;
-import com.groupnine.banku.businesslogic.EnterpriseAccountOwner;
 import com.groupnine.banku.businesslogic.ParticularAccountOwner;
 import com.groupnine.banku.miscellaneous.LogType;
 import com.groupnine.banku.miscellaneous.Logger;
@@ -10,8 +9,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
+
 public class SelectOwnerIdController {
-    public static WindowContextController activeIntance;
+    public static WindowContextController activeWindowInstance;
+    public static OnValidSelectedAction onValidSelectedAction;
 
     @FXML
     ListView<String> listView;
@@ -43,14 +44,19 @@ public class SelectOwnerIdController {
         return "ID: " + ID + " Name: " + fullN + " NIF: " + NIF;
     }
 
+    public static void setOnValidSelectedAction(OnValidSelectedAction action)
+    {
+        onValidSelectedAction = action;
+    }
+
     String getSelectedItem() {
         return listView.selectionModelProperty().get().getSelectedItem();
     }
 
     @FXML
     protected void cancelButtonOnClick() {
-        if (activeIntance != null)
-            activeIntance.getStage().close();
+        if (activeWindowInstance != null)
+            activeWindowInstance.getStage().close();
     }
 
     @FXML
@@ -63,8 +69,10 @@ public class SelectOwnerIdController {
 
             try {
                 int value = Integer.parseInt(id);
-                AddNewParticularAccountController.publicOwnerNumInput.setText(id);
-                activeIntance.getStage().close();
+                if (onValidSelectedAction != null) {
+                    onValidSelectedAction.action(id);
+                }
+                activeWindowInstance.getStage().close();
             } catch (NumberFormatException exception) {
                 Logger.log("Error at parsing id in selectButtonOnClick at SelectOwnerIdController", LogType.ERROR);
                 Logger.log(exception.getMessage(), LogType.ERROR);
