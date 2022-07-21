@@ -26,10 +26,15 @@ public class SelectOwnerIdController {
 
     @FXML
     void initialize() {
-        final BankAgency agency = BankAgency.getInstance();
-
         selectButton.setDisable(true);
         listView.setOnMouseClicked(windowEvent -> {if (getSelectedItem() != null) selectButton.setDisable(false);});
+        activeWindowInstance.getStage().setOnShowing(e -> updateListView());
+        updateListView();
+    }
+
+    private void updateListView() {
+        listView.getItems().clear();
+        final BankAgency agency = BankAgency.getInstance();
 
         if (accountTypeFilter != null) {
             switch (accountTypeFilter) {

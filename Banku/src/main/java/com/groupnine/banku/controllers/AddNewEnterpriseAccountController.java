@@ -3,16 +3,19 @@ package com.groupnine.banku.controllers;
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.*;
 import com.groupnine.banku.miscellaneous.InputValidationResult;
+import com.groupnine.banku.miscellaneous.Logger;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddNewParticularAccountController {
+public class AddNewEnterpriseAccountController {
     public static WindowContextController activeInstance;
 
     @FXML
@@ -22,7 +25,13 @@ public class AddNewParticularAccountController {
     @FXML
     private TextField initialBalanceInput;
     @FXML
-    private TextField associateNumberInput;
+    private TextField adminNumberInput;
+
+    @FXML
+    private TextFlow authorizedUsersTextFlow;
+
+    @FXML
+    private Button addAuthorizedUsersButton;
 
     @FXML
     private Text resultText;
@@ -42,7 +51,8 @@ public class AddNewParticularAccountController {
         accountNameInput.setText(EMPTY_STR);
         ownerNumberInput.setText(EMPTY_STR);
         initialBalanceInput.setText(EMPTY_STR);
-        associateNumberInput.setText(EMPTY_STR);
+        adminNumberInput.setText(EMPTY_STR);
+        authorizedUsersTextFlow.getChildren().clear();
     }
 
     @FXML
@@ -65,17 +75,18 @@ public class AddNewParticularAccountController {
 
         if (result.isValid) {
             final String ownerNumber = ownerNumberInput.getText();
-            final String associateNumber = associateNumberInput.getText();
+            final String adminNumber = adminNumberInput.getText();
             final String name = accountNameInput.getText();
             final String balance = initialBalanceInput.getText();
+            final ArrayList<ParticularAccountOwner> authUsers = getAuthorizedUsers();
 
-            final AccountOwner owner = agency.findAccountOwnerByID(ownerNumber);
-            final ParticularAccountOwner associate = (ParticularAccountOwner) agency.findAccountOwnerByID(associateNumber);
+            final AccountOwner owner = agency.findAccountOwnerByID(ownerNumber); // todo: finish bellow
+            final ParticularAccountOwner admin = (ParticularAccountOwner) agency.findAccountOwnerByID(adminNumber);
 
-            if (owner instanceof ParticularAccountOwner pOwner) {
+            if (owner instanceof EnterpriseAccountOwner eOwner) {
                 // for parAcc
-                OrdinaryParticularAccount account = BankuApp.globalAccFactory.createOrdinaryParticularAccount(
-                        name, pOwner, Double.parseDouble(balance), associate);
+                EnterpriseAccount account = BankuApp.globalAccFactory.createEnterpriseAccount(
+                        name, eOwner, admin, Double.parseDouble(balance), authUsers);
 
                 BankuApp.currentOperator.addNewAccountToTheBank(account);
 
@@ -87,28 +98,49 @@ public class AddNewParticularAccountController {
 
                 result.explainStatus = "A conta '" + name + "' foi adicionada com sucesso.";
             } else {
-                result = new InputValidationResult(false, "O tipo de dono de conta fornecido não é particular!\n");
+                result = new InputValidationResult(false, "O tipo de dono de conta fornecido não é de empresa!\n");
             }
         }
 
         displayResults(result);
     }
 
+    private ArrayList<ParticularAccountOwner> getAuthorizedUsers() {
+        BankAgency agency = BankAgency.getInstance();
+        ArrayList<ParticularAccountOwner> list = new ArrayList<>();
+        for (Node text : authorizedUsersTextFlow.getChildren()) {
+            final String id = ((Text) text).getText();
+            Logger.log(id);
+            final ParticularAccountOwner accountOwner = (ParticularAccountOwner) agency.findAccountOwnerByID(id);
+            // todo: check for repeated accNum
+            list.add(accountOwner);
+        }
+        return list;
+    }
+
+    @FXML
+    protected void addAuthorizedUsersButtonOnClick() {
+        SelectOwnerIdController.setAccountTypeFilter(AccountType.PARTICULAR);
+        openAccountIdSelectionWindow(selectedId -> authorizedUsersTextFlow.getChildren().add(new Text(selectedId + "\n")));
+    }
+
     @FXML
     protected void searchOwnerButtonOnClick() {
+        SelectOwnerIdController.setAccountTypeFilter(AccountType.ENTERPRISE);
         openAccountIdSelectionWindow(selectedId -> ownerNumberInput.setText(selectedId));
     }
 
     @FXML
-    protected void searchAssociateButtonOnClick() {
-        openAccountIdSelectionWindow(selectedId -> associateNumberInput.setText(selectedId));
+    protected void searchAdminButtonOnClick() {
+        SelectOwnerIdController.setAccountTypeFilter(AccountType.PARTICULAR);
+        openAccountIdSelectionWindow(selectedId -> adminNumberInput.setText(selectedId));
     }
 
     protected void openAccountIdSelectionWindow(OnValidSelectedAction action) {
-        SelectOwnerIdController.setAccountTypeFilter(AccountType.PARTICULAR);
         SelectOwnerIdController.setOnValidSelectedAction(action);
         if (SelectOwnerIdController.activeWindowInstance == null) {
-            SelectOwnerIdController.activeWindowInstance = new WindowContextController(390, 535, "views/select-owner-id-view.fxml", "Select Owner");
+            SelectOwnerIdController.activeWindowInstance = new WindowContextController(
+                    390, 535, "views/select-owner-id-view.fxml", "Select Owner");
             SelectOwnerIdController.activeWindowInstance.showDefaultView();
         } else {
             SelectOwnerIdController.activeWindowInstance.getStage().show();
@@ -133,9 +165,9 @@ public class AddNewParticularAccountController {
     {
         List<InputValidationResult> list = new ArrayList<>();
         list.add(validateAccountName(accountNameInput.getText()));
-        list.add(validateOwnerNumber(ownerNumberInput.getText()));
+        list.add(validateOwnerNumber(ownerNumberInput.getText(), "dono"));
         list.add(validateInitialBalance(initialBalanceInput.getText()));
-        list.add(validateAssociateNumber(associateNumberInput.getText()));
+        list.add(validateOwnerNumber(adminNumberInput.getText(), "admin"));
 
         InputValidationResult finalResult = new InputValidationResult(true, "");
 
@@ -152,20 +184,6 @@ public class AddNewParticularAccountController {
         }
 
         return finalResult;
-    }
-
-    private InputValidationResult validateAssociateNumber(String value)
-    {
-        if (value == null || value.isEmpty()) /* Associado é opcional. */
-            return new InputValidationResult(true);
-        else {
-            try {
-                int ret = Integer.parseInt(value);
-                return new InputValidationResult(true);
-            } catch (NumberFormatException exception) { /* Quando fornecido deve poder ser convertido para int. */
-                return new InputValidationResult(false, "Número de associado inválido.");
-            }
-        }
     }
 
     private InputValidationResult validateAccountName(String value)
@@ -186,15 +204,15 @@ public class AddNewParticularAccountController {
         }
     }
 
-    private InputValidationResult validateOwnerNumber(String value)
+    private InputValidationResult validateOwnerNumber(String value, String forForm)
     {
         final BankAgency agency = BankAgency.getInstance();
 
         if (value.isEmpty()) {
-            return new InputValidationResult(false, "Número do dono não foi inserido.");
+            return new InputValidationResult(false, "Número do " + forForm +  " não foi inserido.");
         }
         else if (agency.findAccountOwnerByID(value) == null) {
-            return new InputValidationResult(false, "Número do dono não encontrado na agência.");
+            return new InputValidationResult(false, "Número do " + forForm +  " não encontrado na agência.");
         }
         else {
             return new InputValidationResult(true);

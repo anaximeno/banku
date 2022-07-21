@@ -77,7 +77,10 @@ public class AccountsController {
             AddNewParticularAccountController.activeInstance = new WindowContextController(430, 600, viewPath, title);
             AddNewParticularAccountController.activeInstance.showDefaultView();
         } else if (tabCorporativas.isSelected()) {
-            // todo
+            viewPath = "views/add-new-enterprise-account-view.fxml";
+            title += " Adicionar Nova Conta Corporativa";
+            AddNewEnterpriseAccountController.activeInstance = new WindowContextController(430, 600, viewPath, title);
+            AddNewEnterpriseAccountController.activeInstance.showDefaultView();
         } else if (tabTemporarias.isSelected()) {
             // todo
         } else {
