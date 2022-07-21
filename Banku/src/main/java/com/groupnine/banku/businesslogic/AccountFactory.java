@@ -1,6 +1,8 @@
 package com.groupnine.banku.businesslogic;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 // A Factory Class that helps the organization of the accounts's construction
 // This class is abstract because only one AccountFactory will be used for all accounts
@@ -23,6 +25,15 @@ public class AccountFactory extends SequentiableFactory {
         String accountNumber = getEncodedSequentialId();
         double interest = currentEnterpriseInterestRate;
         return new EnterpriseAccount(accountNumber, name, owner, admin, initialBalance, interest);
+    }
+
+    public EnterpriseAccount createEnterpriseAccount(
+            String name, EnterpriseAccountOwner owner, ParticularAccountOwner admin, double initialBalance,
+            ArrayList<ParticularAccountOwner> users)
+    {
+        EnterpriseAccount account = createEnterpriseAccount(name, owner, admin, initialBalance);
+        account.setAuthorizedUsers(users);
+        return account;
     }
 
     //functions that create an OrdinaryParticularAccount
