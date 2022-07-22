@@ -25,22 +25,22 @@ public class AccountOwnerFactory extends SequentiableFactory {
     }
 
 
-    public ParticularAccountOwner createParticularAccountOwner(String name, String lastName, String address, String NIF,
+    public ParticularAccountOwner createParticularAccountOwner(String name, String lastName, String NIF, String address,
                                        String nationality, ArrayList<Account> accounts, ArrayList<Account> associatedAccounts)
     {
-        return  new ParticularAccountOwner(getEncodedSequentialId(), name, lastName, address, NIF, nationality,
+        return  new ParticularAccountOwner(getEncodedSequentialId(), name, lastName, NIF, address, nationality,
                     accounts, associatedAccounts);
     }
 
     public ParticularAccountOwner createParticularAccountOwner (String name, String lastName, String address, String NIF,
                                                                        String nationality, ArrayList<Account> accounts)
     {
-        return new ParticularAccountOwner(getEncodedSequentialId(), name, lastName, address, NIF, nationality, accounts);
+        return new ParticularAccountOwner(getEncodedSequentialId(), name, lastName, NIF, address, nationality, accounts);
     }
 
-    public ParticularAccountOwner createParticularAccountOwner (String name, String lastName, String address, String NIF,
+    public ParticularAccountOwner createParticularAccountOwner (String name, String lastName, String NIF, String address,
                                                                        String nationality)
     {
-        return new ParticularAccountOwner(getEncodedSequentialId(), name, lastName, address, NIF, nationality);
+        return new ParticularAccountOwner(getEncodedSequentialId(), name, lastName, NIF, address, nationality);
     }
 }

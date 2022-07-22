@@ -8,7 +8,7 @@ public class ParticularAccountOwner  extends AccountOwner{
      private ArrayList<Account> accounts;
      private ArrayList<Account> associatedAccounts;
 
-     public ParticularAccountOwner(String ownerID, String name, String lastName, String address, String NIF, String nationality,
+     public ParticularAccountOwner(String ownerID, String name, String lastName, String NIF, String address, String nationality,
                                    ArrayList<? extends Account>accounts, ArrayList<? extends Account>associatedAccounts ){
 
           super(ownerID, name, NIF, address);
@@ -18,13 +18,13 @@ public class ParticularAccountOwner  extends AccountOwner{
           this.associatedAccounts = (ArrayList<Account>) associatedAccounts;
      }
 
-     public ParticularAccountOwner(String ownerID, String name, String lastName, String address, String NIF, String nationality,
+     public ParticularAccountOwner(String ownerID, String name, String lastName, String NIF, String address, String nationality,
                                    ArrayList<? extends Account>accounts ) {
-          this(ownerID, name,lastName, address, NIF, nationality, accounts, new ArrayList<>() );
+          this(ownerID, name,lastName, NIF, address, nationality, accounts, new ArrayList<>() );
      }
 
-     public ParticularAccountOwner(String ownerID, String name, String lastName, String address, String NIF, String nationality) {
-          this(ownerID, name, lastName, address, NIF, nationality, new ArrayList<>(), new ArrayList<>() );
+     public ParticularAccountOwner(String ownerID, String name, String lastName, String NIF, String address, String nationality) {
+          this(ownerID, name, lastName, NIF, address, nationality, new ArrayList<>(), new ArrayList<>() );
      }
 
      //function that return all the money available in all accounts to an owner

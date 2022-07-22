@@ -62,10 +62,10 @@ public class BankuApp extends Application {
     {
         final String name = globalFaker.name().firstName();
         final String lastName = globalFaker.name().lastName();
-        final String address = globalFaker.address().fullAddress();
         final String NIF = globalFaker.regexify("[0-9]{13}");
+        final String address = globalFaker.address().fullAddress();
         final String nationality = globalFaker.address().country();
-        return globalAccOwnFactory.createParticularAccountOwner(name, lastName, address, NIF, nationality);
+        return globalAccOwnFactory.createParticularAccountOwner(name, lastName, NIF, address, nationality);
     }
 
     private static OrdinaryParticularAccount generateOrdinaryAccount(ParticularAccountOwner owner)
