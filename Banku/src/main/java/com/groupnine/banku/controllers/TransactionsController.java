@@ -133,7 +133,30 @@ public class TransactionsController {
     Result validateDepositInputs()
     {
         Result finalResult = new Result(false);
-        // todo
+
+        final String account = depositAccountInput.getText();
+        final String value = depositValueInput.getText();
+
+        String prefix = "";
+
+        if (account == null || account.isEmpty()) {
+            finalResult.isValid = false;
+            finalResult.explainStatus = "Número da conta não foi inserida!";
+            prefix = "\n";
+        }
+
+        if (value == null || value.isEmpty()) {
+            finalResult.isValid = false;
+            finalResult.explainStatus += prefix + "Valor não inserido!";
+        } else {
+            try {
+                double val = Double.parseDouble(value);
+            } catch (NumberFormatException e) {
+                finalResult.isValid = false;
+                finalResult.explainStatus += prefix + "Valor deve ser um número!";
+            }
+        }
+
         return finalResult;
     }
 
