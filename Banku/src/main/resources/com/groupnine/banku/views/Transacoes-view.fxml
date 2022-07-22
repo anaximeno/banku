@@ -5,11 +5,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.TransactionsController">
    <children>
@@ -23,60 +28,79 @@
       </Label>
       <TabPane layoutX="37.0" layoutY="94.0" prefHeight="465.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-            <Tab fx:id="withdrawAccountInput" text="Levantamento">
+            <Tab fx:id="tabWithdraw" text="Levantamento">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="766.0">
                      <children>
-                        <TextField fx:id="account" layoutX="81.0" layoutY="53.0" />
-                        <TextField layoutX="340.0" layoutY="53.0" />
-                        <TextField disable="true" layoutX="520.0" layoutY="53.0" prefHeight="26.0" prefWidth="174.0" />
-                        <TextField layoutX="81.0" layoutY="143.0" prefHeight="26.0" prefWidth="613.0" />
+                        <TextField fx:id="withdrawAccountInput" layoutX="81.0" layoutY="53.0" />
+                        <TextField fx:id="withdrawValueInput" layoutX="340.0" layoutY="53.0" />
+                        <TextField fx:id="withdrawDate" disable="true" layoutX="520.0" layoutY="53.0" prefHeight="26.0" prefWidth="174.0" />
                         <Label layoutX="81.0" layoutY="35.0" text="Conta" />
                         <Label layoutX="340.0" layoutY="35.0" text="Valor" />
                         <Label layoutX="520.0" layoutY="35.0" text="Data" />
-                        <Label layoutX="81.0" layoutY="125.0" text="Descrição do Cliente" />
                         <Button layoutX="238.0" layoutY="53.0" mnemonicParsing="false" text="Selecionar" />
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Depósito">
+            <Tab fx:id="tabDeposit" text="Depósito">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField layoutX="81.0" layoutY="53.0" />
-                        <TextField layoutX="340.0" layoutY="53.0" />
-                        <TextField disable="true" layoutX="520.0" layoutY="53.0" prefHeight="26.0" prefWidth="175.2" />
-                        <TextField layoutX="81.0" layoutY="143.0" prefHeight="26.0" prefWidth="613.0" />
+                        <TextField fx:id="depositAccountInput" layoutX="81.0" layoutY="53.0" />
+                        <TextField fx:id="depositValueInput" layoutX="340.0" layoutY="53.0" />
+                        <TextField fx:id="depositDate" disable="true" layoutX="520.0" layoutY="53.0" prefHeight="26.0" prefWidth="175.2" />
                         <Label layoutX="81.0" layoutY="37.0" text="Conta" />
                         <Label layoutX="340.0" layoutY="37.0" text="Valor" />
                         <Label layoutX="520.0" layoutY="37.0" text="Data" />
-                        <Label layoutX="81.0" layoutY="125.0" text="Descrição do Cliente" />
                         <Button layoutX="238.0" layoutY="53.0" mnemonicParsing="false" text="Selecionar" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-          <Tab text="Transferência">
+          <Tab fx:id="tabTransference" text="Transferência">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField layoutX="81.0" layoutY="53.0" />
-                        <TextField layoutX="81.0" layoutY="122.0" />
-                        <DatePicker layoutX="429.0" layoutY="122.0" />
-                        <TextField layoutX="81.0" layoutY="183.0" prefHeight="26.0" prefWidth="613.0" />
+                        <TextField fx:id="transferenceDebitedAccountInput" layoutX="81.0" layoutY="53.0" />
+                        <TextField fx:id="transferenceValueInput" layoutX="81.0" layoutY="122.0" />
+                        <DatePicker fx:id="transferenceDate" layoutX="429.0" layoutY="122.0" />
                         <Label layoutX="81.0" layoutY="36.0" text="Conta a Debitar" />
                         <Button layoutX="238.0" layoutY="53.0" mnemonicParsing="false" text="Selecionar" />
                         <Label layoutX="429.0" layoutY="36.0" text="Conta a Creditar" />
-                        <TextField layoutX="429.0" layoutY="53.0" />
+                        <TextField fx:id="transferenceCreditedAccountInput" layoutX="429.0" layoutY="53.0" />
                         <Button layoutX="586.0" layoutY="53.0" mnemonicParsing="false" text="Selecionar" />
                         <Label layoutX="81.0" layoutY="104.0" text="Valor" />
                         <Label layoutX="429.0" layoutY="104.0" text="Data" />
                         <Label layoutX="81.0" layoutY="165.0" text="Descrição do Cliente" />
+                        <TextArea fx:id="transferenceClientDescriptionTextArea" layoutX="81.0" layoutY="181.0" prefHeight="59.0" prefWidth="602.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
       </TabPane>
+      <GridPane layoutX="117.0" layoutY="352.0" prefHeight="124.0" prefWidth="642.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.3333435058594" minWidth="10.0" prefWidth="262.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.3333435058594" minWidth="10.0" prefWidth="380.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="34.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="25.66668701171875" minHeight="3.0" prefHeight="7.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fx:id="resultText" strokeType="OUTSIDE" strokeWidth="0.0" text="Result" textAlignment="CENTER" wrappingWidth="256.0995635986328" GridPane.rowIndex="1">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Text fx:id="explainText" strokeType="OUTSIDE" strokeWidth="0.0" text="Explain" wrappingWidth="380.7294616699219" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
       <HBox alignment="BOTTOM_LEFT" layoutX="50.0" layoutY="501.0" prefHeight="34.0" prefWidth="758.0" spacing="230.0">
          <children>
             <HBox alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="343.0">
@@ -87,7 +111,7 @@
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="34.0" prefWidth="346.0" spacing="5.0">
                <children>
-                  <Button fx:id="comfirmButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" text="Confirmar" />
+                  <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" text="Confirmar" />
                   <Button fx:id="clearButton" mnemonicParsing="false" text="Limpar" />
                </children>
             </HBox>
