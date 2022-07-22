@@ -79,8 +79,23 @@ public class ClientsController {
     }
 
     @FXML
-    protected void createButtonOnClick() {
-        // todo
+    protected void createButtonOnClick()
+    {
+        String viewPath = "", title = "Banku - ";
+
+        if (tabParticulares.isSelected()) {
+            viewPath = "views/add-new-particular-client-view.fxml";
+            title += " Adicionar Novo Client Particular";
+            AddNewParticularClientController.activeWindow = new WindowContextController(430, 600, viewPath, title);
+            AddNewParticularClientController.activeWindow.showDefaultView();
+        } else if (tabCorporativos.isSelected()) {
+            viewPath = "views/add-new-enterprise-client-view.fxml";
+            title += " Adicionar Novo Cliente Corporativo";
+            AddNewEnterpriseClientController.activeWindow = new WindowContextController(430, 600, viewPath, title);
+            AddNewEnterpriseClientController.activeWindow.showDefaultView();
+        } else {
+            Logger.log("Unknown tab state at createButtonOnClick in ClientsController", LogType.WARNING);
+        }
     }
 
     @FXML
