@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.DashboardController">
    <children>
-      <HBox layoutX="48.0" layoutY="104.0" prefHeight="383.0" prefWidth="742.0" spacing="50.0">
+      <HBox layoutX="48.0" layoutY="122.0" prefHeight="383.0" prefWidth="742.0" spacing="50.0">
          <children>
             <VBox fx:id="vBox1" onMouseClicked="#onVBox1MouseClick" onMouseEntered="#onVBox1MouseIn" onMouseExited="#onVBox1MouseOut" prefHeight="266.0" prefWidth="170.0" style="-fx-border-color: red; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: white;">
                <children>
