@@ -7,20 +7,24 @@ public class Transaction extends BankingOperation{
     private Account accountFrom;
     private Account accountTo;
     private double value;
+    private String userDescription;
     private double balanceOfFromAccountBeforeTransaction;
     private double balanceOfFromAccountAfterTransaction;
     private double balanceOfToAccountBeforeTransaction;
     private double balanceOfToAfterTransaction;
-    private String details;
 
-    public Transaction(Employee operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value) {
+
+    public Transaction(Employee operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value, String userDescription) {
         super(operator, dateTime);
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;
         this.value = value;
-
+        this.userDescription = userDescription;
     }
 
+    public Transaction(Employee operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value) {
+        this(operator, dateTime, accountFrom, accountTo, value, "");
+    }
     @Override
     public String getDescription () {
         // If transaction interest was applied, show the information

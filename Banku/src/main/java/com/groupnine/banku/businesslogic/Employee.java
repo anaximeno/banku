@@ -68,6 +68,20 @@ public class Employee implements IOperator {
         this.role = role;
     }
 
+    public boolean makeTransaction(Account from, Account to, double value, String userDescription) {
+        if (from == null || to == null || value < 0) {
+            return false;
+        }
+
+        Transaction transaction = new Transaction(this, LocalDateTime.now(), from, to, value, userDescription);
+
+        boolean result = transaction.executeOperation();
+
+        // Guardar a transacao
+        BankAgency.getInstance().addOperationLog(transaction);
+        return result;
+    }
+
     public boolean makeTransaction(Account from, Account to, double value) {
         if (from == null || to == null || value < 0) {
             return false;
@@ -77,7 +91,7 @@ public class Employee implements IOperator {
 
         boolean result = transaction.executeOperation();
 
-        // Log the transaction
+        // Guardar a transacao
         BankAgency.getInstance().addOperationLog(transaction);
         return result;
     }
