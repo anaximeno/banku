@@ -17,6 +17,7 @@ public class TransactionsController {
     private TextField withdrawAccountInput;
     @FXML
     private TextField withdrawValueInput;
+    @FXML
     private TextField withdrawDate;
     @FXML
     private TextField depositAccountInput;
@@ -56,8 +57,8 @@ public class TransactionsController {
     void initialize()
     {
         withdrawDate.setText(LocalDate.now().toString());
-
-
+        depositDate.setText(LocalDate.now().toString());
+        transferenceDate.getEditor().setText(LocalDate.now().toString());
     }
 
 }
