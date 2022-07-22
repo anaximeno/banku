@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.TransactionsController">
    <children>
       <Label layoutX="333.0" layoutY="14.0" lineSpacing="5.0" prefHeight="55.0" prefWidth="210.0" text="Transações" textAlignment="CENTER" textFill="#222222">
          <font>
@@ -23,11 +23,11 @@
       </Label>
       <TabPane layoutX="37.0" layoutY="94.0" prefHeight="465.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-            <Tab text="Levantamento">
+            <Tab fx:id="withdrawAccountInput" text="Levantamento">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="766.0">
                      <children>
-                        <TextField layoutX="81.0" layoutY="53.0" />
+                        <TextField fx:id="account" layoutX="81.0" layoutY="53.0" />
                         <TextField layoutX="340.0" layoutY="53.0" />
                         <TextField disable="true" layoutX="520.0" layoutY="53.0" prefHeight="26.0" prefWidth="174.0" />
                         <TextField layoutX="81.0" layoutY="143.0" prefHeight="26.0" prefWidth="613.0" />
@@ -88,7 +88,7 @@
             <HBox alignment="BOTTOM_RIGHT" prefHeight="34.0" prefWidth="346.0" spacing="5.0">
                <children>
                   <Button fx:id="comfirmButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" text="Confirmar" />
-                  <Button fx:id="clearButton" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" text="Limpar" />
+                  <Button fx:id="clearButton" mnemonicParsing="false" text="Limpar" />
                </children>
             </HBox>
          </children>
