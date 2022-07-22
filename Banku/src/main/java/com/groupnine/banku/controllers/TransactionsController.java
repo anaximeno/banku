@@ -1,8 +1,10 @@
 package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.BankuApp;
+import com.groupnine.banku.miscellaneous.Result;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 import java.time.LocalDate;
@@ -78,6 +80,10 @@ public class TransactionsController {
         dashboardButton.setOnMouseClicked(e -> {
             BankuApp.getMainWindow().showDefaultView();
         });
+
+        confirmButton.setOnMouseClicked(e -> makeOperation());
+        clearButton.setOnMouseClicked(e -> clearInputs());
+
     }
 
     void clearInputs()
@@ -94,19 +100,74 @@ public class TransactionsController {
         transferenceDebitedAccountInput.setText(EMPTY_STR);
     }
 
-    void validateWitdhdrawInputs()
+    Result validateWitdhdrawInputs()
     {
-        // todo
+        Result finalResult = new Result(false);
+
+        final String account = withdrawAccountInput.getText();
+        final String value = withdrawValueInput.getText();
+
+        String prefix = "";
+
+        if (account == null || account.isEmpty()) {
+            finalResult.isValid = false;
+            finalResult.explainStatus = "Número da conta não foi inserida!";
+            prefix = "\n";
+        }
+
+        if (value == null || value.isEmpty()) {
+            finalResult.isValid = false;
+            finalResult.explainStatus += prefix + "Valor não inserido!";
+        } else {
+            try {
+                double val = Double.parseDouble(value);
+            } catch (NumberFormatException e) {
+                finalResult.isValid = false;
+                finalResult.explainStatus += prefix + "Valor deve ser um número!";
+            }
+        }
+
+        return finalResult;
     }
 
-    void validateDepositInputs()
+    Result validateDepositInputs()
     {
+        Result finalResult = new Result(false);
         // todo
+        return finalResult;
     }
 
-    void validateTransferenceInputs()
+    Result validateTransferenceInputs()
     {
+        Result finalResult = new Result(false);
         // todo
+        return finalResult;
+    }
+
+    private void displayResults(final Result result)
+    {
+        resultText.setText(result.isValid ? "Sucesso!" : "Insucesso!");
+        resultText.setFill(Paint.valueOf(result.isValid ? "green" : "red"));
+        explainText.setText(result.explainStatus);
+    }
+
+    void makeMoneyWithdraw() {
+        Result res = validateWitdhdrawInputs();
+        if (!res.isValid) {
+            displayResults(res);
+        }
+    }
+
+    void makeDeposit() {
+
+    }
+
+    void makeTransference() {
+
+    }
+
+    void makeOperation() {
+        makeMoneyWithdraw();
     }
 
     void confirmButtonOnClick() {
