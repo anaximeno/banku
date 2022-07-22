@@ -1,5 +1,6 @@
 package com.groupnine.banku.controllers;
 
+import com.groupnine.banku.BankuApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
@@ -59,6 +60,14 @@ public class TransactionsController {
         withdrawDate.setText(LocalDate.now().toString());
         depositDate.setText(LocalDate.now().toString());
         transferenceDate.getEditor().setText(LocalDate.now().toString());
+
+        operationsButton.setOnMouseClicked(e -> {
+            BankuApp.getMainWindow().showView("views/operations-view.fxml", "Banku - Operations");
+        });
+
+        dashboardButton.setOnMouseClicked(e -> {
+            BankuApp.getMainWindow().showDefaultView();
+        });
     }
 
 }
