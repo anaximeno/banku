@@ -3,7 +3,7 @@ package com.groupnine.banku.controllers;
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.Account;
 import com.groupnine.banku.businesslogic.BankAgency;
-import com.groupnine.banku.businesslogic.IOperator;
+import com.groupnine.banku.miscellaneous.Logger;
 import com.groupnine.banku.miscellaneous.Result;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -104,71 +104,95 @@ public class TransactionsController {
         transferenceDebitedAccountInput.setText(EMPTY_STR);
     }
 
-    Result validateWitdhdrawInputs()
+    Result validateAccountInput(String account)
     {
-        Result finalResult = new Result(false);
-
-        final String account = withdrawAccountInput.getText();
-        final String value = withdrawValueInput.getText();
-
-        String prefix = "";
-
         if (account == null || account.isEmpty()) {
-            finalResult.isValid = false;
-            finalResult.explainStatus = "Número da conta não foi inserida!";
-            prefix = "\n";
+            return new Result(false, "Número da conta não foi inserida!");
+        } else {
+            return new Result(true);
         }
+    }
+
+    Result validateAccountInput(String account, String tipoDeConta)
+    {
+        if (account == null || account.isEmpty()) {
+            return new Result(false, "Número da conta " + tipoDeConta + " não foi inserida!");
+        } else {
+            return new Result(true);
+        }
+    }
+
+    Result validateValue(String value)
+    {
+        Result finalResult = new Result(true);
 
         if (value == null || value.isEmpty()) {
             finalResult.isValid = false;
-            finalResult.explainStatus += prefix + "Valor não inserido!";
+            finalResult.explainStatus = "Valor não inserido!";
         } else {
             try {
                 double val = Double.parseDouble(value);
+
+                if (val <= 0) {
+                    finalResult.isValid = false;
+                    finalResult.explainStatus = "Valor deve ser maior que zero!";
+                }
             } catch (NumberFormatException e) {
                 finalResult.isValid = false;
-                finalResult.explainStatus += prefix + "Valor deve ser um número!";
+                finalResult.explainStatus = "Valor deve ser um número!";
             }
         }
 
         return finalResult;
+    }
+
+    Result validateWitdhdrawInputs()
+    {
+        Result res1 = validateAccountInput(withdrawAccountInput.getText());
+        Result res2 = validateValue(withdrawValueInput.getText());
+
+        if (!res1.isValid && !res2.isValid) {
+            res1.explainStatus += "\n" + res2.explainStatus;
+            return res1;
+        } else if (!res1.isValid) {
+            return res1;
+        } else {
+            return res2;
+        }
     }
 
     Result validateDepositInputs()
     {
-        Result finalResult = new Result(true);
+        Result res1 = validateAccountInput(depositAccountInput.getText());
+        Result res2 = validateValue(depositValueInput.getText());
 
-        final String account = depositAccountInput.getText();
-        final String value = depositValueInput.getText();
-
-        String prefix = "";
-
-        if (account == null || account.isEmpty()) {
-            finalResult.isValid = false;
-            finalResult.explainStatus = "Número da conta não foi inserida!";
-            prefix = "\n";
-        }
-
-        if (value == null || value.isEmpty()) {
-            finalResult.isValid = false;
-            finalResult.explainStatus += prefix + "Valor não inserido!";
+        if (!res1.isValid && !res2.isValid) {
+            res1.explainStatus += "\n" + res2.explainStatus;
+            return res1;
+        } else if (!res1.isValid) {
+            return res1;
         } else {
-            try {
-                double val = Double.parseDouble(value);
-            } catch (NumberFormatException e) {
-                finalResult.isValid = false;
-                finalResult.explainStatus += prefix + "Valor deve ser um número!";
-            }
+            return res2;
         }
-
-        return finalResult;
     }
 
     Result validateTransferenceInputs()
     {
-        Result finalResult = new Result(false);
-        // todo
-        return finalResult;
+        Result res1 = validateAccountInput(transferenceDebitedAccountInput.getText(), "debitada");
+        Result res2 = validateValue(transferenceValueInput.getText());
+        Result res3 = validateAccountInput(transferenceCreditedAccountInput.getText(), "creditada");
+
+        if (!res1.isValid && !res2.isValid && !res3.isValid) {
+            res1.explainStatus += "\n" + res2.explainStatus + "\n" + res3.explainStatus;
+            return res1;
+        } else if (!res1.isValid && !res2.isValid) {
+            res1.explainStatus += "\n" + res2.explainStatus;
+            return res1;
+        } else if (!res1.isValid) {
+            return res1;
+        } else {
+            return res2;
+        }
     }
 
     private void displayResults(final Result result)
@@ -179,10 +203,35 @@ public class TransactionsController {
     }
 
     void makeMoneyWithdraw() {
-        Result res = validateWitdhdrawInputs();
-        if (!res.isValid) {
-            displayResults(res);
+        BankAgency agency = BankAgency.getInstance();
+        Result result = validateWitdhdrawInputs();
+
+        if (!result.isValid) {
+            displayResults(result);
+            return;
         }
+
+        final Account account = agency.findAccountByNumber(withdrawAccountInput.getText());
+        final double value = Double.parseDouble(withdrawValueInput.getText());
+
+        if (account == null) {
+            result.isValid = false;
+            result.explainStatus = "Conta " + withdrawAccountInput.getText() + " não foi encontrada!";
+            displayResults(result);
+            return;
+        }
+
+        boolean execRes = BankuApp.currentOperator.makeMoneyWithdraw(account, value);
+
+        if (execRes) {
+            result.isValid = true;
+            result.explainStatus = "Levantamento efetuado com sucesso!";
+        } else {
+            result.isValid = false;
+            result.explainStatus = "O leventamento não foi efetuado!";
+        }
+
+        displayResults(result);
     }
 
     void makeDeposit() {
@@ -218,11 +267,57 @@ public class TransactionsController {
     }
 
     void makeTransference() {
+        BankAgency agency = BankAgency.getInstance();
+        Result result = validateTransferenceInputs();
 
+        if (!result.isValid) {
+            displayResults(result);
+            return;
+        }
+
+        final Account accountDebited = agency.findAccountByNumber(transferenceDebitedAccountInput.getText());
+        final Account accountCredited = agency.findAccountByNumber(transferenceCreditedAccountInput.getText());
+        final double value = Double.parseDouble(transferenceValueInput.getText());
+        final String description = transferenceClientDescriptionTextArea.getText();
+
+        if (accountDebited == null) {
+            result.isValid = false;
+            result.explainStatus = "Conta " + transferenceDebitedAccountInput.getText() + " não foi encontrada!";
+            displayResults(result);
+            return;
+        }
+
+        if (accountCredited == null) {
+            result.isValid = false;
+            result.explainStatus = "Conta " + transferenceCreditedAccountInput.getText() + " não foi encontrada!";
+            displayResults(result);
+            return;
+        }
+
+        boolean execRes = BankuApp.currentOperator.makeTransaction(
+                accountDebited, accountCredited, value, description);
+
+        if (execRes) {
+            result.isValid = true;
+            result.explainStatus = "A trasferência efetuada com sucesso!";
+        } else {
+            result.isValid = false;
+            result.explainStatus = "A trasferência não foi efetuado!";
+        }
+
+        displayResults(result);
     }
 
     void makeOperation() {
-        makeDeposit();
+        if (tabDeposit.isSelected()) {
+            makeDeposit();
+        } else if (tabWithdraw.isSelected()) {
+            makeMoneyWithdraw();
+        } else if (tabTransference.isSelected()) {
+            makeTransference();
+        } else {
+            Logger.log("Unknown state at makeOperation in TransactionsController");
+        }
     }
 
     void confirmButtonOnClick() {
