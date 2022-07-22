@@ -3,7 +3,6 @@ package com.groupnine.banku.businesslogic;
 import java.time.LocalDateTime;
 
 public class Transaction extends BankingOperation{
-
     private Account accountFrom;
     private Account accountTo;
     private double value;
