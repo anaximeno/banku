@@ -2,6 +2,7 @@ package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.Account;
+import com.groupnine.banku.businesslogic.AccountType;
 import com.groupnine.banku.businesslogic.BankAgency;
 import com.groupnine.banku.miscellaneous.Logger;
 import com.groupnine.banku.miscellaneous.Result;
@@ -88,6 +89,22 @@ public class TransactionsController {
         confirmButton.setOnMouseClicked(e -> makeOperation());
         clearButton.setOnMouseClicked(e -> clearInputs());
 
+        withdrawSelectAccountButton.setOnMouseClicked(e -> openAccountIdSelectionWindow(id -> withdrawAccountInput.setText(id)));
+        depositSelectAccountButton.setOnMouseClicked(e -> openAccountIdSelectionWindow(id -> depositAccountInput.setText(id)));
+        transferenceSelectDebitedAccountButton.setOnMouseClicked(e -> openAccountIdSelectionWindow(id -> transferenceDebitedAccountInput.setText(id)));
+        transferenceSelectCreditedAccountButton.setOnMouseClicked(e -> openAccountIdSelectionWindow(id -> transferenceCreditedAccountInput.setText(id)));
+    }
+
+    protected void openAccountIdSelectionWindow(OnValidSelectedAction action)
+    {
+        SelectAccountIdController.setOnValidSelectedAction(action);
+        if (SelectAccountIdController.activeWindowInstance == null) {
+            SelectAccountIdController.activeWindowInstance = new WindowContextController(
+                    390, 535, "views/select-account-id-view.fxml", "Select Account");
+            SelectAccountIdController.activeWindowInstance.showDefaultView();
+        } else {
+            SelectAccountIdController.activeWindowInstance.getStage().show();
+        }
     }
 
     void clearInputs()
@@ -202,7 +219,8 @@ public class TransactionsController {
         explainText.setText(result.explainStatus);
     }
 
-    void makeMoneyWithdraw() {
+    void makeMoneyWithdraw()
+    {
         BankAgency agency = BankAgency.getInstance();
         Result result = validateWitdhdrawInputs();
 
@@ -234,7 +252,8 @@ public class TransactionsController {
         displayResults(result);
     }
 
-    void makeDeposit() {
+    void makeDeposit()
+    {
         BankAgency agency = BankAgency.getInstance();
         Result result = validateDepositInputs();
 
@@ -266,7 +285,8 @@ public class TransactionsController {
         displayResults(result);
     }
 
-    void makeTransference() {
+    void makeTransference()
+    {
         BankAgency agency = BankAgency.getInstance();
         Result result = validateTransferenceInputs();
 
@@ -308,7 +328,8 @@ public class TransactionsController {
         displayResults(result);
     }
 
-    void makeOperation() {
+    void makeOperation()
+    {
         if (tabDeposit.isSelected()) {
             makeDeposit();
         } else if (tabWithdraw.isSelected()) {
@@ -318,9 +339,5 @@ public class TransactionsController {
         } else {
             Logger.log("Unknown state at makeOperation in TransactionsController");
         }
-    }
-
-    void confirmButtonOnClick() {
-
     }
 }
