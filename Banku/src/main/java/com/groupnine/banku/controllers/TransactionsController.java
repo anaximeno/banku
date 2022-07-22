@@ -41,6 +41,14 @@ public class TransactionsController {
     private Button dashboardButton;
     @FXML
     private Button operationsButton;
+    @FXML
+    private Button withdrawSelectAccountButton;
+    @FXML
+    private Button depositSelectAccountButton;
+    @FXML
+    private Button transferenceSelectDebitedAccountButton;
+    @FXML
+    private Button transferenceSelectCreditedAccountButton;
 
     @FXML
     private Button confirmButton;
@@ -53,6 +61,8 @@ public class TransactionsController {
     private Tab tabWithdraw;
     @FXML
     private Tab tabTransference;
+
+    private final String EMPTY_STR = "";
 
     @FXML
     void initialize()
@@ -70,4 +80,36 @@ public class TransactionsController {
         });
     }
 
+    void clearInputs()
+    {
+        resultText.setText(EMPTY_STR);
+        explainText.setText(EMPTY_STR);
+        withdrawAccountInput.setText(EMPTY_STR);
+        withdrawValueInput.setText(EMPTY_STR);
+        depositAccountInput.setText(EMPTY_STR);
+        depositValueInput.setText(EMPTY_STR);
+        transferenceClientDescriptionTextArea.setText(EMPTY_STR);
+        transferenceValueInput.setText(EMPTY_STR);
+        transferenceCreditedAccountInput.setText(EMPTY_STR);
+        transferenceDebitedAccountInput.setText(EMPTY_STR);
+    }
+
+    void validateWitdhdrawInputs()
+    {
+        // todo
+    }
+
+    void validateDepositInputs()
+    {
+        // todo
+    }
+
+    void validateTransferenceInputs()
+    {
+        // todo
+    }
+
+    void confirmButtonOnClick() {
+
+    }
 }
