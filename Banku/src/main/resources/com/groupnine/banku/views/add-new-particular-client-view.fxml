@@ -85,10 +85,10 @@
                <children>
                   <HBox alignment="BOTTOM_LEFT" prefHeight="41.0" prefWidth="309.0">
                      <children>
-                        <Button fx:id="clearButton" mnemonicParsing="false" onMouseClicked="#clearButtonOnClick" prefHeight="35.0" prefWidth="84.0" text="Limpar" />
+                        <Button fx:id="clearButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="84.0" text="Limpar" />
                      </children>
                   </HBox>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onMouseClicked="#cancelButtonOnClick" prefHeight="35.0" prefWidth="126.0" text="Cancelar" />
+                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="126.0" text="Cancelar" />
                   <Button fx:id="createButton" mnemonicParsing="false" onMouseClicked="#createButtonOnClick" prefHeight="35.0" prefWidth="122.0" text="Criar" />
                </children></HBox>
          </children>
