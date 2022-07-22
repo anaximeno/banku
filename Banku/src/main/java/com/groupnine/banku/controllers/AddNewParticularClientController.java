@@ -1,11 +1,8 @@
 package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.BankuApp;
-import com.groupnine.banku.businesslogic.AccountOwner;
-import com.groupnine.banku.businesslogic.BankAgency;
-import com.groupnine.banku.businesslogic.OrdinaryParticularAccount;
 import com.groupnine.banku.businesslogic.ParticularAccountOwner;
-import com.groupnine.banku.miscellaneous.InputValidationResult;
+import com.groupnine.banku.miscellaneous.Result;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -68,7 +65,7 @@ public class AddNewParticularClientController {
     @FXML
     protected void createButtonOnClick()
     {
-        InputValidationResult result = validateInputs();
+        Result result = validateInputs();
 
         if (result.isValid) {
             final String name = nameInput.getText();
@@ -93,25 +90,25 @@ public class AddNewParticularClientController {
         displayResults(result);
     }
 
-    private void displayResults(final InputValidationResult result)
+    private void displayResults(final Result result)
     {
         resultText.setText(result.isValid ? "Sucesso!" : "Insucesso!");
         resultText.setFill(Paint.valueOf(result.isValid ? "green" : "red"));
         explainText.setText(result.explainStatus);
     }
 
-    private InputValidationResult validateInputs()
+    private Result validateInputs()
         /* Valida os inputs e retorna o resultado da validação global. */
     {
-        List<InputValidationResult> list = new ArrayList<>();
+        List<Result> list = new ArrayList<>();
         list.add(validateInputForm(nameInput.getText(), "Nome", 3));
         list.add(validateInputForm(lastNameInput.getText(), "Apelido", 3));
         list.add(validateInputForm(NIFInput.getText(), "NIF", 12));
         list.add(validateInputForm(nationalityInput.getText(), "Nacionalidade", 3));
 
-        InputValidationResult finalResult = new InputValidationResult(true, "");
+        Result finalResult = new Result(true, "");
 
-        for (InputValidationResult res : list) {
+        for (Result res : list) {
             if (!res.isValid) {
                 finalResult.isValid = false;
 
@@ -126,14 +123,14 @@ public class AddNewParticularClientController {
         return finalResult;
     }
 
-    private InputValidationResult validateInputForm(String input, String formName, int minLength)
+    private Result validateInputForm(String input, String formName, int minLength)
     {
         if (input == null || input.isEmpty()) {
-            return new InputValidationResult(false, formName + " não foi preenchido!");
+            return new Result(false, formName + " não foi preenchido!");
         } else if (input.length() < minLength) {
-            return new InputValidationResult(false, formName + " deve ter ao menos " + minLength + " caracteres");
+            return new Result(false, formName + " deve ter ao menos " + minLength + " caracteres");
         } else {
-            return new InputValidationResult(true);
+            return new Result(true);
         }
     }
 }

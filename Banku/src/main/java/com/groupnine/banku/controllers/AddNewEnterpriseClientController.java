@@ -3,8 +3,7 @@ package com.groupnine.banku.controllers;
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.EnterpriseAccountOwner;
 import com.groupnine.banku.businesslogic.EnterprisePartner;
-import com.groupnine.banku.businesslogic.ParticularAccountOwner;
-import com.groupnine.banku.miscellaneous.InputValidationResult;
+import com.groupnine.banku.miscellaneous.Result;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -85,7 +84,7 @@ public class AddNewEnterpriseClientController {
     @FXML
     protected void createButtonOnClick()
     {
-        InputValidationResult result = validateInputs();
+        Result result = validateInputs();
 
         if (result.isValid) {
             final String name = nameInput.getText();
@@ -131,24 +130,24 @@ public class AddNewEnterpriseClientController {
         explainText.setText(EMPTY_STR);
     }
 
-    private void displayResults(final InputValidationResult result)
+    private void displayResults(final Result result)
     {
         resultText.setText(result.isValid ? "Sucesso!" : "Insucesso!");
         resultText.setFill(Paint.valueOf(result.isValid ? "green" : "red"));
         explainText.setText(result.explainStatus);
     }
 
-    private InputValidationResult validateInputs()
+    private Result validateInputs()
         /* Valida os inputs e retorna o resultado da validação global. */
     {
-        List<InputValidationResult> list = new ArrayList<>();
+        List<Result> list = new ArrayList<>();
         list.add(validateInputForm(nameInput.getText(), "Name", 3, false));
         list.add(validateInputForm(NIFInput.getText(), "NIF", 12, false));
         list.add(validateInputForm(addressInput.getText(), "Endereço", 5, false));
 
-        InputValidationResult finalResult = new InputValidationResult(true, "");
+        Result finalResult = new Result(true, "");
 
-        for (InputValidationResult res : list) {
+        for (Result res : list) {
             if (!res.isValid) {
                 finalResult.isValid = false;
 
@@ -163,14 +162,14 @@ public class AddNewEnterpriseClientController {
         return finalResult;
     }
 
-    private InputValidationResult validateInputForm(String input, String formName, int minLength, boolean canBeEmpty)
+    private Result validateInputForm(String input, String formName, int minLength, boolean canBeEmpty)
     {
         if (canBeEmpty && (input == null || input.isEmpty())) {
-            return new InputValidationResult(false, formName + " não foi preenchido!");
+            return new Result(false, formName + " não foi preenchido!");
         } else if (input.length() < minLength) {
-            return new InputValidationResult(false, formName + " deve ter ao menos " + minLength + " caracteres");
+            return new Result(false, formName + " deve ter ao menos " + minLength + " caracteres");
         } else {
-            return new InputValidationResult(true);
+            return new Result(true);
         }
     }
 }

@@ -2,10 +2,8 @@ package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.*;
-import com.groupnine.banku.miscellaneous.InputValidationResult;
+import com.groupnine.banku.miscellaneous.Result;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -62,7 +60,7 @@ public class AddNewParticularAccountController {
     {
         final BankAgency agency = BankAgency.getInstance();
 
-        InputValidationResult result = validateInputs();
+        Result result = validateInputs();
 
         if (result.isValid) {
             final String ownerNumber = ownerNumberInput.getText();
@@ -88,7 +86,7 @@ public class AddNewParticularAccountController {
 
                 result.explainStatus = "A conta '" + name + "' foi adicionada com sucesso.";
             } else {
-                result = new InputValidationResult(false, "O tipo de dono de conta fornecido não é particular!\n");
+                result = new Result(false, "O tipo de dono de conta fornecido não é particular!\n");
             }
         }
 
@@ -122,25 +120,25 @@ public class AddNewParticularAccountController {
             activeInstance.getStage().close();
     }
 
-    private void displayResults(final InputValidationResult result)
+    private void displayResults(final Result result)
     {
         resultText.setText(result.isValid ? "Sucesso!" : "Insucesso!");
         resultText.setFill(Paint.valueOf(result.isValid ? "green" : "red"));
         explainText.setText(result.explainStatus);
     }
 
-    private InputValidationResult validateInputs()
+    private Result validateInputs()
     /* Valida os inputs e retorna o resultado da validação global. */
     {
-        List<InputValidationResult> list = new ArrayList<>();
+        List<Result> list = new ArrayList<>();
         list.add(validateAccountName(accountNameInput.getText()));
         list.add(validateOwnerNumber(ownerNumberInput.getText()));
         list.add(validateInitialBalance(initialBalanceInput.getText()));
         list.add(validateAssociateNumber(associateNumberInput.getText()));
 
-        InputValidationResult finalResult = new InputValidationResult(true, "");
+        Result finalResult = new Result(true, "");
 
-        for (InputValidationResult res : list) {
+        for (Result res : list) {
             if (!res.isValid) {
                 finalResult.isValid = false;
 
@@ -155,54 +153,54 @@ public class AddNewParticularAccountController {
         return finalResult;
     }
 
-    private InputValidationResult validateAssociateNumber(String value)
+    private Result validateAssociateNumber(String value)
     {
         if (value == null || value.isEmpty()) /* Associado é opcional. */
-            return new InputValidationResult(true);
+            return new Result(true);
         else {
             try {
                 int ret = Integer.parseInt(value);
-                return new InputValidationResult(true);
+                return new Result(true);
             } catch (NumberFormatException exception) { /* Quando fornecido deve poder ser convertido para int. */
-                return new InputValidationResult(false, "Número de associado inválido.");
+                return new Result(false, "Número de associado inválido.");
             }
         }
     }
 
-    private InputValidationResult validateAccountName(String value)
+    private Result validateAccountName(String value)
     {
         final BankAgency agency = BankAgency.getInstance();
 
         if (value.isEmpty()) {
-            return new InputValidationResult(false, "Nome da conta não foi inserida.");
+            return new Result(false, "Nome da conta não foi inserida.");
         }
         else if (agency.findAccountByName(value) != null) {
-            return new InputValidationResult(false, "Nome da conta já existe na agência.");
+            return new Result(false, "Nome da conta já existe na agência.");
         }
         else if (value.length() < 3) {
-            return new InputValidationResult(false, "Nome da conta é muito pequeno, requer-se ao menos 3 caracteres.");
+            return new Result(false, "Nome da conta é muito pequeno, requer-se ao menos 3 caracteres.");
         }
         else {
-            return new InputValidationResult(true);
+            return new Result(true);
         }
     }
 
-    private InputValidationResult validateOwnerNumber(String value)
+    private Result validateOwnerNumber(String value)
     {
         final BankAgency agency = BankAgency.getInstance();
 
         if (value.isEmpty()) {
-            return new InputValidationResult(false, "Número do dono não foi inserido.");
+            return new Result(false, "Número do dono não foi inserido.");
         }
         else if (agency.findAccountOwnerByID(value) == null) {
-            return new InputValidationResult(false, "Número do dono não encontrado na agência.");
+            return new Result(false, "Número do dono não encontrado na agência.");
         }
         else {
-            return new InputValidationResult(true);
+            return new Result(true);
         }
     }
 
-    private InputValidationResult validateInitialBalance(String value)
+    private Result validateInitialBalance(String value)
     {
         final double minimumInitialBalance = 5000;
         double initialBalance;
@@ -210,18 +208,18 @@ public class AddNewParticularAccountController {
         try {
             initialBalance = Double.parseDouble(value);
         } catch (NullPointerException exception) {
-            return new InputValidationResult(false, "Balanço inicial não foi inserido.");
+            return new Result(false, "Balanço inicial não foi inserido.");
         } catch (NumberFormatException exception) {
             if (value.isEmpty())
-                return new InputValidationResult(false, "Balanço inicial não foi inserido.");
-            return new InputValidationResult(false, "Valor inválido para balanço inicial. Deve ser um número.");
+                return new Result(false, "Balanço inicial não foi inserido.");
+            return new Result(false, "Valor inválido para balanço inicial. Deve ser um número.");
         }
 
         if (initialBalance < minimumInitialBalance) {
-            return new InputValidationResult(false, "Balanço deve maior ou igual a " + minimumInitialBalance + " escudos.");
+            return new Result(false, "Balanço deve maior ou igual a " + minimumInitialBalance + " escudos.");
         }
         else {
-            return new InputValidationResult(true);
+            return new Result(true);
         }
     }
 }
