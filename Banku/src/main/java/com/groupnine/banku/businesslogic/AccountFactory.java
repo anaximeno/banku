@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Uma classe factory ajuda na organizacao na construcao de contas
-// Esta classe e abstrata visto que so uma AccountFactory sera usada para todas as contas
-// por isso nao e necessario uma instanciacao desta classe
+
 public class AccountFactory extends SequentiableFactory {
     private double currentEnterpriseInterestRate = 0.01;
     private double currentOrdinaryAccountInterestRate = 0.01;
