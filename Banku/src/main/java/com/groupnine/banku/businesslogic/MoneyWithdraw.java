@@ -34,10 +34,10 @@ public class MoneyWithdraw extends BankingOperation {
         if (account == null || account.getAccountBalance() < valueMoved || wasExecuted) {
             return false;
         } else {
-            // Store Account Balance
+            // guardar o saldo antes da transacao
             this.balanceBeforeWithDraw = account.getAccountBalance();
             account.setAccountBalance(account.getAccountBalance() - valueMoved);
-            // Store Account Balance
+            // guardar o saldo depois da transacao
             this.balanceAfterWithDraw = account.getAccountBalance();
             wasExecuted = true;
             return true;

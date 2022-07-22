@@ -22,17 +22,17 @@ public abstract class BankingOperation {
         return dateTime;
     }
 
-    // a boolean to confirm if an operation was successfully executed
+    // um booleano para confirmar se uma operacao foi executada com sucesso
     public boolean operationWasExecuted() {
         return wasExecuted;
     }
 
-    //get a short detail about the operation
+    // obter um pequeno resumo sobre a operacao
     public abstract String getDescription();
 
-    //get full details about the operation
+    //obter toda informacao sobre a operacao
     public abstract String getFullDescription();
 
-    //function that execute the operation
+    // funcao que executa a operacao
     public abstract boolean executeOperation();
 }

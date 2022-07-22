@@ -26,17 +26,17 @@ public class EnterpriseAccountOwner extends AccountOwner {
     }
 
 
-    //get a list of accounts the Enterprise own
+
     public ArrayList<EnterpriseAccount> getAccounts() {
         return this.accounts;
     }
 
-    //add an account to the Enterprise list accounts
+
     public void addAccount (EnterpriseAccount account) {
         this.accounts.add(account);
     }
 
-    //remove an account from the Enterprise list accounts
+    // remover uma conta  da lista
     public boolean removeAccount (String accountNumber) {
         boolean result = false;
         for (int i = 0; i < accounts.size(); i++){
@@ -62,7 +62,7 @@ public class EnterpriseAccountOwner extends AccountOwner {
         }
     }
 
-    //remove a partner from the Enterprise list partners
+    //remover  um parceiro da lista
     public boolean removePartner (String partnerCNI) {
         boolean result = false;
         for (int i = 0; i < partners.size(); i++){
@@ -74,7 +74,7 @@ public class EnterpriseAccountOwner extends AccountOwner {
         return result;
     }
 
-    //get a list of the Enterprise's partners
+
     public ArrayList<EnterprisePartner> getPartners(){
         return this.partners;
     }

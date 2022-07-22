@@ -4,21 +4,22 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-// A Factory Class that helps the organization of the accounts's construction
-// This class is abstract because only one AccountFactory will be used for all accounts
-// so there's no need for instantiation on this class
+// Uma classe factory ajuda na organizacao na construcao de contas
+// Esta classe e abstrata visto que so uma AccountFactory sera usada para todas as contas
+// por isso nao e necessario uma instanciacao desta classe
 public class AccountFactory extends SequentiableFactory {
     private double currentEnterpriseInterestRate = 0.01;
     private double currentOrdinaryAccountInterestRate = 0.01;
     private double currentTemporaryAccountInterestRate = 0.01;
 
-    //function that create an EnterpriseAccount
-    public AccountFactory(double particularInterest, double enterpriseIntererst, double temporaryInterest) {
+
+    public AccountFactory(double particularInterest, double enterpriseInterest, double temporaryInterest) {
         currentOrdinaryAccountInterestRate = particularInterest;
-        currentEnterpriseInterestRate = enterpriseIntererst;
+        currentEnterpriseInterestRate = enterpriseInterest;
         currentTemporaryAccountInterestRate = temporaryInterest;
     }
 
+    // funcao que cria uma EnterpriseAccount
     public EnterpriseAccount createEnterpriseAccount(
             String name, EnterpriseAccountOwner owner, ParticularAccountOwner admin, double initialBalance)
     {
@@ -36,7 +37,7 @@ public class AccountFactory extends SequentiableFactory {
         return account;
     }
 
-    //functions that create an OrdinaryParticularAccount
+    // funcao que criam uma OrdinaryParticularAccount
     public OrdinaryParticularAccount createOrdinaryParticularAccount(
             String name, ParticularAccountOwner owner, double balance, ParticularAccountOwner associate)
     {
@@ -47,7 +48,7 @@ public class AccountFactory extends SequentiableFactory {
         return acc;
     }
 
-    //functions that create an TemporaryParticularAccount
+    //functions that create an TemporaryParticularAccount funcao que cria uma TemporaryParticularAccount
     public TemporaryParticularAccount createTemporaryParticularAccount(
             String accountName, Double balance, ParticularAccountOwner owner, LocalDate expirationDate)
     {
@@ -56,6 +57,7 @@ public class AccountFactory extends SequentiableFactory {
         return  new TemporaryParticularAccount(accountNumber, accountName, balance, interest, owner, LocalDate.now(), expirationDate);
     }
 
+    //funcoes que atualizam os valores das taxas de juro
     public void updateCurrentEnterpriseInterestRate(double currentEnterpriseInterestRate) {
         this.currentEnterpriseInterestRate = currentEnterpriseInterestRate;
     }

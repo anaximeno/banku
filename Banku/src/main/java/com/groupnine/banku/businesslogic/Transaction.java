@@ -46,12 +46,12 @@ public class Transaction extends BankingOperation{
     public boolean executeOperation() {
         BankAgency agency = BankAgency.getInstance();
         if (accountFrom != null && accountTo != null && accountFrom.getAccountBalance() - value > 0 && !wasExecuted) {
-            // Store the balance before the transaction
+            // guardar o saldo antes da transacao
             this.balanceOfFromAccountBeforeTransaction = accountFrom.getAccountBalance();
             this.balanceOfToAccountBeforeTransaction = accountTo.getAccountBalance();
 
             if (accountFrom instanceof EnterpriseAccount) {
-                // If the type of the account is Enterprise, a transaction interest is applied.
+                // Se o tipo de conta for enterprise e aplicado uma taxa.
                 double interestValue = EnterpriseAccount.TRANSACTION_INTEREST * accountFrom.getAccountBalance();
                 InterestApplication interestApplication = new InterestApplication(
                         getOperator(), LocalDateTime.now(), accountFrom, interestValue
@@ -63,7 +63,7 @@ public class Transaction extends BankingOperation{
             accountFrom.setAccountBalance(accountFrom.getAccountBalance() - value);
             accountTo.setAccountBalance(accountTo.getAccountBalance() + value);
 
-            // Store the balance after the transaction
+            // guardar o saldo depois da transacao
             this.balanceOfFromAccountAfterTransaction = accountFrom.getAccountBalance();
             this.balanceOfToAfterTransaction = accountTo.getAccountBalance();
 
