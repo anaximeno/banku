@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.MovementsController">
    <children>
       <Label layoutX="321.0" layoutY="14.0" lineSpacing="5.0" prefHeight="55.0" prefWidth="197.0" text="Movimentos" textAlignment="CENTER" textFill="#222222">
          <font>

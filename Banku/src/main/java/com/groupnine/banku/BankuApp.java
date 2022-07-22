@@ -71,7 +71,7 @@ public class BankuApp extends Application {
     private static OrdinaryParticularAccount generateOrdinaryAccount(ParticularAccountOwner owner)
     {
         final BankAgency agency = BankAgency.getInstance();
-        final IOperator operator = agency.getBankOperator("John", "Doe", "isDoe");
+        final IOperator operator = agency.getBankOperator("JohnDoe", "isDoe");
 
         final String accountName = globalFaker.dragonBall().character();
         final int balance = globalFaker.number().numberBetween(5000, 800000);
@@ -136,7 +136,7 @@ public class BankuApp extends Application {
         agency.addEmployee(new Employee("John", "Doe", "isDoe", "Manager"));
         agency.addEmployee(new Employee("Background", "Thread",  "multi-threading", "Automatic Interest Applicator"));
 
-        final IOperator operator = agency.getBankOperator("John", "Doe", "isDoe");
+        final IOperator operator = agency.getBankOperator("JohnDoe", "isDoe");
         currentOperator = operator;
 
         if (operator != null) {

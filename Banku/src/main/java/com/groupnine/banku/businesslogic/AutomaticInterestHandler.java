@@ -46,7 +46,7 @@ public class AutomaticInterestHandler extends Thread {
         int numberOfDailyRecords = ListUtils.lengthOf(account.getBalanceRecord());
 
         if (numberOfDailyRecords >= minimunRecordDays) {
-            IOperator operator = agency.getBankOperator("Background", "Thread", "multi-threading");
+            IOperator operator = agency.getBankOperator("BackgroundThread", "multi-threading");
 
             final double interestValue = calculateInterests(account);
 

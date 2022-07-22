@@ -128,9 +128,13 @@ public class BankAgency {
         this.employees.add(employee);
     }
 
-    public IOperator getBankOperator(String name, String lastName, String password) {
+
+    public IOperator getBankOperator(String username, String password) {
         for (Employee e : employees) {
-            if (e.getName().equals(name) && e.getLastName().equals(lastName) && e.CheckPassword(password)) {
+            //username e a soma do name com lastName
+            //ex: name: Pedro lastName: Sampaio username: PedroSampaio
+            String employeeUsername = e.getName() + e.getLastName();
+            if (employeeUsername.equals(username) && e.CheckPassword(password)) {
                 return e;
             }
         }
