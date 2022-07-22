@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.AccountsController">
+   <children>
+      <TabPane fx:id="tabPane" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#tabPaneOnClick" prefHeight="560.0" prefWidth="840.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabParticulares" text="Particulares">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="particularAccountsTable" layoutX="1.0" prefHeight="482.0" prefWidth="840.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Número" />
+                              <TableColumn prefWidth="193.0" text="Nome" />
+                              <TableColumn prefWidth="303.0" text="Dono" />
+                              <TableColumn minWidth="0.0" prefWidth="156.0" text="Saldo Atual" />
+                              <TableColumn prefWidth="89.0" text="#Cartões" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabCorporativas" text="Corporativas">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="832.0">
+                     <children>
+                        <TableView fx:id="corporativeAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Número" />
+                            <TableColumn prefWidth="228.0" text="Dono" />
+                              <TableColumn minWidth="0.0" prefWidth="188.0" text="Administrador" />
+                              <TableColumn prefWidth="143.0" text="Saldo Atual" />
+                              <TableColumn prefWidth="184.0" text="#Usuários Autorizados" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabTemporarias" text="Temporárias">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="temporaryAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Número" />
+                              <TableColumn prefWidth="152.0" text="Nome" />
+                              <TableColumn prefWidth="208.0" text="Dono" />
+                              <TableColumn minWidth="0.0" prefWidth="132.0" text="Saldo Atual" />
+                              <TableColumn prefWidth="116.0" text="Criado" />
+                              <TableColumn prefWidth="134.0" text="Expira" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Pane layoutY="516.0" prefHeight="44.0" prefWidth="840.0" style="-fx-background-color: #eee;">
+         <children>
+            <HBox alignment="BOTTOM_LEFT" layoutX="9.0" layoutY="11.0" prefHeight="24.0" prefWidth="822.0">
+               <children>
+                  <HBox prefHeight="24.0" prefWidth="134.0">
+                     <children>
+                        <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="110.0" text="Dashboard" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="364.0" spacing="4.0">
+                     <children>
+                        <Label text="Procurar:" />
+                        <TextField fx:id="searchInput" prefHeight="24.0" prefWidth="147.0" />
+                        <ComboBox fx:id="comboBox" prefHeight="24.0" prefWidth="102.0" promptText="Nome" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_RIGHT" layoutX="460.0" layoutY="10.0" prefHeight="24.0" prefWidth="327.0" spacing="5.0">
+                     <children>
+                        <Button fx:id="reloadBtn" mnemonicParsing="false" onMouseClicked="#reloadBtnOnClick" prefHeight="24.0" prefWidth="94.0" text="Atualizar" />
+                        <Button fx:id="removeBtn1" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" prefHeight="24.0" prefWidth="102.0" text="Remover" />
+                        <Button fx:id="createButton" layoutX="228.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#createButtonOnClick" prefHeight="24.0" prefWidth="102.0" text="Criar Novo" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

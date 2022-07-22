@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="230.0" layoutY="14.0" lineSpacing="5.0" prefHeight="55.0" prefWidth="380.0" text="Detalhes do Movimento" textAlignment="CENTER" textFill="#222222">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <effect>
+            <DropShadow height="9.11" radius="3.2325" width="5.82" />
+         </effect>
+      </Label>
+      <GridPane layoutX="73.0" layoutY="92.0" prefHeight="336.0" prefWidth="694.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="67.59998168945313" minHeight="0.0" prefHeight="26.600018310546876" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="149.20001831054685" minHeight="10.0" prefHeight="45.99999389648437" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="177.39998168945314" minHeight="2.4000000000000057" prefHeight="44.399987792968744" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="132.79998779296872" minHeight="10.0" prefHeight="88.59999389648438" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="93.59998168945316" minHeight="2.3999999999999773" prefHeight="43.599993896484364" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="143.39999389648438" minHeight="10.0" prefHeight="112.40000610351564" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Operador">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label text="Descrição do Cliente" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label text="Descrição Completa" GridPane.rowIndex="4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Operador" wrappingWidth="341.3367004394531" GridPane.rowIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição do Banco" wrappingWidth="694.13671875" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <HBox alignment="BOTTOM_LEFT" layoutX="71.0" layoutY="512.0" prefHeight="28.0" prefWidth="558.0" spacing="270.0">
+         <children>
+            <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="26.0" prefWidth="96.0" text="Voltar" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

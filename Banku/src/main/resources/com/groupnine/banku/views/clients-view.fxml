@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.ClientsController">
+   <children>
+      <TabPane fx:id="tabPane" layoutX="-1.0" layoutY="-1.0" prefHeight="514.0" prefWidth="840.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="tabParticulares" text="Particulares">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="particularAccountOwnerTable" layoutX="1.0" prefHeight="483.0" prefWidth="840.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabCorporativos" text="Corporativos">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="832.0">
+                     <children>
+                        <TableView fx:id="enterpriseAccountOwnerTable" layoutX="1.0" prefHeight="485.0" prefWidth="840.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Pane layoutY="513.0" prefHeight="44.0" prefWidth="840.0" style="-fx-background-color: #eee;">
+         <children>
+            <HBox alignment="BOTTOM_LEFT" layoutX="9.0" layoutY="11.0" prefHeight="24.0" prefWidth="822.0">
+               <children>
+                  <HBox prefHeight="24.0" prefWidth="126.0">
+                     <children>
+                        <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="105.0" text="Dashboard" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="360.0" spacing="4.0">
+                     <children>
+                        <Label text="Procurar:" />
+                        <TextField fx:id="searchInput" prefHeight="24.0" prefWidth="147.0" />
+                        <ComboBox fx:id="comboBox" prefHeight="24.0" prefWidth="102.0" promptText="Nome" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_RIGHT" layoutX="460.0" layoutY="10.0" prefHeight="24.0" prefWidth="337.0" spacing="5.0">
+                     <children>
+                        <Button fx:id="reloadBtn" mnemonicParsing="false" prefHeight="24.0" prefWidth="94.0" text="Atualizar" />
+                        <Button fx:id="removeBtn" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" prefHeight="24.0" prefWidth="102.0" text="Remover" />
+                        <Button fx:id="createButton" layoutX="228.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#createButtonOnClick" prefHeight="24.0" prefWidth="102.0" text="Criar Novo" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
