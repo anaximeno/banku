@@ -12,9 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.OperationsController">
    <children>
-      <HBox layoutX="4.0" layoutY="388.0" prefHeight="35.0" prefWidth="702.0" />
       <HBox layoutX="140.0" layoutY="114.0" prefHeight="335.0" prefWidth="558.0">
          <children>
             <VBox fx:id="vBox1" alignment="CENTER" onMouseClicked="#onVBox1MouseClick" onMouseEntered="#onVBox1MouseIn" onMouseExited="#onVBox1MouseOut" prefHeight="266.0" prefWidth="170.0" style="-fx-border-color: red; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: white;">
@@ -60,7 +59,7 @@
             </VBox>
          </children>
       </HBox>
-      <Label layoutX="332.0" layoutY="14.0" lineSpacing="5.0" prefHeight="55.0" prefWidth="174.0" text="Operações" textAlignment="CENTER" textFill="#222222">
+      <Label layoutX="317.0" layoutY="14.0" lineSpacing="5.0" prefHeight="55.0" prefWidth="210.0" text="Operações" textAlignment="CENTER" textFill="#222222">
          <font>
             <Font size="35.0" />
          </font>
@@ -70,7 +69,7 @@
       </Label>
       <HBox alignment="BOTTOM_LEFT" layoutX="61.0" layoutY="502.0" prefHeight="28.0" prefWidth="558.0" spacing="270.0">
          <children>
-            <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="180.0" text="Voltar ao Dashboard" />
+            <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="146.0" text="Dashboard" />
          </children>
       </HBox>
    </children>
