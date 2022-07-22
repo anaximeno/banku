@@ -2,6 +2,7 @@ package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.BankuApp;
 import com.groupnine.banku.businesslogic.*;
+import com.groupnine.banku.miscellaneous.IBasicFilter;
 import com.groupnine.banku.miscellaneous.ListUtils;
 import com.groupnine.banku.miscellaneous.LogType;
 import com.groupnine.banku.miscellaneous.Logger;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientsController {
@@ -33,6 +35,12 @@ public class ClientsController {
     @FXML
     private Tab tabCorporativos;
 
+    @FXML
+    private ComboBox<String> comboBox;
+
+    @FXML
+    private TextField searchInput;
+
     private boolean particularAccountOwnerTableWasCreated = false;
     private boolean enterpriseAccountOwnerTableWasCreated = false;
 
@@ -50,6 +58,15 @@ public class ClientsController {
 
         tabPane.setOnMouseClicked(e -> refreshTables());
         reloadBtn.setOnMouseClicked(e -> refreshTables());
+
+        comboBox.getItems().add("Nome");
+        comboBox.getItems().add("Número");
+
+        /* default */
+        comboBox.setValue("Nome");
+        comboBox.setOnMouseClicked(e -> refreshTables());
+
+        searchInput.textProperty().addListener((obs, old, niu) -> refreshTables());
 
         /* Isto vai ser utilizado externamente para
          * atualizar o estado dessa view.
@@ -135,6 +152,42 @@ public class ClientsController {
         }
     }
 
+    private<T extends AccountOwner> List<T>
+    filterAccountOwnerList(List<T> clientList, String entry, IBasicFilter<T, String> filter)
+    /* Filtra uma lista de contas, usando um método de filtragem fornecido pelo utilizador. */
+    {
+        List<T> list = new ArrayList<>();
+
+        for (T item : clientList) {
+            if (filter.passesFilter(item, entry)) {
+                list.add(item);
+            }
+        }
+
+        return list;
+    }
+
+    private<T extends AccountOwner>  List<T>
+    applyFilter(List<T> accountOwnerList, String searchEntry)
+    /* Retorna a lista filtrada. */
+    {
+        List<T> result = filterAccountOwnerList(accountOwnerList, searchEntry, (client, entry) -> {
+            if (comboBox.getValue().equals("Nome")) {
+                return client.getName().toLowerCase().contains(entry.toLowerCase());
+            } else {
+                return client.getOwnerID().contains(entry);
+            }
+        });
+        result.sort((T a, T b) -> {
+            if (comboBox.getValue().equals("Nome")) {
+                return a.getName().compareTo(b.getName());
+            } else {
+                return a.getOwnerID().compareTo(b.getOwnerID());
+            }
+        });
+        return result;
+    }
+
     private void createParticularAccountOwnerTable()
     {
         particularAccountOwnerTable.getColumns().clear();
@@ -189,6 +242,12 @@ public class ClientsController {
 
         List<ParticularAccountOwner> ParticularOwnersList = BankAgency.getInstance().getParticularClientList();
 
+        String searchEntry = searchInput.getText();
+
+        if (searchEntry != null && !searchEntry.isEmpty()) {
+            ParticularOwnersList = applyFilter(ParticularOwnersList, searchEntry);
+        }
+
         ObservableList<ClientsController.ParticularAccountOwnerBean> data = FXCollections.observableArrayList();
 
         for (ParticularAccountOwner accOwner : ParticularOwnersList) {
@@ -205,6 +264,13 @@ public class ClientsController {
         }
 
         List<EnterpriseAccountOwner> enterpriseOwnersList = BankAgency.getInstance().getEnterpriseClientList();
+
+        String searchEntry = searchInput.getText();
+
+        if (searchEntry != null && !searchEntry.isEmpty()) {
+            enterpriseOwnersList = applyFilter(enterpriseOwnersList, searchEntry);
+        }
+
 
         ObservableList<ClientsController.EnterpriseAccountOwnerBean> data = FXCollections.observableArrayList();
 

@@ -41,13 +41,15 @@ public class AddNewParticularClientController {
 
     final String EMPTY_STR = "";
 
-    private void clearView() {
+    private void clearView()
+    {
         resultText.setText(EMPTY_STR);
         explainText.setText(EMPTY_STR);
         clearInputForms();
     }
 
-    private void clearInputForms() {
+    private void clearInputForms()
+    {
         nameInput.setText(EMPTY_STR);
         lastNameInput.setText(EMPTY_STR);
         NIFInput.setText(EMPTY_STR);
@@ -64,7 +66,8 @@ public class AddNewParticularClientController {
     }
 
     @FXML
-    protected void createButtonOnClick() {
+    protected void createButtonOnClick()
+    {
         InputValidationResult result = validateInputs();
 
         if (result.isValid) {
@@ -101,7 +104,7 @@ public class AddNewParticularClientController {
         /* Valida os inputs e retorna o resultado da validação global. */
     {
         List<InputValidationResult> list = new ArrayList<>();
-        list.add(validateInputForm(nameInput.getText(), "Name", 3));
+        list.add(validateInputForm(nameInput.getText(), "Nome", 3));
         list.add(validateInputForm(lastNameInput.getText(), "Apelido", 3));
         list.add(validateInputForm(NIFInput.getText(), "NIF", 12));
         list.add(validateInputForm(nationalityInput.getText(), "Nacionalidade", 3));

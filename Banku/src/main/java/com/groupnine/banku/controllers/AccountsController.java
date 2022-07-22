@@ -1,6 +1,7 @@
 package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.BankuApp;
+import com.groupnine.banku.miscellaneous.IBasicFilter;
 import com.groupnine.banku.miscellaneous.ListUtils;
 import com.groupnine.banku.miscellaneous.LogType;
 import com.groupnine.banku.miscellaneous.Logger;
@@ -17,10 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-interface AccountFilter<T extends Account, U> {
-    boolean passesFilter(T account, U entry);
-}
 
 public class AccountsController {
     private static AccountsController activeInstance;
@@ -221,7 +218,8 @@ public class AccountsController {
         temporaryAccountsTableWasCreated = false;
     }
 
-    private<T extends Account> List<T> filterAccountList(List<T> accountList, String entry, AccountFilter<T, String> filter)
+    private<T extends Account> List<T>
+    filterAccountList(List<T> accountList, String entry, IBasicFilter<T, String> filter)
     /* Filtra uma lista de contas, usando um método de filtragem fornecido pelo utilizador. */
     {
         List<T> list = new ArrayList<>();
@@ -235,7 +233,8 @@ public class AccountsController {
         return list;
     }
 
-    private<T extends Account>  List<T> applyFilter(List<T> accountList, String searchEntry)
+    private<T extends Account>  List<T>
+    applyFilter(List<T> accountList, String searchEntry)
     /* Retorna a lista filtrada. */
     {
         List<T> result = filterAccountList(accountList, searchEntry, (account, entry) -> {

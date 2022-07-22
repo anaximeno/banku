@@ -51,7 +51,8 @@ public class AddNewEnterpriseClientController {
         clearInputForms();
     }
 
-    private void clearInputForms() {
+    private void clearInputForms()
+    {
         nameInput.setText(EMPTY_STR);
         NIFInput.setText(EMPTY_STR);
         addressInput.setText(EMPTY_STR);
@@ -68,7 +69,8 @@ public class AddNewEnterpriseClientController {
         clearView();
     }
 
-    protected ArrayList<EnterprisePartner> getPartners() {
+    protected ArrayList<EnterprisePartner> getPartners()
+    {
         ArrayList<EnterprisePartner> list = new ArrayList<>();
 
         for (Node node : partnersTextFlow.getChildren()) {
@@ -81,7 +83,8 @@ public class AddNewEnterpriseClientController {
     }
 
     @FXML
-    protected void createButtonOnClick() {
+    protected void createButtonOnClick()
+    {
         InputValidationResult result = validateInputs();
 
         if (result.isValid) {
@@ -113,11 +116,11 @@ public class AddNewEnterpriseClientController {
         final String partnerCNI = partnersCNIInput.getText();
 
         if (partnerName == null || partnerName.isEmpty()) {
-            resultText.setText("O nome do parceiro não foi inserido!");
+            explainText.setText("O nome do parceiro não foi inserido!");
             saveValue = false;
         }
         if (partnerCNI == null || partnerCNI.isEmpty()) {
-            resultText.setText(resultText.getText() + "\nO CNI do parceiro não foi inserido!");
+            explainText.setText(explainText.getText() + "\nO CNI do parceiro não foi inserido!");
             saveValue = false;
         }
 
@@ -125,6 +128,7 @@ public class AddNewEnterpriseClientController {
             return;
 
         partnersTextFlow.getChildren().add(new Text(partnerName + " " + partnerCNI));
+        explainText.setText(EMPTY_STR);
     }
 
     private void displayResults(final InputValidationResult result)
