@@ -41,7 +41,7 @@
                           <columns>
                             <TableColumn prefWidth="75.0" text="Número" />
                             <TableColumn prefWidth="228.0" text="Dono" />
-                              <TableColumn minWidth="0.0" prefWidth="188.0" text="Admin" />
+                              <TableColumn minWidth="0.0" prefWidth="188.0" text="Administrador" />
                               <TableColumn prefWidth="143.0" text="Saldo Atual" />
                               <TableColumn prefWidth="184.0" text="#Usuários Autorizados" />
                           </columns>
@@ -50,7 +50,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="tabTemporarias" text="Temporarias">
+            <Tab fx:id="tabTemporarias" text="Temporárias">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

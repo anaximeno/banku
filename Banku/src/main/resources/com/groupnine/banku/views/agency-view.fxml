@@ -21,7 +21,7 @@
                <children>
                   <ImageView fitHeight="213.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../OneDrive/Documents/Academic/Git/9_sistemas_de_gestao_de_contas_bancarias/Banku/src/main/resources/com/groupnine/banku/images/login.png" />
+                        <Image url="@../images/cash-flow.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="2.0" />
@@ -42,7 +42,7 @@
                <children>
                   <ImageView fitHeight="214.0" fitWidth="216.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: yellow; -fx-border-radius: 5;">
                      <image>
-                        <Image url="@../OneDrive/Documents/Academic/Git/9_sistemas_de_gestao_de_contas_bancarias/Banku/src/main/resources/com/groupnine/banku/images/kyc.png" />
+                        <Image url="@../images/money-transfer.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="2.0" />
@@ -60,7 +60,7 @@
             </VBox>
          </children>
       </HBox>
-      <Label layoutX="276.0" layoutY="14.0" lineSpacing="5.0" prefHeight="55.0" prefWidth="286.0" text="Outras Operações" textAlignment="CENTER" textFill="#222222">
+      <Label layoutX="332.0" layoutY="14.0" lineSpacing="5.0" prefHeight="55.0" prefWidth="174.0" text="Operações" textAlignment="CENTER" textFill="#222222">
          <font>
             <Font size="35.0" />
          </font>

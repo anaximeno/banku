@@ -19,7 +19,7 @@
                <children>
                   <ImageView fitHeight="213.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/login.png" />
+                        <Image url="@../images/transactional-data.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="2.0" />
@@ -58,13 +58,13 @@
                <children>
                   <ImageView fitHeight="246.0" fitWidth="212.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/bank.png" />
+                        <Image url="@../images/transaction.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="2.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Label alignment="CENTER" prefHeight="184.0" prefWidth="229.0" style="-fx-background-color: blue;" text="Agência" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" prefHeight="184.0" prefWidth="229.0" style="-fx-background-color: blue;" text="Operações" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>

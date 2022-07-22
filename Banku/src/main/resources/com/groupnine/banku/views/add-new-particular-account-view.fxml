@@ -17,7 +17,7 @@
                <children>
                   <HBox prefHeight="0.0" prefWidth="573.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="213.0" text="Nome da conta:">
+                        <Label prefHeight="38.0" prefWidth="213.0" text="Nome da Conta:">
                            <font>
                               <Font size="17.0" />
                            </font>
