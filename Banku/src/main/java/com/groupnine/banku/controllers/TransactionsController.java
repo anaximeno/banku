@@ -1,6 +1,9 @@
 package com.groupnine.banku.controllers;
 
 import com.groupnine.banku.BankuApp;
+import com.groupnine.banku.businesslogic.Account;
+import com.groupnine.banku.businesslogic.BankAgency;
+import com.groupnine.banku.businesslogic.IOperator;
 import com.groupnine.banku.miscellaneous.Result;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -69,6 +72,7 @@ public class TransactionsController {
     @FXML
     void initialize()
     {
+        clearInputs();
         withdrawDate.setText(LocalDate.now().toString());
         depositDate.setText(LocalDate.now().toString());
         transferenceDate.getEditor().setText(LocalDate.now().toString());
@@ -132,7 +136,7 @@ public class TransactionsController {
 
     Result validateDepositInputs()
     {
-        Result finalResult = new Result(false);
+        Result finalResult = new Result(true);
 
         final String account = depositAccountInput.getText();
         final String value = depositValueInput.getText();
@@ -182,7 +186,35 @@ public class TransactionsController {
     }
 
     void makeDeposit() {
+        BankAgency agency = BankAgency.getInstance();
+        Result result = validateDepositInputs();
 
+        if (!result.isValid) {
+            displayResults(result);
+            return;
+        }
+
+        final Account account = agency.findAccountByNumber(depositAccountInput.getText());
+        final double value = Double.parseDouble(depositValueInput.getText());
+
+        if (account == null) {
+            result.isValid = false;
+            result.explainStatus = "Conta " + depositAccountInput.getText() + " não foi encontrada!";
+            displayResults(result);
+            return;
+        }
+
+        boolean execRes = BankuApp.currentOperator.makeMoneyDeposit(account, value);
+
+        if (execRes) {
+            result.isValid = true;
+            result.explainStatus = "Depósito efetuado com sucesso!";
+        } else {
+            result.isValid = false;
+            result.explainStatus = "O depósito não foi efetuado!";
+        }
+
+        displayResults(result);
     }
 
     void makeTransference() {
@@ -190,7 +222,7 @@ public class TransactionsController {
     }
 
     void makeOperation() {
-        makeMoneyWithdraw();
+        makeDeposit();
     }
 
     void confirmButtonOnClick() {
