@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="560.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="333.0" layoutY="14.0" lineSpacing="5.0" prefHeight="55.0" prefWidth="173.0" text="Transações" textAlignment="CENTER" textFill="#222222">
+      <Label layoutX="333.0" layoutY="14.0" lineSpacing="5.0" prefHeight="55.0" prefWidth="210.0" text="Transações" textAlignment="CENTER" textFill="#222222">
          <font>
             <Font size="35.0" />
          </font>
@@ -25,19 +25,8 @@
         <tabs>
             <Tab text="Levantamento">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="766.0">
                      <children>
-                        <HBox alignment="BOTTOM_LEFT" layoutX="4.0" layoutY="388.0" prefHeight="34.0" prefWidth="758.0" spacing="270.0">
-                           <children>
-                              <Button fx:id="dashboardBtn" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="180.0" text="Voltar ao Dashboard" />
-                              <HBox alignment="BOTTOM_RIGHT" prefHeight="34.0" prefWidth="346.0" spacing="5.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" text="Confirmar" />
-                                    <Button fx:id="removeBtn" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" text="Limpar" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
                         <TextField layoutX="81.0" layoutY="53.0" />
                         <TextField layoutX="340.0" layoutY="53.0" />
                         <TextField disable="true" layoutX="520.0" layoutY="53.0" prefHeight="26.0" prefWidth="174.0" />
@@ -62,17 +51,6 @@
                         <Label layoutX="340.0" layoutY="37.0" text="Valor" />
                         <Label layoutX="520.0" layoutY="37.0" text="Data" />
                         <Label layoutX="81.0" layoutY="125.0" text="Descrição do Cliente" />
-                        <HBox alignment="BOTTOM_LEFT" layoutX="4.0" layoutY="388.0" prefHeight="34.0" prefWidth="758.0" spacing="270.0">
-                           <children>
-                              <Button fx:id="dashboardBtn1" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="180.0" text="Voltar ao Dashboard" />
-                              <HBox alignment="BOTTOM_RIGHT" prefHeight="34.0" prefWidth="346.0" spacing="5.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" text="Confirmar" />
-                                    <Button fx:id="removeBtn1" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" text="Limpar" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
                         <Button layoutX="238.0" layoutY="53.0" mnemonicParsing="false" text="Selecionar" />
                      </children>
                   </AnchorPane>
@@ -94,21 +72,26 @@
                         <Label layoutX="81.0" layoutY="104.0" text="Valor" />
                         <Label layoutX="429.0" layoutY="104.0" text="Data" />
                         <Label layoutX="81.0" layoutY="165.0" text="Descrição do Cliente" />
-                        <HBox alignment="BOTTOM_LEFT" layoutX="4.0" layoutY="388.0" prefHeight="34.0" prefWidth="758.0" spacing="270.0">
-                           <children>
-                              <Button fx:id="dashboardBtn2" mnemonicParsing="false" onMouseClicked="#dashboardBtnOnClick" prefHeight="24.0" prefWidth="180.0" text="Voltar ao Dashboard" />
-                              <HBox alignment="BOTTOM_RIGHT" prefHeight="34.0" prefWidth="346.0" spacing="5.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" text="Confirmar" />
-                                    <Button fx:id="removeBtn2" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" text="Limpar" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
                      </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
       </TabPane>
+      <HBox alignment="BOTTOM_LEFT" layoutX="50.0" layoutY="501.0" prefHeight="34.0" prefWidth="758.0" spacing="230.0">
+         <children>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="343.0">
+               <children>
+                  <Button fx:id="dashboardButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="124.0" text="Dashboard" />
+                  <Button fx:id="operationsButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="120.0" text="Operaçoes" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="34.0" prefWidth="346.0" spacing="5.0">
+               <children>
+                  <Button fx:id="comfirmButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" text="Confirmar" />
+                  <Button fx:id="clearButton" mnemonicParsing="false" onMouseClicked="#removeBtnOnClick" text="Limpar" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
