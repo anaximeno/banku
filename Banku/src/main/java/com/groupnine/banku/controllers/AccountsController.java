@@ -71,17 +71,17 @@ public class AccountsController {
         if (tabParticulares.isSelected()) {
             viewPath = "views/add-new-particular-account-view.fxml";
             title += " Adicionar Nova Conta Particular";
-            AddNewParticularAccountController.activeInstance = new WindowContextController(430, 600, viewPath, title);
+            AddNewParticularAccountController.activeInstance = new WindowContextController(430, 617, viewPath, title);
             AddNewParticularAccountController.activeInstance.showDefaultView();
         } else if (tabCorporativas.isSelected()) {
             viewPath = "views/add-new-enterprise-account-view.fxml";
             title += " Adicionar Nova Conta Corporativa";
-            AddNewEnterpriseAccountController.activeInstance = new WindowContextController(430, 600, viewPath, title);
+            AddNewEnterpriseAccountController.activeInstance = new WindowContextController(435, 617, viewPath, title);
             AddNewEnterpriseAccountController.activeInstance.showDefaultView();
         } else if (tabTemporarias.isSelected()) {
             viewPath = "views/add-new-temporary-account-view.fxml";
             title += " Adicionar Nova Conta Temporária";
-            AddNewTemporaryAccountController.activeInstance = new WindowContextController(430, 600, viewPath, title);
+            AddNewTemporaryAccountController.activeInstance = new WindowContextController(435, 617, viewPath, title);
             AddNewTemporaryAccountController.activeInstance.showDefaultView();
         } else {
             Logger.log("Unknown tab state at createButtonOnClick in AccountsController", LogType.WARNING);
