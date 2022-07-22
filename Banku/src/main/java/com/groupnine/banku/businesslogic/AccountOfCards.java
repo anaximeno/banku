@@ -10,34 +10,34 @@ public abstract class AccountOfCards extends Account {
         this.cards = cards;
     }
 
-    /// Used to add a new card to the card list
+    /// Adicionar um novo cartao a lista
     public void addCard(ParticularAccountOwner owner, String Id) {
         for (Card c : cards) {
             if (c.getID().equals(Id)) {
-                // If card already inserted
+                //  Se o cartao ja foi inserido
                 // return
                 return;
             }
         }
-        // If card was not inserted before
+        // Se o cartao nao esta inserido na lista ainda
         // add it to the list
         this.cards.add(new Card(Id, owner, this));
     }
 
-    /// Used to get a card from the list given its ID
+    /// Obter um cartao da lista atraves do seu id
     public Card getCard(String cardID) {
         for (Card c : cards) {
-            // If card with ID equal with the given one
-            // is found, return the card.
+            // Se o id do cartao e igual ao id dado
+            // e encontrado, return o cartao.
             if (c.getID().equals(cardID)) {
                 return c;
             }
         }
-        // If not found, return null
+        // se nao foi encontrado retornar null
         return null;
     }
 
-    /// Returns a reference to the card list.
+    /// Retorna a lista de cartoes
     public List<Card> getAllCards() {
         return this.cards;
     }

@@ -7,4 +7,5 @@ public interface IOperator {
     public boolean addNewAccountToTheBank(Account account);
     public boolean addNewClientToTheBank(AccountOwner client);
     public boolean deleteAccount(String accountNumber);
+    public boolean deleteAccountOwner(String ownerID);
 }

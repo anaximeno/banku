@@ -31,10 +31,10 @@ public class MoneyDeposit extends BankingOperation {
     @Override
     public boolean executeOperation() {
         if (!wasExecuted) {
-            // Store the balance Before transaction
+            // guardar o saldo antes da transacao
             this.balanceBefore = account.getAccountBalance();
             account.setAccountBalance(account.getAccountBalance() + value);
-            // Store the balance After the transaction
+            // guardar o saldo apos a transacao
             this.balanceAfter = account.getAccountBalance();
             wasExecuted = true;
             return true;

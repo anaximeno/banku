@@ -33,7 +33,7 @@ public class Employee implements IOperator {
 
     public boolean addNewClientToTheBank(AccountOwner client) {
         final BankAgency agency = BankAgency.getInstance();
-
+        //verificar se ja existe  o cliente
         for (AccountOwner c : agency.getClients()) {
             if (c.getOwnerID().equals(client.getOwnerID()) || c.getNIF().equals(client.getNIF())) {
                 return false;
@@ -106,7 +106,7 @@ public class Employee implements IOperator {
 
     public boolean addNewAccountToTheBank(Account account) {
         final BankAgency agency = BankAgency.getInstance();
-
+        //verificar se ja existe a conta
         for (Account a : agency.getClientAccounts()) {
             if (a.getAccountNumber().equals(account.getAccountNumber()) || a.getAccountName().equals(account.getAccountName())) {
                 return false;
@@ -130,6 +130,42 @@ public class Employee implements IOperator {
         }
         if (accountToBeRemoved != null) {
             agency.getClientAccounts().remove(accountToBeRemoved);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean deleteAccount(AccountOwner owner) {
+        final BankAgency agency = BankAgency.getInstance();
+        Account accountToBeRemoved = null;
+        for (Account eac : agency.getClientAccounts()) {
+            if (eac.getOwner() == owner) {
+                accountToBeRemoved = eac;
+                break;
+            }
+        }
+        if (accountToBeRemoved != null) {
+            agency.getClientAccounts().remove(accountToBeRemoved);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean deleteAccountOwner(String ownerID){
+        final BankAgency agency = BankAgency.getInstance();
+        AccountOwner accountOwnerToBeRemoved = null;
+        for (AccountOwner eac : agency.getClients()) {
+            if (eac.getOwnerID().equals(ownerID)) {
+                accountOwnerToBeRemoved = eac;
+                break;
+            }
+        }
+        if (accountOwnerToBeRemoved != null) {
+            //deletar conta vinculado com o cliente
+            deleteAccount(accountOwnerToBeRemoved);
+            agency.getClients().remove(accountOwnerToBeRemoved);
             return true;
         } else {
             return false;
