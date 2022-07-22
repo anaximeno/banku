@@ -33,7 +33,7 @@
          <children>
             <ImageView fitHeight="67.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@bank1.png" />
+                  <Image url="@../images/bank1.png" />
                </image>
             </ImageView>
          </children>
@@ -42,7 +42,7 @@
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@id-card.png" />
+                  <Image url="@../images/id-card.png" />
                </image>
             </ImageView>
          </children>
@@ -51,7 +51,7 @@
          <children>
             <ImageView fitHeight="58.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@secure.png" />
+                  <Image url="@../images/secure.png" />
                </image>
             </ImageView>
          </children>
