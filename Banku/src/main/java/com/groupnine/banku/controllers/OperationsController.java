@@ -54,7 +54,6 @@ public class OperationsController {
 
     @FXML
     protected void onVBox2MouseClick() throws IOException {
-        //BankuApp.getMainWindow().showView("views/clients-view.fxml", "Banku - Clientes");
-        //
+        BankuApp.getMainWindow().showView("views/Movimentos-view.fxml", "Banku - Clientes");
     }
 }
