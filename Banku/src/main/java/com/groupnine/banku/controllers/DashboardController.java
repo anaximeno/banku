@@ -66,6 +66,6 @@ public class DashboardController {
 
     @FXML
     protected void onVBox3MouseClick() throws IOException {
-        BankuApp.getMainWindow().showView("views/operations-view.fxml", "Banku - Agência");
+        BankuApp.getMainWindow().showView("views/operations-view.fxml", "Banku - Operações");
     }
 }
