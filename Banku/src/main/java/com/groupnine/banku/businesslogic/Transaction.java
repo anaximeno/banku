@@ -24,6 +24,17 @@ public class Transaction extends BankingOperation{
     public Transaction(Employee operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value) {
         this(operator, dateTime, accountFrom, accountTo, value, "");
     }
+
+    public String getUserDescription()
+    {
+        return userDescription;
+    }
+
+    public void setUserDescription(String description)
+    {
+        userDescription = description;
+    }
+
     @Override
     public String getDescription () {
         // If transaction interest was applied, show the information
