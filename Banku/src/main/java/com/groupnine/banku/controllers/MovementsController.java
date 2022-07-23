@@ -16,6 +16,8 @@ public class MovementsController {
     private Button operationsButton;
     @FXML
     private Button detailsButton;
+    @FXML
+    private Button refreshButton;
 
     @FXML
     private Text bankBalanceText;
@@ -37,6 +39,8 @@ public class MovementsController {
         operationsButton.setOnMouseClicked(e -> {
             BankuApp.getMainWindow().showView("views/operations-view.fxml", "Banku - Operations");
         });
+
+        refreshButton.setOnMouseClicked(e -> refreshMovements());
     }
 
     void refreshMovements() {

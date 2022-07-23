@@ -58,5 +58,6 @@
             </Text>
          </children>
       </HBox>
+      <Button fx:id="refreshButton" layoutX="18.0" layoutY="72.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Atualizar" />
    </children>
 </AnchorPane>
