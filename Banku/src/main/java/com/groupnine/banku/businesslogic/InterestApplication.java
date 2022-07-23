@@ -21,7 +21,7 @@ public class InterestApplication extends BankingOperation {
 
     @Override
     public String getDescription() {
-        String description = "Dinheiro resultante de juros para a conta numero" + this.account.getAccountNumber()
+        String description = "Dinheiro resultante de juros para a conta numero " + this.account.getAccountNumber()
                 + " no valor de " + this.value;
         return description;
     }
