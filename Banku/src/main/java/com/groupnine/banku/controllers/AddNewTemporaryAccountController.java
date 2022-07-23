@@ -218,7 +218,7 @@ public class AddNewTemporaryAccountController {
 
     private Result validateInitialBalance(String value)
     {
-        final double minimumInitialBalance = 5000;
+        final double minimumInitialBalance = 50000;
         double initialBalance;
 
         try {
