@@ -62,6 +62,9 @@ public class TransactionsController {
     private Button clearButton;
 
     @FXML
+    private TabPane tabPane;
+
+    @FXML
     private Tab tabDeposit;
     @FXML
     private Tab tabWithdraw;
@@ -88,6 +91,11 @@ public class TransactionsController {
 
         confirmButton.setOnMouseClicked(e -> makeOperation());
         clearButton.setOnMouseClicked(e -> clearInputs());
+
+        tabPane.setOnMouseClicked(e -> {
+            resultText.setText(EMPTY_STR);
+            explainText.setText(EMPTY_STR);
+        });
 
         withdrawSelectAccountButton.setOnMouseClicked(e -> openAccountIdSelectionWindow(id -> withdrawAccountInput.setText(id)));
         depositSelectAccountButton.setOnMouseClicked(e -> openAccountIdSelectionWindow(id -> depositAccountInput.setText(id)));

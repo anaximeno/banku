@@ -26,7 +26,7 @@
             <DropShadow height="9.11" radius="3.2325" width="5.82" />
          </effect>
       </Label>
-      <TabPane layoutX="37.0" layoutY="94.0" prefHeight="465.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="37.0" layoutY="94.0" prefHeight="465.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE" fx:id="tabPane">
         <tabs>
             <Tab fx:id="tabWithdraw" text="Levantamento">
               <content>
