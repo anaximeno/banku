@@ -254,7 +254,7 @@ public class TransactionsController {
             result.explainStatus = "Levantamento efetuado com sucesso!";
         } else {
             result.isValid = false;
-            result.explainStatus = "O leventamento não foi efetuado!";
+            result.explainStatus = "O levantamento não foi efetuado!";
         }
 
         displayResults(result);
