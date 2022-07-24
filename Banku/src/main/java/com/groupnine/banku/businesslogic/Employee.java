@@ -78,7 +78,9 @@ public class Employee implements IOperator {
         boolean result = transaction.executeOperation();
 
         // Guardar a transacao
-        BankAgency.getInstance().addOperationLog(transaction);
+        if (result != false){
+            BankAgency.getInstance().addOperationLog(transaction);
+        }
         return result;
     }
 
@@ -91,8 +93,10 @@ public class Employee implements IOperator {
 
         boolean result = transaction.executeOperation();
 
-        // Guardar a transacao
-        BankAgency.getInstance().addOperationLog(transaction);
+        // Guardar a
+        if (result != false){
+            BankAgency.getInstance().addOperationLog(transaction);
+        }
         return result;
     }
 
@@ -100,7 +104,9 @@ public class Employee implements IOperator {
         if (from != null) {
             MoneyWithdraw moneyWithDraw = new MoneyWithdraw(this, LocalDateTime.now(), from, value);
             boolean result = moneyWithDraw.executeOperation();
-            BankAgency.getInstance().addOperationLog(moneyWithDraw);
+            if (result != false){
+                BankAgency.getInstance().addOperationLog(moneyWithDraw);
+            }
             return result;
         } else {
             return false;
