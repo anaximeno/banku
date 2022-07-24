@@ -26,19 +26,20 @@
             <DropShadow height="9.11" radius="3.2325" width="5.82" />
          </effect>
       </Label>
-      <TabPane layoutX="37.0" layoutY="94.0" prefHeight="465.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE" fx:id="tabPane">
+      <TabPane layoutX="27.0" layoutY="69.0" prefHeight="428.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE" fx:id="tabPane">
         <tabs>
             <Tab fx:id="tabWithdraw" text="Levantamento">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="766.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="313.0" prefWidth="766.0">
                      <children>
                         <TextField fx:id="withdrawAccountInput" layoutX="81.0" layoutY="53.0" />
                         <TextField fx:id="withdrawValueInput" layoutX="340.0" layoutY="53.0" />
                         <TextField fx:id="withdrawDate" disable="true" layoutX="520.0" layoutY="53.0" prefHeight="26.0" prefWidth="174.0" />
-                        <Label layoutX="81.0" layoutY="35.0" text="Conta" />
-                        <Label layoutX="340.0" layoutY="35.0" text="Valor" />
-                        <Label layoutX="520.0" layoutY="35.0" text="Data" />
+                        <Label layoutX="81.0" layoutY="37.0" text="Conta" />
+                        <Label layoutX="340.0" layoutY="37.0" text="Valor" />
+                        <Label layoutX="520.0" layoutY="37.0" text="Data" />
                         <Button fx:id="withdrawSelectAccountButton" layoutX="238.0" layoutY="53.0" mnemonicParsing="false" text="Selecionar" />
+                        <HBox alignment="BOTTOM_LEFT" layoutX="15.0" layoutY="398.0" prefHeight="31.0" prefWidth="758.0" spacing="10.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -64,15 +65,15 @@
                         <TextField fx:id="transferenceDebitedAccountInput" layoutX="81.0" layoutY="53.0" />
                         <TextField fx:id="transferenceValueInput" layoutX="81.0" layoutY="122.0" />
                         <DatePicker fx:id="transferenceDate" layoutX="429.0" layoutY="122.0" prefHeight="24.0" prefWidth="246.0" />
-                        <Label layoutX="81.0" layoutY="36.0" text="Conta a Debitar" />
+                        <Label layoutX="81.0" layoutY="37.0" text="Conta a Debitar" />
                         <Button fx:id="transferenceSelectDebitedAccountButton" layoutX="238.0" layoutY="53.0" mnemonicParsing="false" text="Selecionar" />
-                        <Label layoutX="429.0" layoutY="36.0" text="Conta a Creditar" />
+                        <Label layoutX="429.0" layoutY="37.0" text="Conta a Creditar" />
                         <TextField fx:id="transferenceCreditedAccountInput" layoutX="429.0" layoutY="53.0" />
                         <Button fx:id="transferenceSelectCreditedAccountButton" layoutX="586.0" layoutY="53.0" mnemonicParsing="false" text="Selecionar" />
-                        <Label layoutX="81.0" layoutY="104.0" text="Valor" />
-                        <Label layoutX="429.0" layoutY="104.0" text="Data" />
+                        <Label layoutX="81.0" layoutY="106.0" text="Valor" />
+                        <Label layoutX="429.0" layoutY="106.0" text="Data" />
                         <Label layoutX="81.0" layoutY="165.0" text="Descrição do Cliente" />
-                        <TextArea fx:id="transferenceClientDescriptionTextArea" layoutX="81.0" layoutY="181.0" prefHeight="59.0" prefWidth="602.0" />
+                        <TextArea fx:id="transferenceClientDescriptionTextArea" layoutX="78.0" layoutY="183.0" prefHeight="59.0" prefWidth="597.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -101,17 +102,17 @@
             </Text>
          </children>
       </GridPane>
-      <HBox alignment="BOTTOM_LEFT" layoutX="50.0" layoutY="501.0" prefHeight="34.0" prefWidth="758.0" spacing="230.0">
+      <HBox layoutX="50.0" layoutY="509.0" prefHeight="31.0" prefWidth="738.0">
          <children>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="343.0">
+            <HBox alignment="BOTTOM_LEFT" prefHeight="31.0" prefWidth="386.0">
                <children>
-                  <Button fx:id="dashboardButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="124.0" text="Dashboard" />
-                  <Button fx:id="operationsButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="120.0" text="Operaçoes" />
+                  <Button fx:id="dashboardButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="124.0" text="Dashboard" />
+                  <Button fx:id="operationsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Operações" />
                </children>
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="34.0" prefWidth="346.0" spacing="5.0">
                <children>
-                  <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" text="Confirmar" />
+                  <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="202.0" text="Confirmar" />
                   <Button fx:id="clearButton" mnemonicParsing="false" text="Limpar" />
                </children>
             </HBox>
