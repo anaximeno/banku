@@ -20,44 +20,43 @@
             <DropShadow height="9.11" radius="3.2325" width="5.82" />
          </effect>
       </Label>
-      <HBox layoutX="18.0" layoutY="101.0" prefHeight="403.0" prefWidth="802.0">
+      <HBox alignment="CENTER" layoutX="488.0" layoutY="74.0" prefHeight="26.0" prefWidth="318.0">
          <children>
-            <ListView fx:id="operationsListView" prefHeight="403.0" prefWidth="802.0" />
-         </children>
-      </HBox>
-      <HBox alignment="BOTTOM_LEFT" layoutX="18.0" layoutY="514.0" prefHeight="31.0" prefWidth="802.0" spacing="100.0">
-         <children>
-            <HBox alignment="BOTTOM_LEFT">
-               <children>
-                  <Button fx:id="dashboardButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Dashboard" />
-                  <Button fx:id="operationsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Operaçoes" />
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="31.0" prefWidth="554.0">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="83.0" text="Data Inicial" />
-                  <DatePicker fx:id="initDatePicker" prefHeight="26.0" prefWidth="110.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="74.0" text="Data Final" />
-                  <DatePicker fx:id="endDatePicker" prefHeight="26.0" prefWidth="110.0" />
-                  <Button fx:id="detailsButton" lineSpacing="5.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Detalhes" />
-               </children>
-            </HBox>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="554.0" layoutY="74.0" prefHeight="26.0" prefWidth="252.0">
-         <children>
-            <Label prefHeight="19.0" prefWidth="144.0" text="Saldo do Banco: ">
+            <Label prefHeight="22.0" prefWidth="122.0" text="Saldo do Banco: " textFill="#222222">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Text fx:id="bankBalanceText" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor" wrappingWidth="100.53662490844727">
+            <Text fx:id="bankBalanceText" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor" wrappingWidth="183.73675847053528">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
          </children>
       </HBox>
-      <Button fx:id="refreshButton" layoutX="18.0" layoutY="72.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Atualizar" />
+      <HBox layoutX="12.0" layoutY="100.0" prefHeight="403.0" prefWidth="802.0">
+         <children>
+            <ListView fx:id="operationsListView" prefHeight="403.0" prefWidth="802.0" />
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_LEFT" layoutX="12.0" layoutY="514.0" prefHeight="31.0" prefWidth="802.0" spacing="50.0">
+         <children>
+            <HBox alignment="BOTTOM_LEFT">
+               <children>
+                  <Button fx:id="dashboardButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Dashboard" />
+                  <Button fx:id="operationsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Operações" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="31.0" prefWidth="487.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="83.0" text="Data Inicial" />
+                  <DatePicker fx:id="initDatePicker" prefHeight="26.0" prefWidth="110.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="74.0" text="Data Final" />
+                  <DatePicker fx:id="endDatePicker" prefHeight="26.0" prefWidth="110.0" />
+                  <Button fx:id="refreshButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Atualizar" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
