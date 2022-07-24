@@ -1,11 +1,45 @@
-/* Disciplina: PROGRAMAÇÃO ORIENTADO A OBJETOS (POO)
-Projeto: Sistemas de gestão de contas bancárias
-Data de criação: 25-05-2022
-Data de modificação: 24-07-2022
-Versão:1.0
-Autor(es): Anaximeno Brito, Carlos Monteiro, Marco Costa e Tamiris Evora
-Faculdade de Ciências e Tecnologia
-Universidade de Cabo Verde */
+/* Banku - A Banking Agency
+ * Versão 1.0
+ *
+ * Universidade de Cabo Verde - Faculdade de Ciências e Tecnologia
+ *
+ * Disciplina: PROGRAMAÇÃO ORIENTADO A OBJETOS (POO)
+ * Projeto: Sistemas de gestão de contas bancárias
+ *
+ *
+ * Autores:
+ *      - Anaximeno Brito
+ *      - Carlos Monteiro
+ *      - Marco Costa
+ *      - Tamiris Évora
+ *
+ * Data de criação: 25-05-2022
+ * Data de modificação: 24-07-2022
+ *
+ * O programa é distribuido sob a licença MIT com seguintes termos:
+ *
+ *  Copyright (c) 2022 Anaxímeno Brito, Carlos Monteiro, Marco Costa, Tamiris Évora
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * */
+
+
 package com.groupnine.banku;
 
 import com.groupnine.banku.businesslogic.*;
@@ -182,8 +216,6 @@ public class BankuApp extends Application {
 
     public static void initData()
     {
-        final BankAgency agency = BankAgency.getInstance();
-
         if (currentOperator != null) {
             for (int i = 0 ; i < MAX_GEN_ITERATION ; i += 1) {
                 switch (globalFaker.random().nextInt(1, 3)) {
