@@ -57,7 +57,7 @@ public class AutomaticInterestHandler extends Thread {
                 agency.addOperationLog(interestApplication);
 
                 Logger.log("Interest Applied to account '" + account.getAccountNumber() + "'", LogType.INFO);
-ye
+
                 // clear the list for new records
                 account.getBalanceRecord().clear();
 
