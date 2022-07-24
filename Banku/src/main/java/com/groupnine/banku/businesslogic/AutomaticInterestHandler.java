@@ -57,7 +57,7 @@ public class AutomaticInterestHandler extends Thread {
                 agency.addOperationLog(interestApplication);
 
                 Logger.log("Interest Applied to account '" + account.getAccountNumber() + "'", LogType.INFO);
-
+ye
                 // clear the list for new records
                 account.getBalanceRecord().clear();
 
@@ -87,7 +87,7 @@ public class AutomaticInterestHandler extends Thread {
                     applyInterestsIntoAccount(acc, yearlyInterstApplicationRecordDays);
                 }
                 else if (acc instanceof TemporaryParticularAccount tAcc) {
-                    applyInterestsIntoAccount(tAcc, tAcc.getNumberOfDaysBetweenCreationAndExpiration());
+                    applyInterestsIntoAccount(tAcc, (int) tAcc.getNumberOfDaysBetweenCreationAndExpiration());
                 }
                 else {
                     Logger.log("Unknown account type at AutomaticInterestHandler", LogType.WARNING);
