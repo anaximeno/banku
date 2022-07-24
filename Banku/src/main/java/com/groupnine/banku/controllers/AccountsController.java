@@ -101,7 +101,7 @@ public class AccountsController {
         createTables();
         refreshTables();
 
-        comboBox.setOnMouseClicked(e -> tabPaneOnClick());
+        comboBox.setOnMouseExited(e -> tabPaneOnClick());
         searchInput.textProperty().addListener((obs, old, niu) -> tabPaneOnClick());
 
         /* Isto vai ser utilizado externamente para

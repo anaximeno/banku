@@ -64,7 +64,7 @@ public class ClientsController {
 
         /* default */
         comboBox.setValue("Nome");
-        comboBox.setOnMouseClicked(e -> refreshTables());
+        comboBox.setOnMouseExited(e -> refreshTables());
 
         searchInput.textProperty().addListener((obs, old, niu) -> refreshTables());
 
