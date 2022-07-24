@@ -52,6 +52,8 @@ public class MovementsController {
     void refreshMovements() {
         final BankAgency agency = BankAgency.getInstance();
 
+        bankBalanceText.setText(String.valueOf(agency.getBankAccount().getBalance()));
+
         operationsListView.getItems().clear();
 
         IDoubleFilter<BankingOperation, LocalDate, LocalDate> filter = (input, init, end) -> {

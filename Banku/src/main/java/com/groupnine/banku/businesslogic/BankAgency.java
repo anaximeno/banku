@@ -16,6 +16,20 @@ public class BankAgency {
     private BankAgencyAccount bankAccount;
     private List<BankingOperation> operationsLog;
 
+    private BankAgency(String name, String address) {
+        final double initialBalance = 100000000;
+        this.name = name;
+        this.address = address;
+        this.employees = new ArrayList<>();
+        this.clientAccounts = new ArrayList<>();
+        this.clients = new ArrayList<>();
+        this.bankAccount = new BankAgencyAccount(null, initialBalance);
+        this.operationsLog = new ArrayList<>();
+    }
+
+    public BankAgencyAccount getBankAccount() {
+        return bankAccount;
+    }
 
     public Account findAccountByNumber (String accountNumber){
         for (Account account : clientAccounts) {
@@ -62,16 +76,6 @@ public class BankAgency {
             }
         }
         return null;
-    }
-    private BankAgency(String name, String address) {
-        final double initialBalance = 100000000;
-        this.name = name;
-        this.address = address;
-        this.employees = new ArrayList<>();
-        this.clientAccounts = new ArrayList<>();
-        this.clients = new ArrayList<>();
-        this.bankAccount = new BankAgencyAccount(null, initialBalance);
-        this.operationsLog = new ArrayList<>();
     }
 
     //function that helps the BankAgency respect the singleton pattern
