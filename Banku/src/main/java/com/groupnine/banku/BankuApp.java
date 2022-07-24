@@ -39,22 +39,14 @@ public class BankuApp extends Application {
         return mainWindow;
     }
 
-    public void initInterestHandler() {
+    public void initInterestHandler()
+    {
         interestHandler = new AutomaticInterestHandler();
         interestHandler.start();
 
         if (mainWindow != null) {
             mainWindow.getStage().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> interestHandler.interrupt());
         }
-    }
-
-    @Override
-    public void start(Stage stage)
-    {
-        initData();
-        setMainWindow(new WindowContextController("views/dashboard-view.fxml", "Banku - Dashboard"));
-        getMainWindow().showDefaultView();
-        initInterestHandler();
     }
 
     private static ParticularAccountOwner generateNewFakeAccountOwner()
@@ -123,31 +115,96 @@ public class BankuApp extends Application {
         return globalAccOwnFactory.createEnterpriseAccountOwner(name, NIF, address, partners);
     }
 
-    private static EnterpriseAccount generateEnterpriseAccount(EnterpriseAccountOwner owner) {
+    private static EnterpriseAccount generateEnterpriseAccount(EnterpriseAccountOwner owner)
+    {
         final String name = globalFaker.zelda().character();
         final double balance = globalFaker.random().nextInt(30000, 1000000000);
         return globalAccFactory.createEnterpriseAccount(name, owner, generateNewFakeAccountOwner(), balance);
+    }
+
+    private static Account getRandomAccount() {
+        final BankAgency agency = BankAgency.getInstance();
+        Account account = null;
+
+        do {
+            final String accId = SequentiableFactory.encodeNumber(globalFaker.random().nextInt(
+                    MAX_GEN_ITERATION - 1), SequentiableFactory.ID_PLACES);
+            account = agency.findAccountByNumber(accId);
+        } while (account == null);
+
+        return account;
+    }
+
+    private static void makeFakeDeposit()
+    {
+        final Account account = getRandomAccount();
+        final int value = globalFaker.random().nextInt(100, account.getAccountBalance().intValue() - 1000);
+        if (value > 0)
+            currentOperator.makeMoneyDeposit(account, value);
+    }
+
+    private static void makeFakeWithdraw()
+    {
+        final Account account = getRandomAccount();
+        final int value = globalFaker.random().nextInt(100, account.getAccountBalance().intValue() - 1000);
+        if (value > 0)
+            currentOperator.makeMoneyWithdraw(account, value);
+    }
+
+    private static void makeFakeTransference()
+    {
+        final Account account1 = getRandomAccount();
+        final Account account2 = getRandomAccount();
+        if (account2 != account1) {
+            final int value = globalFaker.random().nextInt(100, account1.getAccountBalance().intValue() - 1000);
+
+            if (value > 0)
+                currentOperator.makeTransaction(account1, account2, value);
+        }
+    }
+
+    public void initOperator() {
+        final BankAgency agency = BankAgency.getInstance();
+
+        agency.addEmployee(new Employee("John", "Doe", "isDoe", "Manager"));
+        agency.addEmployee(new Employee("Background", "Thread",  "multi-threading", "Automatic Interest Applicator"));
+
+        currentOperator = agency.getBankOperator("JohnDoe", "isDoe");
     }
 
     public static void initData()
     {
         final BankAgency agency = BankAgency.getInstance();
 
-        agency.addEmployee(new Employee("John", "Doe", "isDoe", "Manager"));
-        agency.addEmployee(new Employee("Background", "Thread",  "multi-threading", "Automatic Interest Applicator"));
-
-        final IOperator operator = agency.getBankOperator("JohnDoe", "isDoe");
-        currentOperator = operator;
-
-        if (operator != null) {
+        if (currentOperator != null) {
             for (int i = 0 ; i < MAX_GEN_ITERATION ; i += 1) {
                 switch (globalFaker.random().nextInt(1, 3)) {
-                    case 1 -> operator.addNewAccountToTheBank(generateOrdinaryAccount(generateNewFakeAccountOwner()));
-                    case 2 -> operator.addNewAccountToTheBank(generateTemporaryAccount(generateNewFakeAccountOwner()));
-                    case 3 -> operator.addNewAccountToTheBank(generateEnterpriseAccount(generateEnterpriseAccountOwner()));
+                    case 1 -> currentOperator.addNewAccountToTheBank(generateOrdinaryAccount(generateNewFakeAccountOwner()));
+                    case 2 -> currentOperator.addNewAccountToTheBank(generateTemporaryAccount(generateNewFakeAccountOwner()));
+                    case 3 -> currentOperator.addNewAccountToTheBank(generateEnterpriseAccount(generateEnterpriseAccountOwner()));
+                }
+            }
+
+            final int maxOp = (MAX_GEN_ITERATION / 2);
+
+            for (int i = 0 ; i < maxOp ; i += 1) {
+                switch (globalFaker.random().nextInt(1, 3)) {
+                    case 1 -> makeFakeDeposit();
+                    case 2 -> makeFakeWithdraw();
+                    case 3 -> makeFakeTransference();
                 }
             }
         }
+    }
+
+    @Override
+    public void start(Stage stage)
+    {
+        initOperator();
+        initData();
+        setMainWindow(new WindowContextController("views/dashboard-view.fxml", "Banku - Dashboard"));
+        getMainWindow().showDefaultView();
+        initInterestHandler();
     }
 
     public static void main(String[] args) {
