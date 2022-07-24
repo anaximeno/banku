@@ -1,3 +1,11 @@
+/* Disciplina: PROGRAMAÇÃO ORIENTADO A OBJETOS (POO)
+Projeto: Sistemas de gestão de contas bancárias
+Data de criação: 25-05-2022
+Data de modificação: 24-07-2022
+Versão:1.0
+Autor(es): Anaximeno Brito, Carlos Monteiro, Marco Costa e Tamiris Evora
+Faculdade de Ciências e Tecnologia
+Universidade de Cabo Verde */
 package com.groupnine.banku;
 
 import com.groupnine.banku.businesslogic.*;
