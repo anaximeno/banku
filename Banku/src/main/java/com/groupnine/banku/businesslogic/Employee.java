@@ -1,5 +1,6 @@
 package com.groupnine.banku.businesslogic;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Employee implements IOperator {
@@ -68,12 +69,12 @@ public class Employee implements IOperator {
         this.role = role;
     }
 
-    public boolean makeTransaction(Account from, Account to, double value, String userDescription) {
+    public boolean makeTransaction(Account from, Account to, double value, LocalDate date, String userDescription) {
         if (from == null || to == null || value < 0) {
             return false;
         }
 
-        Transaction transaction = new Transaction(this, LocalDateTime.now(), from, to, value, userDescription);
+        Transaction transaction = new Transaction(this, date, from, to, value, userDescription);
 
         boolean result = transaction.executeOperation();
 
@@ -85,24 +86,12 @@ public class Employee implements IOperator {
     }
 
     public boolean makeTransaction(Account from, Account to, double value) {
-        if (from == null || to == null || value < 0) {
-            return false;
-        }
-
-        Transaction transaction = new Transaction(this, LocalDateTime.now(), from, to, value);
-
-        boolean result = transaction.executeOperation();
-
-        // Guardar a
-        if (result != false){
-            BankAgency.getInstance().addOperationLog(transaction);
-        }
-        return result;
+        return makeTransaction(from, to, value, LocalDate.now(), "");
     }
 
     public boolean makeMoneyWithdraw(Account from, double value) {
         if (from != null) {
-            MoneyWithdraw moneyWithDraw = new MoneyWithdraw(this, LocalDateTime.now(), from, value);
+            MoneyWithdraw moneyWithDraw = new MoneyWithdraw(this, LocalDate.now(), from, value);
             boolean result = moneyWithDraw.executeOperation();
             if (result != false){
                 BankAgency.getInstance().addOperationLog(moneyWithDraw);
@@ -115,7 +104,7 @@ public class Employee implements IOperator {
 
     public boolean makeMoneyDeposit(Account account, double value) {
         if (account != null) {
-            MoneyDeposit moneyDeposit = new MoneyDeposit(this, LocalDateTime.now(), account, value);
+            MoneyDeposit moneyDeposit = new MoneyDeposit(this, LocalDate.now(), account, value);
             boolean result = moneyDeposit.executeOperation();
             BankAgency.getInstance().addOperationLog(moneyDeposit);
             return result;
