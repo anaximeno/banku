@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Main-Class: com.groupnine.banku.Launcher
+Class-Path: javafx-base-18.jar commons-lang3-3.5.jar javafx-graphics-18-
+ linux.jar automaton-1.11-8.jar generex-1.0.2.jar snakeyaml-1.23-android
+ .jar javafx-base-18-linux.jar javafx-controls-18-linux.jar javafx-fxml-
+ 18-linux.jar javafx-fxml-18.jar javafaker-1.0.2.jar javafx-graphics-18.
+ jar javafx-controls-18.jar
+

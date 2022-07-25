@@ -1,12 +1,10 @@
-package com.groupnine.banku;
+package com.groupnine.banku.businesslogic;
 
-public class EnterprisePartners {
+public class EnterprisePartner {
     private String fullName;
     private String CNI;
 
-
-
-    public EnterprisePartners(String fullName, String CNI) {
+    public EnterprisePartner(String fullName, String CNI) {
         this.fullName = fullName;
         this.CNI = CNI;
     }

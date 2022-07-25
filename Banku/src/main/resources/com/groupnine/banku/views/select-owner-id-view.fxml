@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupnine.banku.controllers.SelectOwnerIdController">
+   <children>
+      <VBox layoutY="-1.0" prefHeight="360.0" prefWidth="531.0">
+         <children>
+            <ListView fx:id="listView" prefHeight="306.0" prefWidth="531.0" />
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="41.0" prefWidth="531.0" spacing="10.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="41.0" prefWidth="221.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#cancelButtonOnClick" text="Cancelar" />
+                        <Button fx:id="selectButton" mnemonicParsing="false" onMouseClicked="#selectButtonOnClick" text="Selecionar" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

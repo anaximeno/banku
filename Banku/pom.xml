@@ -36,7 +36,14 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>              </dependencies>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>1.0.2</version>
+    </dependency>
+  </dependencies>
 
   <build>
         <plugins>
@@ -58,7 +65,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.groupnine.banku/com.groupnine.banku.HelloApplication</mainClass>
+              <mainClass>com.groupnine.banku/com.groupnine.banku.BankuApp</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
