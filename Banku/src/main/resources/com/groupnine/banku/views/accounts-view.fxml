@@ -37,7 +37,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="530.0" prefWidth="832.0">
                      <children>
-                        <TableView fx:id="corporativeAccountsTable" layoutX="1.0" prefHeight="482.0" prefWidth="840.0">
+                        <TableView fx:id="corporativeAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Número" />
                             <TableColumn prefWidth="228.0" text="Dono" />
@@ -54,7 +54,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="temporaryAccountsTable" layoutX="1.0" prefHeight="482.0" prefWidth="840.0">
+                        <TableView fx:id="temporaryAccountsTable" layoutX="1.0" prefHeight="537.0" prefWidth="840.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="Número" />
                               <TableColumn prefWidth="152.0" text="Nome" />
@@ -70,7 +70,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Pane layoutY="516.0" prefHeight="44.0" prefWidth="840.0" style="-fx-background-color: #eee;">
+      <Pane layoutX="-3.0" layoutY="516.0" prefHeight="44.0" prefWidth="840.0" style="-fx-background-color: #eee;">
          <children>
             <HBox alignment="BOTTOM_LEFT" layoutX="9.0" layoutY="11.0" prefHeight="24.0" prefWidth="822.0">
                <children>
