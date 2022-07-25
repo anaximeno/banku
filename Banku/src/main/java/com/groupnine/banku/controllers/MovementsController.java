@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MovementsController {
@@ -64,6 +65,8 @@ public class MovementsController {
 
         List<BankingOperation> operations = filterOperationsByDate(
                 agency.getOperationsLog(), initDatePicker.getValue(), endDatePicker.getValue(), filter);
+
+        Collections.reverse(operations);
 
         for (BankingOperation operation : operations) {
             operationsListView.getItems().add(operation.getDescription());
