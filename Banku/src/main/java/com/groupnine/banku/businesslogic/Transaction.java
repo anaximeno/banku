@@ -1,5 +1,6 @@
 package com.groupnine.banku.businesslogic;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Transaction extends BankingOperation{
@@ -13,7 +14,7 @@ public class Transaction extends BankingOperation{
     private double balanceOfToAfterTransaction;
 
 
-    public Transaction(Employee operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value, String userDescription) {
+    public Transaction(Employee operator, LocalDate dateTime, Account accountFrom, Account accountTo, double value, String userDescription) {
         super(operator, dateTime);
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;
@@ -21,7 +22,7 @@ public class Transaction extends BankingOperation{
         this.userDescription = userDescription;
     }
 
-    public Transaction(Employee operator, LocalDateTime dateTime, Account accountFrom, Account accountTo, double value) {
+    public Transaction(Employee operator, LocalDate dateTime, Account accountFrom, Account accountTo, double value) {
         this(operator, dateTime, accountFrom, accountTo, value, "");
     }
 
@@ -68,7 +69,7 @@ public class Transaction extends BankingOperation{
                 // Se o tipo de conta for enterprise e aplicado uma taxa.
                 double interestValue = EnterpriseAccount.TRANSACTION_INTEREST * accountFrom.getAccountBalance();
                 InterestApplication interestApplication = new InterestApplication(
-                        getOperator(), LocalDateTime.now(), accountFrom, interestValue
+                        getOperator(), LocalDate.now(), accountFrom, interestValue
                 );
                 interestApplication.executeOperation();
                 BankAgency.getInstance().addOperationLog(interestApplication);

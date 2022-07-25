@@ -6,6 +6,7 @@ import com.groupnine.banku.miscellaneous.LogType;
 import com.groupnine.banku.miscellaneous.Logger;
 import com.groupnine.banku.miscellaneous.ListUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class AutomaticInterestHandler extends Thread {
             final double interestValue = calculateInterests(account);
 
             InterestApplication interestApplication = new InterestApplication(
-                    (Employee) operator, LocalDateTime.now(), account, interestValue);
+                    (Employee) operator, LocalDate.now(), account, interestValue);
 
             if (interestApplication.executeOperation()) {
                 agency.addOperationLog(interestApplication);

@@ -12,6 +12,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TransactionsController {
 
@@ -306,6 +307,7 @@ public class TransactionsController {
         final Account accountDebited = agency.findAccountByNumber(transferenceDebitedAccountInput.getText());
         final Account accountCredited = agency.findAccountByNumber(transferenceCreditedAccountInput.getText());
         final double value = Double.parseDouble(transferenceValueInput.getText());
+        final LocalDate date = transferenceDate.getValue();
         final String description = transferenceClientDescriptionTextArea.getText();
 
         if (accountDebited == null) {
@@ -323,7 +325,7 @@ public class TransactionsController {
         }
 
         boolean execRes = BankuApp.currentOperator.makeTransaction(
-                accountDebited, accountCredited, value, description);
+                accountDebited, accountCredited, value, date, description);
 
         if (execRes) {
             result.isValid = true;

@@ -1,5 +1,6 @@
 package com.groupnine.banku.businesslogic;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class MoneyDeposit extends BankingOperation {
@@ -8,7 +9,7 @@ public class MoneyDeposit extends BankingOperation {
     private double balanceBefore;
     private double balanceAfter;
 
-    public MoneyDeposit(Employee operator, LocalDateTime dateTime, Account account, double value) {
+    public MoneyDeposit(Employee operator, LocalDate dateTime, Account account, double value) {
         super(operator, dateTime);
         this.account = account;
         this.value = value;

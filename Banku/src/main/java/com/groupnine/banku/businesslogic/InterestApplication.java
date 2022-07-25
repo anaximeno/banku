@@ -1,5 +1,6 @@
 package com.groupnine.banku.businesslogic;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class InterestApplication extends BankingOperation {
@@ -8,11 +9,11 @@ public class InterestApplication extends BankingOperation {
     private final double value;
     private double balanceAfter;
 
-    public InterestApplication(Employee operator, LocalDateTime dateTime, Account account) {
+    public InterestApplication(Employee operator, LocalDate dateTime, Account account) {
         this(operator, dateTime, account, account.getInterestRate() * account.getAccountBalance());
     }
 
-    public InterestApplication(Employee operator, LocalDateTime dateTime, Account account, double value) {
+    public InterestApplication(Employee operator, LocalDate dateTime, Account account, double value) {
         super(operator, dateTime);
         this.account = account;
         this.value = value;

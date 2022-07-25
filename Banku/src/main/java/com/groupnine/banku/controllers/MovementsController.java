@@ -57,8 +57,8 @@ public class MovementsController {
         operationsListView.getItems().clear();
 
         IDoubleFilter<BankingOperation, LocalDate, LocalDate> filter = (input, init, end) -> {
-            final boolean firstCondition = init == null || input.getDateTime().toLocalDate().isAfter(init);
-            final boolean secondCondition = end == null || input.getDateTime().toLocalDate().isBefore(end);
+            final boolean firstCondition = init == null || input.getDate().isAfter(init);
+            final boolean secondCondition = end == null || input.getDate().isBefore(end);
             return firstCondition && secondCondition;
         };
 

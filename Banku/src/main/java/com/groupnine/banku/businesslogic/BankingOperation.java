@@ -1,14 +1,13 @@
 package com.groupnine.banku.businesslogic;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public abstract class BankingOperation {
     private final Employee operator;
-    private final LocalDateTime dateTime;
+    private final LocalDate dateTime;
     protected boolean wasExecuted;
 
-    public BankingOperation(Employee operator, LocalDateTime dateTime) {
+    public BankingOperation(Employee operator, LocalDate dateTime) {
         this.operator = operator;
         this.dateTime = dateTime;
         wasExecuted = false;
@@ -18,7 +17,7 @@ public abstract class BankingOperation {
         return operator;
     }
 
-    public LocalDateTime getDateTime() {
+    public LocalDate getDate() {
         return dateTime;
     }
 
