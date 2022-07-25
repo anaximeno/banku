@@ -242,7 +242,8 @@ public class BankuApp extends Application {
     {
         initOperator();
         initData();
-        setMainWindow(new WindowContextController("views/dashboard-view.fxml", "Banku - Dashboard"));
+        setMainWindow(new WindowContextController(WindowContextController.DEFAULT_HEIGHT, WindowContextController.DEFAULT_WIDTH + 12,
+                "views/dashboard-view.fxml", "Banku - Dashboard"));
         getMainWindow().showDefaultView();
         initInterestHandler();
     }
